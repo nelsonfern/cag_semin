@@ -1,0 +1,148 @@
+{
+  "_comment": "Registro curado de fuentes oficiales. Cada entrada describe QUÉ se obtiene y CÓMO; los metadatos de cada descarga (hash, fechas, versión) se guardan en data/manifest.json. Verificado manualmente el 2026-10-16 (ver PROGRESS.md, Fase 1).",
+  "sources": [
+    {
+      "document_id": "rc-solicitud-partidas",
+      "title": "Solicitud de Partidas",
+      "organism": "Registro Civil de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://registrocivil.larioja.gob.ar/tramite-solicitud-partidas.html",
+      "document_type": "html",
+      "parser": "registro_civil",
+      "acquisition": "auto",
+      "notes": "Cita costos de la Ley Impositiva 2024 (Ley 10.929, art. 79)."
+    },
+    {
+      "document_id": "rc-nacimientos",
+      "title": "Inscripción de Nacimientos",
+      "organism": "Registro Civil de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://registrocivil.larioja.gob.ar/tramite-nacimientos.html",
+      "document_type": "html",
+      "parser": "registro_civil",
+      "acquisition": "auto",
+      "notes": ""
+    },
+    {
+      "document_id": "rc-matrimonios",
+      "title": "Matrimonios",
+      "organism": "Registro Civil de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://registrocivil.larioja.gob.ar/tramite-matrimonios.html",
+      "document_type": "html",
+      "parser": "registro_civil",
+      "acquisition": "auto",
+      "notes": ""
+    },
+    {
+      "document_id": "rc-defunciones",
+      "title": "Defunciones",
+      "organism": "Registro Civil de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://registrocivil.larioja.gob.ar/tramite-defunciones.html",
+      "document_type": "html",
+      "parser": "registro_civil",
+      "acquisition": "auto",
+      "notes": ""
+    },
+    {
+      "document_id": "rc-union-convivencial",
+      "title": "Unión Convivencial",
+      "organism": "Registro Civil de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://registrocivil.larioja.gob.ar/tramite-union-convivencial.html",
+      "document_type": "html",
+      "parser": "registro_civil",
+      "acquisition": "auto",
+      "notes": ""
+    },
+    {
+      "document_id": "rc-rectificacion-partidas",
+      "title": "Rectificación de Partidas",
+      "organism": "Registro Civil de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://registrocivil.larioja.gob.ar/tramite-rectificacion-partidas.html",
+      "document_type": "html",
+      "parser": "registro_civil",
+      "acquisition": "auto",
+      "notes": ""
+    },
+    {
+      "document_id": "rc-dni-renovacion",
+      "title": "DNI - Renovación / Nuevo ejemplar",
+      "organism": "Registro Civil de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://registrocivil.larioja.gob.ar/tramite-dni-renovacion.html",
+      "document_type": "html",
+      "parser": "registro_civil",
+      "acquisition": "auto",
+      "notes": "El DNI es un documento nacional (RENAPER); el Registro Civil provincial publica cómo tramitarlo en La Rioja."
+    },
+    {
+      "document_id": "rc-dni-recien-nacido",
+      "title": "DNI de Recién Nacido",
+      "organism": "Registro Civil de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://registrocivil.larioja.gob.ar/tramite-dni-recien-nacido.html",
+      "document_type": "html",
+      "parser": "registro_civil",
+      "acquisition": "auto",
+      "notes": ""
+    },
+    {
+      "document_id": "rc-pasaporte",
+      "title": "Pasaporte",
+      "organism": "Registro Civil de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://registrocivil.larioja.gob.ar/tramite-pasaporte.html",
+      "document_type": "html",
+      "parser": "registro_civil",
+      "acquisition": "auto",
+      "notes": ""
+    },
+    {
+      "document_id": "sj-guia-tramites",
+      "title": "Guía de trámites de la Secretaría de Justicia",
+      "organism": "Secretaría de Justicia de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://secretariadejusticia.larioja.gob.ar/",
+      "document_type": "html_js_embedded",
+      "parser": "justicia_spa",
+      "acquisition": "auto",
+      "notes": "La guía se renderiza con JavaScript; los datos (TRAMITES, AREAS, CONTACTOS, FAQ) están incrustados en el HTML y se extraen sin ejecutar JS."
+    },
+    {
+      "document_id": "nac-requisitos-dni-pasaporte",
+      "title": "Requisitos para trámites de DNI o Pasaporte",
+      "organism": "RENAPER - Ministerio del Interior (Nación)",
+      "jurisdiction": "nacional",
+      "source_url": "https://www.argentina.gob.ar/interior/dni/requisitos-para-tramites-de-dni-o-pasaporte",
+      "document_type": "html",
+      "parser": "argentina_gob",
+      "acquisition": "auto",
+      "notes": "Fuente nacional complementaria. robots.txt declara Crawl-delay: 10."
+    },
+    {
+      "document_id": "nac-portal-tramitar",
+      "title": "Portal de trámites nacionales",
+      "organism": "Gobierno de la República Argentina",
+      "jurisdiction": "nacional",
+      "source_url": "https://www.argentina.gob.ar/tramitar",
+      "document_type": "html",
+      "parser": "argentina_gob",
+      "acquisition": "manual",
+      "notes": "robots.txt de argentina.gob.ar indica 'Disallow: /tramitar'. No se descarga automáticamente; puede importarse manualmente."
+    },
+    {
+      "document_id": "leg-ley-10929",
+      "title": "Ley 10.929 - Ley Impositiva 2024",
+      "organism": "Legislatura de la Provincia de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://legislaturalarioja.gob.ar/consulta-de-leyes/leyes/ley-10929/",
+      "document_type": "pdf",
+      "parser": "pdf",
+      "acquisition": "manual",
+      "notes": "Citada por el Registro Civil para los costos de partidas. La URL de detalle devolvió 404 el 2026-10-16 y la búsqueda del sitio no la encontró; pendiente de importación manual si se consigue el PDF oficial."
+    }
+  ]
+}

@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head> <link rel="icon" type="image/png" href="img/favicon.png"><link rel="apple-touch-icon" href="img/favicon.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secretaría de Justicia — Provincia de La Rioja</title>
+<meta name="description" content="Trámites, actividades y servicios de la Secretaría de Justicia de la Provincia de La Rioja: Registro Civil, Inspección General de Justicia, Servicio Penitenciario y Acceso a la Justicia.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://secretariadejusticia.larioja.gob.ar/">
+
+<!-- Open Graph (vista previa al compartir en redes/WhatsApp) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Secretaría de Justicia — Provincia de La Rioja">
+<meta property="og:title" content="Secretaría de Justicia — Provincia de La Rioja">
+<meta property="og:description" content="Trámites, requisitos y servicios de la Secretaría de Justicia de La Rioja: Registro Civil, Inspección General de Justicia, Servicio Penitenciario y Acceso a la Justicia.">
+<meta property="og:url" content="https://secretariadejusticia.larioja.gob.ar/">
+<meta property="og:locale" content="es_AR">
+<meta property="og:image" content="https://secretariadejusticia.larioja.gob.ar/img/og-secretaria.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Datos estructurados: organismo de gobierno -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "GovernmentOrganization",
+  "name": "Secretaría de Justicia de la Provincia de La Rioja",
+  "alternateName": "Secretaría de Justicia La Rioja",
+  "url": "https://secretariadejusticia.larioja.gob.ar/",
+  "logo": "https://secretariadejusticia.larioja.gob.ar/img/logo-larioja.png",
+  "areaServed": "Provincia de La Rioja, Argentina",
+  "parentOrganization": {
+    "@type": "GovernmentOrganization",
+    "name": "Gobierno de la Provincia de La Rioja",
+    "url": "https://www.larioja.gob.ar/"
+  },
+  "department": [
+    {"@type":"GovernmentOrganization","name":"Registro Civil"},
+    {"@type":"GovernmentOrganization","name":"Inspección General de Justicia"},
+    {"@type":"GovernmentOrganization","name":"Servicio Penitenciario"},
+    {"@type":"GovernmentOrganization","name":"Subsecretaría de Acceso a la Justicia"}
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#E61939;
+  --red-deep:#C2122E;
+  --gray:#686867;
+  --gray-dark:#3f3f3e;
+  --gray-soft:#8d8d8b;
+  --line:#e4e4e1;
+  --line-soft:#efefec;
+  --paper:#ffffff;
+  --paper-2:#f7f7f5;
+  --paper-3:#f0f0ed;
+  --shadow:0 1px 2px rgba(40,40,40,.04), 0 8px 28px rgba(40,40,40,.06);
+  --shadow-lg:0 18px 50px rgba(40,40,40,.14);
+  --r:14px;
+  --maxw:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Montserrat',system-ui,sans-serif;
+  color:var(--gray-dark);
+  background:var(--paper);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px;border-radius:4px}
+
+/* ---------- Brand lockup ---------- */
+.lockup{line-height:.98;letter-spacing:.02em}
+.lockup .desc{display:block;font-weight:300;text-transform:uppercase;letter-spacing:.18em;color:var(--gray-soft)}
+.lockup .key{display:block;font-weight:800;text-transform:uppercase;color:var(--gray)}
+.mark{display:inline-flex;gap:4px;vertical-align:middle}
+.mark span{width:14px;height:14px;display:block}
+.mark .s-red{background:var(--red)}
+.mark .s-gray{background:var(--gray)}
+.mark .s-white{background:#fff;border:1.5px solid var(--line)}
+
+/* ---------- Top bar ---------- */
+.topbar{background:var(--gray-dark);color:#e9e9e7;font-size:.74rem;letter-spacing:.04em}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;min-height:38px;flex-wrap:wrap;gap:8px;;transition:color .2s,opacity .2s}
+.topbar .gov:hover{color:#fff;opacity:1}
+.topbar .gov{text-transform:uppercase;font-weight:500;letter-spacing:.14em;opacity:.9}
+.topbar nav a{margin-left:18px;opacity:.85;transition:opacity .2s}
+.topbar nav a:hover{opacity:1;color:#fff}
+
+/* ---------- Header ---------- */
+header.site{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.site::before{content:"";display:block;height:4px;background:var(--red)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;min-height:84px;gap:20px}
+.brand{display:flex;align-items:center;gap:14px}
+.brand .mark span{width:11px;height:11px}
+.brand .lockup{font-size:1.5rem}
+.brand .lockup .desc{font-size:.72rem}
+nav.main{display:flex;align-items:center;gap:6px}
+nav.main a{padding:10px 14px;font-size:.82rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--gray);border-radius:8px;transition:.2s;position:relative}
+nav.main a:hover{color:var(--gray-dark);background:var(--paper-2)}
+nav.main a.cta{background:var(--red);color:#fff}
+nav.main a.cta:hover{background:var(--red-deep)}
+.menu-btn{display:none;border:1px solid var(--line);background:#fff;border-radius:8px;padding:9px 11px;cursor:pointer}
+.menu-btn span{display:block;width:20px;height:2px;background:var(--gray-dark);margin:4px 0}
+.brand{display:flex;align-items:center;gap:16px}
+.brand .brand-logo{height:44px;width:auto;display:block}
+.brand .brand-sep{width:1px;height:34px;background:var(--line);flex:none}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:hidden;background:radial-gradient(130% 130% at 90% 40%, rgba(230,25,57,.15), transparent 55%),linear-gradient(115deg, #1e1e1e 0%, #28201f 55%, #3a1620 100%);}
+.hero::after{content:"";position:absolute;inset:0;background:url('img/patron.png') no-repeat center/cover;mix-blend-mode:multiply;opacity:.07;pointer-events:none}
+.hero .wrap{position:relative;z-index:1;padding:64px 24px 56px}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.22em;color:var(--red);margin-bottom:22px}
+.hero h1{font-size:clamp(2.1rem,5vw,3.4rem);font-weight:800;line-height:1.05;color:#fff;max-width:16ch;letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero p.lead{margin-top:18px;max-width:54ch;font-size:1.06rem;color:#fff}
+
+/* ---------- Search ---------- */
+.search-card{margin-top:34px;background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:22px;max-width:760px}
+.search-card label{display:block;font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--gray-soft);margin-bottom:10px}
+.search-row{display:flex;gap:10px}
+.search-input{flex:1;display:flex;align-items:center;gap:10px;border:2px solid var(--line);border-radius:10px;padding:0 14px;transition:border-color .2s}
+.search-input:focus-within{border-color:var(--red)}
+.search-input svg{flex:none;color:var(--gray-soft)}
+.search-input input{flex:1;border:0;outline:0;font:inherit;font-size:1rem;padding:14px 0;background:transparent;color:var(--gray-dark)}
+.btn{font:inherit;font-weight:700;font-size:.86rem;text-transform:uppercase;letter-spacing:.06em;border:0;border-radius:10px;padding:0 22px;cursor:pointer;transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:var(--red-deep)}
+.quick{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.quick span.lbl{font-size:.78rem;color:var(--gray-soft);margin-right:4px}
+.quick button{font:inherit;font-size:.8rem;font-weight:500;background:var(--paper-2);border:1px solid var(--line);color:var(--gray);border-radius:999px;padding:6px 13px;cursor:pointer;transition:.18s}
+.quick button:hover{border-color:var(--red);color:var(--red)}
+
+/* ---------- Sections ---------- */
+section{padding:72px 0}
+section[id]{scroll-margin-top:96px}
+.section-head{margin-bottom:38px}
+.section-head .kicker{display:inline-flex;align-items:center;gap:9px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.2em;color:var(--red);margin-bottom:12px}
+.section-head .kicker .bar{width:26px;height:3px;background:var(--red)}
+.section-head h2{font-size:clamp(1.7rem,3.4vw,2.4rem);font-weight:800;color:var(--gray);letter-spacing:-.01em}
+.section-head p{margin-top:10px;max-width:60ch;color:var(--gray)}
+
+/* ---------- Áreas ---------- */
+.areas{background:var(--paper)}
+.areas-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.area-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px 22px 22px;cursor:pointer;transition:.22s;overflow:hidden}
+.area-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--red);transform:scaleY(0);transform-origin:top;transition:transform .25s}
+.area-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent}
+.area-card:hover::before{transform:scaleY(1)}
+.area-card .num{font-size:.74rem;font-weight:700;color:var(--gray-soft);letter-spacing:.1em}
+.area-card .lockup{font-size:1.18rem;margin:14px 0 12px;min-height:64px}
+.area-card .lockup .desc{font-size:.7rem}
+.area-card .meta{font-size:.84rem;color:var(--gray);border-top:1px solid var(--line-soft);padding-top:12px}
+.area-card .go{margin-top:14px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--red);display:inline-flex;align-items:center;gap:6px}
+.area-card .go svg{transition:transform .2s}
+.area-card:hover .go svg{transform:translateX(4px)}
+
+/* ---------- Autoridades ---------- */
+.autoridades{background:var(--paper)}
+.featured{display:grid;grid-template-columns:320px 1fr;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);margin-bottom:30px}
+.featured .photo{position:relative;aspect-ratio:1;background:linear-gradient(150deg,#7a7a78,var(--gray-dark));display:flex;align-items:center;justify-content:center;border-right:4px solid var(--red)}
+.featured .photo img{width:100%;height:100%;object-fit:cover}
+.featured .info{padding:32px 34px;display:flex;flex-direction:column;justify-content:center}
+.featured .cargo{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.16em;color:var(--red);margin-bottom:10px}
+.featured h3{font-size:1.7rem;font-weight:800;color:var(--gray);line-height:1.1}
+.featured p{margin-top:12px;color:var(--gray);font-size:.96rem;max-width:60ch}
+.auth-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.scard{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:.22s}
+.scard:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.scard .photo{position:relative;aspect-ratio:1;background:linear-gradient(150deg,#8a8a88,var(--gray));display:flex;align-items:center;justify-content:center;overflow:hidden}
+.scard .photo::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--red)}
+.scard .photo img{width:100%;height:100%;object-fit:cover}
+.scard .initials{font-size:2.4rem;font-weight:800;color:#fff;letter-spacing:.03em}
+.scard .ph-icon{color:rgba(255,255,255,.85)}
+.scard .body{padding:18px 18px 20px}
+.scard .cargo{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--red)}
+.scard h4{font-size:1.05rem;font-weight:700;color:var(--gray-dark);margin:7px 0 4px;line-height:1.25}
+.scard .rep{font-size:.82rem;color:var(--gray-soft)}
+.scard .todo,.featured .todo{color:var(--gray-soft);font-weight:600;font-style:italic}
+
+/* ---------- Trámites ---------- */
+.tramites{background:var(--paper-2)}
+.filterbar{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;justify-content:space-between;margin-bottom:26px}
+.mini-search{display:flex;align-items:center;gap:9px;background:#fff;border:2px solid var(--line);border-radius:10px;padding:0 14px;min-width:280px;flex:1;max-width:420px;transition:border-color .2s}
+.mini-search:focus-within{border-color:var(--red)}
+.mini-search input{border:0;outline:0;font:inherit;padding:12px 0;flex:1;background:transparent}
+.mini-search svg{color:var(--gray-soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;font-size:.8rem;font-weight:600;background:#fff;border:1px solid var(--line);color:var(--gray);border-radius:999px;padding:8px 15px;cursor:pointer;transition:.18s;text-transform:uppercase;letter-spacing:.03em}
+.chip:hover{border-color:var(--gray-soft)}
+.chip.active{background:var(--red);border-color:var(--red);color:#fff}
+.result-count{font-size:.84rem;color:var(--gray-soft);margin-bottom:18px}
+.result-count b{color:var(--gray-dark)}
+
+.tramite{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:12px;overflow:hidden;transition:box-shadow .2s}
+.tramite[open]{box-shadow:var(--shadow);border-color:#dcdcd9}
+.tramite summary{list-style:none;cursor:pointer;padding:20px 22px;display:flex;align-items:center;gap:16px}
+.tramite summary::-webkit-details-marker{display:none}
+.tramite .badge{flex:none;font-size:.64rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:5px 9px;border-radius:6px;background:var(--paper-3);color:var(--gray)}
+.tramite .t-main{flex:1;min-width:0}
+.tramite .t-name{font-weight:700;color:var(--gray-dark);font-size:1.02rem}
+.tramite .t-desc{font-size:.88rem;color:var(--gray);margin-top:2px}
+.tramite .t-tags{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;font-size:.78rem;color:var(--gray-soft)}
+.tramite .t-tags span{display:inline-flex;align-items:center;gap:5px}
+.tramite .t-tags .dot{width:6px;height:6px;border-radius:50%;background:var(--red)}
+.tramite .chev{flex:none;color:var(--gray-soft);transition:transform .25s}
+.tramite[open] .chev{transform:rotate(180deg)}
+.tramite .panel{padding:0 22px 34px 22px;border-top:1px solid var(--line-soft)}
+.tramite .panel-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:28px;padding-top:20px}
+.tramite h4{font-size:.74rem;text-transform:uppercase;letter-spacing:.12em;color:var(--gray-soft);font-weight:700;margin-bottom:10px}
+.tramite ul.req{list-style:none}
+.tramite ul.req li{position:relative;padding-left:20px;margin-bottom:7px;font-size:.92rem;color:var(--gray-dark)}
+.tramite ul.req li::before{content:"";position:absolute;left:0;top:9px;width:8px;height:8px;background:var(--red)}
+.tramite ul.pdf-list{list-style:none;display:flex;flex-direction:column;gap:8px;padding-top:18px}
+.tramite ul.pdf-list a{display:flex;align-items:center;gap:11px;padding:13px 15px;border:1px solid var(--line);border-radius:10px;color:var(--gray-dark);font-weight:600;font-size:.92rem;text-decoration:none;transition:.18s}
+.tramite ul.pdf-list a:hover{border-color:var(--red);color:var(--red);background:var(--paper-2)}
+.tramite ul.pdf-list a svg{flex:none;color:var(--red)}
+.infolist{font-size:.9rem}
+.infolist .row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line-soft)}
+.infolist .row:last-child{border-bottom:0}
+.infolist .row .k{color:var(--gray-soft)}
+.infolist .row .v{color:var(--gray-dark);font-weight:600;text-align:right}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;margin-left:25px;margin-bottom: 25px;}
+.btn-outline{background:#fff;border:1.5px solid var(--gray);color:var(--gray-dark)}
+.btn-wa{background:#fff;border:1.5px solid var(--red);color:var(--red)}
+.btn-wa:hover,.btn-wa:active{background:var(--red);border-color:var(--red);color:#fff}
+.btn-outline:hover{border-color:var(--red);color:var(--red)}
+.btn-sm{height:42px;padding:0 8px;font-size:.8rem}
+.btn[disabled]{opacity:.55;cursor:not-allowed;background:var(--paper-3);color:var(--gray-soft);border:1px solid var(--line)}
+.soon{font-size:.66rem;background:var(--gray);color:#fff;padding:2px 7px;border-radius:5px;text-transform:uppercase;letter-spacing:.06em;margin-left:6px;font-weight:700}
+.empty{text-align:center;padding:50px 0;color:var(--gray-soft)}
+
+/* ---------- Actividades ---------- */
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.news-pill{display:inline-flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-left:4px solid var(--red);border-radius:10px;padding:10px 16px;margin-bottom:20px;font-size:.9rem;color:var(--gray)}
+.news-pill b{color:var(--gray-dark)}
+.news-pill button{font:inherit;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;background:var(--paper-2);border:1px solid var(--line);color:var(--gray);border-radius:999px;padding:5px 12px;cursor:pointer;transition:.18s}
+.news-pill button:hover{border-color:var(--red);color:var(--red)}
+.news{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:.22s;display:flex;flex-direction:column}
+.news:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.news .ph{height:150px;background:linear-gradient(135deg,var(--paper-3),var(--paper-2));position:relative;display:flex;align-items:center;justify-content:center}
+.news .ph img{width:100%;height:100%;object-fit:cover}
+.news .ph .mark span{width:18px;height:18px}
+.news .body{padding:20px;display:flex;flex-direction:column;flex:1}
+.news .date{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--red)}
+.news h3{font-size:1.05rem;font-weight:700;color:var(--gray-dark);margin:8px 0 6px;line-height:1.3}
+.news p{font-size:.88rem;color:var(--gray);flex:1}
+.news .more{margin-top:14px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray)}
+
+/* Recorta el texto de la tarjeta a 3 líneas (vista previa) */
+.news p{display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.news{cursor:pointer}
+
+/* Recuadro (modal) de la noticia */
+.modal-noticia{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-noticia.abierto{display:flex}
+.modal-backdrop{position:absolute;inset:0;background:rgba(20,20,20,.6)}
+.modal-caja{position:relative;background:#fff;border-radius:var(--r);max-width:620px;width:100%;max-height:88vh;overflow:auto;box-shadow:var(--shadow-lg)}
+.modal-cerrar{position:absolute;top:12px;right:14px;z-index:2;width:36px;height:36px;border:0;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;font-size:1.4rem;line-height:1;cursor:pointer}
+.modal-foto img{width:100%;height:auto;display:block;border-radius:var(--r) var(--r) 0 0}
+.modal-cuerpo{padding:26px}
+.modal-cuerpo .date{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--red)}
+.modal-cuerpo h3{font-size:1.4rem;font-weight:800;color:var(--gray-dark);margin:8px 0 14px;line-height:1.25}
+.modal-cuerpo p{color:var(--gray);line-height:1.6}
+.modal-cuerpo .auth-sec{margin-top:18px}
+.modal-cuerpo .auth-sec h4{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gray-soft);font-weight:700;margin-bottom:6px}
+.modal-cuerpo .auth-sec p{color:var(--gray);line-height:1.6}
+.modal-cuerpo ul.auth-team{list-style:none;margin-top:2px}
+.modal-cuerpo ul.auth-team li{position:relative;padding-left:18px;margin-bottom:6px;color:var(--gray-dark);font-size:.94rem}
+.modal-cuerpo ul.auth-team li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;background:var(--red)}
+.featured,.scard{cursor:pointer}
+.auth-more{display:inline-block;margin-top:10px;color:var(--red);font-weight:700;font-size:.82rem}
+.auth-slider{position:relative;overflow:hidden;border-radius:12px;background:#000;margin-top:2px}
+.auth-slider .slides{display:flex;transition:transform .35s ease}
+.auth-slider .slides img{flex:0 0 100%;width:100%;height:260px;object-fit:cover;display:block}
+.auth-slider .slider-prev,.auth-slider .slider-next{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border:0;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;font-size:1.5rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.18s}
+.auth-slider .slider-prev:hover,.auth-slider .slider-next:hover{background:var(--red)}
+.auth-slider .slider-prev{left:10px}
+.auth-slider .slider-next{right:10px}
+.auth-slider .slider-dots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:7px}
+.auth-slider .slider-dots .dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer;transition:.18s}
+.auth-slider .slider-dots .dot.active{background:#fff}
+.modal-foto .auth-slider{border-radius:var(--r) var(--r) 0 0;margin:0}
+.modal-foto .auth-slider .slides img{height:340px;object-fit:contain;background:#fff;border-radius:0}
+/* ---------- FAQ ---------- */
+.faq{background:var(--paper-2)}
+.faq-list{max-width:820px}
+.faq-item{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden}
+.faq-item summary{list-style:none;cursor:pointer;padding:18px 22px;font-weight:600;color:var(--gray-dark);display:flex;justify-content:space-between;gap:16px;align-items:center}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item .plus{flex:none;width:22px;height:22px;position:relative}
+.faq-item .plus::before,.faq-item .plus::after{content:"";position:absolute;background:var(--red);transition:.25s}
+.faq-item .plus::before{top:10px;left:2px;right:2px;height:2px}
+.faq-item .plus::after{left:10px;top:2px;bottom:2px;width:2px}
+.faq-item[open] .plus::after{transform:rotate(90deg);opacity:0}
+.faq-item .ans{padding:0 22px 20px;color:var(--gray);font-size:.94rem;border-top:1px solid var(--line-soft);padding-top:16px}
+
+/* ---------- Contacto / Footer ---------- */
+.contacto{background:var(--gray-dark);color:#dcdcda}
+.contacto .section-head h2{color:#fff}
+.contacto .section-head .kicker{color:#ff8497}
+.contacto .section-head .kicker .bar{background:var(--red)}
+.contacto .section-head p{color:#b9b9b6}
+.contact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.contact-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:22px;justify-content:flex-start}
+.contact-card .lockup{font-size:.96rem;margin-bottom:26px;display:block}
+.contact-card .lockup .desc{font-size:.85rem;color:#fff;font-weight:500;letter-spacing:.03em}
+.contact-card .lockup .key{color:#fff;font-size:1.05rem}
+.contact-card .line{font-size:.85rem;color:#bdbdba;margin-bottom:7px;display:flex;gap:9px}
+.contact-card .line svg{flex:none;margin-top:3px;color:var(--red)}
+footer.site{background:#2c2c2b;color:#9b9b98;font-size:.82rem}
+footer.site .wrap{position:relative;padding:34px 24px;display:flex;flex-wrap:wrap;justify-content:flex-start;gap:20px;align-items:center}
+footer.site a:hover{color:#fff}
+.footer.site .foot-logo,
+footer.site .foot-logo{display:flex;justify-content:flex-start;align-items:center}
+footer.site .foot-logo img{height:120px;width:auto;display:block}
+footer.site .foot-copy{position:absolute;left:0;right:0;text-align:center;pointer-events:none}
+@media (max-width: 640px){
+  footer.site .wrap{flex-direction:column;text-align:center;gap:14px}
+  footer.site .foot-logo{justify-content:center}
+  footer.site .foot-copy{position:static;text-align:center}
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:960px){
+  .areas-grid{grid-template-columns:repeat(2,1fr)}
+  .auth-grid{grid-template-columns:repeat(2,1fr)}
+  .news-grid{grid-template-columns:repeat(2,1fr)}
+  .contact-grid{grid-template-columns:repeat(2,1fr)}
+  .tramite .panel-grid{grid-template-columns:1fr;gap:22px}
+}
+@media (max-width:720px){
+  nav.main{position:absolute;top:100%;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;padding:12px 24px 18px;gap:4px;display:none;box-shadow:var(--shadow)}
+  nav.main.open{display:flex}
+  nav.main a{padding:13px 12px}
+  .menu-btn{display:block}
+  .topbar nav{display:none}
+  .search-row{flex-direction:column}
+  .btn-red.search-go{padding:14px}
+  .areas-grid,.news-grid,.contact-grid{grid-template-columns:1fr}
+  .auth-grid{grid-template-columns:repeat(2,1fr)}
+  .featured{grid-template-columns:1fr}
+  .featured .photo{aspect-ratio:16/10;border-right:0;border-bottom:4px solid var(--red)}
+  .filterbar{flex-direction:column;align-items:stretch}
+  .mini-search{max-width:none}
+  section{padding:54px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<div class="topbar">
+  <div class="wrap">
+    <span class="gov"><a href="https://www.larioja.gov.ar/">Gobierno de la Provincia de La Rioja</span></a>
+    <nav aria-label="Enlaces institucionales">
+    </nav>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site">
+  <div class="wrap header-inner">
+    <a class="brand" href="#inicio" aria-label="Gobierno de La Rioja — Secretaría de Justicia — Inicio">
+  <img class="brand-logo" src="img/logo-larioja-header.png" alt="Gobierno de La Rioja">
+  <span class="brand-sep" aria-hidden="true"></span>
+  <span class="lockup"><span class="desc">Secretaría de</span><span class="key">Justicia</span></span>
+</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="main" id="mainNav" aria-label="Navegación principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#areas">Áreas</a>
+      <a href="#autoridades">Autoridades</a>
+      <a href="#tramites">Trámites</a>
+      <a href="#actividades">Actividades</a>
+      <a href="#tramites" class="cta">Buscar trámite</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="inicio" style="padding:0">
+  <div class="wrap">
+    <h1>Hacé tus trámites de <em>Justicia</em> de forma simple.</h1>
+    <p class="lead">Registro Civil, Inspección General de Justicia, Servicio Penitenciario y Acceso a la Justicia, en un solo lugar. Buscá el trámite que necesitás y conocé requisitos, costos y dónde realizarlo.</p>
+
+    <div class="search-card">
+      <label for="heroSearch">¿Qué trámite necesitás?</label>
+      <div class="search-row">
+        <div class="search-input">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" id="heroSearch" placeholder="Ej.: rúbrica de libros, constituir sociedad, asesoramiento gratuito…" autocomplete="off">
+        </div>
+        <button class="btn btn-red search-go" id="heroGo">Buscar</button>
+      </div>
+      <div class="quick">
+        <span class="lbl">Consultas frecuentes:</span>
+        <button data-q="DNI">DNI</button>
+        <button data-q="sociedad">Constituir sociedad</button>
+        <button data-q="asesoramiento">Asesoramiento gratuito</button>
+        <button data-q="Cronograma de visitas — Unidad N°1 y N°2">Cronograma Visitas SPP</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ÁREAS ============ -->
+<section class="areas" id="areas">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker"><span class="bar"></span> Nuestras reparticiones</span>
+      <h2>Cuatro áreas, un mismo organismo</h2>
+      <p>La Secretaría de Justicia agrupa las reparticiones que acompañan al ciudadano en cada etapa: desde el registro de su identidad hasta el acceso efectivo a la justicia.</p>
+    </div>
+    <div class="areas-grid" id="areasGrid"></div>
+  </div>
+</section>
+
+<!-- ============ AUTORIDADES ============ -->
+<section class="autoridades" id="autoridades">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker"><span class="bar"></span> Quiénes nos conducen</span>
+      <h2>Autoridades</h2>
+      <p>Funcionarias y funcionarios responsables de la Secretaría de Justicia y de cada una de sus reparticiones.</p>
+    </div>
+    <div id="autoridadFeatured"></div>
+    <div class="auth-grid" id="authGrid"></div>
+  </div>
+</section>
+
+<!-- ============ TRÁMITES ============ -->
+<section class="tramites" id="tramites">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker"><span class="bar"></span> Guía de trámites</span>
+      <h2>Encontrá tu trámite en segundos</h2>
+      <p>Filtrá por repartición o escribí lo que buscás. Cada trámite muestra los requisitos que necesitás.</p>
+    </div>
+
+    <div class="filterbar">
+      <div class="mini-search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="search" id="tramiteSearch" placeholder="Buscar trámite por nombre o palabra clave…" autocomplete="off">
+      </div>
+      <div class="chips" id="chips" role="group" aria-label="Filtrar por repartición"></div>
+    </div>
+
+    <p class="result-count" id="resultCount"></p>
+    <div id="tramitesList"></div>
+  </div>
+</section>
+
+<!-- ============ ACTIVIDADES ============ -->
+<section class="actividades" id="actividades">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker"><span class="bar"></span> Novedades</span>
+      <h2>Actividades de la Secretaría</h2>
+      <p>Operativos, campañas y noticias de las distintas reparticiones.</p>
+    </div>
+    <div id="newsFilterBar"></div>
+    <div class="news-grid" id="newsGrid"></div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker"><span class="bar"></span> Preguntas frecuentes</span>
+      <h2>Resolvé tus dudas sin trasladarte</h2>
+      <p>Las consultas más habituales, respondidas. Si no encontrás lo que buscás, escribinos.</p>
+    </div>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section class="contacto" id="contacto">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker"><span class="bar"></span> Dónde encontrarnos</span>
+      <h2>Contacto y atención</h2>
+      <p>Sedes y horarios de cada repartición en La Rioja Capital.</p>
+    </div>
+    <div class="contact-grid" id="contactGrid"></div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="wrap">
+  <div class="foot-logo"><img src="img/logo-larioja.png" alt="Gobierno de la Provincia de La Rioja"></div>
+  <div class="foot-copy">© 2026 | Gobierno de la Provincia de La Rioja</div>
+</div>
+</footer>
+<script src="noticias.js"></script>
+<script>
+/* =================================================================
+   DATOS — Estructurados para mapear luego a WordPress (CPT + ACF).
+   Cada "área" = taxonomía; cada "trámite" = entrada del CPT.
+   El contenido de requisitos/costos es PROVISORIO y editable.
+   ================================================================= */
+const AREAS = {
+  rc:  {desc:"Registro",            key:"Civil",               nombre:"Registro Civil",                          short:"Registro Civil", url:"https://registrocivil.larioja.gob.ar/"},
+  igj: {desc:"Inspección General de", key:"Justicia",          nombre:"Inspección General de Justicia",          short:"IGJ"},
+  sp:  {desc:"Servicio",            key:"Penitenciario",        nombre:"Servicio Penitenciario",                  short:"Serv. Penitenciario"},
+  aj:  {desc:"Subsecretaría de",    key:"Acceso a la Justicia", nombre:"Subsecretaría de Acceso a la Justicia",   short:"Acceso a la Justicia"}
+};
+
+const TRAMITES = [
+  // ---------- Registro Civil ----------
+{area:"rc", nombre:"DNI Nuevo Ejemplar", desc:"Nuevo ejemplar de DNI por pérdida, robo, deterioro o cambio de domicilio",
+ req:[
+  "Mayores de 14 años: llevar el DNI anterior (si lo conservás). Si fue por robo o extravío, podés llevar la denuncia policial o exposición, aunque no es excluyente.",
+  "Menores de 14 años: concurrir acompañados por padre, madre o tutor legal, quienes deben presentar su propio DNI y la partida de nacimiento original del menor."
+],descarga:false, pago:false},
+
+{area:"rc", nombre:"DNI Recién Nacido", desc:"Primer DNI del bebé recién nacido.",
+ req:[
+  "DNI actualizado de la madre, padre o tutor legal.",
+  "Partida de nacimiento original con firma y sello del oficial público (te la entregan al inscribir al bebé).",
+  "En caso de tutela, presentar el testimonio judicial original."
+],
+ lugar:"Registro Civil o delegación correspondiente", descarga:false, pago:false},
+  {area:"rc", nombre:"Unión Convivencial", desc:"Registro de la unión entre dos personas que conviven de forma estable y permanente.", modalidad:"Presencial",tiempo:"Turno Previo",
+req:[
+  "Convivencia: relación pública, notoria, estable, permanente y singular, durante un mínimo de 2 años.",
+  "Edad: ambos integrantes deben ser mayores de edad (18 años o más).",
+  "Estado civil: no estar casados ni registrar otra unión convivencial vigente.",
+  "Parentesco: no ser parientes en línea recta en todos los grados, ni colaterales hasta el segundo grado (ej. hermanos), ni por afinidad en línea recta.",
+  "Documentación: DNI de ambos convivientes y domicilio legal denunciado en común.",
+  "Testigos: 2 testigos mayores de edad con DNI, que no sean familiares en ningún grado."
+],
+ lugar:"Registro Civil correspondiente", descarga:false, pago:false},
+
+{area:"rc", nombre:"Pasaporte", desc:"Para tramitar o renovar el pasaporte",
+req:[
+  "Mayores de 18 años: DNI tarjeta vigente. El pasaporte anterior es recomendable llevarlo, pero no es obligatorio.",
+  "Menores de 18 años: DNI tarjeta vigente del menor, partida de nacimiento original (o certificado de nacimiento), y el DNI de los padres o tutores legales que lo acompañen."
+], descarga:false, pago:false},
+  // ---------- Inspección General de Justicia ----------
+  {area:"igj", nombre:"Registro Público de Comercio", desc:"Requisitos para la constitución de sociedades y entidades.",
+   pdfs:[
+     {label:"S.R.L. — Contrato Social", url:"requisitos/igj/registro-publico/contrato-social-srl.pdf"},
+     {label:"S.R.L. — Cesión de Cuotas", url:"requisitos/igj/registro-publico/cesion-cuotas-srl.pdf"},
+     {label:"S.R.L. — Inscripción de Gerente", url:"requisitos/igj/registro-publico/inscripcion-gerente-srl.pdf"},
+     {label:"S.A.S. — Constitución de Sociedad por Acciones Simplificadas", url:"requisitos/igj/registro-publico/constitución-sas.pdf"},
+     {label:"Rubricación de Libros", url:"requisitos/igj/registro-publico/rubricacion-libros.pdf"},
+     {label:"Comerciantes y Martilleros Públicos", url:"requisitos/igj/registro-publico/comerciante-martillero-publico.pdf"}
+
+   //  {label:"SAPEM — Soc. Anónima con Participación Estatal Mayoritaria", url:"requisitos/igj-sapem.pdf"},
+   //  {label:"SAU — Sociedad Anónima Unipersonal", url:"requisitos/igj-sau.pdf"},
+   ]},{area:"igj", nombre:"Dirección de Personas Jurídicas", desc:"Requisitos y trámites de personas jurídicas.",
+   pdfs:[
+     {label:"Asociación Civil - Constitución", url:"requisitos/igj/asociacion-civil/igj-asociacion-civil.pdf"},
+     {label:"Asociación Civil - Modificación de Estatuto", url:"requisitos/igj/asociacion-civil/igj-estatuto-asociacion-civil.pdf"},
+     {label:"Asociación Civil - Disolución, liquidación y cancelación de asociaciones civiles", url:"requisitos/igj/asociacion-civil/igj-disolucion-liquidacion-cancelacion.pdf"},
+     {label:"Fundaciones - Constitución", url:"requisitos/igj/fundaciones/igj-constitucion-fundaciones.pdf"},
+     {label:"Fundaciones - Presentación para el llamado a reunión extraordinaria del Consejo de Administración", url:"requisitos/igj/fundaciones/igj-reunion-extraordinaria-fundaciones.pdf"},
+     {label:"Fundaciones - Disolución, liquidación y cancelación de fundaciones.", url:"requisitos/igj/fundaciones/igj-disolución-liquidación-cancelación-fundaciones.pdf"},
+
+   ]},
+
+  {area:"igj", nombre:"Dirección de Registro de Contratos de Fideicomiso", desc:"Requisitos y trámites de fideicomisos.",subtitulo:"Trámites de fideicomiso",
+   pdfs:[
+     {label:"Fideicomisos", url:"requisitos/igj/fideicomiso/fideicomisos.pdf"},
+     //{label:"Trámite 2 — (completar)", url:"requisitos/igj-fid-2.pdf"}
+   ]},
+   /*
+   {area:"igj", nombre:"Rúbrica de libros", desc:"Rubricación de libros contables y societarios.", modalidad:"Presencial", costo:"$ (arancel por libro)", tiempo:"En el día / 48 hs",
+   req:["Libros a rubricar","Constancia de inscripción de la entidad","Nota de solicitud"], lugar:"Sede IGJ — Rúbricas", descarga:true, pago:false},
+  {area:"igj", nombre:"Reforma de estatuto o contrato", desc:"Modificación del instrumento constitutivo.", modalidad:"Mixto", costo:"$ (tasa)", tiempo:"Variable",
+   req:["Acta de asamblea / reunión de socios","Texto reformado","Dictamen profesional (si corresponde)"], lugar:"Sede IGJ", descarga:true, pago:false},
+  {area:"igj", nombre:"Designación y cesación de autoridades", desc:"Registro de cambios en autoridades.", modalidad:"Mixto", costo:"$ (tasa)", tiempo:"Variable",
+   req:["Acta de designación","Aceptación de cargos","DNI de las autoridades"], lugar:"Sede IGJ", descarga:true, pago:false},
+  {area:"igj", nombre:"Certificado de vigencia", desc:"Constancia de vigencia de la entidad.", modalidad:"Mixto", costo:"$ (arancel)", tiempo:"24 a 72 hs",
+   req:["Datos de inscripción de la entidad","Nota de solicitud"], lugar:"Sede IGJ", descarga:true, pago:false},
+   */
+  // ---------- Servicio Penitenciario ----------
+{area:"sp", nombre:"Requisitos para acreditación de visitas", desc:"Documentación y pasos para acreditarte como visita.",req:["Descargá el instructivo con los requisitos para acreditar visitas."],pdfUrl:"requisitos/spp/acreditacion-visitas.pdf"},
+
+{area:"sp", nombre:"Elementos que no se pueden ingresar", desc:"Listado de elementos prohibidos en las unidades.",req:["Descargá el listado completo de elementos no permitidos."],pdfUrl:"requisitos/spp/elementos-prohibidos.pdf"},
+
+{area:"sp", nombre:"Horario de recepción de elementos", desc:"Días y horarios para la recepción de elementos.",req:["Descargá la grilla de días y horarios de recepción."],pdfUrl:"requisitos/spp/horario-recepcion-elementos.pdf"},
+
+{area:"sp", nombre:"Cronograma de visitas — Unidad N°1 y N°2", desc:"Días y horarios de visita de la Unidad N°1 y N°2.",req:["Descargá el cronograma de visitas de las Unidades."],pdfUrl:"requisitos/spp/cronograma-visitas-unidad.pdf"},
+  
+  // ---------- Acceso a la Justicia ----------
+  {area:"aj", nombre:"Asesoramiento Primario Integral Legal y Psicosocial", desc:"Orientación legal sin costo para el ciudadano.",
+   req:["Nombre Completo","DNI"], lugar:"Subsecretaría de Acceso a la Justicia", descarga:false,whatsapp:"5493804320589"},
+  //{area:"aj", nombre:"Mediación comunitaria", desc:"Resolución de conflictos vecinales y familiares.", modalidad:"Presencial", costo:"Gratuito", tiempo:"Según turno",
+   //req:["DNI de las partes","Descripción del conflicto"], lugar:"Centro de mediación", descarga:false, pago:false},
+  {area:"aj", nombre:"Solicitá tu turno en Subsecretaría Acceso a la Justicia", desc:"Reserva de turno para atención presencial.", modalidad:"Online", costo:"Gratuito", tiempo:"Inmediato",
+   req:["DNI","Motivo de consulta","Nombre Completo"], lugar:"CAJ — La Rioja Capital",whatsapp:"5493804320589"}
+];
+
+
+
+const FAQ = [
+  {q:"¿Necesito turno para todos los trámites?", a:"No todos requieren turno. En la guía de trámites, cada ficha indica la modalidad (presencial, en línea o mixta) y si corresponde reservar turno."},
+  {q:"¿Cómo solicito una partida o trámite del Registro Civil?", a:"El Registro Civil cuenta con su propio sitio oficial, donde se gestionan partidas de nacimiento, matrimonio, defunción y demás trámites. Ingresá en <a href=\"https://registrocivil.larioja.gob.ar/\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--red);font-weight:600\">registrocivil.larioja.gob.ar</a>."},
+  //{q:"¿Cuánto cuestan los trámites?", a:"Muchos servicios de la Subsecretaría de Acceso a la Justicia son gratuitos. Los aranceles de la IGJ se actualizan periódicamente; cada ficha indica si el trámite tiene costo."},
+  //{q:"¿Voy a poder pagar y descargar requisitos en línea?", a:"Sí. Es una funcionalidad prevista para la próxima etapa del sitio. Donde aparezca la etiqueta «Próximamente», el trámite se está preparando para gestión digital."}
+];
+
+const CONTACTOS = [
+  {area:"rc", dir:"Hipólito Yrigoyen 100, Av. Rivadavia", hor:"Lun a Vie: 8:00 a 13:00 hs y 16:00 a 21:00 hs · Fines de semana y feriados: 16:00 a 21:00 hs"},
+  {area:"igj", dir:"Juan Bautista Alberdi 285, La Rioja Capital", hor:"Lun a Vie · 8:30 a 12:30 hs"},
+  {area:"sp", dir:"Calle Pellegrini Extremo Oeste B° Las Ágaves", hor:"Lun a Dom · 8:00 a 20:00 hs", mail:"serviciopenitenciariolr@gmail.com"},
+  {area:"aj", dir:"Av. Perón 1290 - Avant Park Hotel - Oficinas 4to Piso", hor:"Lun a Vie · 8:00 a 13:00 hs", tel:"3804320589"},
+];
+
+// Autoridades 
+/* Para el "Leer más" de cada autoridad, completá estos 3 campos:
+     lugar  → dónde trabaja (dirección y horario)
+     desc   → descripción y funciones del área
+     sigue  → quién le sigue: ["Nombre Apellido — Cargo", "Nombre Apellido — Cargo"]   */
+const AUTORIDADES = {
+  secretario: {cargo:"Secretario de Justicia", nombre:"Lucas Alfredo Casas", foto:"img/secretario.png",
+    bio:"Máxima autoridad de la Secretaría de Justicia de la Provincia de La Rioja, responsable de coordinar las cuatro reparticiones del organismo.",
+    lugar:"", desc:"", sigue:[], galeria:["img/secretaria/casa-gobierno.png"]},
+  equipo: [
+    {cargo:"Director del Registro Civil", rep:"Registro Civil", nombre:"Gonzalo Barrera", foto:"img/registro.png",
+     lugar:"", desc:"", sigue:[], galeria:[]},
+    {cargo:"Inspector General de Justicia", rep:"Inspección General de Justicia", nombre:"Jacob Saúl", foto:"img/igj.png",
+     lugar:"", desc:"", sigue:[], galeria:["img/igj/igj-fachada.png"]},
+    {cargo:"Jefa del Servicio Penitenciario", rep:"Servicio Penitenciario", nombre:"Lic. Analía Tello", foto:"img/penitenciario.png",
+     lugar:"", desc:"", sigue:[], galeria:["img/spp/spp-ingreso.png"],organigrama:"requisitos/spp/organigrama-servicio-penitenciario.pdf"},
+    {cargo:"Subsecretario de Acceso a la Justicia", rep:"Acceso a la Justicia", nombre:"Adrian Guaraglia", foto:"img/acceso.png",
+     lugar:"", desc:"", sigue:[], galeria:[]}
+  ]
+};
+
+/* ================= RENDER ================= */
+const $ = s => document.querySelector(s);
+const lockupHTML = a => `<span class="lockup"><span class="desc">${a.desc}</span><span class="key">${a.key}</span></span>`;
+
+// Áreas
+$("#areasGrid").innerHTML = Object.entries(AREAS).map(([k,a],i)=>{
+  const n = TRAMITES.filter(t=>t.area===k).length;
+  if(a.url){
+    // Repartición con sitio propio: enlaza al oficial
+    return `<a class="area-card" href="${a.url}" target="_blank" rel="noopener" aria-label="Ir al sitio oficial de ${a.nombre}">
+      <div class="num">0${i+1}</div>
+      ${lockupHTML(a)}
+      <div class="meta">Trámites en su sitio oficial</div>
+      <span class="go">Ir al sitio oficial
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M14 4h6v6M20 4l-9 9M19 13v6a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg>
+      </span>
+    </a>`;
+  }
+  if(a.soloNoticias){
+    // Repartición que solo difunde noticias (ej. Servicio Penitenciario)
+    return `<div class="area-card" data-news-area="${k}" tabindex="0" role="button" aria-label="Ver noticias de ${a.nombre}">
+      <div class="num">0${i+1}</div>
+      ${lockupHTML(a)}
+      <div class="meta">Noticias y actividades</div>
+      <span class="go">Ver noticias
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </span>
+    </div>`;
+  }
+  return `<div class="area-card" data-area="${k}" tabindex="0" role="button" aria-label="Ver trámites de ${a.nombre}">
+    <div class="num">0${i+1}</div>
+    ${lockupHTML(a)}
+    <div class="meta">${n} trámite${n===1?'':'s'} disponible${n===1?'':'s'}</div>
+    <span class="go">Ver trámites
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </span>
+  </div>`;
+}).join("");
+
+// Autoridades
+const PERSON_ICON = `<svg class="ph-icon" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>`;
+function initials(n){return n.trim().split(/\s+/).slice(0,2).map(w=>w[0]||"").join("").toUpperCase();}
+function avatar(a){
+  if(a.foto) return `<img src="${a.foto}" alt="${a.nombre||a.cargo}">`;
+  if(a.nombre) return `<span class="initials">${initials(a.nombre)}</span>`;
+  return PERSON_ICON;
+}
+function nameHTML(a){return a.nombre ? a.nombre : `<span class="todo">Nombre a completar</span>`;}
+
+const sec = AUTORIDADES.secretario;
+$("#autoridadFeatured").innerHTML = `
+  <div class="featured" data-auth="sec" tabindex="0" role="button">
+    <div class="photo">${avatar(sec)}</div>
+    <div class="info">
+      <span class="cargo">${sec.cargo}</span>
+      <h3>${nameHTML(sec)}</h3>
+      <p>${sec.bio}</p>
+      <span class="auth-more">Leer más →</span>
+    </div>
+  </div>`;
+
+$("#authGrid").innerHTML = AUTORIDADES.equipo.map((a,i)=>`
+  <div class="scard" data-auth="${i}" tabindex="0" role="button">
+    <div class="photo">${avatar(a)}</div>
+    <div class="body">
+      <span class="cargo">${a.rep}</span>
+      <h4>${nameHTML(a)}</h4>
+      <div class="rep">${a.cargo}</div>
+      <span class="auth-more">Leer más →</span>
+    </div>
+  </div>`).join("");
+
+// Chips (solo reparticiones que tienen trámites en la guía)
+const areasConTramites = Object.keys(AREAS).filter(k=>TRAMITES.some(t=>t.area===k));
+const CHIP_DEFS = [["all","Todas"],...areasConTramites.map(k=>[k,AREAS[k].short])];
+$("#chips").innerHTML = CHIP_DEFS.map(([k,l],i)=>`<button class="chip ${i===0?'active':''}" data-area="${k}">${l}</button>`).join("");
+
+// Trámites
+function badgeFor(area){return `<span class="badge">${AREAS[area].short}</span>`}
+function tramiteHTML(t,idx){
+  // Si el trámite tiene varios PDFs (ej. Registro Público de Comercio),
+  // el panel muestra la lista de descargas. Si no, muestra requisitos + botón.
+  const panel = t.pdfs
+    ? `<h4>${t.subtitulo || "Requisitos disponibles"}</h4>
+      <ul class="pdf-list">
+        ${t.pdfs.map(p=>`<li><a href="${p.url}" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/></svg>${p.label}</a></li>`).join("")}
+      </ul>`
+    : `<div class="panel-grid">
+        <div>
+          <h4>Requisitos</h4>
+          <ul class="req">${(t.req||[]).map(r=>`<li>${r}</li>`).join("")}</ul>
+        </div>
+      </div>
+      <div class="actions">
+${t.pdfUrl ? `<a class="btn btn-outline btn-sm" href="${t.pdfUrl}" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/></svg> Descargar requisitos</a>` : ""}       ${t.whatsapp ? `<a class="btn btn-wa btn-sm" href="https://wa.me/${t.whatsapp}?text=${encodeURIComponent('Hola, quiero solicitar un turno para: '+t.nombre)}" target="_blank" rel="noopener">Solicitar turno por WhatsApp</a>` : ""}
+      </div>`;
+  const searchText = (t.nombre+' '+t.desc+' '+(t.pdfs?t.pdfs.map(p=>p.label).join(' '):'')).toLowerCase();
+  return `<details class="tramite" data-area="${t.area}" data-text="${searchText}">
+    <summary>
+      ${badgeFor(t.area)}
+      <div class="t-main">
+        <div class="t-name">${t.nombre}</div>
+        <div class="t-desc">${t.desc}</div>
+      </div>
+      <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+    </summary>
+    <div class="panel">${panel}</div>
+  </details>`;
+}
+$("#tramitesList").innerHTML = TRAMITES.map(tramiteHTML).join("");
+
+// News (con filtro opcional por repartición)
+let newsFilter = null;
+function renderNews(){
+  const items = newsFilter ? NEWS.filter(n=>n.area===newsFilter) : NEWS;
+  $("#newsFilterBar").innerHTML = newsFilter
+    ? `<div class="news-pill">Mostrando noticias de <b>${AREAS[newsFilter].nombre}</b>
+         <button id="newsClear" aria-label="Ver todas las noticias">Ver todas ✕</button></div>`
+    : "";
+  $("#newsGrid").innerHTML = items.map(n=>`
+    <article class="news" data-i="${NEWS.indexOf(n)}">
+      <div class="ph">${n.img ? `<img src="${n.img}" alt="${n.title}">` : `<span class="mark" aria-hidden="true"><span class="s-red"></span><span class="s-gray"></span><span class="s-white"></span></span>`}</div>
+      <div class="body">
+        <span class="date">${n.date} · ${AREAS[n.area].short}</span>
+        <h3>${n.title}</h3>
+        <p>${n.text}</p>
+        <span class="more">Leer más →</span>
+      </div>
+    </article>`).join("");
+  const clr = $("#newsClear");
+  if(clr) clr.addEventListener("click",()=>{ newsFilter=null; renderNews(); });
+}
+renderNews();
+
+// FAQ
+$("#faqList").innerHTML = FAQ.map(f=>`
+  <details class="faq-item">
+    <summary>${f.q}<span class="plus" aria-hidden="true"></span></summary>
+    <div class="ans">${f.a}</div>
+  </details>`).join("");
+
+// Contacto
+$("#contactGrid").innerHTML = CONTACTOS.map(c=>{
+  const a=AREAS[c.area];
+  return `<div class="contact-card">
+    ${lockupHTML(a)}
+    <div class="line"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.3-7-11a7 7 0 0 1 14 0c0 5.7-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>${c.dir}</div>
+${c.hor ? `<div class="line"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>${c.hor}</div>` : ""}
+${c.tel ? `<div class="line"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>${c.tel}</div>` : ""}
+${c.mail ? `<div class="line"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>${c.mail}</div>` : ""}
+  </div>`;
+}).join("");
+
+const _y=$("#year"); if(_y) _y.textContent = new Date().getFullYear();
+
+/* ================= INTERACCIÓN ================= */
+let activeArea = "all";
+let activeText = "";
+
+function applyFilter(){
+  let visible = 0;
+  document.querySelectorAll(".tramite").forEach(el=>{
+    const okArea = activeArea==="all" || el.dataset.area===activeArea;
+    const okText = !activeText || el.dataset.text.includes(activeText);
+    const show = okArea && okText;
+    el.style.display = show ? "" : "none";
+    if(show) visible++;
+  });
+  const cnt = $("#resultCount");
+  if(visible===0){
+    cnt.innerHTML = "Sin resultados. Probá con otra palabra o quitá los filtros.";
+    if(!document.querySelector(".empty")){
+      $("#tramitesList").insertAdjacentHTML("beforeend",`<div class="empty">No encontramos trámites que coincidan con tu búsqueda.</div>`);
+    }
+  }else{
+    cnt.innerHTML = `Mostrando <b>${visible}</b> de ${TRAMITES.length} trámites${activeArea!=="all"?` · ${AREAS[activeArea].nombre}`:""}`;
+    const e=document.querySelector(".empty"); if(e) e.remove();
+  }
+}
+
+// chips
+$("#chips").addEventListener("click",e=>{
+  const b=e.target.closest(".chip"); if(!b)return;
+  document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));
+  b.classList.add("active");
+  activeArea=b.dataset.area;
+  applyFilter();
+});
+
+// área cards -> filtran y bajan a trámites (solo las internas con data-area)
+document.querySelectorAll(".area-card[data-area]").forEach(card=>{
+  const act=()=>{
+    activeArea=card.dataset.area; activeText="";
+    $("#tramiteSearch").value="";
+    document.querySelectorAll(".chip").forEach(c=>c.classList.toggle("active",c.dataset.area===activeArea));
+    applyFilter();
+    $("#tramites").scrollIntoView({behavior:"smooth"});
+  };
+  card.addEventListener("click",act);
+  card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();act();}});
+});
+
+// área cards "solo noticias" -> filtran novedades y bajan a actividades
+document.querySelectorAll(".area-card[data-news-area]").forEach(card=>{
+  const act=()=>{
+    newsFilter=card.dataset.newsArea;
+    renderNews();
+    $("#actividades").scrollIntoView({behavior:"smooth"});
+  };
+  card.addEventListener("click",act);
+  card.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();act();}});
+});
+
+// buscadores
+$("#tramiteSearch").addEventListener("input",e=>{activeText=e.target.value.trim().toLowerCase();applyFilter();});
+function heroSearch(){
+  activeText=$("#heroSearch").value.trim().toLowerCase();
+  $("#tramiteSearch").value=$("#heroSearch").value;
+  activeArea="all";
+  document.querySelectorAll(".chip").forEach(c=>c.classList.toggle("active",c.dataset.area==="all"));
+  applyFilter();
+  $("#tramites").scrollIntoView({behavior:"smooth"});
+}
+$("#heroGo").addEventListener("click",heroSearch);
+$("#heroSearch").addEventListener("keydown",e=>{if(e.key==="Enter")heroSearch();});
+
+// chips rápidos del hero
+document.querySelectorAll(".quick button").forEach(b=>{
+  b.addEventListener("click",()=>{ $("#heroSearch").value=b.dataset.q; heroSearch(); });
+});
+
+// menú mobile
+$("#menuBtn").addEventListener("click",()=>{
+  const nav=$("#mainNav"), btn=$("#menuBtn");
+  const open=nav.classList.toggle("open");
+  btn.setAttribute("aria-expanded",open);
+});
+document.querySelectorAll("#mainNav a").forEach(a=>a.addEventListener("click",()=>$("#mainNav").classList.remove("open")));
+
+applyFilter();
+// Abrir/cerrar el recuadro de noticia
+function abrirNoticia(i){
+  const modal = document.getElementById("modalNoticia");
+  const n = NEWS[i];
+  document.getElementById("modalFoto").innerHTML = n.img ? `<img src="${n.img}" alt="${n.title}">` : "";
+  document.getElementById("modalFecha").textContent = `${n.date} · ${AREAS[n.area].short}`;
+  document.getElementById("modalTitulo").textContent = n.title;
+  document.getElementById("modalTexto").textContent = n.text;
+  modal.classList.add("abierto");
+  document.body.style.overflow = "hidden";
+}
+function cerrarNoticia(){
+  document.querySelectorAll(".modal-noticia.abierto").forEach(m=>m.classList.remove("abierto"));
+  document.body.style.overflow = "";
+}
+document.getElementById("newsGrid").addEventListener("click", e=>{
+  const card = e.target.closest(".news");
+  if(card) abrirNoticia(card.dataset.i);
+});
+document.addEventListener("click", e=>{ if(e.target.closest("[data-cerrar]")) cerrarNoticia(); });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") cerrarNoticia(); });
+
+// Abrir el recuadro de autoridad
+function abrirAutoridad(ref){
+  const a = ref==="sec" ? AUTORIDADES.secretario : AUTORIDADES.equipo[ref];
+  if(!a) return;
+  // Foto principal + galería = slider arriba
+  const imgs = [a.foto, ...(a.galeria||[])].filter(Boolean);
+  if(imgs.length > 1){
+    const slides = imgs.map(src=>`<img src="${src}" alt="${a.nombre||a.cargo}" loading="lazy">`).join("");
+    const dots = `<div class="slider-dots">${imgs.map((_,i)=>`<span class="dot${i===0?' active':''}"></span>`).join("")}</div>`;
+    document.getElementById("authFoto").innerHTML = `<div class="auth-slider"><div class="slides">${slides}</div><button class="slider-prev" type="button" aria-label="Anterior">‹</button><button class="slider-next" type="button" aria-label="Siguiente">›</button>${dots}</div>`;
+  } else {
+    document.getElementById("authFoto").innerHTML = imgs.length ? `<img src="${imgs[0]}" alt="${a.nombre||a.cargo}">` : "";
+  }
+  document.getElementById("authCargo").textContent = a.cargo + (a.rep ? " · " + a.rep : "");
+  document.getElementById("authNombre").textContent = a.nombre || "";
+  let body = "";
+  if(a.lugar) body += `<div class="auth-sec"><h4>Dónde trabaja</h4><p>${a.lugar}</p></div>`;
+  const texto = a.desc || a.bio || "";
+  if(texto) body += `<div class="auth-sec"><h4>Sobre el área</h4><p>${texto}</p></div>`;
+  if(a.sigue && a.sigue.length) body += `<div class="auth-sec"><h4>Quién le sigue</h4><ul class="auth-team">${a.sigue.map(p=>`<li>${p}</li>`).join("")}</ul></div>`;
+  if(a.organigrama) body += `<div class="auth-sec"><h4>Organigrama</h4><a class="btn btn-outline btn-sm" href="${a.organigrama}" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14"/></svg> Ver organigrama (PDF)</a></div>`;
+  document.getElementById("authBody").innerHTML = body;
+  document.getElementById("modalAutoridad").classList.add("abierto");
+  document.body.style.overflow = "hidden";
+  // Activar el slider de arriba (si hay galería)
+  const slider = document.querySelector("#authFoto .auth-slider");
+  if(slider){
+    const slidesEl = slider.querySelector(".slides");
+    const total = slider.querySelectorAll(".slides img").length;
+    const dots = slider.querySelectorAll(".slider-dots .dot");
+    let idx = 0;
+    const go = n => {
+      idx = (n + total) % total;
+      slidesEl.style.transform = `translateX(-${idx*100}%)`;
+      dots.forEach((d,i)=>d.classList.toggle("active", i===idx));
+    };
+    slider.querySelector(".slider-prev").addEventListener("click", ()=>go(idx-1));
+    slider.querySelector(".slider-next").addEventListener("click", ()=>go(idx+1));
+    dots.forEach((d,i)=>d.addEventListener("click", ()=>go(i)));
+  }
+}
+document.getElementById("autoridadFeatured").addEventListener("click", e=>{
+  const card = e.target.closest("[data-auth]"); if(card) abrirAutoridad(card.dataset.auth);
+});
+document.getElementById("authGrid").addEventListener("click", e=>{
+  const card = e.target.closest("[data-auth]"); if(card) abrirAutoridad(card.dataset.auth);
+});
+</script>
+<div class="modal-noticia" id="modalNoticia" aria-hidden="true">
+  <div class="modal-backdrop" data-cerrar></div>
+  <div class="modal-caja" role="dialog" aria-modal="true">
+    <button class="modal-cerrar" data-cerrar aria-label="Cerrar">&times;</button>
+    <div class="modal-foto" id="modalFoto"></div>
+    <div class="modal-cuerpo">
+      <span class="date" id="modalFecha"></span>
+      <h3 id="modalTitulo"></h3>
+      <p id="modalTexto"></p>
+    </div>
+  </div>
+</div>
+<div class="modal-noticia" id="modalAutoridad" aria-hidden="true">
+  <div class="modal-backdrop" data-cerrar></div>
+  <div class="modal-caja" role="dialog" aria-modal="true">
+    <button class="modal-cerrar" data-cerrar aria-label="Cerrar">&times;</button>
+    <div class="modal-foto" id="authFoto"></div>
+    <div class="modal-cuerpo">
+      <span class="date" id="authCargo"></span>
+      <h3 id="authNombre"></h3>
+      <div id="authBody"></div>
+    </div>
+  </div>
+</div>
+</body>

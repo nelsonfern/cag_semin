@@ -1,0 +1,9 @@
+# Python 3.12
+# Fase 1 — ingesta documental
+requests==2.34.2
+beautifulsoup4==4.15.0
+pypdf==6.21.0
+json5==0.17.3
+
+# Pruebas
+pytest==9.1.1

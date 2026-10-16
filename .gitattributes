@@ -1,0 +1,3 @@
+# Los originales y textos extraídos se verifican por hash: Git no debe tocar sus fin de línea.
+data/raw/** -text
+data/processed/** -text

@@ -33,7 +33,37 @@ tests/          # Pruebas automatizadas
 docs/           # Especificación y material de la exposición
 ```
 
-## Configuración
+## Instalación
 
-Copiá `.env.example` a `.env` y completá los valores. Las instrucciones de instalación
-y ejecución se agregan a medida que cada fase queda aprobada.
+Requiere Python 3.12.
+
+```bash
+py -3.12 -m venv .venv
+.venv\Scripts\python -m pip install -r requirements.txt
+```
+
+Copiá `.env.example` a `.env` si querés cambiar el User-Agent o la pausa entre solicitudes.
+
+## Ingesta de fuentes oficiales (Fase 1)
+
+Las fuentes se declaran en [`data/sources.json`](data/sources.json). La ingesta descarga
+las automáticas (respetando `robots.txt` y `Crawl-delay`), extrae el texto y registra
+metadatos, hash y versión en [`data/manifest.json`](data/manifest.json).
+
+```bash
+.venv\Scripts\python -X utf8 -m app.ingestion.ingest run        # descargar y registrar
+.venv\Scripts\python -X utf8 -m app.ingestion.ingest status     # ver estado del manifiesto
+.venv\Scripts\python -X utf8 -m app.ingestion.ingest import-manual --id nac-portal-tramitar --file pagina.html
+```
+
+- Originales: `data/raw/<document_id>/v<versión>.<ext>`
+- Texto extraído: `data/processed/<document_id>/v<versión>.txt`
+- Si el texto de un documento cambia, se crea una versión nueva (las anteriores se conservan),
+  cambia `corpus_version` y las cachés KV construidas con la versión anterior quedan marcadas
+  como desactualizadas.
+
+## Pruebas
+
+```bash
+.venv\Scripts\python -m pytest
+```
