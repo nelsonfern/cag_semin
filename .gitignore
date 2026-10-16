@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Entorno
+.env
+
+# Artefactos pesados (caché KV serializada, pesos de modelos)
+*.pt
+*.safetensors
+models/
+cache/
+
+# IDE / SO
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
