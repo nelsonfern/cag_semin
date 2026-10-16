@@ -8,7 +8,7 @@ pruebas aprobadas y tareas pendientes. Cada fase cierra con un commit.
 | Fase | Descripción | Estado |
 |------|-------------|--------|
 | 0 | Inicialización del repositorio | Completada |
-| 1 | Fuentes e ingesta | Implementada — esperando aprobación |
+| 1 | Fuentes e ingesta | **Aprobada** (2026-10-16) |
 | 2 | Corpus reproducible | Pendiente |
 | 3 | Prueba mínima de KV cache | Pendiente |
 | 4 | Motor CAG | Pendiente |
@@ -154,7 +154,7 @@ py -3.12 -m venv .venv
 ### 6. Criterio de aprobación de la Fase 1
 > ≥ 5 documentos oficiales reales con URL, organismo, fecha de obtención y contenido extraído verificable.
 
-**Se cumple:** hay 12 documentos oficiales: 11 páginas de 3 organismos (2 provinciales y 1 nacional) y la Ley Impositiva 2024 publicada por la DGIP. Todos tienen originales y textos versionados con hashes verificables. Queda pendiente la aprobación del usuario.
+**Se cumple:** hay 12 documentos oficiales: 11 páginas de 3 organismos (2 provinciales y 1 nacional) y la Ley Impositiva 2024 publicada por la DGIP. Todos tienen originales y textos versionados con hashes verificables. **Fase aprobada por el usuario el 2026-10-16.**
 
 ### Revisión 1.1 — Ley Impositiva 2024 (2026-10-16)
 
