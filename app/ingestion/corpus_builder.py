@@ -247,17 +247,28 @@ def build_corpus(manifest: Manifest, config: dict, tokenizer: Tokenizer) -> Corp
                     kept_lines.append(line)
             text = "\n".join(kept_lines)
         sections = SPLITTERS[cfg.get("splitter", "markdown")](record.document_id, text)
-        include = cfg.get("include_sections")
-        if include:
+        # Selección por ID (artículos de una norma: "art-39") o por título de sección. El título
+        # es más estable que "s7" cuando el organismo agrega o quita secciones en su página.
+        include_ids = cfg.get("include_sections")
+        include_headings = cfg.get("include_headings")
+        selective = bool(include_ids or include_headings)
+        if include_ids:
             found = {s.section_id.split("#", 1)[1] for s in sections}
-            for missing in sorted(set(include) - found):
+            for missing in sorted(set(include_ids) - found):
                 warnings.append(f"{record.document_id}: la sección '{missing}' de include_sections no existe")
+        if include_headings:
+            found_headings = {s.heading for s in sections}
+            for missing in [h for h in include_headings if h not in found_headings]:
+                warnings.append(f"{record.document_id}: no hay sección con el título '{missing}'")
+        if selective:
             for s in sections:
-                if s.section_id.split("#", 1)[1] not in include:
+                keep = (include_ids and s.section_id.split("#", 1)[1] in include_ids) or \
+                       (include_headings and s.heading in include_headings)
+                if not keep:
                     s.status = "excluded_by_selection"
         plans.append(DocumentPlan(
             record=record, group=cfg["group"], priority=int(cfg["priority"]), sections=sections,
-            selection_reason=cfg.get("selection_reason") if include else None, dropped_lines=dropped,
+            selection_reason=cfg.get("selection_reason") if selective else None, dropped_lines=dropped,
         ))
     for doc_id in sorted(set(doc_cfgs) - {p.record.document_id for p in plans}):
         rec = manifest.get(doc_id)

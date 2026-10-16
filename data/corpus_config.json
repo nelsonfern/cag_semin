@@ -15,7 +15,27 @@
     "rc-dni-recien-nacido":         {"group": "provincial", "priority": 1},
     "rc-pasaporte":                 {"group": "provincial", "priority": 1},
     "sj-guia-tramites":             {"group": "provincial", "priority": 1},
-    "nac-requisitos-dni-pasaporte": {"group": "nacional", "priority": 2},
+    "nac-requisitos-dni-pasaporte": {
+      "group": "nacional",
+      "priority": 2,
+      "include_headings": [
+        "DNI Primer Ejemplar",
+        "DNI Actualización de 5 a 8 años",
+        "DNI Actualización de mayor de 14 años",
+        "DNI Nuevo ejemplar, cambio de domicilio",
+        "DNI Nuevo ejemplar, robo, extravío o inutilización",
+        "DNI Nuevo ejemplar menor",
+        "DNI Nuevo ejemplar mayor",
+        "DNI 24 hs",
+        "DNI exprés",
+        "PASAPORTE Primer Pasaporte menor",
+        "PASAPORTE Nuevo ejemplar menor",
+        "PASAPORTE Primer Pasaporte mayor",
+        "PASAPORTE Nuevo ejemplar mayor",
+        "Pasaporte exprés"
+      ],
+      "selection_reason": "Solo los tipos de DNI y pasaporte que corresponden a los trámites con ficha provincial (DNI de recién nacido, actualizaciones, nuevo ejemplar, pasaporte) y sus modalidades rápidas. Se excluyen inscripciones tardías, rectificaciones, canjes de libreta, opciones de nacionalidad y extranjeros."
+    },
     "ley-10702-impositiva-2024": {
       "group": "normativa",
       "priority": 3,

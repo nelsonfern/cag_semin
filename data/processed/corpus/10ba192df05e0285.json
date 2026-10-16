@@ -1,0 +1,2465 @@
+{
+  "build_id": "10ba192df05e0285",
+  "format_version": 1,
+  "manifest_corpus_version": "b7b3289233add501",
+  "config_sha256": "f0361df0434aa986",
+  "corpus_text_sha256": "c1b39804694481cfd40edf2ae7793290ffbbf81b8f7ac3750004b60995f7c081",
+  "tokenizer": {
+    "id": "Qwen/Qwen2.5-7B-Instruct",
+    "fingerprint": "e360e6f6266884e6"
+  },
+  "max_context_tokens": 16000,
+  "totals": {
+    "documents_included": 12,
+    "documents_excluded": 0,
+    "sections_included": 82,
+    "sections_duplicate": 0,
+    "sections_excluded_by_selection": 139,
+    "chars": 50635,
+    "tokens": 15047,
+    "budget_remaining": 953
+  },
+  "documents": [
+    {
+      "document_id": "rc-defunciones",
+      "title": "Inscripción de Defunciones",
+      "organism": "Registro Civil de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://registrocivil.larioja.gob.ar/tramite-defunciones.html",
+      "version": 2,
+      "content_hash": "e79a4e787c5870f4aa6da9668d23b61cf576908d26d9a51e64deb42255748440",
+      "last_updated_date": "2025-10-20",
+      "retrieved_at": "2026-10-16T18:29:55+00:00",
+      "group": "provincial",
+      "priority": 1,
+      "included": true,
+      "exclusion_reason": null,
+      "tokens": 625,
+      "dropped_noise_lines": 0,
+      "sections": [
+        {
+          "section_id": "rc-defunciones#s0",
+          "heading": null,
+          "char_start": 0,
+          "char_end": 214,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 61,
+          "chars": 213
+        },
+        {
+          "section_id": "rc-defunciones#s1",
+          "heading": "Requisitos del Trámite",
+          "char_start": 214,
+          "char_end": 947,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 190,
+          "chars": 706
+        },
+        {
+          "section_id": "rc-defunciones#s2",
+          "heading": "Pasos para realizar el trámite",
+          "char_start": 947,
+          "char_end": 1447,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 119,
+          "chars": 465
+        },
+        {
+          "section_id": "rc-defunciones#s3",
+          "heading": "¿Quién puede iniciarlo?",
+          "char_start": 1447,
+          "char_end": 1562,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 25,
+          "chars": 87
+        },
+        {
+          "section_id": "rc-defunciones#s4",
+          "heading": "Costo",
+          "char_start": 1562,
+          "char_end": 1726,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 37,
+          "chars": 155
+        }
+      ]
+    },
+    {
+      "document_id": "rc-dni-recien-nacido",
+      "title": "DNI – Recién nacido",
+      "organism": "Registro Civil de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://registrocivil.larioja.gob.ar/tramite-dni-recien-nacido.html",
+      "version": 2,
+      "content_hash": "93ac85da97f02404e8c9b826bacefc501b094a45a0e286c89d3628b3a9f6506f",
+      "last_updated_date": "2025-10-20",
+      "retrieved_at": "2026-10-16T18:30:03+00:00",
+      "group": "provincial",
+      "priority": 1,
+      "included": true,
+      "exclusion_reason": null,
+      "tokens": 571,
+      "dropped_noise_lines": 0,
+      "sections": [
+        {
+          "section_id": "rc-dni-recien-nacido#s0",
+          "heading": null,
+          "char_start": 0,
+          "char_end": 205,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 75,
+          "chars": 204
+        },
+        {
+          "section_id": "rc-dni-recien-nacido#s1",
+          "heading": "Requisitos del Trámite",
+          "char_start": 205,
+          "char_end": 744,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 136,
+          "chars": 512
+        },
+        {
+          "section_id": "rc-dni-recien-nacido#s2",
+          "heading": "Pasos para realizar el trámite",
+          "char_start": 744,
+          "char_end": 983,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 52,
+          "chars": 204
+        },
+        {
+          "section_id": "rc-dni-recien-nacido#s3",
+          "heading": "Costo",
+          "char_start": 983,
+          "char_end": 1053,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 17,
+          "chars": 60
+        },
+        {
+          "section_id": "rc-dni-recien-nacido#s4",
+          "heading": "Información adicional",
+          "char_start": 1053,
+          "char_end": 1325,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 67,
+          "chars": 247
+        }
+      ]
+    },
+    {
+      "document_id": "rc-dni-renovacion",
+      "title": "DNI – Nuevo ejemplar por robo, deterioro, extravío o caducidad",
+      "organism": "Registro Civil de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://registrocivil.larioja.gob.ar/tramite-dni-renovacion.html",
+      "version": 2,
+      "content_hash": "7168aa6a1265ea945aec72cc57851b5f728da6b25f76061e4cfa92ca246e8035",
+      "last_updated_date": "2025-10-20",
+      "retrieved_at": "2026-10-16T18:30:01+00:00",
+      "group": "provincial",
+      "priority": 1,
+      "included": true,
+      "exclusion_reason": null,
+      "tokens": 628,
+      "dropped_noise_lines": 0,
+      "sections": [
+        {
+          "section_id": "rc-dni-renovacion#s0",
+          "heading": null,
+          "char_start": 0,
+          "char_end": 205,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 71,
+          "chars": 204
+        },
+        {
+          "section_id": "rc-dni-renovacion#s1",
+          "heading": "Requisitos del Trámite",
+          "char_start": 205,
+          "char_end": 464,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 64,
+          "chars": 232
+        },
+        {
+          "section_id": "rc-dni-renovacion#s2",
+          "heading": "Pasos para realizar el trámite",
+          "char_start": 464,
+          "char_end": 802,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 77,
+          "chars": 303
+        },
+        {
+          "section_id": "rc-dni-renovacion#s3",
+          "heading": "¿Cómo se inicia?",
+          "char_start": 802,
+          "char_end": 918,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 24,
+          "chars": 95
+        },
+        {
+          "section_id": "rc-dni-renovacion#s4",
+          "heading": "Costo",
+          "char_start": 918,
+          "char_end": 1127,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 55,
+          "chars": 199
+        },
+        {
+          "section_id": "rc-dni-renovacion#s5",
+          "heading": "Información adicional",
+          "char_start": 1127,
+          "char_end": 1489,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 100,
+          "chars": 337
+        }
+      ]
+    },
+    {
+      "document_id": "rc-matrimonios",
+      "title": "Matrimonios",
+      "organism": "Registro Civil de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://registrocivil.larioja.gob.ar/tramite-matrimonios.html",
+      "version": 2,
+      "content_hash": "c49500b6421172fa3437b92bb0cf2e7e52e5e558645413779c5b16df9ffe9342",
+      "last_updated_date": "2025-10-20",
+      "retrieved_at": "2026-10-16T18:29:53+00:00",
+      "group": "provincial",
+      "priority": 1,
+      "included": true,
+      "exclusion_reason": null,
+      "tokens": 708,
+      "dropped_noise_lines": 0,
+      "sections": [
+        {
+          "section_id": "rc-matrimonios#s0",
+          "heading": null,
+          "char_start": 0,
+          "char_end": 157,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 51,
+          "chars": 156
+        },
+        {
+          "section_id": "rc-matrimonios#s1",
+          "heading": "Requisitos y turnos",
+          "char_start": 157,
+          "char_end": 1738,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 423,
+          "chars": 1557
+        },
+        {
+          "section_id": "rc-matrimonios#s2",
+          "heading": "Costo",
+          "char_start": 1738,
+          "char_end": 1957,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 74,
+          "chars": 210
+        }
+      ]
+    },
+    {
+      "document_id": "rc-nacimientos",
+      "title": "Inscripción de Nacimientos",
+      "organism": "Registro Civil de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://registrocivil.larioja.gob.ar/tramite-nacimientos.html",
+      "version": 2,
+      "content_hash": "5a78bbb2e7e2ebb0614e9916d9851ec631e7f83df2942fd6ecbd4ab7db5c39fd",
+      "last_updated_date": "2025-10-20",
+      "retrieved_at": "2026-10-16T18:29:51+00:00",
+      "group": "provincial",
+      "priority": 1,
+      "included": true,
+      "exclusion_reason": null,
+      "tokens": 720,
+      "dropped_noise_lines": 0,
+      "sections": [
+        {
+          "section_id": "rc-nacimientos#s0",
+          "heading": null,
+          "char_start": 0,
+          "char_end": 214,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 68,
+          "chars": 213
+        },
+        {
+          "section_id": "rc-nacimientos#s1",
+          "heading": "Requisitos del trámite",
+          "char_start": 214,
+          "char_end": 699,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 121,
+          "chars": 458
+        },
+        {
+          "section_id": "rc-nacimientos#s2",
+          "heading": "Documentación requerida",
+          "char_start": 699,
+          "char_end": 1361,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 174,
+          "chars": 634
+        },
+        {
+          "section_id": "rc-nacimientos#s3",
+          "heading": "Pasos para realizar el trámite",
+          "char_start": 1361,
+          "char_end": 1572,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 50,
+          "chars": 176
+        },
+        {
+          "section_id": "rc-nacimientos#s4",
+          "heading": "¿Cómo se presenta?",
+          "char_start": 1572,
+          "char_end": 1676,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 16,
+          "chars": 81
+        },
+        {
+          "section_id": "rc-nacimientos#s5",
+          "heading": "Costo",
+          "char_start": 1676,
+          "char_end": 1710,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 11,
+          "chars": 24
+        },
+        {
+          "section_id": "rc-nacimientos#s6",
+          "heading": "Información adicional",
+          "char_start": 1710,
+          "char_end": 1968,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 59,
+          "chars": 233
+        }
+      ]
+    },
+    {
+      "document_id": "rc-pasaporte",
+      "title": "Pasaporte",
+      "organism": "Registro Civil de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://registrocivil.larioja.gob.ar/tramite-pasaporte.html",
+      "version": 2,
+      "content_hash": "11aaa454f2cd901cd60237fc18018303663c142b70a91e3c8d9283819fb9fa51",
+      "last_updated_date": "2025-10-20",
+      "retrieved_at": "2026-10-16T18:30:05+00:00",
+      "group": "provincial",
+      "priority": 1,
+      "included": true,
+      "exclusion_reason": null,
+      "tokens": 647,
+      "dropped_noise_lines": 0,
+      "sections": [
+        {
+          "section_id": "rc-pasaporte#s0",
+          "heading": null,
+          "char_start": 0,
+          "char_end": 251,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 71,
+          "chars": 250
+        },
+        {
+          "section_id": "rc-pasaporte#s1",
+          "heading": "Requisitos del Trámite",
+          "char_start": 251,
+          "char_end": 556,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 82,
+          "chars": 278
+        },
+        {
+          "section_id": "rc-pasaporte#s2",
+          "heading": "Pasos para realizar el trámite",
+          "char_start": 556,
+          "char_end": 881,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 71,
+          "chars": 290
+        },
+        {
+          "section_id": "rc-pasaporte#s3",
+          "heading": "¿Cómo se inicia?",
+          "char_start": 881,
+          "char_end": 1002,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 24,
+          "chars": 100
+        },
+        {
+          "section_id": "rc-pasaporte#s4",
+          "heading": "Costo",
+          "char_start": 1002,
+          "char_end": 1272,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 79,
+          "chars": 260
+        },
+        {
+          "section_id": "rc-pasaporte#s5",
+          "heading": "Información adicional",
+          "char_start": 1272,
+          "char_end": 1672,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 109,
+          "chars": 375
+        }
+      ]
+    },
+    {
+      "document_id": "rc-rectificacion-partidas",
+      "title": "Rectificación de Partidas",
+      "organism": "Registro Civil de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://registrocivil.larioja.gob.ar/tramite-rectificacion-partidas.html",
+      "version": 2,
+      "content_hash": "0b4c1a76a97fc767fd9d45ce000f35e908a74c81a607ebc4d95e945e41f032ac",
+      "last_updated_date": "2025-10-20",
+      "retrieved_at": "2026-10-16T18:29:59+00:00",
+      "group": "provincial",
+      "priority": 1,
+      "included": true,
+      "exclusion_reason": null,
+      "tokens": 617,
+      "dropped_noise_lines": 0,
+      "sections": [
+        {
+          "section_id": "rc-rectificacion-partidas#s0",
+          "heading": null,
+          "char_start": 0,
+          "char_end": 204,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 63,
+          "chars": 203
+        },
+        {
+          "section_id": "rc-rectificacion-partidas#s1",
+          "heading": "Requisitos del Trámite",
+          "char_start": 204,
+          "char_end": 705,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 123,
+          "chars": 474
+        },
+        {
+          "section_id": "rc-rectificacion-partidas#s2",
+          "heading": "Pasos para realizar el trámite",
+          "char_start": 705,
+          "char_end": 1176,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 108,
+          "chars": 436
+        },
+        {
+          "section_id": "rc-rectificacion-partidas#s3",
+          "heading": "¿Cómo se presenta?",
+          "char_start": 1176,
+          "char_end": 1292,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 21,
+          "chars": 93
+        },
+        {
+          "section_id": "rc-rectificacion-partidas#s4",
+          "heading": "Costo",
+          "char_start": 1292,
+          "char_end": 1385,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 20,
+          "chars": 83
+        },
+        {
+          "section_id": "rc-rectificacion-partidas#s5",
+          "heading": "Información adicional",
+          "char_start": 1385,
+          "char_end": 1665,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 61,
+          "chars": 255
+        }
+      ]
+    },
+    {
+      "document_id": "rc-solicitud-partidas",
+      "title": "Solicitud de Partidas",
+      "organism": "Registro Civil de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://registrocivil.larioja.gob.ar/tramite-solicitud-partidas.html",
+      "version": 2,
+      "content_hash": "4d19da6a8afdee03e48c792b46daac602c9e62ec55d8c1b736f568dd323b7953",
+      "last_updated_date": "2025-10-20",
+      "retrieved_at": "2026-10-16T18:29:50+00:00",
+      "group": "provincial",
+      "priority": 1,
+      "included": true,
+      "exclusion_reason": null,
+      "tokens": 641,
+      "dropped_noise_lines": 0,
+      "sections": [
+        {
+          "section_id": "rc-solicitud-partidas#s0",
+          "heading": null,
+          "char_start": 0,
+          "char_end": 209,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 66,
+          "chars": 208
+        },
+        {
+          "section_id": "rc-solicitud-partidas#s1",
+          "heading": "Requisitos del Trámite",
+          "char_start": 209,
+          "char_end": 334,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 23,
+          "chars": 98
+        },
+        {
+          "section_id": "rc-solicitud-partidas#s2",
+          "heading": "¿Cómo se solicita?",
+          "char_start": 334,
+          "char_end": 461,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 26,
+          "chars": 104
+        },
+        {
+          "section_id": "rc-solicitud-partidas#s3",
+          "heading": "Costo",
+          "char_start": 461,
+          "char_end": 850,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 127,
+          "chars": 379
+        },
+        {
+          "section_id": "rc-solicitud-partidas#s4",
+          "heading": "Instructivo de Validación de Firma Digital",
+          "char_start": 850,
+          "char_end": 1206,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 68,
+          "chars": 309
+        },
+        {
+          "section_id": "rc-solicitud-partidas#s5",
+          "heading": "Información adicional",
+          "char_start": 1206,
+          "char_end": 1665,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 116,
+          "chars": 434
+        }
+      ]
+    },
+    {
+      "document_id": "rc-union-convivencial",
+      "title": "Unión Convivencial",
+      "organism": "Registro Civil de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://registrocivil.larioja.gob.ar/tramite-union-convivencial.html",
+      "version": 2,
+      "content_hash": "1273e8160cc341b2149992da894545bb32b59b8290976640a6b589f26cc1a447",
+      "last_updated_date": "2025-10-20",
+      "retrieved_at": "2026-10-16T18:29:57+00:00",
+      "group": "provincial",
+      "priority": 1,
+      "included": true,
+      "exclusion_reason": null,
+      "tokens": 769,
+      "dropped_noise_lines": 0,
+      "sections": [
+        {
+          "section_id": "rc-union-convivencial#s0",
+          "heading": null,
+          "char_start": 0,
+          "char_end": 224,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 62,
+          "chars": 223
+        },
+        {
+          "section_id": "rc-union-convivencial#s1",
+          "heading": "Requisitos del Trámite",
+          "char_start": 224,
+          "char_end": 896,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 162,
+          "chars": 645
+        },
+        {
+          "section_id": "rc-union-convivencial#s2",
+          "heading": "Documentación requerida",
+          "char_start": 896,
+          "char_end": 1515,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 147,
+          "chars": 591
+        },
+        {
+          "section_id": "rc-union-convivencial#s3",
+          "heading": "Pasos para realizar el trámite",
+          "char_start": 1515,
+          "char_end": 1859,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 78,
+          "chars": 309
+        },
+        {
+          "section_id": "rc-union-convivencial#s4",
+          "heading": "Costo",
+          "char_start": 1859,
+          "char_end": 1985,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 48,
+          "chars": 116
+        },
+        {
+          "section_id": "rc-union-convivencial#s5",
+          "heading": "Información adicional",
+          "char_start": 1985,
+          "char_end": 2182,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 42,
+          "chars": 172
+        }
+      ]
+    },
+    {
+      "document_id": "sj-guia-tramites",
+      "title": "Secretaría de Justicia — Provincia de La Rioja",
+      "organism": "Secretaría de Justicia de La Rioja",
+      "jurisdiction": "provincial",
+      "source_url": "https://secretariadejusticia.larioja.gob.ar/",
+      "version": 1,
+      "content_hash": "3510cb7f82fb273f64c00c1a91de6bcbf348af98dca366d3d539eb3390ea0158",
+      "last_updated_date": null,
+      "retrieved_at": "2026-10-16T18:30:08+00:00",
+      "group": "provincial",
+      "priority": 1,
+      "included": true,
+      "exclusion_reason": null,
+      "tokens": 3114,
+      "dropped_noise_lines": 0,
+      "sections": [
+        {
+          "section_id": "sj-guia-tramites#s0",
+          "heading": null,
+          "char_start": 0,
+          "char_end": 186,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 51,
+          "chars": 184
+        },
+        {
+          "section_id": "sj-guia-tramites#s1",
+          "heading": "DNI Nuevo Ejemplar",
+          "char_start": 186,
+          "char_end": 803,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 200,
+          "chars": 593
+        },
+        {
+          "section_id": "sj-guia-tramites#s2",
+          "heading": "DNI Recién Nacido",
+          "char_start": 803,
+          "char_end": 1332,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 171,
+          "chars": 506
+        },
+        {
+          "section_id": "sj-guia-tramites#s3",
+          "heading": "Unión Convivencial",
+          "char_start": 1332,
+          "char_end": 2297,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 284,
+          "chars": 941
+        },
+        {
+          "section_id": "sj-guia-tramites#s4",
+          "heading": "Pasaporte",
+          "char_start": 2297,
+          "char_end": 2832,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 185,
+          "chars": 520
+        },
+        {
+          "section_id": "sj-guia-tramites#s5",
+          "heading": "Registro Público de Comercio",
+          "char_start": 2832,
+          "char_end": 4002,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 351,
+          "chars": 1136
+        },
+        {
+          "section_id": "sj-guia-tramites#s6",
+          "heading": "Dirección de Personas Jurídicas",
+          "char_start": 4002,
+          "char_end": 5374,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 385,
+          "chars": 1335
+        },
+        {
+          "section_id": "sj-guia-tramites#s7",
+          "heading": "Dirección de Registro de Contratos de Fideicomiso",
+          "char_start": 5374,
+          "char_end": 5765,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 116,
+          "chars": 336
+        },
+        {
+          "section_id": "sj-guia-tramites#s8",
+          "heading": "Requisitos para acreditación de visitas",
+          "char_start": 5765,
+          "char_end": 6227,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 129,
+          "chars": 417
+        },
+        {
+          "section_id": "sj-guia-tramites#s9",
+          "heading": "Elementos que no se pueden ingresar",
+          "char_start": 6227,
+          "char_end": 6672,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 124,
+          "chars": 404
+        },
+        {
+          "section_id": "sj-guia-tramites#s10",
+          "heading": "Horario de recepción de elementos",
+          "char_start": 6672,
+          "char_end": 7116,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 130,
+          "chars": 405
+        },
+        {
+          "section_id": "sj-guia-tramites#s11",
+          "heading": "Cronograma de visitas — Unidad N°1 y N°2",
+          "char_start": 7116,
+          "char_end": 7566,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 137,
+          "chars": 404
+        },
+        {
+          "section_id": "sj-guia-tramites#s12",
+          "heading": "Asesoramiento Primario Integral Legal y Psicosocial",
+          "char_start": 7566,
+          "char_end": 7945,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 128,
+          "chars": 322
+        },
+        {
+          "section_id": "sj-guia-tramites#s13",
+          "heading": "Solicitá tu turno en Subsecretaría Acceso a la Justicia",
+          "char_start": 7945,
+          "char_end": 8390,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 150,
+          "chars": 384
+        },
+        {
+          "section_id": "sj-guia-tramites#s14",
+          "heading": "Preguntas frecuentes",
+          "char_start": 8390,
+          "char_end": 8847,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 120,
+          "chars": 433
+        }
+      ]
+    },
+    {
+      "document_id": "nac-requisitos-dni-pasaporte",
+      "title": "Requisitos para trámites de DNI o Pasaporte",
+      "organism": "RENAPER - Ministerio del Interior (Nación)",
+      "jurisdiction": "nacional",
+      "source_url": "https://www.argentina.gob.ar/interior/dni/requisitos-para-tramites-de-dni-o-pasaporte",
+      "version": 2,
+      "content_hash": "a2c5ff3e36b9cfa2b1bcc47f72b3a32bc14561db6f09bedb6f804c694dc97c41",
+      "last_updated_date": "2023-07-18",
+      "retrieved_at": "2026-10-16T18:30:09+00:00",
+      "group": "nacional",
+      "priority": 2,
+      "included": true,
+      "exclusion_reason": null,
+      "tokens": 4623,
+      "dropped_noise_lines": 0,
+      "sections": [
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s0",
+          "heading": null,
+          "char_start": 0,
+          "char_end": 128,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 127
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s1",
+          "heading": "DNI Primer Ejemplar",
+          "char_start": 128,
+          "char_end": 1404,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 318,
+          "chars": 1252
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s2",
+          "heading": "DNI Primer ejemplar, provisorio por razones médicas",
+          "char_start": 1404,
+          "char_end": 2961,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1501
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s3",
+          "heading": "DNI Primer ejemplar, con identificación tardía",
+          "char_start": 2961,
+          "char_end": 4351,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1339
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s4",
+          "heading": "DNI Primer ejemplar por inscripción tardía",
+          "char_start": 4351,
+          "char_end": 6107,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1709
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s5",
+          "heading": "DNI Actualización de 5 a 8 años",
+          "char_start": 6107,
+          "char_end": 7413,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 320,
+          "chars": 1270
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s6",
+          "heading": "DNI Actualización de mayor de 14 años",
+          "char_start": 7413,
+          "char_end": 8048,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 154,
+          "chars": 593
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s7",
+          "heading": "DNI Nuevo ejemplar, cambio de domicilio",
+          "char_start": 8048,
+          "char_end": 9641,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 394,
+          "chars": 1549
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s8",
+          "heading": "DNI Nuevo ejemplar, robo, extravío o inutilización",
+          "char_start": 9641,
+          "char_end": 11354,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 422,
+          "chars": 1658
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s9",
+          "heading": "DNI Corrección de errores de emisión (no válido para cambios de domicilio o cambios que requieren rectificación)",
+          "char_start": 11354,
+          "char_end": 13474,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 2003
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s10",
+          "heading": "DNI Rectificación (de nombre, apellido, reconocimiento, fecha de nacimiento, o género)",
+          "char_start": 13474,
+          "char_end": 15669,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 2104
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s11",
+          "heading": "DNI Rectificación de madre/s o padre/s tras adopción",
+          "char_start": 15669,
+          "char_end": 16492,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 766
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s12",
+          "heading": "DNI Nuevo ejemplar menor",
+          "char_start": 16492,
+          "char_end": 17894,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 347,
+          "chars": 1373
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s13",
+          "heading": "DNI Nuevo ejemplar mayor",
+          "char_start": 17894,
+          "char_end": 18280,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 94,
+          "chars": 357
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s14",
+          "heading": "DNI Actualización de mayor fuera de término / tardía",
+          "char_start": 18280,
+          "char_end": 20540,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 2203
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s15",
+          "heading": "DNI Nuevo ejemplar por canje libreta de enrolamiento",
+          "char_start": 20540,
+          "char_end": 20918,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 321
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s16",
+          "heading": "DNI Nuevo ejemplar por canje libreta cívica",
+          "char_start": 20918,
+          "char_end": 21266,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 300
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s17",
+          "heading": "DNI Opción de nacionalidad argentina para descendientes de nativos",
+          "char_start": 21266,
+          "char_end": 23621,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 2284
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s18",
+          "heading": "DNI Opción de nacionalidad argentina por naturalización judicial mediante carta de ciudadanía",
+          "char_start": 23621,
+          "char_end": 24159,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 440
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s19",
+          "heading": "DNI Renovación de ejemplar para extranjeros residentes (trámites varios)",
+          "char_start": 24159,
+          "char_end": 24971,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 735
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s20",
+          "heading": "DNI 24 hs",
+          "char_start": 24971,
+          "char_end": 26126,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 298,
+          "chars": 1141
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s21",
+          "heading": "DNI exprés",
+          "char_start": 26126,
+          "char_end": 27273,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 295,
+          "chars": 1132
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s22",
+          "heading": "PASAPORTE Primer Pasaporte menor",
+          "char_start": 27273,
+          "char_end": 27852,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 136,
+          "chars": 542
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s23",
+          "heading": "PASAPORTE Nuevo ejemplar menor",
+          "char_start": 27852,
+          "char_end": 28782,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 238,
+          "chars": 895
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s24",
+          "heading": "PASAPORTE Primer Pasaporte mayor",
+          "char_start": 28782,
+          "char_end": 29278,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 119,
+          "chars": 459
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s25",
+          "heading": "PASAPORTE Nuevo ejemplar mayor",
+          "char_start": 29278,
+          "char_end": 30098,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 207,
+          "chars": 785
+        },
+        {
+          "section_id": "nac-requisitos-dni-pasaporte#s26",
+          "heading": "Pasaporte exprés",
+          "char_start": 30098,
+          "char_end": 32583,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 630,
+          "chars": 2465
+        }
+      ]
+    },
+    {
+      "document_id": "ley-10702-impositiva-2024",
+      "title": "Ley N° 10.702 - Ley Impositiva Anual, Período Fiscal 2024",
+      "organism": "Cámara de Diputados de La Rioja (publicada por la Dirección General de Ingresos Provinciales)",
+      "jurisdiction": "provincial",
+      "source_url": "https://www.dgiplarioja.gob.ar/archivos/Legislacion/Leyes%20Impositivas/LEY%20IMPOSITIVA%202024.pdf",
+      "version": 1,
+      "content_hash": "9c003cb873f4c05bc85b9c4523dc35005b59c5ecbd2a16efdf6b381c98413c70",
+      "last_updated_date": null,
+      "retrieved_at": "2026-10-16T18:30:10+00:00",
+      "group": "normativa",
+      "priority": 3,
+      "included": true,
+      "exclusion_reason": null,
+      "tokens": 1372,
+      "dropped_noise_lines": 119,
+      "sections": [
+        {
+          "section_id": "ley-10702-impositiva-2024#preambulo",
+          "heading": null,
+          "char_start": 0,
+          "char_end": 0,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 0
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-1",
+          "heading": null,
+          "char_start": 1,
+          "char_end": 375,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 128,
+          "chars": 373
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-2",
+          "heading": null,
+          "char_start": 376,
+          "char_end": 3022,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 2644
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-3",
+          "heading": null,
+          "char_start": 3024,
+          "char_end": 4165,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1141
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-4",
+          "heading": null,
+          "char_start": 4167,
+          "char_end": 4338,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 171
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-5",
+          "heading": null,
+          "char_start": 4339,
+          "char_end": 4683,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 342
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-6",
+          "heading": null,
+          "char_start": 4684,
+          "char_end": 8475,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 3789
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-7",
+          "heading": null,
+          "char_start": 8476,
+          "char_end": 8821,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 343
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-8",
+          "heading": null,
+          "char_start": 8823,
+          "char_end": 8950,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 127
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-9",
+          "heading": null,
+          "char_start": 8952,
+          "char_end": 9110,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 158
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-10",
+          "heading": null,
+          "char_start": 9111,
+          "char_end": 9316,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 203
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-11",
+          "heading": null,
+          "char_start": 9317,
+          "char_end": 14292,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 4973
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-12",
+          "heading": null,
+          "char_start": 14293,
+          "char_end": 14479,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 184
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-13",
+          "heading": null,
+          "char_start": 14481,
+          "char_end": 14696,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 215
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-14",
+          "heading": null,
+          "char_start": 14699,
+          "char_end": 15206,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 507
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-15",
+          "heading": null,
+          "char_start": 15208,
+          "char_end": 15609,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 401
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-16",
+          "heading": null,
+          "char_start": 15611,
+          "char_end": 15808,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 197
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-17",
+          "heading": null,
+          "char_start": 15809,
+          "char_end": 19220,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 3409
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-18",
+          "heading": null,
+          "char_start": 19221,
+          "char_end": 20470,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1247
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-19",
+          "heading": null,
+          "char_start": 20472,
+          "char_end": 20636,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 164
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-20",
+          "heading": null,
+          "char_start": 20637,
+          "char_end": 22342,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1704
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-21",
+          "heading": null,
+          "char_start": 22345,
+          "char_end": 22603,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 258
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-22",
+          "heading": null,
+          "char_start": 22605,
+          "char_end": 22728,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 123
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-23",
+          "heading": null,
+          "char_start": 22729,
+          "char_end": 23030,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 299
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-24",
+          "heading": null,
+          "char_start": 23032,
+          "char_end": 23202,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 170
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-25",
+          "heading": null,
+          "char_start": 23203,
+          "char_end": 23577,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 372
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-26",
+          "heading": null,
+          "char_start": 23578,
+          "char_end": 23907,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 327
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-27",
+          "heading": null,
+          "char_start": 23909,
+          "char_end": 25642,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1733
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-28",
+          "heading": null,
+          "char_start": 25644,
+          "char_end": 26246,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 602
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-29",
+          "heading": null,
+          "char_start": 26247,
+          "char_end": 27035,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 786
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-30",
+          "heading": null,
+          "char_start": 27036,
+          "char_end": 27688,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 650
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-31",
+          "heading": null,
+          "char_start": 27689,
+          "char_end": 28506,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 815
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-32",
+          "heading": null,
+          "char_start": 28508,
+          "char_end": 30381,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1873
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-33",
+          "heading": null,
+          "char_start": 30382,
+          "char_end": 31516,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1132
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-34",
+          "heading": null,
+          "char_start": 31517,
+          "char_end": 32772,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1253
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-35",
+          "heading": null,
+          "char_start": 32773,
+          "char_end": 33642,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 866
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-36",
+          "heading": null,
+          "char_start": 33643,
+          "char_end": 34999,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1354
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-37",
+          "heading": null,
+          "char_start": 35000,
+          "char_end": 35201,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 199
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-38",
+          "heading": null,
+          "char_start": 35202,
+          "char_end": 37217,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 2013
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-39",
+          "heading": null,
+          "char_start": 37218,
+          "char_end": 39500,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 836,
+          "chars": 2280
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-40",
+          "heading": null,
+          "char_start": 39501,
+          "char_end": 40576,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1073
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-41",
+          "heading": null,
+          "char_start": 40577,
+          "char_end": 44823,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 4243
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-42",
+          "heading": null,
+          "char_start": 44824,
+          "char_end": 46178,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1351
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-43",
+          "heading": null,
+          "char_start": 46179,
+          "char_end": 47842,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1661
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-44",
+          "heading": null,
+          "char_start": 47843,
+          "char_end": 50019,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 2174
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-45",
+          "heading": null,
+          "char_start": 50020,
+          "char_end": 52168,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 2147
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-46",
+          "heading": null,
+          "char_start": 52170,
+          "char_end": 52992,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 822
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-47",
+          "heading": null,
+          "char_start": 52994,
+          "char_end": 53430,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 436
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-48",
+          "heading": null,
+          "char_start": 53431,
+          "char_end": 54601,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1168
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-49",
+          "heading": null,
+          "char_start": 54602,
+          "char_end": 56544,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1940
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-50",
+          "heading": null,
+          "char_start": 56545,
+          "char_end": 58990,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 2442
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-51",
+          "heading": null,
+          "char_start": 58991,
+          "char_end": 59530,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 536
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-52",
+          "heading": null,
+          "char_start": 59531,
+          "char_end": 60020,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 487
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-53",
+          "heading": null,
+          "char_start": 60021,
+          "char_end": 62384,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 2361
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-54",
+          "heading": null,
+          "char_start": 62386,
+          "char_end": 64481,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 2095
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-55",
+          "heading": null,
+          "char_start": 64482,
+          "char_end": 70880,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 6396
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-56",
+          "heading": null,
+          "char_start": 70882,
+          "char_end": 72293,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1411
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-57",
+          "heading": null,
+          "char_start": 72295,
+          "char_end": 72591,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 296
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-58",
+          "heading": null,
+          "char_start": 72593,
+          "char_end": 73358,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 765
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-59",
+          "heading": null,
+          "char_start": 73360,
+          "char_end": 74282,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 922
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-60",
+          "heading": null,
+          "char_start": 74284,
+          "char_end": 75896,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1612
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-61",
+          "heading": null,
+          "char_start": 75898,
+          "char_end": 77484,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1586
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-62",
+          "heading": null,
+          "char_start": 77486,
+          "char_end": 81131,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 3645
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-63",
+          "heading": null,
+          "char_start": 81133,
+          "char_end": 82597,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1464
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-64",
+          "heading": null,
+          "char_start": 82599,
+          "char_end": 82966,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 367
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-65",
+          "heading": null,
+          "char_start": 82967,
+          "char_end": 91582,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 8613
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-66",
+          "heading": null,
+          "char_start": 91583,
+          "char_end": 101267,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 9682
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-67",
+          "heading": null,
+          "char_start": 101268,
+          "char_end": 101806,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 534
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-68",
+          "heading": null,
+          "char_start": 101808,
+          "char_end": 102944,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1136
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-69",
+          "heading": null,
+          "char_start": 102945,
+          "char_end": 103406,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 459
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-70",
+          "heading": null,
+          "char_start": 103408,
+          "char_end": 104004,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 596
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-71",
+          "heading": null,
+          "char_start": 104006,
+          "char_end": 104400,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 394
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-72",
+          "heading": null,
+          "char_start": 104402,
+          "char_end": 104658,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 256
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-73",
+          "heading": null,
+          "char_start": 104660,
+          "char_end": 104954,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 294
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-74",
+          "heading": null,
+          "char_start": 104956,
+          "char_end": 105939,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 983
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-75",
+          "heading": null,
+          "char_start": 105941,
+          "char_end": 106264,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 323
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-76",
+          "heading": null,
+          "char_start": 106266,
+          "char_end": 106815,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 549
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-77",
+          "heading": null,
+          "char_start": 106817,
+          "char_end": 107033,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 216
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-78",
+          "heading": null,
+          "char_start": 107035,
+          "char_end": 107415,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 380
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-79",
+          "heading": null,
+          "char_start": 107417,
+          "char_end": 107683,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 266
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-80",
+          "heading": null,
+          "char_start": 107685,
+          "char_end": 107867,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 182
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-81",
+          "heading": null,
+          "char_start": 107869,
+          "char_end": 108055,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 186
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-82",
+          "heading": null,
+          "char_start": 108056,
+          "char_end": 108198,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 139
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-83",
+          "heading": null,
+          "char_start": 108199,
+          "char_end": 109085,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 884
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-84",
+          "heading": null,
+          "char_start": 109086,
+          "char_end": 110683,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1595
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-85",
+          "heading": null,
+          "char_start": 110684,
+          "char_end": 112255,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1569
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-86",
+          "heading": null,
+          "char_start": 112257,
+          "char_end": 112545,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 288
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-87",
+          "heading": null,
+          "char_start": 112547,
+          "char_end": 113097,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 550
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-88",
+          "heading": null,
+          "char_start": 113099,
+          "char_end": 113334,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 235
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-89",
+          "heading": null,
+          "char_start": 113336,
+          "char_end": 113579,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 243
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-90",
+          "heading": null,
+          "char_start": 113581,
+          "char_end": 113757,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 176
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-91",
+          "heading": null,
+          "char_start": 113758,
+          "char_end": 114857,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1097
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-92",
+          "heading": null,
+          "char_start": 114859,
+          "char_end": 115046,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 187
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-93",
+          "heading": null,
+          "char_start": 115048,
+          "char_end": 115330,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 282
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-94",
+          "heading": null,
+          "char_start": 115332,
+          "char_end": 115706,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 374
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-95",
+          "heading": null,
+          "char_start": 115708,
+          "char_end": 115901,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 193
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-96",
+          "heading": null,
+          "char_start": 115903,
+          "char_end": 116226,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 323
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-97",
+          "heading": null,
+          "char_start": 116228,
+          "char_end": 116453,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 225
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-98",
+          "heading": null,
+          "char_start": 116456,
+          "char_end": 118109,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1653
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-99",
+          "heading": null,
+          "char_start": 118111,
+          "char_end": 119160,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1049
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-100",
+          "heading": null,
+          "char_start": 119162,
+          "char_end": 120157,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 995
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-101",
+          "heading": null,
+          "char_start": 120159,
+          "char_end": 120916,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 757
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-102",
+          "heading": null,
+          "char_start": 120918,
+          "char_end": 121096,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 178
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-103",
+          "heading": null,
+          "char_start": 121098,
+          "char_end": 121431,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 333
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-104",
+          "heading": null,
+          "char_start": 121433,
+          "char_end": 122853,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1420
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-105",
+          "heading": null,
+          "char_start": 122855,
+          "char_end": 123177,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 322
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-106",
+          "heading": null,
+          "char_start": 123180,
+          "char_end": 123394,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 214
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-107",
+          "heading": null,
+          "char_start": 123396,
+          "char_end": 124235,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 839
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-108",
+          "heading": null,
+          "char_start": 124237,
+          "char_end": 124943,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 706
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-109",
+          "heading": null,
+          "char_start": 124945,
+          "char_end": 125648,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 703
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-110",
+          "heading": null,
+          "char_start": 125650,
+          "char_end": 125932,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 282
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-111",
+          "heading": null,
+          "char_start": 125934,
+          "char_end": 126648,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 714
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-112",
+          "heading": null,
+          "char_start": 126650,
+          "char_end": 126984,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 334
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-113",
+          "heading": null,
+          "char_start": 126986,
+          "char_end": 127145,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 159
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-114",
+          "heading": null,
+          "char_start": 127147,
+          "char_end": 127394,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 247
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-115",
+          "heading": null,
+          "char_start": 127396,
+          "char_end": 127786,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 390
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-116",
+          "heading": null,
+          "char_start": 127788,
+          "char_end": 128304,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 516
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-117",
+          "heading": null,
+          "char_start": 128306,
+          "char_end": 128584,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 278
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-118",
+          "heading": null,
+          "char_start": 128586,
+          "char_end": 129047,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 461
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-119",
+          "heading": null,
+          "char_start": 129051,
+          "char_end": 130133,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1082
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-120",
+          "heading": null,
+          "char_start": 130135,
+          "char_end": 130672,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 537
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-121",
+          "heading": null,
+          "char_start": 130674,
+          "char_end": 132772,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 2098
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-122",
+          "heading": null,
+          "char_start": 132774,
+          "char_end": 133966,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1192
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-123",
+          "heading": null,
+          "char_start": 133968,
+          "char_end": 134532,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 564
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-124",
+          "heading": null,
+          "char_start": 134536,
+          "char_end": 136465,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1929
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-125",
+          "heading": null,
+          "char_start": 136467,
+          "char_end": 137507,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 1040
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-126",
+          "heading": null,
+          "char_start": 137508,
+          "char_end": 137713,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 201
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-127",
+          "heading": null,
+          "char_start": 137715,
+          "char_end": 137889,
+          "status": "included",
+          "duplicate_of": null,
+          "tokens": 55,
+          "chars": 174
+        },
+        {
+          "section_id": "ley-10702-impositiva-2024#art-128",
+          "heading": null,
+          "char_start": 137891,
+          "char_end": 138343,
+          "status": "excluded_by_selection",
+          "duplicate_of": null,
+          "tokens": 0,
+          "chars": 452
+        }
+      ]
+    }
+  ],
+  "excluded_documents": [],
+  "duplicates": [],
+  "warnings": []
+}

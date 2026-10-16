@@ -78,6 +78,18 @@ def test_selection_and_noise_lines(tmp_path):
     assert doc["dropped_noise_lines"] == 2
 
 
+def test_selection_by_heading(tmp_path):
+    m = Manifest(tmp_path / "m.json")
+    add_doc(m, tmp_path, "nac", "# Título\nIntro\n## DNI menor\nreq menor\n## Canje libreta\nreq canje\n## Pasaporte\nreq pas")
+    cfg = config({"nac": {"group": "nacional", "priority": 2, "selection_reason": "Solo lo pertinente.",
+                          "include_headings": ["DNI menor", "Pasaporte", "No existe"]}})
+    build = build_corpus(m, cfg, WordTokenizer())
+    assert "req menor" in build.text and "req pas" in build.text
+    assert "req canje" not in build.text and "Intro" not in build.text
+    assert "Extracto: solo se incluyen las secciones s1, s3. Solo lo pertinente." in build.text
+    assert any("No existe" in w for w in build.warnings)
+
+
 def test_duplicates_are_controlled_without_losing_traceability(tmp_path):
     m = Manifest(tmp_path / "m.json")
     add_doc(m, tmp_path, "a", f"## Req\n{LONG}")

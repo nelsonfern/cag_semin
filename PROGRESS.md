@@ -279,8 +279,46 @@ Sobre la consulta del usuario por **Ollama Cloud con MiniMax**: la API de Ollama
 ### Criterio de aprobación de la Fase 2
 > Extracción reproducible, metadatos conservados, duplicados controlados y cantidad de tokens registrada.
 
-**Se cumple**, con una decisión pendiente del usuario: con el presupuesto de 16.000 tokens, el documento nacional queda excluido.
+**Se cumple.** El documento nacional se resolvió en la revisión 2.1. Queda pendiente la aprobación del usuario.
 
 ### Pendientes y limitaciones
 - Los 10.423 tokens son solo del corpus. En la Fase 3 se suman el prompt de sistema y la plantilla de chat del modelo.
 - Una aclaración para la Fase 3: después de construir la caché, cada pregunta procesa solo sus propios tokens nuevos. Sin embargo, cada token generado sigue haciendo atención sobre todo el prefijo cacheado. El costo por consulta baja mucho, pero sigue dependiendo del tamaño del corpus, sobre todo en memoria (la caché KV crece linealmente con los tokens).
+
+### Revisión 2.1 — Extracto del documento nacional (2026-10-16)
+
+**Contexto:** con 16.000 tokens el documento nacional completo (8.985 tokens) no entraba. Se analizó su aporte:
+- Es la única fuente nacional del corpus y la autoridad del DNI y del pasaporte (RENAPER). Sin él, la app no puede distinguir lo provincial de lo nacional (§5).
+- No publica costos.
+- Su última actualización es del 18/07/2023.
+- De sus 26 secciones, solo unas 14 corresponden a trámites con ficha provincial.
+
+**Decisión del usuario:** incluir las secciones clave y las modalidades rápidas, manteniendo el presupuesto de 16.000 tokens.
+
+**Cambios**
+- `corpus_builder`: nueva selección `include_headings`, por título de sección. Es más estable que el índice `sN` cuando el organismo agrega o quita secciones, y el builder avisa si un título desaparece. Tiene un test nuevo.
+- `corpus_config.json`: el documento nacional entra con 14 secciones:
+  - Primer ejemplar.
+  - Actualizaciones de 5 a 8 años y de mayores de 14.
+  - Nuevo ejemplar: cambio de domicilio, robo o extravío, menor y mayor.
+  - DNI 24 hs y DNI exprés.
+  - Pasaporte primer y nuevo ejemplar, menores y mayores.
+  - Pasaporte exprés.
+
+  Se excluyen las inscripciones tardías, rectificaciones, canjes de libreta, opciones de nacionalidad y extranjeros. La cabecera del documento declara que es un extracto y por qué.
+
+**Resultado: `build_id = 10ba192df05e0285`**, con el mismo `build_id` al reconstruir.
+
+| Documento | Tokens |
+|---|---|
+| 9 fichas del Registro Civil | 5.926 |
+| sj-guia-tramites | 3.114 |
+| nac-requisitos-dni-pasaporte (14 de 27 secciones) | 4.623 |
+| ley-10702-impositiva-2024 (3 de 129 secciones) | 1.372 |
+| **Total** | **15.047 / 16.000** (12 documentos, 82 secciones, 0 duplicados, 139 secciones excluidas por selección, ningún documento excluido) |
+
+El margen libre es de 953 tokens. Para sumar documentos habrá que subir el presupuesto o recortar otra cosa; el builder no lo hace en silencio.
+
+El build anterior (`e30a011c26dfa791`) se conserva como histórico; `latest.json` apunta al nuevo.
+
+**Pruebas:** 48 aprobadas, 0 fallidas.
