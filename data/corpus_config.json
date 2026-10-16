@@ -1,0 +1,29 @@
+{
+  "_comment": "Qué documentos y secciones entran al corpus CAG y en qué orden. Ver app/ingestion/corpus_builder.py y PROGRESS.md (Fase 2).",
+  "tokenizer_id": "Qwen/Qwen2.5-7B-Instruct",
+  "_tokenizer_note": "Qwen2.5-Instruct 0.5B a 72B comparten tokenizer.json idéntico (verificado el 2026-10-16), así que los conteos valen para cualquier tamaño de la familia.",
+  "max_context_tokens": 16000,
+  "group_order": ["provincial", "nacional", "normativa"],
+  "documents": {
+    "rc-solicitud-partidas":        {"group": "provincial", "priority": 1},
+    "rc-nacimientos":               {"group": "provincial", "priority": 1},
+    "rc-matrimonios":               {"group": "provincial", "priority": 1},
+    "rc-defunciones":               {"group": "provincial", "priority": 1},
+    "rc-union-convivencial":        {"group": "provincial", "priority": 1},
+    "rc-rectificacion-partidas":    {"group": "provincial", "priority": 1},
+    "rc-dni-renovacion":            {"group": "provincial", "priority": 1},
+    "rc-dni-recien-nacido":         {"group": "provincial", "priority": 1},
+    "rc-pasaporte":                 {"group": "provincial", "priority": 1},
+    "sj-guia-tramites":             {"group": "provincial", "priority": 1},
+    "nac-requisitos-dni-pasaporte": {"group": "nacional", "priority": 2},
+    "ley-10702-impositiva-2024": {
+      "group": "normativa",
+      "priority": 3,
+      "splitter": "articles",
+      "include_sections": ["art-1", "art-39", "art-127"],
+      "selection_reason": "Solo los artículos pertinentes a los trámites: art. 1 (objeto y período fiscal), art. 39 (tasas del Registro Civil) y art. 127 (vigencia). El resto trata impuestos ajenos a los trámites del corpus.",
+      "drop_line_patterns": ["^10\\.702$", "^\\d{1,2}$"],
+      "_drop_note": "Pie de página repetido en cada página del PDF: número de ley y número de página."
+    }
+  }
+}

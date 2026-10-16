@@ -5,6 +5,7 @@ Uso:
     python -m app.ingestion.ingest run --only rc-pasaporte
     python -m app.ingestion.ingest import-manual --id nac-portal-tramitar --file pagina.html
     python -m app.ingestion.ingest status
+    python -m app.ingestion.ingest reparse                # re-extraer sin red (cambio de parser)
 
 Por cada documento se guardan:
 - el original en ``data/raw/<document_id>/v<versión>.<ext>``
@@ -69,7 +70,7 @@ def register_content(
 
     change = manifest.upsert(record)
     current = manifest.get(spec.document_id)
-    if change in ("new", "updated"):
+    if change in ("new", "updated", "reparsed"):
         # Solo se escriben archivos cuando hay una versión nueva: los anteriores se conservan.
         raw_path = RAW_DIR / spec.document_id / f"v{current.version}.{_EXTENSIONS.get(spec.document_type, 'bin')}"
         txt_path = PROCESSED_DIR / spec.document_id / f"v{current.version}.txt"
@@ -134,6 +135,31 @@ def run(only: list[str] | None = None, sources_file: Path = SOURCES_FILE, manife
     return manifest
 
 
+def reparse(manifest_file: Path = MANIFEST_FILE) -> Manifest:
+    """Vuelve a extraer el texto desde los originales guardados, sin usar la red.
+
+    Se usa cuando cambia un parser: el original es el mismo, así que el manifiesto registra
+    el cambio como ``reparsed`` y conserva la fecha de obtención original.
+    """
+    specs = {s.document_id: s for s in load_sources()}
+    manifest = Manifest(manifest_file)
+    for record in list(manifest.ok_documents()):
+        spec = specs.get(record.document_id)
+        if spec is None or not record.local_path:
+            continue
+        content = (ROOT_DIR / record.local_path).read_bytes()
+        encoding = "utf-8" if spec.document_type.startswith("html") else None
+        change, current = register_content(
+            manifest, spec, content, encoding, record.retrieved_at, record.ingest_note
+        )
+        manifest.sync_spec(spec)
+        print(f"[{change:>20}] {record.document_id}: v{current.version} {current.char_count} caracteres")
+    manifest.mark_stale_caches()
+    manifest.save()
+    print(f"\ncorpus_version={manifest.corpus_version}")
+    return manifest
+
+
 def import_manual(document_id: str, file: Path, retrieved_at: str | None = None) -> None:
     """Importa un archivo obtenido manualmente para una fuente registrada en sources.json."""
     specs = {s.document_id: s for s in load_sources()}
@@ -172,10 +198,13 @@ def main(argv: list[str] | None = None) -> None:
     p_imp.add_argument("--file", required=True, type=Path)
     p_imp.add_argument("--retrieved-at", help="Fecha ISO en que se obtuvo el archivo")
     sub.add_parser("status", help="Muestra el estado del manifiesto")
+    sub.add_parser("reparse", help="Re-extrae el texto de los originales guardados (sin red)")
     args = parser.parse_args(argv)
 
     if args.command == "run":
         run(args.only)
+    elif args.command == "reparse":
+        reparse()
     elif args.command == "import-manual":
         import_manual(args.document_id, args.file, args.retrieved_at)
     else:

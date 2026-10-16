@@ -97,6 +97,14 @@ def parse_registro_civil(content: bytes, encoding: str | None, source_url: str) 
         if last_updated is None:
             errors.append(f"No se pudo interpretar la fecha de actualización: {updated.get_text(strip=True)!r}")
 
+    # Los <h2> separan las secciones de la ficha (Requisitos, Costo...); se marcan con "## "
+    # para que el corpus pueda dividirse en secciones citables. Los <h4> son subtítulos.
+    if h1 is not None:
+        h1.string = f"# {h1.get_text(' ', strip=True)}"
+    for level, prefix in (("h2", "## "), ("h4", "### ")):
+        for heading in main.find_all(level):
+            heading.string = prefix + heading.get_text(" ", strip=True)
+
     lines = [l for l in normalize_text(_block_text(main)).splitlines() if l not in _RC_BOILERPLATE]
     text = normalize_text("\n".join(lines))
     if not text:
@@ -235,6 +243,23 @@ def parse_argentina_gob(content: bytes, encoding: str | None, source_url: str) -
 
     h1 = main.find("h1")
     title = normalize_text(h1.get_text(" ", strip=True)) if h1 else None
+    if h1 is not None:
+        h1.string = f"# {title}"
+
+    # Cada tipo de trámite es un bloque "webform-component-markup" cuyo primer <strong> es el
+    # título (p. ej. "DNI Primer Ejemplar"): se lo marca con "## " para dividir en secciones.
+    # Los bloques que solo contienen un título de grupo ("DNI", "PASAPORTE") se descartan,
+    # porque cada sección ya nombra su grupo.
+    for component in main.select("div.webform-component-markup"):
+        first_strong = component.find("strong")
+        heading = normalize_text(first_strong.get_text(" ", strip=True)) if first_strong else ""
+        if not heading:
+            continue
+        if normalize_text(component.get_text(" ", strip=True)) == heading:
+            component.decompose()
+            continue
+        first_strong.string = f"## {heading}"
+
     lines = [
         l for l in normalize_text(_block_text(main)).splitlines()
         if l not in _AR_BOILERPLATE and not l.startswith(_AR_BOILERPLATE_PREFIXES)

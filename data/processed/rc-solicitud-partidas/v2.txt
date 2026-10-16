@@ -1,0 +1,28 @@
+# Solicitud de Partidas
+Última actualización: 20/10/2025
+Este trámite permite solicitar copias de partidas de nacimiento, matrimonio, defunción y uniones convivenciales inscriptas en la Provincia de La Rioja.
+## Requisitos del Trámite
+Tener una cuenta de Ciudadano Digital.
+Datos del acta necesarios para que la búsqueda sea exitosa.
+## ¿Cómo se solicita?
+La solicitud de actas se inicia de manera digital en el servicio. Podrás acceder directamente desde acá.
+## Costo
+Según la Ley Impositiva 2024 (Ley 10.929, art. 79):
+Copia de acta certificada:
+$1.100
+Copia de acta legalizada:
+$1.500
+Copia de acta, certificado o extracto de nacimiento para trámite de identificación y primera copia de matrimonio:
+Sin cargo
+* Importante: La Municipalidad de La Rioja podrá establecer su propia tasa por actas inscriptas en el Registro de la Ciudad de La Rioja.
+## Instructivo de Validación de Firma Digital
+Descargar el programa Adobe Reader DC.
+Configurar Adobe Reader desde Edición > Preferencias siguiendo esta
+guía
+.
+Instalar la cadena de confianza de los certificados emitidos. Esto se realiza una sola vez.
+Este procedimiento solo puede realizarse desde una computadora para validar la legalidad del documento.
+## Información adicional
+Indicar localidad de inscripción, número de acta, tomo, serie, folio y año mejora significativamente la precisión de la búsqueda.
+Las actas legalizadas se emiten únicamente con firma digital, la cual es igual de válida que la manuscrita según la Ley 25.506.
+Todas las notificaciones del proceso llegarán al correo vinculado a tu cuenta Ciudadano Digital. La descarga se realiza desde "Mis trámites" en el servicio "Mi Registro Civil".

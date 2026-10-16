@@ -62,6 +62,25 @@ metadatos, hash y versión en [`data/manifest.json`](data/manifest.json).
   cambia `corpus_version` y las cachés KV construidas con la versión anterior quedan marcadas
   como desactualizadas.
 
+Si cambia un parser, `reparse` vuelve a extraer el texto de los originales guardados sin usar la red:
+
+```bash
+.venv\Scripts\python -X utf8 -m app.ingestion.ingest reparse
+```
+
+## Corpus para la caché KV (Fase 2)
+
+[`data/corpus_config.json`](data/corpus_config.json) define qué documentos y secciones entran,
+su orden, el tokenizer y el presupuesto de tokens.
+
+```bash
+.venv\Scripts\python -X utf8 -m app.ingestion.corpus_builder build
+```
+
+Genera `data/processed/corpus/<build_id>.txt`, que es el texto exacto que se cargará en la caché,
+y `<build_id>.json`, el reporte con documentos incluidos y excluidos, duplicados y tokens por
+sección. La misma entrada produce siempre los mismos bytes y el mismo `build_id`.
+
 ## Pruebas
 
 ```bash

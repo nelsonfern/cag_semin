@@ -58,6 +58,52 @@ def test_organism_dates_are_valid_and_not_after_retrieval(ok_docs):
                 assert date.fromisoformat(value) <= date.fromisoformat(doc.retrieved_at[:10])
 
 
+# --- Fase 2: corpus construido ------------------------------------------------
+
+def _latest_build():
+    import json
+    from app.ingestion.corpus_builder import CORPUS_DIR
+    pointer = CORPUS_DIR / "latest.json"
+    if not pointer.exists():
+        pytest.skip("No hay corpus construido (python -m app.ingestion.corpus_builder build)")
+    latest = json.loads(pointer.read_text(encoding="utf-8"))
+    text = (CORPUS_DIR / latest["text"]).read_text(encoding="utf-8")
+    report = json.loads((CORPUS_DIR / latest["report"]).read_text(encoding="utf-8"))
+    return text, report
+
+
+def test_corpus_build_matches_current_manifest_and_hashes():
+    text, report = _latest_build()
+    assert report["manifest_corpus_version"] == Manifest().corpus_version, "corpus desactualizado: reconstruir"
+    assert sha256_text(text) == report["corpus_text_sha256"]
+    assert report["totals"]["tokens"] <= report["max_context_tokens"]
+
+
+def test_corpus_preserves_metadata_of_every_included_document():
+    text, report = _latest_build()
+    manifest = Manifest()
+    for doc in report["documents"]:
+        record = manifest.get(doc["document_id"])
+        assert doc["content_hash"] == record.content_hash
+        if doc["included"]:
+            assert f"<<<DOCUMENTO id={doc['document_id']}>>>" in text
+            assert f"Fuente oficial: {record.source_url}" in text
+        else:
+            assert doc["exclusion_reason"], "toda exclusión debe estar justificada"
+            assert f"id={doc['document_id']}>>>" not in text
+
+
+def test_corpus_token_count_matches_real_tokenizer():
+    text, report = _latest_build()
+    from app.ingestion.corpus_builder import HFTokenizer
+    try:
+        tok = HFTokenizer(report["tokenizer"]["id"])
+    except Exception as exc:  # sin red y sin caché local
+        pytest.skip(f"No se pudo cargar el tokenizer: {exc}")
+    assert tok.fingerprint == report["tokenizer"]["fingerprint"]
+    assert tok.count(text) == report["totals"]["tokens"]
+
+
 def test_non_downloadable_sources_are_recorded():
     manifest = Manifest()
     pending = [d for d in manifest.documents.values() if d.status != STATUS_OK]

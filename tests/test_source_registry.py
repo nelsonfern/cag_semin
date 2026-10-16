@@ -36,6 +36,14 @@ def test_new_unchanged_updated(tmp_path):
     assert [h["change"] for h in m.history] == ["new", "updated"]
 
 
+def test_same_raw_with_new_text_is_reparsed(tmp_path):
+    m = Manifest(tmp_path / "manifest.json")
+    m.upsert(make_record(text="extracción vieja", raw_hash="abc"))
+    assert m.upsert(make_record(text="extracción nueva", raw_hash="abc")) == "reparsed"
+    assert m.get("doc-a").version == 2
+    assert m.upsert(make_record(text="otro contenido", raw_hash="def")) == "updated"
+
+
 def test_failure_keeps_previous_good_version(tmp_path):
     m = Manifest(tmp_path / "manifest.json")
     m.upsert(make_record(text="bueno"))

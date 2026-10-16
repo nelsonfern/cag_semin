@@ -9,7 +9,7 @@ pruebas aprobadas y tareas pendientes. Cada fase cierra con un commit.
 |------|-------------|--------|
 | 0 | Inicialización del repositorio | Completada |
 | 1 | Fuentes e ingesta | **Aprobada** (2026-10-16) |
-| 2 | Corpus reproducible | Pendiente |
+| 2 | Corpus reproducible | Implementada — esperando aprobación |
 | 3 | Prueba mínima de KV cache | Pendiente |
 | 4 | Motor CAG | Pendiente |
 | 5 | TramitaIA (API + interfaz + citas) | Pendiente |
@@ -191,3 +191,96 @@ No se puede determinar desde el corpus de dónde salen los $1.100 y $1.500. Pued
 - La Ley 10.702 ocupa unos 139 mil caracteres, casi todos sobre impuestos ajenos a los trámites. En la Fase 2 habrá que incorporar solo los artículos pertinentes (art. 39, Registro Civil), sin perder la trazabilidad y registrando qué se excluye.
 - Los PDF de IGJ y del Servicio Penitenciario que enlaza la Secretaría de Justicia no se descargaron porque están fuera de los trámites elegidos. El parser `pdf` ya está disponible para ellos.
 - **Para la Fase 3:** un CAG real necesita acceso al estado KV del modelo (Transformers en una PC propia o remota). Las APIs comerciales ofrecen *prompt caching* gestionado por el proveedor, que es un concepto distinto (§8). Esto condiciona la elección entre «API» y «PC potente».
+
+---
+
+## Fase 2 — Corpus reproducible (2026-10-16)
+
+### Decisiones aprobadas por el usuario antes de empezar
+1. Tokenizer de la familia **Qwen2.5-Instruct**.
+2. De la Ley 10.702, solo los **arts. 1, 39 y 127**.
+3. Documento nacional **completo**.
+4. Presupuesto de **16.000 tokens**.
+
+Sobre la consulta del usuario por **Ollama Cloud con MiniMax**: la API de Ollama recibe y devuelve texto y no expone, guarda ni restaura la caché KV, así que no sirve como motor CAG. Puede usarse como comparación «modelo grande en la nube sin caché propia» en el benchmark. Hay que verificarlo contra la documentación oficial al empezar la Fase 3 (§3).
+
+### Verificaciones previas
+- `tokenizer.json` y `tokenizer_config.json` de Qwen2.5-{0.5B, 1.5B, 3B, 7B, 14B, 32B, 72B}-Instruct tienen el **mismo SHA-256**. Los conteos valen para cualquier tamaño de la familia. En el config se usa `Qwen/Qwen2.5-7B-Instruct`.
+- Ley 10.702: la extracción del PDF a veces separa los dígitos (`ARTÍCULO 1 6º`). Con una expresión regular tolerante se detectan los **128 artículos**, únicos y en orden.
+
+### Implementación
+
+| Archivo | Responsabilidad |
+|---|---|
+| `app/ingestion/parser.py` | Ahora marca los títulos: `##` para las secciones del Registro Civil (`<h2>`) y para cada uno de los 26 bloques de tipo de DNI y pasaporte del sitio nacional. Se descartan los bloques que solo tienen un título de grupo. |
+| `app/ingestion/source_registry.py` | Nuevo tipo de cambio `reparsed`: el original es el mismo y cambió la extracción. Así no se confunde con un cambio del organismo. |
+| `app/ingestion/ingest.py` | Nuevo comando `reparse`, que re-extrae desde los originales guardados sin usar la red. |
+| `data/corpus_config.json` | Tokenizer, presupuesto, orden de grupos y, por documento: grupo, prioridad, divisor, secciones incluidas y líneas de ruido a descartar. |
+| `app/ingestion/corpus_builder.py` | Construcción del corpus, detallada abajo. |
+
+**Pipeline de `corpus_builder`**
+1. Toma los documentos `ok` del manifiesto.
+2. Los divide en secciones con ID estable: `doc#sN` en los documentos con títulos `##` y `doc#art-N` en la ley. Cada sección guarda su posición en el texto procesado.
+3. Aplica la selección y descarta las líneas de ruido (los pies de página del PDF).
+4. Controla duplicados con texto normalizado (minúsculas y espacios). La copia se reemplaza por una referencia `[doc#sN] (contenido idéntico a [otro#sM]…)`. Las secciones de menos de 80 caracteres no se deduplican, porque «Sin cargo» o «DNI vigente» se repiten legítimamente.
+5. Ordena por grupo (provincial → nacional → normativa) y luego por ID. Cada documento lleva una cabecera con título, organismo, jurisdicción, fuente oficial, fecha publicada por el organismo, fecha de obtención y versión. Si es un extracto, la cabecera lo dice.
+6. Cuenta tokens con el tokenizer real, sin tokens especiales. Si se pasa del presupuesto, excluye **documentos completos** por prioridad y después reincorpora los que caben. Nunca trunca.
+7. `build_id` = hash del formato, el texto, el tokenizer (id y huella) y la configuración. Los archivos se escriben con `\n` fijo para que los bytes sean reproducibles en Windows.
+
+**Errores encontrados y corregidos durante la fase**
+- La primera versión del recorte por presupuesto excluyó la ley (1.372 tokens) antes que el documento nacional y no la volvió a incorporar, aunque después cabía. Se agregó una segunda pasada que reincorpora lo que entra. El build defectuoso se borró.
+- `latest.json` guardaba rutas relativas a la raíz del proyecto, lo que fallaba fuera del repo. Ahora son relativas a la carpeta del corpus.
+
+### Re-extracción (`ingest reparse`)
+- 10 documentos pasaron a **v2** con cambio `reparsed`: las 9 fichas del Registro Civil y el documento nacional. El original es el mismo y solo se agregaron las marcas de título.
+- La guía de la Secretaría de Justicia y la ley quedaron sin cambios.
+- `corpus_version = b7b3289233add501`.
+
+### Resultado real: `build_id = e30a011c26dfa791`
+
+| Documento | Tokens | Estado |
+|---|---|---|
+| 9 fichas del Registro Civil | 5.926 | incluidas |
+| sj-guia-tramites | 3.114 | incluida |
+| ley-10702-impositiva-2024 (arts. 1, 39 y 127) | 1.372 | incluida (126 secciones excluidas por selección) |
+| nac-requisitos-dni-pasaporte | 8.985 | **excluida por presupuesto** |
+| **Total del corpus** | **10.423 / 16.000** | 11 documentos, 68 secciones, 0 duplicados |
+
+**Desvío respecto del plan:** la estimación previa (~15.000 tokens con el documento nacional, calculada a 4 caracteres por token) fue optimista. Con el tokenizer real, el español rinde unos 3,2 caracteres por token y además suman las cabeceras y los marcadores. El corpus completo ocuparía **unos 19.400 tokens**, así que con 16.000 el documento nacional queda afuera. Queda informado en el reporte y se consulta al usuario cómo seguir.
+
+**Reproducibilidad:** reconstruir con la misma entrada dio el mismo `build_id` y los mismos bytes.
+
+**Duplicados:** no hay secciones idénticas entre documentos. Las fichas del Registro Civil y la guía de Justicia tratan los mismos trámites con **textos distintos** y se conservan las dos, porque incluso se contradicen (pasaporte de menores).
+
+### Comandos ejecutados
+```bash
+.venv/Scripts/python -m pip install transformers tokenizers
+.venv/Scripts/python -X utf8 -m app.ingestion.ingest reparse
+.venv/Scripts/python -X utf8 -m app.ingestion.corpus_builder build   # dos veces: mismo build_id
+.venv/Scripts/python -m pytest
+```
+
+### Pruebas — 47 aprobadas, 0 fallidas
+- `tests/test_corpus_builder.py` (10 tests, con un tokenizer falso):
+  - División en secciones con sus posiciones, y artículos con números separados.
+  - Los títulos de capítulo pasan al artículo siguiente.
+  - Selección de secciones y líneas de ruido descartadas.
+  - Duplicados con trazabilidad, y textos cortos que no se deduplican.
+  - Orden por grupo y cabecera con metadatos.
+  - Exclusión por presupuesto sin truncar y con reincorporación de lo que cabe.
+  - Documentos sin configurar o no disponibles quedan reportados.
+  - Reproducibilidad byte a byte y sin `\r\n`; el `build_id` cambia si cambia la configuración o el tokenizer.
+- `tests/test_corpus_real.py` (+3 sobre el corpus real):
+  - El build corresponde al manifiesto actual y su hash coincide.
+  - Se conservan los metadatos de cada documento incluido y toda exclusión está justificada.
+  - El conteo de tokens coincide con el tokenizer real de Qwen2.5 y con su huella.
+- `tests/test_source_registry.py` (+1): cambio `reparsed`.
+
+### Criterio de aprobación de la Fase 2
+> Extracción reproducible, metadatos conservados, duplicados controlados y cantidad de tokens registrada.
+
+**Se cumple**, con una decisión pendiente del usuario: con el presupuesto de 16.000 tokens, el documento nacional queda excluido.
+
+### Pendientes y limitaciones
+- Los 10.423 tokens son solo del corpus. En la Fase 3 se suman el prompt de sistema y la plantilla de chat del modelo.
+- Una aclaración para la Fase 3: después de construir la caché, cada pregunta procesa solo sus propios tokens nuevos. Sin embargo, cada token generado sigue haciendo atención sobre todo el prefijo cacheado. El costo por consulta baja mucho, pero sigue dependiendo del tamaño del corpus, sobre todo en memoria (la caché KV crece linealmente con los tokens).

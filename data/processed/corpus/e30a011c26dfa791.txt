@@ -1,0 +1,660 @@
+<<<DOCUMENTO id=rc-defunciones>>>
+Título: Inscripción de Defunciones
+Organismo: Registro Civil de La Rioja
+Jurisdicción: provincial
+Fuente oficial: https://registrocivil.larioja.gob.ar/tramite-defunciones.html
+Última actualización publicada por el organismo: 2025-10-20
+Fecha de obtención: 2026-10-16
+Versión del documento: v2
+
+[rc-defunciones#s0]
+# Inscripción de Defunciones
+Última actualización: 20/10/2025
+Este trámite te permite solicitar la inscripción del fallecimiento de una persona en el registro civil correspondiente a la localidad de fallecimiento.
+
+[rc-defunciones#s1] Requisitos del Trámite
+Certificado médico de defunción emitido por un profesional habilitado.
+DNI del fallecido (original).
+DNI de la persona que solicita la inscripción del fallecimiento (original y copia).
+Que la inscripción se realice dentro de las 48hs hábiles luego de ocurrido el fallecimiento.
+### Documentación adicional para personas fallecidas sin DNI
+Muerte fetal:
+DNI de los progenitores y Certificado de Defunción fetal (original y copia).
+Persona nacida con vida:
+Se debe realizar la inscripción del nacimiento, la inscripción de la defunción y presentar el DNI de los progenitores.
+Extravío, robo o hurto:
+Exposición o denuncia policial y Declaración Jurada de identidad con dos testigos ante autoridad competente.
+
+[rc-defunciones#s2] Pasos para realizar el trámite
+Concurrir a la funeraria municipal o privada y solicitar el servicio funerario.
+Reunir toda la documentación necesaria.
+Concurrir al registro civil de la localidad de fallecimiento. Consultar previamente la modalidad de atención (con o sin turno). Si se contrató un servicio funerario privado, la empresa puede presentar la documentación.
+En el momento de la inscripción se obtiene el acta de defunción y, en caso de corresponder, la autorización de libre tránsito.
+
+[rc-defunciones#s3] ¿Quién puede iniciarlo?
+Familiar directo.
+Profesional habilitado.
+Empresas funerarias.
+Terceros intervinientes.
+
+[rc-defunciones#s4] Costo
+El trámite es gratuito. Consultar con el registro civil correspondiente el costo de la tasa en caso de inscripción por medio de servicio funerario privado.
+
+<<<FIN DOCUMENTO id=rc-defunciones>>>
+
+<<<DOCUMENTO id=rc-dni-recien-nacido>>>
+Título: DNI – Recién nacido
+Organismo: Registro Civil de La Rioja
+Jurisdicción: provincial
+Fuente oficial: https://registrocivil.larioja.gob.ar/tramite-dni-recien-nacido.html
+Última actualización publicada por el organismo: 2025-10-20
+Fecha de obtención: 2026-10-16
+Versión del documento: v2
+
+[rc-dni-recien-nacido#s0]
+# DNI – Recién nacido
+Última actualización: 20/10/2025
+Si sos mamá, papá o tutor de un recién nacido, tenés que tramitarle el DNI. El número del primer DNI es inalterable y lo va a acompañar toda su vida.
+
+[rc-dni-recien-nacido#s1] Requisitos del Trámite
+Partida de nacimiento (si se inscribe el mismo día, la emite el oficial público).
+En caso de corresponder: acta de reconocimiento o adopción.
+DNI de madre/padre o tutor legal.
+Testimonio judicial si hay tutela.
+### En caso de bebés internados
+Certificado médico del hospital donde esté internado.
+Debe incluir: nombre completo del bebé, diagnóstico, firma y sello médico y de la institución.
+Vigencia: 30 días. No se acepta certificado de médico particular.
+Con el alta médica, debe tramitarse el DNI definitivo.
+
+[rc-dni-recien-nacido#s2] Pasos para realizar el trámite
+Sacar turno en el registro civil o delegación correspondiente.
+Presentarse con el bebé para DNI definitivo o sin el bebé para DNI provisorio.
+Conservar el comprobante hasta recibir el DNI en tu domicilio.
+
+[rc-dni-recien-nacido#s3] Costo
+El trámite de DNI para recién nacido es totalmente gratuito.
+
+[rc-dni-recien-nacido#s4] Información adicional
+DNI para recién nacido tiene validez hasta la primera actualización escolar (5-8 años).
+El DNI provisorio tiene vigencia de 6 meses. Se puede solicitar prórroga con nueva documentación médica.
+Al recibir el alta, debe tramitarse el DNI definitivo.
+
+<<<FIN DOCUMENTO id=rc-dni-recien-nacido>>>
+
+<<<DOCUMENTO id=rc-dni-renovacion>>>
+Título: DNI – Nuevo ejemplar por robo, deterioro, extravío o caducidad
+Organismo: Registro Civil de La Rioja
+Jurisdicción: provincial
+Fuente oficial: https://registrocivil.larioja.gob.ar/tramite-dni-renovacion.html
+Última actualización publicada por el organismo: 2025-10-20
+Fecha de obtención: 2026-10-16
+Versión del documento: v2
+
+[rc-dni-renovacion#s0]
+# DNI – Nuevo ejemplar por robo, deterioro, extravío o caducidad
+Última actualización: 20/10/2025
+Este trámite te permite obtener un nuevo ejemplar de DNI en caso de robo, deterioro, extravío o caducidad.
+
+[rc-dni-renovacion#s1] Requisitos del Trámite
+Mayores de 14 años: Llevar DNI anterior si lo tenés (no obligatorio).
+Menores de 14 años:
+Ir acompañados por padre, madre o tutor con su DNI.
+Si es tutor legal, llevar testimonio judicial original.
+Partida de nacimiento actualizada.
+
+[rc-dni-renovacion#s2] Pasos para realizar el trámite
+Elegir oficina más cercana y reservar turno según modalidad de atención.
+Presentarse en la oficina el día del turno. Conservar el comprobante hasta recibir el DNI.
+Esperar el envío del DNI al domicilio. Entregar el comprobante al recibirlo.
+Ya podés gestionar el DNI Digital como complemento del físico.
+
+[rc-dni-renovacion#s3] ¿Cómo se inicia?
+El trámite es personal y presencial en la oficina de Registro Civil más cercana a tu domicilio.
+
+[rc-dni-renovacion#s4] Costo
+El costo es el determinado por Re.Na.Per.
+El pago se realiza en la oficina donde se inicia el trámite. En los Centros de Documentación de Renaper, se paga por débito o crédito el mismo día del turno.
+
+[rc-dni-renovacion#s5] Información adicional
+Desde el 01/04/2017 solo es válido el nuevo DNI tarjeta o libreta celeste.
+Mayores de 75 años pueden seguir usando DNI verde, Libreta Cívica o de Enrolamiento si está en buen estado.
+La vigencia del nuevo DNI es de 15 años (salvo menores con actualizaciones obligatorias).
+Podés tramitar el DNI digital en tu celular junto con el físico.
+
+<<<FIN DOCUMENTO id=rc-dni-renovacion>>>
+
+<<<DOCUMENTO id=rc-matrimonios>>>
+Título: Matrimonios
+Organismo: Registro Civil de La Rioja
+Jurisdicción: provincial
+Fuente oficial: https://registrocivil.larioja.gob.ar/tramite-matrimonios.html
+Última actualización publicada por el organismo: 2025-10-20
+Fecha de obtención: 2026-10-16
+Versión del documento: v2
+
+[rc-matrimonios#s0]
+# Matrimonios
+Última actualización: 20/10/2025
+Trámite para contraer matrimonio en una oficina del Registro Civil. Podrás optar por la modalidad presencial.
+
+[rc-matrimonios#s1] Requisitos y turnos
+### Turno y residencia
+Los turnos se solicitan con
+dos meses de anticipación
+en la Oficina de Matrimonio Casa Central.
+Al menos uno de los contrayentes debe tener domicilio en
+La Rioja – Capital
+.
+### Según estado civil
+Soltero/a:
+DNI original y fotocopias de ambos contrayentes, más fotocopias de actas de nacimiento.
+Divorciado/a:
+Presentar Acta de Matrimonio con marginal de divorcio.
+Viudo/a:
+Presentar Acta de Defunción y Acta de Matrimonio del cónyuge anterior.
+### Documentación general
+DNI de ambos contrayentes (original y vigente)
+Actas de nacimiento actualizadas (si corresponde)
+Si nacieron fuera del país: apostilla o visa consular + traducción oficial al español
+DNI de los testigos (original y vigente)
+Cantidad de testigos: mínimo 2, máximo 4 mayores de edad
+### Impedimentos legales (Art. 403 CCCN)
+Parentesco en línea recta en todos los grados
+Parentesco entre hermanos bilaterales o unilaterales
+La afinidad en línea recta en todos los grados
+Tener menos de dieciocho años
+Estar unido por vínculos de un matrimonio anterior
+Condena como autor, cómplice o instigador del homicidio doloso de uno de los cónyuges
+Alteraciones mentales permanentes que impidan discernimiento
+### Casos especiales
+Edad entre 16 y 18 años:
+Requiere autorización judicial y del representante legal.
+Idioma extranjero:
+Si alguno de los contrayentes no comprende el idioma, debe presentarse con traductor público.
+Convención matrimonial:
+Si desean establecer un régimen patrimonial diferente al legal, deben presentar convención matrimonial ante escribano público.
+
+[rc-matrimonios#s2] Costo
+Según Ley Impositiva N° 10.929 – Artículo 79 (Año 2024):
+Matrimonio en día/horario hábil:
+$??
+Matrimonio en día/horario inhábil:
+$??
+Los costos pueden variar según modalidad y servicios adicionales solicitados.
+
+<<<FIN DOCUMENTO id=rc-matrimonios>>>
+
+<<<DOCUMENTO id=rc-nacimientos>>>
+Título: Inscripción de Nacimientos
+Organismo: Registro Civil de La Rioja
+Jurisdicción: provincial
+Fuente oficial: https://registrocivil.larioja.gob.ar/tramite-nacimientos.html
+Última actualización publicada por el organismo: 2025-10-20
+Fecha de obtención: 2026-10-16
+Versión del documento: v2
+
+[rc-nacimientos#s0]
+# Inscripción de Nacimientos
+Última actualización: 20/10/2025
+Este trámite permite realizar la inscripción de nacimiento de un recién nacido dentro del plazo de 40 días corridos de ocurrido el nacimiento del bebé.
+
+[rc-nacimientos#s1] Requisitos del trámite
+Realizar el trámite dentro de los 40 días corridos desde la fecha de nacimiento del bebé.
+Desde el día 41 al 60 desde que nació, se realizará una inscripción de oficio por parte del registro civil de la localidad de nacimiento, que también debe ser iniciada por los progenitores, y cuyos requisitos son los mismos. Solo se agrega como requisito el certificado negativo de inscripción, que debe ser emitido por el registro civil de la localidad de nacimiento.
+
+[rc-nacimientos#s2] Documentación requerida
+*Certificado médico de nacimiento original con sello del profesional firmante o certificado de nacido vivo expedido por el hospital o la clínica.
+*Documento de identidad de ambos progenitores.
+*Si los progenitores están casados, deben presentar la libreta de familia o los datos de inscripción del acta de matrimonio para poder localizar el acta y adjuntarla al trámite.
+*Si son extranjeros, con DNI Argentino para extranjeros, pasaporte o cédula de su país, que no haya vencido.
+*Si alguno de los progenitores no posee documento, deberá acreditar su identidad con 2 (dos) testigos mayores de 18 años con DNI vigente y en buen estado.
+
+[rc-nacimientos#s3] Pasos para realizar el trámite
+1
+### Sacar turno
+En el registro civil correspondiente
+2
+### Asistir con documentación
+El día del turno
+3
+### Inscripción y entrega
+Se realiza el acta y se puede iniciar el DNI
+
+[rc-nacimientos#s4] ¿Cómo se presenta?
+De manera presencial en el registro civil correspondiente al lugar de nacimiento.
+
+[rc-nacimientos#s5] Costo
+El trámite es
+gratuito
+.
+
+[rc-nacimientos#s6] Información adicional
+Se puede iniciar el DNI del bebé junto con el acta
+Si los padres no comprenden español, deben asistir con traductor público
+En caso de reproducción asistida, presentar consentimiento certificado por el Ministerio de Salud o escribano
+
+<<<FIN DOCUMENTO id=rc-nacimientos>>>
+
+<<<DOCUMENTO id=rc-pasaporte>>>
+Título: Pasaporte
+Organismo: Registro Civil de La Rioja
+Jurisdicción: provincial
+Fuente oficial: https://registrocivil.larioja.gob.ar/tramite-pasaporte.html
+Última actualización publicada por el organismo: 2025-10-20
+Fecha de obtención: 2026-10-16
+Versión del documento: v2
+
+[rc-pasaporte#s0]
+# Pasaporte
+Última actualización: 20/10/2025
+Este trámite te permite obtener tu primer ejemplar del pasaporte o un nuevo ejemplar, emitido por el Ministerio del Interior del Gobierno Nacional, a través del Registro Nacional de las Personas (RENAPER).
+
+[rc-pasaporte#s1] Requisitos del Trámite
+### Menores de 18 años
+Partida de nacimiento actualizada
+DNI vigente
+Presencia de ambos progenitores o tutor legal con DNI
+Sentencia de tutela si corresponde
+### Mayores de 18 años
+DNI vigente
+Importante:
+Si tenés visa en el pasaporte anterior, informalo al momento del trámite.
+
+[rc-pasaporte#s2] Pasos para realizar el trámite
+Elegí la oficina más cercana y reservá un turno según la modalidad de atención vigente.
+Presentate en la oficina el día del turno con la documentación requerida. Conservar el comprobante.
+Esperá la entrega del pasaporte en tu domicilio. Es necesario presentar el comprobante para recibirlo.
+
+[rc-pasaporte#s3] ¿Cómo se inicia?
+Se inicia de forma presencial y personal en la oficina de Registro Civil más cercana a tu domicilio.
+
+[rc-pasaporte#s4] Costo
+Pasaporte regular: Costo determinado por Re.Na.Per.
+Pasaporte express: Costo determinado por Re.Na.Per.
+Pasaporte al instante: Costo determinado por Re.Na.Per.
+El pago se realiza en la oficina donde se inicia el trámite o en centros RENAPER con débito/crédito.
+
+[rc-pasaporte#s5] Información adicional
+El pasaporte será enviado al domicilio declarado, y podrá ser recibido por el titular o una persona mayor de edad con DNI y comprobante del trámite. En caso de no recibirlo, deberá concurrir al lugar donde se inició el trámite.
+Vigencia para mayores de 18 años: 10 años.
+Vigencia para menores de 18 años: 5 años.
+La fecha de vencimiento está en la hoja impresa del pasaporte.
+
+<<<FIN DOCUMENTO id=rc-pasaporte>>>
+
+<<<DOCUMENTO id=rc-rectificacion-partidas>>>
+Título: Rectificación de Partidas
+Organismo: Registro Civil de La Rioja
+Jurisdicción: provincial
+Fuente oficial: https://registrocivil.larioja.gob.ar/tramite-rectificacion-partidas.html
+Última actualización publicada por el organismo: 2025-10-20
+Fecha de obtención: 2026-10-16
+Versión del documento: v2
+
+[rc-rectificacion-partidas#s0]
+# Rectificación de Partidas
+Última actualización: 20/10/2025
+Este trámite consiste en la corrección de errores u omisiones materiales en las actas inscriptas en el territorio de la Provincia de La Rioja.
+
+[rc-rectificacion-partidas#s1] Requisitos del Trámite
+Nota explicativa del error a corregir y documentación que lo respalde.
+DNI original del solicitante.
+Datos del acta a rectificar para su localización.
+Pruebas documentales que acrediten el dato correcto.
+Si sos familiar directo, representante legal o apoderado, deberás presentar documentación que acredite el vínculo o autorización.
+Ejemplo para acreditar vínculo: si un nieto quiere rectificar el matrimonio de su abuelo, debe presentar las actas que acrediten ese linaje.
+
+[rc-rectificacion-partidas#s2] Pasos para realizar el trámite
+Sacar turno en el registro civil más cercano.
+Presentarse con la documentación requerida.
+El registro remite el trámite a la Dirección General, donde se genera un expediente y se evalúa.
+Si se observa el trámite, se notifica vía correo electrónico; si se aprueba, se emite la resolución.
+La resolución se envía al registro civil correspondiente para marginar el acta.
+Solicitar luego una copia actualizada a través de Ciudadano Digital.
+
+[rc-rectificacion-partidas#s3] ¿Cómo se presenta?
+Se inicia de manera presencial en el registro civil más cercano al domicilio del solicitante.
+
+[rc-rectificacion-partidas#s4] Costo
+Por la registración de notas de referencia (rectificaciones, sentencias, etc.):
+$??
+
+[rc-rectificacion-partidas#s5] Información adicional
+Toda documentación debe ser legible y completa. Documentos extranjeros deben estar legalizados o apostillados y traducidos por traductor matriculado si corresponde.
+Actualmente las notas de referencia se agregan como hoja adicional, no al margen del acta.
+
+<<<FIN DOCUMENTO id=rc-rectificacion-partidas>>>
+
+<<<DOCUMENTO id=rc-solicitud-partidas>>>
+Título: Solicitud de Partidas
+Organismo: Registro Civil de La Rioja
+Jurisdicción: provincial
+Fuente oficial: https://registrocivil.larioja.gob.ar/tramite-solicitud-partidas.html
+Última actualización publicada por el organismo: 2025-10-20
+Fecha de obtención: 2026-10-16
+Versión del documento: v2
+
+[rc-solicitud-partidas#s0]
+# Solicitud de Partidas
+Última actualización: 20/10/2025
+Este trámite permite solicitar copias de partidas de nacimiento, matrimonio, defunción y uniones convivenciales inscriptas en la Provincia de La Rioja.
+
+[rc-solicitud-partidas#s1] Requisitos del Trámite
+Tener una cuenta de Ciudadano Digital.
+Datos del acta necesarios para que la búsqueda sea exitosa.
+
+[rc-solicitud-partidas#s2] ¿Cómo se solicita?
+La solicitud de actas se inicia de manera digital en el servicio. Podrás acceder directamente desde acá.
+
+[rc-solicitud-partidas#s3] Costo
+Según la Ley Impositiva 2024 (Ley 10.929, art. 79):
+Copia de acta certificada:
+$1.100
+Copia de acta legalizada:
+$1.500
+Copia de acta, certificado o extracto de nacimiento para trámite de identificación y primera copia de matrimonio:
+Sin cargo
+* Importante: La Municipalidad de La Rioja podrá establecer su propia tasa por actas inscriptas en el Registro de la Ciudad de La Rioja.
+
+[rc-solicitud-partidas#s4] Instructivo de Validación de Firma Digital
+Descargar el programa Adobe Reader DC.
+Configurar Adobe Reader desde Edición > Preferencias siguiendo esta
+guía
+.
+Instalar la cadena de confianza de los certificados emitidos. Esto se realiza una sola vez.
+Este procedimiento solo puede realizarse desde una computadora para validar la legalidad del documento.
+
+[rc-solicitud-partidas#s5] Información adicional
+Indicar localidad de inscripción, número de acta, tomo, serie, folio y año mejora significativamente la precisión de la búsqueda.
+Las actas legalizadas se emiten únicamente con firma digital, la cual es igual de válida que la manuscrita según la Ley 25.506.
+Todas las notificaciones del proceso llegarán al correo vinculado a tu cuenta Ciudadano Digital. La descarga se realiza desde "Mis trámites" en el servicio "Mi Registro Civil".
+
+<<<FIN DOCUMENTO id=rc-solicitud-partidas>>>
+
+<<<DOCUMENTO id=rc-union-convivencial>>>
+Título: Unión Convivencial
+Organismo: Registro Civil de La Rioja
+Jurisdicción: provincial
+Fuente oficial: https://registrocivil.larioja.gob.ar/tramite-union-convivencial.html
+Última actualización publicada por el organismo: 2025-10-20
+Fecha de obtención: 2026-10-16
+Versión del documento: v2
+
+[rc-union-convivencial#s0]
+# Unión Convivencial
+Última actualización: 20/10/2025
+El trámite permite registrar la unión entre dos personas que conviven en modo singular, público, notorio, estable y permanente compartiendo un proyecto de vida en común.
+
+[rc-union-convivencial#s1] Requisitos del Trámite
+Que los dos integrantes sean mayores de edad y capaces.
+Que no estén unidos por vínculos de parentesco en línea recta en todos los grados, ni colateral hasta el segundo grado.
+Que no estén unidos por vínculos de parentesco por afinidad en línea recta.
+Que no tengan impedimento de ligamen ni esté registrada otra convivencia de manera simultánea.
+Que mantengan la convivencia durante un periodo no inferior a 2 años.
+DNI de ambos convivientes, original y fotocopia.
+En caso de no cumplir con todos o algunos de los requisitos, deberán consultar en el registro civil qué documentación deberán presentar para probar fehacientemente la convivencia.
+
+[rc-union-convivencial#s2] Documentación requerida
+DNI de ambos convivientes, original y fotocopia.
+Dos testigos mayores de edad con DNI, quienes no deben ser parientes en ningún grado.
+Declaración jurada completa y suscripta.
+Si existe pacto de convivencia, deberá presentarse con firma certificada por escribano público o escritura según corresponda.
+En caso de inconsistencias, se podrán solicitar actas de nacimiento legalizadas o apostilladas según el lugar de nacimiento.
+Si los nacimientos se produjeron en la Provincia de Córdoba, la Oficina del Registro Civil procederá a la búsqueda con los datos aportados en la declaración jurada.
+
+[rc-union-convivencial#s3] Pasos para realizar el trámite
+### Modalidad Presencial
+Solicitar turno en el Registro Civil correspondiente.
+Presentarse el día del turno con documentación y datos de testigos.
+La Dirección General analizará la documentación y autorizará o no la unión.
+Si es aprobada, se notificará a los convivientes y se celebrará la unión convivencial.
+
+[rc-union-convivencial#s4] Costo
+Según Ley 10.929 Art. 79 del año 2024:
+Registración en día/horario hábil:
+$?
+Registración en día/horario inhábil:
+$?
+
+[rc-union-convivencial#s5] Información adicional
+La registración debe ser solicitada por ambos convivientes.
+Toda la documentación debe presentarse en original y copia. No se recibe documentación incompleta o desmembrada.
+
+<<<FIN DOCUMENTO id=rc-union-convivencial>>>
+
+<<<DOCUMENTO id=sj-guia-tramites>>>
+Título: Secretaría de Justicia — Provincia de La Rioja
+Organismo: Secretaría de Justicia de La Rioja
+Jurisdicción: provincial
+Fuente oficial: https://secretariadejusticia.larioja.gob.ar/
+Última actualización publicada por el organismo: no publicada
+Fecha de obtención: 2026-10-16
+Versión del documento: v1
+
+[sj-guia-tramites#s0]
+Guía de trámites de la Secretaría de Justicia de La Rioja.
+Reparticiones: Registro Civil, Inspección General de Justicia, Servicio Penitenciario, Subsecretaría de Acceso a la Justicia.
+
+[sj-guia-tramites#s1] DNI Nuevo Ejemplar
+Repartición: Registro Civil
+Descripción: Nuevo ejemplar de DNI por pérdida, robo, deterioro o cambio de domicilio
+Requisitos:
+- Mayores de 14 años: llevar el DNI anterior (si lo conservás). Si fue por robo o extravío, podés llevar la denuncia policial o exposición, aunque no es excluyente.
+- Menores de 14 años: concurrir acompañados por padre, madre o tutor legal, quienes deben presentar su propio DNI y la partida de nacimiento original del menor.
+Atención: Hipólito Yrigoyen 100, Av. Rivadavia · Lun a Vie: 8:00 a 13:00 hs y 16:00 a 21:00 hs · Fines de semana y feriados: 16:00 a 21:00 hs
+
+[sj-guia-tramites#s2] DNI Recién Nacido
+Repartición: Registro Civil
+Descripción: Primer DNI del bebé recién nacido.
+Lugar: Registro Civil o delegación correspondiente
+Requisitos:
+- DNI actualizado de la madre, padre o tutor legal.
+- Partida de nacimiento original con firma y sello del oficial público (te la entregan al inscribir al bebé).
+- En caso de tutela, presentar el testimonio judicial original.
+Atención: Hipólito Yrigoyen 100, Av. Rivadavia · Lun a Vie: 8:00 a 13:00 hs y 16:00 a 21:00 hs · Fines de semana y feriados: 16:00 a 21:00 hs
+
+[sj-guia-tramites#s3] Unión Convivencial
+Repartición: Registro Civil
+Descripción: Registro de la unión entre dos personas que conviven de forma estable y permanente.
+Modalidad: Presencial
+Tiempo / turno: Turno Previo
+Lugar: Registro Civil correspondiente
+Requisitos:
+- Convivencia: relación pública, notoria, estable, permanente y singular, durante un mínimo de 2 años.
+- Edad: ambos integrantes deben ser mayores de edad (18 años o más).
+- Estado civil: no estar casados ni registrar otra unión convivencial vigente.
+- Parentesco: no ser parientes en línea recta en todos los grados, ni colaterales hasta el segundo grado (ej. hermanos), ni por afinidad en línea recta.
+- Documentación: DNI de ambos convivientes y domicilio legal denunciado en común.
+- Testigos: 2 testigos mayores de edad con DNI, que no sean familiares en ningún grado.
+Atención: Hipólito Yrigoyen 100, Av. Rivadavia · Lun a Vie: 8:00 a 13:00 hs y 16:00 a 21:00 hs · Fines de semana y feriados: 16:00 a 21:00 hs
+
+[sj-guia-tramites#s4] Pasaporte
+Repartición: Registro Civil
+Descripción: Para tramitar o renovar el pasaporte
+Requisitos:
+- Mayores de 18 años: DNI tarjeta vigente. El pasaporte anterior es recomendable llevarlo, pero no es obligatorio.
+- Menores de 18 años: DNI tarjeta vigente del menor, partida de nacimiento original (o certificado de nacimiento), y el DNI de los padres o tutores legales que lo acompañen.
+Atención: Hipólito Yrigoyen 100, Av. Rivadavia · Lun a Vie: 8:00 a 13:00 hs y 16:00 a 21:00 hs · Fines de semana y feriados: 16:00 a 21:00 hs
+
+[sj-guia-tramites#s5] Registro Público de Comercio
+Repartición: Inspección General de Justicia
+Descripción: Requisitos para la constitución de sociedades y entidades.
+Documento adjunto: S.R.L. — Contrato Social (https://secretariadejusticia.larioja.gob.ar/requisitos/igj/registro-publico/contrato-social-srl.pdf)
+Documento adjunto: S.R.L. — Cesión de Cuotas (https://secretariadejusticia.larioja.gob.ar/requisitos/igj/registro-publico/cesion-cuotas-srl.pdf)
+Documento adjunto: S.R.L. — Inscripción de Gerente (https://secretariadejusticia.larioja.gob.ar/requisitos/igj/registro-publico/inscripcion-gerente-srl.pdf)
+Documento adjunto: S.A.S. — Constitución de Sociedad por Acciones Simplificadas (https://secretariadejusticia.larioja.gob.ar/requisitos/igj/registro-publico/constitución-sas.pdf)
+Documento adjunto: Rubricación de Libros (https://secretariadejusticia.larioja.gob.ar/requisitos/igj/registro-publico/rubricacion-libros.pdf)
+Documento adjunto: Comerciantes y Martilleros Públicos (https://secretariadejusticia.larioja.gob.ar/requisitos/igj/registro-publico/comerciante-martillero-publico.pdf)
+Atención: Juan Bautista Alberdi 285, La Rioja Capital · Lun a Vie · 8:30 a 12:30 hs
+
+[sj-guia-tramites#s6] Dirección de Personas Jurídicas
+Repartición: Inspección General de Justicia
+Descripción: Requisitos y trámites de personas jurídicas.
+Documento adjunto: Asociación Civil - Constitución (https://secretariadejusticia.larioja.gob.ar/requisitos/igj/asociacion-civil/igj-asociacion-civil.pdf)
+Documento adjunto: Asociación Civil - Modificación de Estatuto (https://secretariadejusticia.larioja.gob.ar/requisitos/igj/asociacion-civil/igj-estatuto-asociacion-civil.pdf)
+Documento adjunto: Asociación Civil - Disolución, liquidación y cancelación de asociaciones civiles (https://secretariadejusticia.larioja.gob.ar/requisitos/igj/asociacion-civil/igj-disolucion-liquidacion-cancelacion.pdf)
+Documento adjunto: Fundaciones - Constitución (https://secretariadejusticia.larioja.gob.ar/requisitos/igj/fundaciones/igj-constitucion-fundaciones.pdf)
+Documento adjunto: Fundaciones - Presentación para el llamado a reunión extraordinaria del Consejo de Administración (https://secretariadejusticia.larioja.gob.ar/requisitos/igj/fundaciones/igj-reunion-extraordinaria-fundaciones.pdf)
+Documento adjunto: Fundaciones - Disolución, liquidación y cancelación de fundaciones. (https://secretariadejusticia.larioja.gob.ar/requisitos/igj/fundaciones/igj-disolución-liquidación-cancelación-fundaciones.pdf)
+Atención: Juan Bautista Alberdi 285, La Rioja Capital · Lun a Vie · 8:30 a 12:30 hs
+
+[sj-guia-tramites#s7] Dirección de Registro de Contratos de Fideicomiso
+Repartición: Inspección General de Justicia
+Subtítulo: Trámites de fideicomiso
+Descripción: Requisitos y trámites de fideicomisos.
+Documento adjunto: Fideicomisos (https://secretariadejusticia.larioja.gob.ar/requisitos/igj/fideicomiso/fideicomisos.pdf)
+Atención: Juan Bautista Alberdi 285, La Rioja Capital · Lun a Vie · 8:30 a 12:30 hs
+
+[sj-guia-tramites#s8] Requisitos para acreditación de visitas
+Repartición: Servicio Penitenciario
+Descripción: Documentación y pasos para acreditarte como visita.
+Requisitos:
+- Descargá el instructivo con los requisitos para acreditar visitas.
+Documento adjunto: Documento (https://secretariadejusticia.larioja.gob.ar/requisitos/spp/acreditacion-visitas.pdf)
+Atención: Calle Pellegrini Extremo Oeste B° Las Ágaves · Lun a Dom · 8:00 a 20:00 hs · serviciopenitenciariolr@gmail.com
+
+[sj-guia-tramites#s9] Elementos que no se pueden ingresar
+Repartición: Servicio Penitenciario
+Descripción: Listado de elementos prohibidos en las unidades.
+Requisitos:
+- Descargá el listado completo de elementos no permitidos.
+Documento adjunto: Documento (https://secretariadejusticia.larioja.gob.ar/requisitos/spp/elementos-prohibidos.pdf)
+Atención: Calle Pellegrini Extremo Oeste B° Las Ágaves · Lun a Dom · 8:00 a 20:00 hs · serviciopenitenciariolr@gmail.com
+
+[sj-guia-tramites#s10] Horario de recepción de elementos
+Repartición: Servicio Penitenciario
+Descripción: Días y horarios para la recepción de elementos.
+Requisitos:
+- Descargá la grilla de días y horarios de recepción.
+Documento adjunto: Documento (https://secretariadejusticia.larioja.gob.ar/requisitos/spp/horario-recepcion-elementos.pdf)
+Atención: Calle Pellegrini Extremo Oeste B° Las Ágaves · Lun a Dom · 8:00 a 20:00 hs · serviciopenitenciariolr@gmail.com
+
+[sj-guia-tramites#s11] Cronograma de visitas — Unidad N°1 y N°2
+Repartición: Servicio Penitenciario
+Descripción: Días y horarios de visita de la Unidad N°1 y N°2.
+Requisitos:
+- Descargá el cronograma de visitas de las Unidades.
+Documento adjunto: Documento (https://secretariadejusticia.larioja.gob.ar/requisitos/spp/cronograma-visitas-unidad.pdf)
+Atención: Calle Pellegrini Extremo Oeste B° Las Ágaves · Lun a Dom · 8:00 a 20:00 hs · serviciopenitenciariolr@gmail.com
+
+[sj-guia-tramites#s12] Asesoramiento Primario Integral Legal y Psicosocial
+Repartición: Subsecretaría de Acceso a la Justicia
+Descripción: Orientación legal sin costo para el ciudadano.
+Lugar: Subsecretaría de Acceso a la Justicia
+WhatsApp: 5493804320589
+Requisitos:
+- Nombre Completo
+- DNI
+Atención: Av. Perón 1290 - Avant Park Hotel - Oficinas 4to Piso · Lun a Vie · 8:00 a 13:00 hs · 3804320589
+
+[sj-guia-tramites#s13] Solicitá tu turno en Subsecretaría Acceso a la Justicia
+Repartición: Subsecretaría de Acceso a la Justicia
+Descripción: Reserva de turno para atención presencial.
+Modalidad: Online
+Tiempo / turno: Inmediato
+Lugar: CAJ — La Rioja Capital
+Costo: Gratuito
+WhatsApp: 5493804320589
+Requisitos:
+- DNI
+- Motivo de consulta
+- Nombre Completo
+Atención: Av. Perón 1290 - Avant Park Hotel - Oficinas 4to Piso · Lun a Vie · 8:00 a 13:00 hs · 3804320589
+
+[sj-guia-tramites#s14] Preguntas frecuentes
+P: ¿Necesito turno para todos los trámites?
+R: No todos requieren turno. En la guía de trámites, cada ficha indica la modalidad (presencial, en línea o mixta) y si corresponde reservar turno.
+P: ¿Cómo solicito una partida o trámite del Registro Civil?
+R: El Registro Civil cuenta con su propio sitio oficial, donde se gestionan partidas de nacimiento, matrimonio, defunción y demás trámites. Ingresá en registrocivil.larioja.gob.ar .
+
+<<<FIN DOCUMENTO id=sj-guia-tramites>>>
+
+<<<DOCUMENTO id=ley-10702-impositiva-2024>>>
+Título: Ley N° 10.702 - Ley Impositiva Anual, Período Fiscal 2024
+Organismo: Cámara de Diputados de La Rioja (publicada por la Dirección General de Ingresos Provinciales)
+Jurisdicción: provincial
+Fuente oficial: https://www.dgiplarioja.gob.ar/archivos/Legislacion/Leyes%20Impositivas/LEY%20IMPOSITIVA%202024.pdf
+Última actualización publicada por el organismo: no publicada
+Fecha de obtención: 2026-10-16
+Versión del documento: v1
+Extracto: solo se incluyen las secciones art-1, art-39, art-127. Solo los artículos pertinentes a los trámites: art. 1 (objeto y período fiscal), art. 39 (tasas del Registro Civil) y art. 127 (vigencia). El resto trata impuestos ajenos a los trámites del corpus.
+
+[ley-10702-impositiva-2024#art-1]
+LA CÁMARA DE DIPUTADOS DE LA PROVINCIA, SANCIONA CON FUERZA DE
+
+L E Y :
+ARTÍCULO 1º .- Establézcase la Ley Impositiva Anual para el Período Fiscal 2024. La
+recaudación de impuestos, tasas, contribuciones, cánones y de más tributos establecidos
+por el Código Tributario para el período mencionado, se efectuará de acuerdo a las
+alícuotas y/o cantidades fijadas en esta Ley.-
+
+[ley-10702-impositiva-2024#art-39]
+DIRECCIÓN GENERAL DEL REGISTRO CIVIL DE LAS PERSONAS
+ARTÍCULO 39º.- Por los servicios que presta la Dirección General del Registro Civil de las
+Personas se abonarán las siguientes tasas:
+
+a. Por cada celebración de matrimonio.
+a.1. Días hábiles:
+a.1.1. En la oficina dentro del horario del reglamento, PESOS
+DOSCIENTOS ($200,00).
+a.1.2. Fuera de la oficina dentro del horario reglamentario, PESOS UN
+MIL ($1.000,00).
+a.1.3. En la oficina fuera del horario reglamentario, PESOS
+TRESCIENTOS ($300,00).
+a.1.4. Fuera de la oficina y fuera del horario reglamentario, PESOS UN
+MIL SETECIENTOS ($1.700,00).
+
+a.2. Días inhábiles:
+a.2.1. En la oficina, en el horario de 8.00 a 12.00 y de 17.00 a 20.00 hs.,
+PESOS UN MIL ($1.000,00).
+a.2.2. Fuera de la oficina, en el horario de 8.00 a 12. 00 y de 17.00 a
+20.00 hs., UN MIL SETECIENTOS ($1.700,00).
+
+Excluyendo de estas disposiciones los matrimonios que se celebren “In artículo mortis”.
+b. Por cada testigo de matrimonio que exceda el número legal , PESOS CIEN
+($100,00).
+
+c. Por cada inscripción de sentencia de divorcio y nulidad de matrimonio, PESOS
+CIEN ($100,00).
+
+d. Por cada inscripción de actos celebrados fuera de la Provincia, PESOS CIEN
+($100,00).
+
+e. Por cada inscripción de declaración, filiación legítima o natural de hijos , SIN
+CARGO.
+
+f. Por cada adopción de hijos, SIN CARGO.
+
+g. Por cada inscripción de rectificación de actas, PESOS CIEN ($100,00).
+
+
+
+h. Por inscripción de sentencia judicial, SIN CARGO.
+
+i. Por cada copia de acta de nacimiento, adopción, defunción o matrimonio, PESOS
+CIEN ($100,00).
+
+j. Por registración de matrimonio en libreta de familia, PESOS CIEN ($100,00).
+
+k. Por cualquier inscripción en la Dirección General del Registro Civil de las Personas
+no previstas de un modo especial, PESOS CIEN ($100,00).
+
+l. Por autenticación de documentación emanada de la Dirección General del
+Registro Civil de las Personas, PESOS VEINTE ($20,00). Serán SIN CARGO, los
+trámites de jubilaciones, pensiones, seguros de vida y subsidios.
+
+m. Por la búsqueda de cualquier partida en los Registros de Capital e Interior, PESOS
+CIEN ($100,00).
+
+n. Por la solicitud de partidas en otras P rovincias, PESOS CIENTO SETENTA
+($170,00).
+
+o. Por la expedición del acta de las uniones c onvivenciales, PESOS CIEN
+($100,00).-
+
+[ley-10702-impositiva-2024#art-127]
+ARTÍCULO 127º.- Las disposiciones de la presente Ley tendrán vigencia a partir del 01 de
+enero de 2024, salvo para aquellos casos en que se establezca una vigencia especial.-
+
+<<<FIN DOCUMENTO id=ley-10702-impositiva-2024>>>

@@ -141,7 +141,8 @@ class Manifest:
     def upsert(self, record: DocumentRecord) -> str:
         """Registra un documento y devuelve qué pasó.
 
-        Resultados: ``new``, ``updated``, ``unchanged``, ``failed_kept_previous`` o, para
+        Resultados: ``new``, ``updated`` (cambió el documento), ``reparsed`` (mismo original,
+        cambió la extracción), ``unchanged``, ``failed_kept_previous`` o, para
         documentos sin contenido, su propio estado (``error``, ``blocked_by_robots``...).
 
         Si el contenido extraído no cambió, se conserva la versión y solo se actualiza
@@ -162,7 +163,11 @@ class Manifest:
             previous.last_error = None
             return "unchanged"
 
-        change = "updated" if previous and previous.status == STATUS_OK else "new"
+        if previous and previous.status == STATUS_OK:
+            # Mismo original con texto distinto = cambió nuestra extracción, no el organismo.
+            change = "reparsed" if previous.raw_hash and previous.raw_hash == record.raw_hash else "updated"
+        else:
+            change = "new"
         record.version = (previous.version if previous else 0) + 1
         self.documents[record.document_id] = record
         self.history.append({
