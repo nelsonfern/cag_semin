@@ -86,6 +86,30 @@ def test_save_and_reload_roundtrip(tmp_path):
     assert reloaded.corpus_version == m.corpus_version
 
 
+def test_sync_spec_updates_curated_fields_without_new_version(tmp_path):
+    from app.ingestion.source_registry import SourceSpec
+    m = Manifest(tmp_path / "manifest.json")
+    m.upsert(make_record(text="x"))
+    version = m.corpus_version
+    spec = SourceSpec(document_id="doc-a", title="t", organism="Nuevo organismo", jurisdiction="nacional",
+                      source_url="https://a", document_type="html", parser="pdf", notes="nota nueva")
+    m.sync_spec(spec)
+    rec = m.get("doc-a")
+    assert (rec.organism, rec.jurisdiction, rec.notes, rec.version) == ("Nuevo organismo", "nacional", "nota nueva", 1)
+    assert m.corpus_version == version
+
+
+def test_remove_keeps_history_and_changes_corpus_version(tmp_path):
+    m = Manifest(tmp_path / "manifest.json")
+    m.upsert(make_record("a", "uno"))
+    m.upsert(make_record("b", "dos"))
+    version = m.corpus_version
+    m.remove("b", "ya no se usa")
+    assert m.get("b") is None
+    assert m.history[-1]["change"] == "removed"
+    assert m.corpus_version != version
+
+
 def test_load_sources_rejects_duplicated_ids(tmp_path):
     entry = dict(document_id="x", title="t", organism="o", jurisdiction="provincial",
                  source_url="https://a", document_type="html", parser="pdf")

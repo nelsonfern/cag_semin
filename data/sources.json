@@ -10,7 +10,7 @@
       "document_type": "html",
       "parser": "registro_civil",
       "acquisition": "auto",
-      "notes": "Cita costos de la Ley Impositiva 2024 (Ley 10.929, art. 79)."
+      "notes": "Cita costos de la 'Ley Impositiva 2024 (Ley 10.929, art. 79)'. La Ley Impositiva 2024 es la Ley 10.702 y sus tasas del Registro Civil (art. 39) no coinciden con estos montos: ver ley-10702-impositiva-2024."
     },
     {
       "document_id": "rc-nacimientos",
@@ -134,15 +134,15 @@
       "notes": "robots.txt de argentina.gob.ar indica 'Disallow: /tramitar'. No se descarga automáticamente; puede importarse manualmente."
     },
     {
-      "document_id": "leg-ley-10929",
-      "title": "Ley 10.929 - Ley Impositiva 2024",
-      "organism": "Legislatura de la Provincia de La Rioja",
+      "document_id": "ley-10702-impositiva-2024",
+      "title": "Ley N° 10.702 - Ley Impositiva Anual, Período Fiscal 2024",
+      "organism": "Cámara de Diputados de La Rioja (publicada por la Dirección General de Ingresos Provinciales)",
       "jurisdiction": "provincial",
-      "source_url": "https://legislaturalarioja.gob.ar/consulta-de-leyes/leyes/ley-10929/",
+      "source_url": "https://www.dgiplarioja.gob.ar/archivos/Legislacion/Leyes%20Impositivas/LEY%20IMPOSITIVA%202024.pdf",
       "document_type": "pdf",
       "parser": "pdf",
-      "acquisition": "manual",
-      "notes": "Citada por el Registro Civil para los costos de partidas. La URL de detalle devolvió 404 el 2026-10-16 y la búsqueda del sitio no la encontró; pendiente de importación manual si se consigue el PDF oficial."
+      "acquisition": "auto",
+      "notes": "Aportada por el usuario; la copia local coincidió byte a byte con la URL oficial de la DGIP. Según su texto: sancionada el 27/12/2023 y vigente desde el 01/01/2024 (art. 127). Las tasas del Registro Civil están en el art. 39, que NO coincide con los montos de la ficha de partidas del Registro Civil (ver PROGRESS.md)."
     }
   ]
 }

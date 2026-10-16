@@ -65,8 +65,7 @@ def register_content(
     record.content_hash = sha256_text(parsed.text)
     record.raw_hash = sha256_bytes(content)
     record.char_count = len(parsed.text)
-    if extra_note:
-        record.notes = f"{record.notes} | {extra_note}" if record.notes else extra_note
+    record.ingest_note = extra_note
 
     change = manifest.upsert(record)
     current = manifest.get(spec.document_id)
@@ -114,9 +113,16 @@ def run(only: list[str] | None = None, sources_file: Path = SOURCES_FILE, manife
         specs = [s for s in specs if s.document_id in only]
 
     manifest = Manifest(manifest_file)
+    if not only:
+        registered = {s.document_id for s in specs}
+        for doc_id in sorted(set(manifest.documents) - registered):
+            manifest.remove(doc_id, f"Ya no figura en {sources_file.name}")
+            print(f"[{'removed':>20}] {doc_id}")
+
     downloader = PoliteDownloader()
     for spec in specs:
         change, record = ingest_source(manifest, spec, downloader)
+        manifest.sync_spec(spec)
         detail = f"v{record.version} {record.char_count} caracteres" if record.status == STATUS_OK else "; ".join(record.extraction_errors)
         print(f"[{change:>20}] {spec.document_id}: {detail}")
 
@@ -140,6 +146,7 @@ def import_manual(document_id: str, file: Path, retrieved_at: str | None = None)
     change, record = register_content(
         manifest, specs[document_id], file.read_bytes(), None, retrieved_at or utc_now_iso(), note
     )
+    manifest.sync_spec(specs[document_id])
     manifest.mark_stale_caches()
     manifest.save()
     print(f"[{change}] {document_id}: estado={record.status} versión={record.version}")

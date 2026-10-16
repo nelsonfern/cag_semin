@@ -125,14 +125,16 @@ reconocimiento e identidad de género.
 | sj-guia-tramites | Secretaría de Justicia LR | provincial | — (no publicada) | 8847 |
 | nac-requisitos-dni-pasaporte | RENAPER (Nación) | nacional | 2023-07-18 | 32517 |
 | nac-portal-tramitar | Gob. Nacional | nacional | `manual_pending` (robots) | — |
-| leg-ley-10929 | Legislatura LR | provincial | `manual_pending` (404) | — |
+| ley-10702-impositiva-2024 | Cámara de Diputados LR (vía DGIP) | provincial | — (sancionada 27/12/2023, vigente desde 01/01/2024 según su art. 127) | 138932 |
+
+*(Tabla actualizada en la revisión 1.1. Antes figuraba `leg-ley-10929` como pendiente; se retiró.)*
 
 Una segunda corrida inmediata dio `unchanged` en los 11 documentos y la misma `corpus_version`: la detección de cambios no genera versiones falsas.
 
 **Observaciones para fases siguientes**
 - Ya aparece una diferencia entre fuentes: para el pasaporte de menores, la ficha del Registro Civil pide la «presencia de ambos progenitores o tutor legal», mientras que la guía de Justicia menciona «el DNI de los padres o tutores legales que lo acompañen». Es un caso útil para probar que el sistema señale contradicciones (§5).
 - El documento nacional (≈32,5 mil caracteres) es más grande que todo el corpus provincial junto. En la Fase 2 hay que decidir si entra completo o solo las secciones relevantes, informando lo que se excluye.
-- Los costos de partidas citan la Ley 10.929, que no se pudo obtener; su vigencia no está verificada.
+- Costos de partidas: ver la revisión 1.1. La ficha del Registro Civil y la Ley 10.702 no coinciden.
 
 ### 4. Comandos ejecutados
 ```bash
@@ -143,7 +145,7 @@ py -3.12 -m venv .venv
 .venv/Scripts/python -m pytest
 ```
 
-### 5. Pruebas — 31 aprobadas, 0 fallidas
+### 5. Pruebas — 33 aprobadas, 0 fallidas (después de la revisión 1.1)
 - `tests/test_source_registry.py`: versiones new/unchanged/updated, el fallo conserva la versión buena, `corpus_version` estable, fechas vacías, marcado de cachés desactualizadas, guardar y recargar, ids duplicados, validez de `sources.json`.
 - `tests/test_parser.py`: los 4 parsers con fragmentos sintéticos, fechas inválidas reportadas (no inventadas), PDF inválido o sin texto, normalización.
 - `tests/test_downloader.py`: URL bloqueada por robots no se descarga, caché de `robots.txt`, se respeta `Crawl-delay`.
@@ -152,10 +154,40 @@ py -3.12 -m venv .venv
 ### 6. Criterio de aprobación de la Fase 1
 > ≥ 5 documentos oficiales reales con URL, organismo, fecha de obtención y contenido extraído verificable.
 
-**Se cumple:** hay 11 documentos de 3 organismos oficiales (2 provinciales y 1 nacional), con originales y textos versionados y hashes verificables. Queda pendiente la aprobación del usuario.
+**Se cumple:** hay 12 documentos oficiales: 11 páginas de 3 organismos (2 provinciales y 1 nacional) y la Ley Impositiva 2024 publicada por la DGIP. Todos tienen originales y textos versionados con hashes verificables. Queda pendiente la aprobación del usuario.
+
+### Revisión 1.1 — Ley Impositiva 2024 (2026-10-16)
+
+**Origen:** el usuario indicó que la Ley 10.929 no trata sobre tasas y que la Ley Impositiva 2024 es la **Ley 10.702**. Aportó el PDF (`data/raw/ley-impositiva/LEY IMPOSITIVA 2024.pdf`) y su fuente oficial, que es el sitio de la Dirección General de Ingresos Provinciales: https://www.dgiplarioja.gob.ar/archivos/Legislacion/Leyes%20Impositivas/LEY%20IMPOSITIVA%202024.pdf
+
+**Verificaciones realizadas**
+- El `robots.txt` de dgiplarioja.gob.ar permite la descarga y la URL responde 200 `application/pdf`.
+- La copia aportada y la descarga oficial son **idénticas**: mismo SHA-256 (`7c0cc93c5e75…`), 694.951 bytes.
+- Contenido: 60 páginas con texto extraíble (sin errores), unos 139 mil caracteres. El encabezado y el cierre corresponden a la «Ley Nº 10.702»: «Ley Impositiva Anual para el Período Fiscal 2024» (art. 1), sancionada el 27/12/2023 y vigente desde el 01/01/2024 (art. 127).
+- Se registró como fuente **automática** (`ley-10702-impositiva-2024`) y reemplazó a `leg-ley-10929`, que salió del manifiesto con una entrada `removed` en el historial.
+
+**Hallazgo: los costos publicados por el Registro Civil no coinciden con esta ley**
+
+| Concepto | Ficha «Solicitud de Partidas» (RC, act. 20/10/2025) | Ley 10.702 |
+|---|---|---|
+| Norma citada | «Ley Impositiva 2024 (Ley 10.929, art. 79)» | La Ley Impositiva 2024 es la 10.702. Su art. 79 trata la *rúbrica de libros* |
+| Copia de acta | Certificada $1.100 · legalizada $1.500 | Art. 39 inc. i: «copia de acta de nacimiento, adopción, defunción o matrimonio» **$100** |
+| Otros | Copia para trámite de identificación y primera copia de matrimonio: sin cargo | Art. 39 incluye además: búsqueda de partida $100, partidas de otras provincias $170, acta de unión convivencial $100, rectificación $100 |
+
+No se puede determinar desde el corpus de dónde salen los $1.100 y $1.500. Puede ser una norma posterior, por ejemplo una Ley Impositiva 2025 o una actualización, que no tenemos. **TramitaIA deberá mostrar ambas fuentes y advertir la inconsistencia** sin elegir un monto (§5). Para resolverlo convendría conseguir la Ley Impositiva vigente.
+
+**Cambios de código**
+- `parse_pdf` ya no usa el `/Title` del PDF como título: en esta ley era «LA CÁMARA DE DIPUTADOS…». Se usa el título curado de `sources.json`.
+- Nuevo `Manifest.sync_spec`: las notas, el organismo y la jurisdicción curados se actualizan en el manifiesto sin crear versión nueva.
+- Nuevo `Manifest.remove`: una fuente quitada de `sources.json` sale del manifiesto y queda asentada en el historial.
+- Las notas de obtención (redirección, importación manual) pasan al campo `ingest_note`.
+- 2 tests nuevos (33 en total).
+
+**Corpus después de la revisión:** `corpus_version = 565fff0e449e2d6c`, 12 documentos `ok`.
 
 ### Limitaciones y pendientes
 - No hay actualización periódica automática: el corpus se actualiza solo cuando se corre `ingest run`.
-- `nac-portal-tramitar` y `leg-ley-10929` requieren importación manual.
+- `nac-portal-tramitar` requiere importación manual. Su aporte es bajo porque es un índice de enlaces.
+- La Ley 10.702 ocupa unos 139 mil caracteres, casi todos sobre impuestos ajenos a los trámites. En la Fase 2 habrá que incorporar solo los artículos pertinentes (art. 39, Registro Civil), sin perder la trazabilidad y registrando qué se excluye.
 - Los PDF de IGJ y del Servicio Penitenciario que enlaza la Secretaría de Justicia no se descargaron porque están fuera de los trámites elegidos. El parser `pdf` ya está disponible para ellos.
 - **Para la Fase 3:** un CAG real necesita acceso al estado KV del modelo (Transformers en una PC propia o remota). Las APIs comerciales ofrecen *prompt caching* gestionado por el proveedor, que es un concepto distinto (§8). Esto condiciona la elección entre «API» y «PC potente».

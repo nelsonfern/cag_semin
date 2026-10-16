@@ -1,29 +1,30 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T18:20:15+00:00",
-  "corpus_version": "db76fabe6b5ad4b3",
+  "generated_at": "2026-10-16T18:30:25+00:00",
+  "corpus_version": "565fff0e449e2d6c",
   "documents": {
-    "leg-ley-10929": {
-      "document_id": "leg-ley-10929",
-      "title": "Ley 10.929 - Ley Impositiva 2024",
-      "organism": "Legislatura de la Provincia de La Rioja",
+    "ley-10702-impositiva-2024": {
+      "document_id": "ley-10702-impositiva-2024",
+      "title": "Ley N° 10.702 - Ley Impositiva Anual, Período Fiscal 2024",
+      "organism": "Cámara de Diputados de La Rioja (publicada por la Dirección General de Ingresos Provinciales)",
       "jurisdiction": "provincial",
-      "source_url": "https://legislaturalarioja.gob.ar/consulta-de-leyes/leyes/ley-10929/",
-      "local_path": null,
-      "processed_path": null,
+      "source_url": "https://www.dgiplarioja.gob.ar/archivos/Legislacion/Leyes%20Impositivas/LEY%20IMPOSITIVA%202024.pdf",
+      "local_path": "data/raw/ley-10702-impositiva-2024/v1.pdf",
+      "processed_path": "data/processed/ley-10702-impositiva-2024/v1.txt",
       "document_type": "pdf",
       "publication_date": null,
       "last_updated_date": null,
-      "retrieved_at": null,
-      "content_hash": null,
-      "raw_hash": null,
-      "status": "manual_pending",
-      "version": 0,
-      "notes": "Citada por el Registro Civil para los costos de partidas. La URL de detalle devolvió 404 el 2026-10-16 y la búsqueda del sitio no la encontró; pendiente de importación manual si se consigue el PDF oficial.",
-      "char_count": 0,
+      "retrieved_at": "2026-10-16T18:30:10+00:00",
+      "content_hash": "9c003cb873f4c05bc85b9c4523dc35005b59c5ecbd2a16efdf6b381c98413c70",
+      "raw_hash": "7c0cc93c5e758da93afdf70e7f72d3837ed65d05f79e23856207ea559f474f59",
+      "status": "ok",
+      "version": 1,
+      "notes": "Aportada por el usuario; la copia local coincidió byte a byte con la URL oficial de la DGIP. Según su texto: sancionada el 27/12/2023 y vigente desde el 01/01/2024 (art. 127). Las tasas del Registro Civil están en el art. 39, que NO coincide con los montos de la ficha de partidas del Registro Civil (ver PROGRESS.md).",
+      "char_count": 138932,
       "extraction_errors": [],
-      "acquisition": "manual",
-      "last_error": null
+      "acquisition": "auto",
+      "last_error": null,
+      "ingest_note": ""
     },
     "nac-portal-tramitar": {
       "document_id": "nac-portal-tramitar",
@@ -45,7 +46,8 @@
       "char_count": 0,
       "extraction_errors": [],
       "acquisition": "manual",
-      "last_error": null
+      "last_error": null,
+      "ingest_note": ""
     },
     "nac-requisitos-dni-pasaporte": {
       "document_id": "nac-requisitos-dni-pasaporte",
@@ -58,7 +60,7 @@
       "document_type": "html",
       "publication_date": "2021-09-13",
       "last_updated_date": "2023-07-18",
-      "retrieved_at": "2026-10-16T18:20:14+00:00",
+      "retrieved_at": "2026-10-16T18:30:09+00:00",
       "content_hash": "a172a0459f6eac655aa7d1b5bad02291fb4b63b8a4b41af12765e05d6e562715",
       "raw_hash": "2f76381557f900908c1c608917424025d371de0d05a218adb443fba668ddbb46",
       "status": "ok",
@@ -67,7 +69,8 @@
       "char_count": 32517,
       "extraction_errors": [],
       "acquisition": "auto",
-      "last_error": null
+      "last_error": null,
+      "ingest_note": ""
     },
     "rc-defunciones": {
       "document_id": "rc-defunciones",
@@ -80,7 +83,7 @@
       "document_type": "html",
       "publication_date": null,
       "last_updated_date": "2025-10-20",
-      "retrieved_at": "2026-10-16T18:19:59+00:00",
+      "retrieved_at": "2026-10-16T18:29:55+00:00",
       "content_hash": "2f13ff67127ab5f0b6b6b0d23e5003f17c8f5dfa104ea537c20b8be2e724eef5",
       "raw_hash": "6751e933b0b6d38582ed963a4ff23ccae7c43afa83a157b0ad530095a0e2e02b",
       "status": "ok",
@@ -89,7 +92,8 @@
       "char_count": 1708,
       "extraction_errors": [],
       "acquisition": "auto",
-      "last_error": null
+      "last_error": null,
+      "ingest_note": ""
     },
     "rc-dni-recien-nacido": {
       "document_id": "rc-dni-recien-nacido",
@@ -102,7 +106,7 @@
       "document_type": "html",
       "publication_date": null,
       "last_updated_date": "2025-10-20",
-      "retrieved_at": "2026-10-16T18:20:07+00:00",
+      "retrieved_at": "2026-10-16T18:30:03+00:00",
       "content_hash": "fe969d4a2b9bb1a56fbf0325836fcf0d61114dada348051f1fc8aa158af987df",
       "raw_hash": "e1a986d9bae8878b5b8b1b2f1d13b3689c784e03da4d0551289d92e04468a3ff",
       "status": "ok",
@@ -111,7 +115,8 @@
       "char_count": 1307,
       "extraction_errors": [],
       "acquisition": "auto",
-      "last_error": null
+      "last_error": null,
+      "ingest_note": ""
     },
     "rc-dni-renovacion": {
       "document_id": "rc-dni-renovacion",
@@ -124,7 +129,7 @@
       "document_type": "html",
       "publication_date": null,
       "last_updated_date": "2025-10-20",
-      "retrieved_at": "2026-10-16T18:20:05+00:00",
+      "retrieved_at": "2026-10-16T18:30:01+00:00",
       "content_hash": "7cc61a9322977c221372c43fea7228c5079e146939e0222cf8386ffe54954814",
       "raw_hash": "921d69e0498e84dad8c94d19c2c8c162bdb78e3bb3a5b8da33578447cca702cf",
       "status": "ok",
@@ -133,7 +138,8 @@
       "char_count": 1472,
       "extraction_errors": [],
       "acquisition": "auto",
-      "last_error": null
+      "last_error": null,
+      "ingest_note": ""
     },
     "rc-matrimonios": {
       "document_id": "rc-matrimonios",
@@ -146,7 +152,7 @@
       "document_type": "html",
       "publication_date": null,
       "last_updated_date": "2025-10-20",
-      "retrieved_at": "2026-10-16T18:19:58+00:00",
+      "retrieved_at": "2026-10-16T18:29:53+00:00",
       "content_hash": "717c220cf168a1cabc7a1b1e23b7cd895f503dee777fe0f921a58e1e5dcab7ef",
       "raw_hash": "89d5d2084e82f49e923c6d1775865d5bf0fb17d0b25437fdf680fabd2cf41448",
       "status": "ok",
@@ -155,7 +161,8 @@
       "char_count": 1929,
       "extraction_errors": [],
       "acquisition": "auto",
-      "last_error": null
+      "last_error": null,
+      "ingest_note": ""
     },
     "rc-nacimientos": {
       "document_id": "rc-nacimientos",
@@ -168,7 +175,7 @@
       "document_type": "html",
       "publication_date": null,
       "last_updated_date": "2025-10-20",
-      "retrieved_at": "2026-10-16T18:19:55+00:00",
+      "retrieved_at": "2026-10-16T18:29:51+00:00",
       "content_hash": "d19ff29ced8e3b13cc6f808343de7b7b1627b8c35896fa657aec03c429ed09fc",
       "raw_hash": "3e8f7f35cbce3107e45731a66568fce8147d9e2c7241d70bdf886c825c1272e5",
       "status": "ok",
@@ -177,7 +184,8 @@
       "char_count": 1936,
       "extraction_errors": [],
       "acquisition": "auto",
-      "last_error": null
+      "last_error": null,
+      "ingest_note": ""
     },
     "rc-pasaporte": {
       "document_id": "rc-pasaporte",
@@ -190,7 +198,7 @@
       "document_type": "html",
       "publication_date": null,
       "last_updated_date": "2025-10-20",
-      "retrieved_at": "2026-10-16T18:20:09+00:00",
+      "retrieved_at": "2026-10-16T18:30:05+00:00",
       "content_hash": "96da61e04b3838c6b9c8021b671f88eb666646de0b1434dab8fa703bb1194719",
       "raw_hash": "3ff2f5c743caa089a1d5de9b451a83a8ad588930d80dc86744384d5440013339",
       "status": "ok",
@@ -199,7 +207,8 @@
       "char_count": 1647,
       "extraction_errors": [],
       "acquisition": "auto",
-      "last_error": null
+      "last_error": null,
+      "ingest_note": ""
     },
     "rc-rectificacion-partidas": {
       "document_id": "rc-rectificacion-partidas",
@@ -212,7 +221,7 @@
       "document_type": "html",
       "publication_date": null,
       "last_updated_date": "2025-10-20",
-      "retrieved_at": "2026-10-16T18:20:03+00:00",
+      "retrieved_at": "2026-10-16T18:29:59+00:00",
       "content_hash": "b7df37bbfbb36cb8712b44aaa6fa417e87895762868dd9db65beec859ec8db9d",
       "raw_hash": "7a2710b75ca172c5d49ea0b91d1b2eb059ba7307d40acc48369557445028373f",
       "status": "ok",
@@ -221,7 +230,8 @@
       "char_count": 1648,
       "extraction_errors": [],
       "acquisition": "auto",
-      "last_error": null
+      "last_error": null,
+      "ingest_note": ""
     },
     "rc-solicitud-partidas": {
       "document_id": "rc-solicitud-partidas",
@@ -234,16 +244,17 @@
       "document_type": "html",
       "publication_date": null,
       "last_updated_date": "2025-10-20",
-      "retrieved_at": "2026-10-16T18:19:54+00:00",
+      "retrieved_at": "2026-10-16T18:29:50+00:00",
       "content_hash": "3d63a9620de5d018ddc777ada6b155feb6b46514dc0d6563221b2d234ec269e9",
       "raw_hash": "3d2af9e1c4ed084185b5080acc16b5cfd4561c4ab392256bb3ccbfc7955706d5",
       "status": "ok",
       "version": 1,
-      "notes": "Cita costos de la Ley Impositiva 2024 (Ley 10.929, art. 79).",
+      "notes": "Cita costos de la 'Ley Impositiva 2024 (Ley 10.929, art. 79)'. La Ley Impositiva 2024 es la Ley 10.702 y sus tasas del Registro Civil (art. 39) no coinciden con estos montos: ver ley-10702-impositiva-2024.",
       "char_count": 1648,
       "extraction_errors": [],
       "acquisition": "auto",
-      "last_error": null
+      "last_error": null,
+      "ingest_note": ""
     },
     "rc-union-convivencial": {
       "document_id": "rc-union-convivencial",
@@ -256,7 +267,7 @@
       "document_type": "html",
       "publication_date": null,
       "last_updated_date": "2025-10-20",
-      "retrieved_at": "2026-10-16T18:20:02+00:00",
+      "retrieved_at": "2026-10-16T18:29:57+00:00",
       "content_hash": "604153b583d79d14858c8366fab5deab6a03cdfc248c2a8d21a45a7e76025173",
       "raw_hash": "3ba63be2d37bf7cd4e9d87462a1cddaaff5890014ba7b17e6d368b2e50b18e0c",
       "status": "ok",
@@ -265,7 +276,8 @@
       "char_count": 2161,
       "extraction_errors": [],
       "acquisition": "auto",
-      "last_error": null
+      "last_error": null,
+      "ingest_note": ""
     },
     "sj-guia-tramites": {
       "document_id": "sj-guia-tramites",
@@ -278,7 +290,7 @@
       "document_type": "html_js_embedded",
       "publication_date": null,
       "last_updated_date": null,
-      "retrieved_at": "2026-10-16T18:20:12+00:00",
+      "retrieved_at": "2026-10-16T18:30:08+00:00",
       "content_hash": "3510cb7f82fb273f64c00c1a91de6bcbf348af98dca366d3d539eb3390ea0158",
       "raw_hash": "0ade64ede5d1f262ac1a58842f4db33b455ab472b18d261566a0eb761e407e14",
       "status": "ok",
@@ -287,7 +299,8 @@
       "char_count": 8847,
       "extraction_errors": [],
       "acquisition": "auto",
-      "last_error": null
+      "last_error": null,
+      "ingest_note": ""
     }
   },
   "history": [
@@ -377,6 +390,23 @@
       "content_hash": "a172a0459f6eac655aa7d1b5bad02291fb4b63b8a4b41af12765e05d6e562715",
       "retrieved_at": "2026-10-16T18:19:52+00:00",
       "last_updated_date": "2023-07-18",
+      "change": "new"
+    },
+    {
+      "document_id": "leg-ley-10929",
+      "version": 0,
+      "content_hash": null,
+      "retrieved_at": "2026-10-16T18:29:50+00:00",
+      "last_updated_date": null,
+      "change": "removed",
+      "reason": "Ya no figura en sources.json"
+    },
+    {
+      "document_id": "ley-10702-impositiva-2024",
+      "version": 1,
+      "content_hash": "9c003cb873f4c05bc85b9c4523dc35005b59c5ecbd2a16efdf6b381c98413c70",
+      "retrieved_at": "2026-10-16T18:30:10+00:00",
+      "last_updated_date": null,
       "change": "new"
     }
   ],

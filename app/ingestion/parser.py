@@ -273,8 +273,9 @@ def parse_pdf(content: bytes, encoding: str | None, source_url: str) -> ParsedDo
     text = normalize_text("\n\n".join(pages))
     if not text:
         raise ExtractionError("El PDF no contiene texto extraíble")
-    meta_title = reader.metadata.title if reader.metadata else None
-    return ParsedDocument(title=meta_title or None, text=text, errors=errors)
+    # El /Title de los PDF suele ser la primera línea que puso Word (p. ej. "LA CÁMARA DE
+    # DIPUTADOS ... SANCIONA CON FUERZA DE"), no el nombre de la norma: se usa el de sources.json.
+    return ParsedDocument(title=None, text=text, errors=errors)
 
 
 # ---------------------------------------------------------------------------

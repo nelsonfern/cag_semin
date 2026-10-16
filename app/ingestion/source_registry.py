@@ -78,6 +78,7 @@ class DocumentRecord:
     extraction_errors: list[str] = field(default_factory=list)
     acquisition: str = "auto"
     last_error: str | None = None   # último intento fallido, sin pisar la versión buena
+    ingest_note: str = ""           # cómo se obtuvo (redirección, importación manual...)
 
     @classmethod
     def from_dict(cls, data: dict) -> "DocumentRecord":
@@ -173,6 +174,32 @@ class Manifest:
             "change": change,
         })
         return change
+
+    def sync_spec(self, spec: "SourceSpec") -> None:
+        """Copia al manifiesto los datos curados de sources.json (organismo, notas...).
+
+        Son datos nuestros, no del documento: cambiarlos no crea una versión nueva.
+        """
+        record = self.documents.get(spec.document_id)
+        if record is None:
+            return
+        record.organism = spec.organism
+        record.jurisdiction = spec.jurisdiction
+        record.notes = spec.notes
+        record.acquisition = spec.acquisition
+
+    def remove(self, document_id: str, reason: str) -> None:
+        """Quita un documento que ya no está en el registro, dejando constancia en el historial."""
+        record = self.documents.pop(document_id)
+        self.history.append({
+            "document_id": document_id,
+            "version": record.version,
+            "content_hash": record.content_hash,
+            "retrieved_at": utc_now_iso(),
+            "last_updated_date": record.last_updated_date,
+            "change": "removed",
+            "reason": reason,
+        })
 
     def register_cache(self, cache_id: str, details: dict | None = None) -> dict:
         """Asocia una caché KV con la versión actual del corpus (se usa desde la Fase 3)."""
