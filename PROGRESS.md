@@ -398,15 +398,26 @@ El repo `hf-internal-testing/tiny-random-Qwen2ForCausalLM` ya no existe (401/404
 
 **Decisión del usuario (opción 1):** correr la demo en la PC potente. La Fase 3 **queda abierta**: su criterio exige la demostración con el prefijo documental real, y los tests con el modelo minúsculo prueban el mecanismo pero no lo reemplazan.
 
-**Cómo correrla en la PC potente**
+**PC donde se correrá:** Ryzen 5 5500 de escritorio (6 núcleos / 12 hilos, AVX2, sin bf16 nativo), 16 GB de RAM y Radeon RX 6400 de 4 GB.
+- **La GPU no sirve para este stack.** Es AMD, así que no tiene CUDA. La RX 6400 (RDNA2, gfx1034) no figura entre las GPU soportadas oficialmente por ROCm, y PyTorch con ROCm en Windows apunta a GPUs más nuevas. Además, 4 GB apenas alcanzan para el 0.5B. Hay que verificarlo antes de descartarla del todo, pero el plan es usar la **CPU**.
+- Con 16 GB de RAM la CPU alcanza:
+
+| Modelo | Pesos en float32 | Caché KV en float32 | Entra en 16 GB |
+|---|---|---|---|
+| 0.5B | ~2 GB | ~0,36 GB | Sí |
+| 1.5B | ~6,2 GB | ~0,85 GB | Sí |
+| 3B | ~12,3 GB | ~1,1 GB | Justo (bf16 entra en ~6,2 GB, pero es lento sin bf16 nativo) |
+
+- En una CPU sin bf16 nativo, **float32 suele ser más rápido que bfloat16**. Hay que confirmarlo midiendo.
+
+**Cómo correrla**
 ```bash
 git clone https://github.com/nelsonfern/cag_semin.git && cd cag_semin
-python -m venv .venv            # Python 3.12
-.venv/Scripts/python -m pip install -r requirements.txt
-# Con GPU NVIDIA, reemplazar torch por la versión CUDA (ver https://pytorch.org/get-started/locally/)
-.venv/Scripts/python -m pytest                     # deben pasar todos los tests
-.venv/Scripts/python -X utf8 -m app.cag.demo_kv --device cuda --dtype bfloat16
+py -3.12 -m venv .venv
+.venv\Scripts\python -m pip install -r requirements.txt   # torch para CPU
+.venv\Scripts\python -m pytest                             # deben pasar todos los tests
+.venv\Scripts\python -X utf8 -m app.cag.demo_kv --device cpu --dtype float32
 ```
-El corpus (`data/processed/corpus/`) y el manifiesto vienen en el repo, así que no hace falta volver a descargar las fuentes. La demo registra CPU, GPU, VRAM y versiones en el JSON de resultados. Hay que commitear ese JSON y traerlo de vuelta para documentarlo.
+El corpus (`data/processed/corpus/`) y el manifiesto vienen en el repo, así que no hace falta volver a descargar las fuentes. Hay que commitear el JSON de `data/results/` y traerlo para documentarlo.
 
 Se agregó `--device` a la demo y el registro de GPU, VRAM total y VRAM máxima usada.
