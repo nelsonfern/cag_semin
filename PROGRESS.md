@@ -9,7 +9,7 @@ pruebas aprobadas y tareas pendientes. Cada fase cierra con un commit.
 |------|-------------|--------|
 | 0 | Inicialización del repositorio | Completada |
 | 1 | Fuentes e ingesta | **Aprobada** (2026-10-16) |
-| 2 | Corpus reproducible | Implementada — esperando aprobación |
+| 2 | Corpus reproducible | **Aprobada** (2026-10-16) |
 | 3 | Prueba mínima de KV cache | Pendiente |
 | 4 | Motor CAG | Pendiente |
 | 5 | TramitaIA (API + interfaz + citas) | Pendiente |
@@ -279,7 +279,7 @@ Sobre la consulta del usuario por **Ollama Cloud con MiniMax**: la API de Ollama
 ### Criterio de aprobación de la Fase 2
 > Extracción reproducible, metadatos conservados, duplicados controlados y cantidad de tokens registrada.
 
-**Se cumple.** El documento nacional se resolvió en la revisión 2.1. Queda pendiente la aprobación del usuario.
+**Se cumple.** El documento nacional se resolvió en la revisión 2.1. **Fase aprobada por el usuario el 2026-10-16.**
 
 ### Pendientes y limitaciones
 - Los 10.423 tokens son solo del corpus. En la Fase 3 se suman el prompt de sistema y la plantilla de chat del modelo.
