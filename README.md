@@ -81,6 +81,21 @@ Genera `data/processed/corpus/<build_id>.txt`, que es el texto exacto que se car
 y `<build_id>.json`, el reporte con documentos incluidos y excluidos, duplicados y tokens por
 sección. La misma entrada produce siempre los mismos bytes y el mismo `build_id`.
 
+## Demostración de la caché KV (Fase 3)
+
+```bash
+.venv\Scripts\python -X utf8 -m app.cag.demo_kv --dtype bfloat16
+```
+
+Construye una vez la caché KV del prefijo (instrucciones + corpus) y responde dos preguntas
+reutilizándola. Compara cada respuesta con el baseline (todo recalculado), verifica que la
+caché vuelva exactamente al estado del prefijo después de cada consulta y corre un control
+negativo sin restaurarla. Los resultados quedan en `data/results/phase3_kv_demo_*.json`.
+
+Código: [`app/cag/cache_builder.py`](app/cag/cache_builder.py) (construcción),
+[`app/cag/engine.py`](app/cag/engine.py) (consulta, restauración y baseline) y
+[`app/cag/prompt.py`](app/cag/prompt.py) (prefijo y pregunta).
+
 ## Pruebas
 
 ```bash

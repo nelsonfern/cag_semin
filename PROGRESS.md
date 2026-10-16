@@ -10,7 +10,7 @@ pruebas aprobadas y tareas pendientes. Cada fase cierra con un commit.
 | 0 | Inicialización del repositorio | Completada |
 | 1 | Fuentes e ingesta | **Aprobada** (2026-10-16) |
 | 2 | Corpus reproducible | **Aprobada** (2026-10-16) |
-| 3 | Prueba mínima de KV cache | Pendiente |
+| 3 | Prueba mínima de KV cache | Abierta — falta la demo real (se correrá en la PC potente) |
 | 4 | Motor CAG | Pendiente |
 | 5 | TramitaIA (API + interfaz + citas) | Pendiente |
 | 6 | Benchmark | Pendiente |
@@ -322,3 +322,91 @@ El margen libre es de 953 tokens. Para sumar documentos habrá que subir el pres
 El build anterior (`e30a011c26dfa791`) se conserva como histórico; `latest.json` apunta al nuevo.
 
 **Pruebas:** 48 aprobadas, 0 fallidas.
+
+---
+
+## Fase 3 — Prueba mínima de caché KV (2026-10-16)
+
+### Verificaciones previas (§3 y §4: no asumir APIs)
+
+**Transformers 5.20.1**, verificado leyendo el código instalado (`cache_utils.py`):
+- `DynamicCache` guarda en `cache.layers[i].keys` y `.values` tensores de forma `[batch, cabezas_kv, tokens, dim_cabeza]`.
+- **`crop()` cambió de semántica:** recibe la cantidad de tokens **a quitar como número negativo** (`crop(-n)`) y un valor positivo lanza `ValueError`. En versiones anteriores, ese valor era la longitud final. Un tutorial viejo que use `crop(prefix_len)` falla con esta versión. Hay un test que lo documenta.
+- `crop` recorta con un slice (`keys[..., :-n, :]`), y cada paso de generación agrega con `torch.cat`. Es decir, la caché dinámica **copia todos sus tensores en cada token generado**: un costo a medir en el benchmark.
+- `model(..., past_key_values=cache)` **modifica la caché que recibe**. Si no se restaura entre consultas, la respuesta anterior contamina la siguiente.
+
+**Ollama**, verificado en la documentación oficial (`docs/api.md` en GitHub y `docs.ollama.com/cloud`):
+- La API no tiene ningún endpoint ni parámetro para guardar, exportar o restaurar la caché KV.
+- El parámetro `context` de `/api/generate` está marcado como obsoleto y se describe como «una codificación de la conversación», sin aclarar si son tokens o estados KV.
+- Solo informa cuántos tokens del prompt salieron de caché (`prompt_eval_cached_count`), una caché que maneja el servidor.
+- Ollama Cloud usa la misma API de chat con una API key. Su página no menciona control de caché ni lista modelos MiniMax.
+- **Conclusión:** Ollama y Ollama Cloud **no** sirven como motor CAG. Pueden usarse como comparación en el benchmark.
+
+**Memoria por modelo** (configs oficiales de Qwen2.5-Instruct; caché KV en bf16 para unos 15.500 tokens):
+
+| Modelo | Capas | Cabezas KV | Dim. cabeza | Pesos bf16 | KV por token | Caché KV del corpus |
+|---|---|---|---|---|---|---|
+| 0.5B | 24 | 2 | 64 | 0,99 GB | 12 KB | 182 MB |
+| 1.5B | 28 | 2 | 128 | 3,09 GB | 28 KB | 425 MB |
+| 3B | 36 | 2 | 128 | 6,17 GB | 36 KB | 547 MB |
+| 7B | 28 | 4 | 128 | 15,23 GB | 56 KB | 850 MB |
+| 14B | 48 | 8 | 128 | 29,54 GB | 192 KB | 2,9 GB |
+
+KV por token = 2 (K y V) × capas × cabezas KV × dim. cabeza × 2 bytes. Qwen2.5 usa **GQA** (pocas cabezas K/V compartidas), lo que achica mucho la caché.
+
+**Hardware de esta PC:**
+- AMD Ryzen 5 5500U, 6 hilos para torch, AVX2 **sin bfloat16 nativo**.
+- 5,8 GB de RAM, con solo ~1,2 GB libres al empezar, y archivo de paginación de 7,5 GB.
+- Por eso la Fase 3 usa **Qwen2.5-0.5B-Instruct en CPU y bfloat16**: el objetivo es demostrar el mecanismo, no la calidad de las respuestas. El modelo de producción (7B o similar en la PC potente) se define en la Fase 5.
+
+### Implementación
+
+| Archivo | Responsabilidad |
+|---|---|
+| `app/cag/model_loader.py` | Carga el modelo y el tokenizer (`MODEL_ID`, `DEVICE`, `DTYPE`) con atención SDPA. Registra tiempo y RAM de carga por separado. |
+| `app/cag/prompt.py` | Prefijo = plantilla de chat + instrucciones provisionales + corpus. La pregunta es el sufijo que la plantilla agrega después. Ambos se tokenizan por separado y se concatenan los IDs. `check_boundary` verifica que coincide con tokenizar el texto completo. |
+| `app/cag/cache_builder.py` | `prefill` por bloques de 2.048 tokens con `cache_position` explícito (posiciones absolutas para RoPE) y `logits_to_keep=1`. `build_kv_cache` crea la caché, registra tiempo, RAM, estructura (capas, formas, tipo, bytes) y una **huella SHA-256 de todas las K/V del prefijo**. |
+| `app/cag/engine.py` | Ver detalle abajo. |
+| `app/cag/demo_kv.py` | Demo reproducible con el corpus real. Resultados en `data/results/phase3_kv_demo_*.json`. |
+
+**Funciones de `engine.py`**
+- `reset_to_prefix` (`crop(-n)`) y `verify_base_state` (largo de la caché + huella).
+- `answer_with_cache`: restaura → verifica → procesa solo la pregunta → genera token por token (greedy) → restaura.
+- `answer_without_cache`: el baseline, con una caché nueva por consulta. Usa los **mismos bloques** que la construcción de la caché, para que la comparación aísle el efecto de reutilizarla.
+
+**Decisiones técnicas**
+- **Bucle de generación escrito a mano**, en vez de `generate()`, para que quede explícito qué se calcula en cada paso: un token nuevo por paso, en la posición siguiente, atendiendo sobre toda la caché. Es útil para la exposición.
+- **Restaurar con `crop`, no copiar la caché** con `deepcopy`: no duplica 182 MB por consulta, y la huella garantiza que el prefijo quedó intacto.
+- **Prefill por bloques** para acotar la memoria pico en una PC con poca RAM. Es matemáticamente equivalente a procesarlo de una vez, y hay un test que lo comprueba.
+
+### Pruebas con un modelo minúsculo (`tests/test_cag_kv.py`)
+El repo `hf-internal-testing/tiny-random-Qwen2ForCausalLM` ya no existe (401/404). En su lugar, el modelo se crea en memoria: Qwen2 de 2 capas, 4 cabezas (2 KV), pesos aleatorios con semilla 0, float32. No hace falta red.
+1. Prefill por bloques = una sola pasada (logits iguales, atol 1e-5).
+2. **CAG = baseline** token por token en dos preguntas, y la pregunta 2 hecha **después** de la 1 coincide con la pregunta 2 hecha desde cero (aislamiento). Después de cada consulta la caché vuelve al prefijo con la misma huella.
+3. **Control negativo:** sin restaurar, la pregunta 2 arranca con la caché más larga, los logits cambian y `verify_base_state` lo detecta. Al restaurar se recupera exactamente el estado base.
+4. Si se altera un valor de la caché, la huella lo detecta.
+5. `crop(10)` con un valor positivo lanza error en esta versión.
+6. Un prefijo más largo que el contexto del modelo se rechaza.
+
+**Suite completa: 54 aprobadas, 0 fallidas.**
+
+### Demo real (en ejecución)
+- Modelo Qwen/Qwen2.5-0.5B-Instruct, revisión `7ae557604adf67be50417f59c2c2f167def9a775`, bfloat16, CPU.
+- La primera carga tardó 287,7 s, **incluyendo la descarga** de 988 MB. No es el tiempo de carga desde disco.
+- Prefijo de **15.208 tokens** (15.047 del corpus + instrucciones y plantilla). Preguntas de 22 y 27 tokens. Unión de tokenización correcta en ambas.
+- Construcción de la caché: **interrumpida a pedido del usuario** después de ~5 minutos en CPU (6 hilos al 100 %, ~1,2 GB de RAM física más paginación a disco). **No se obtuvo ninguna medición de la construcción ni de las consultas**, así que no se informa ninguna. El log parcial se descartó.
+
+**Decisión del usuario (opción 1):** correr la demo en la PC potente. La Fase 3 **queda abierta**: su criterio exige la demostración con el prefijo documental real, y los tests con el modelo minúsculo prueban el mecanismo pero no lo reemplazan.
+
+**Cómo correrla en la PC potente**
+```bash
+git clone https://github.com/nelsonfern/cag_semin.git && cd cag_semin
+python -m venv .venv            # Python 3.12
+.venv/Scripts/python -m pip install -r requirements.txt
+# Con GPU NVIDIA, reemplazar torch por la versión CUDA (ver https://pytorch.org/get-started/locally/)
+.venv/Scripts/python -m pytest                     # deben pasar todos los tests
+.venv/Scripts/python -X utf8 -m app.cag.demo_kv --device cuda --dtype bfloat16
+```
+El corpus (`data/processed/corpus/`) y el manifiesto vienen en el repo, así que no hace falta volver a descargar las fuentes. La demo registra CPU, GPU, VRAM y versiones en el JSON de resultados. Hay que commitear ese JSON y traerlo de vuelta para documentarlo.
+
+Se agregó `--device` a la demo y el registro de GPU, VRAM total y VRAM máxima usada.
