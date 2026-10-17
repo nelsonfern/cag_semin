@@ -1,0 +1,14 @@
+{
+  "_comment": "Advertencias para el ciudadano que se muestran cuando una respuesta cita estos documentos. Son diferencias entre fuentes oficiales verificadas a mano (ver PROGRESS.md, Fase 1, revisión 1.1 y observaciones). Las notas técnicas del manifiesto (robots.txt, extracción) no se muestran.",
+  "documents": {
+    "rc-solicitud-partidas": "Los costos de partidas que publica el Registro Civil no coinciden con las tasas del art. 39 de la Ley Impositiva 2024 (Ley 10.702). Confirmá el monto con el Registro Civil antes de pagar.",
+    "ley-10702-impositiva-2024": "La Ley Impositiva 2024 (Ley 10.702) rige para el período fiscal 2024 y sus tasas no coinciden con los costos que publica el Registro Civil. No se pudo confirmar qué monto está vigente hoy."
+  },
+  "pairs": [
+    {
+      "documents": ["rc-pasaporte", "sj-guia-tramites"],
+      "topic": "pasaporte de menores",
+      "message": "Para el pasaporte de menores, la ficha del Registro Civil pide la presencia de ambos progenitores o del tutor legal, mientras que la guía de la Secretaría de Justicia menciona el DNI de los padres o tutores que acompañen. Consultá al Registro Civil cuál aplica a tu caso."
+    }
+  ]
+}

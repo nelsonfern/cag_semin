@@ -22,3 +22,6 @@ Thumbs.db
 
 # Cachés KV serializadas (cientos de MB cada una)
 data/caches/
+
+# Configuración local del entorno de desarrollo (vista previa de Claude Code)
+.claude/

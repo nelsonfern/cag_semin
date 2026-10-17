@@ -1,0 +1,214 @@
+{
+  "phase": 5,
+  "experiment": "llama.cpp feasibility",
+  "started_at": "2026-10-17T20:34:31+00:00",
+  "environment": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.12.0",
+    "llama_cpp_python": "0.3.36",
+    "threads": 6,
+    "n_batch": 512,
+    "ram_available_gb_at_start": 9.8
+  },
+  "model_path": "D:\\hf_cache\\hub\\models--bartowski--Qwen2.5-3B-Instruct-GGUF\\snapshots\\f302c64a2269a69fb27b2f9473b362f5bb8e78d8\\Qwen2.5-3B-Instruct-Q4_K_M.gguf",
+  "template": "chatml",
+  "model_file_gb": 1.797,
+  "corpus_build_id": "10ba192df05e0285",
+  "model": {
+    "load_seconds": 18.97,
+    "rss_before_mb": 207,
+    "rss_after_mb": 3406,
+    "n_ctx": 17408,
+    "n_vocab": 151936,
+    "stop_tokens": [
+      151645
+    ]
+  },
+  "prompt": {
+    "prefix_tokens": 15755,
+    "question_tokens": {
+      "q01": 22,
+      "q11": 24,
+      "q13": 26,
+      "q14": 20,
+      "q02": 23,
+      "q10": 20
+    },
+    "boundary_ok": {
+      "q01": true,
+      "q11": true,
+      "q13": true,
+      "q14": true,
+      "q02": true,
+      "q10": true
+    },
+    "max_new_tokens": 256
+  },
+  "cache": {
+    "build_seconds": 368.27,
+    "kv_seq_bytes": 580982268,
+    "kv_seq_mb": 554.1,
+    "kv_bytes_per_token": 36876,
+    "state_bytes": 580982269,
+    "save_state_seconds": 0.585,
+    "write_to_disk_seconds": 6.96,
+    "fingerprint": "fe2eb70444b1c7c8f55d28e8d9f46e81",
+    "state_file": "llamacpp_fe2eb70444b1c7c8.state",
+    "rss_before_mb": 3409,
+    "rss_after_mb": 5227
+  },
+  "checks": {
+    "fingerprint_restored_after_query": true,
+    "negative_control": {
+      "cache_len_before_second_without_reset": 15785,
+      "first_logits_max_abs_diff_vs_clean": 7.174796104431152
+    },
+    "load_state_seconds": 0.704,
+    "fingerprint_after_load_state": true,
+    "load_state_reproduces_answer": true
+  },
+  "rows": [
+    {
+      "id": "q01",
+      "question": "¿Cómo solicito una partida de nacimiento en La Rioja?",
+      "answerable": true,
+      "outcome": "missed",
+      "decision": "unsupported",
+      "coverage": 0.333,
+      "cited_sections": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [
+        "rc-nacimientos#s0",
+        "rc-nacimientos#s1",
+        "rc-nacimientos#s2",
+        "rc-nacimientos#s4",
+        "rc-nacimientos#s3"
+      ],
+      "output_tokens": 220,
+      "stopped_by": "eos",
+      "prefill_seconds": 2.07,
+      "ttft_seconds": 2.087,
+      "total_seconds": 44.42,
+      "seconds_per_token": 0.1933,
+      "fingerprint_restored": true,
+      "raw_text": "**Trámite:** Inscripción de Nacimientos, Registro Civil de La Rioja (provincial) [rc-nacimientos#s0].\n\n**Requisitos:**\n- Partida de nacimiento original (si se inscribe el mismo día, emite el oficial público).\n- Acta de nacimiento actualizada (si corresponde).\n- DNI de ambos progenitores (original y vigente).\n- Si alguno de los progenitores no posee documento, deberá acreditar su identidad con 2 testigos mayores de 18 años con DNI vigente y en buen estado.\n\n**Pasos:**\n1. Sacar turno en el registro civil correspondiente [rc-nacimientos#s1].\n2. Presentarse con la documentación requerida [rc-nacimientos#s2].\n\n**Costo:** Gratuito [rc-nacimientos#s4].\n\n**Dónde:** Hipólito Yrigoyen 100, Av. Rivadavia [rc-nacimientos#s3]."
+    },
+    {
+      "id": "q11",
+      "question": "¿Dónde pido el certificado de antecedentes penales?",
+      "answerable": false,
+      "outcome": "correct_abstention",
+      "decision": "abstained",
+      "coverage": null,
+      "cited_sections": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "output_tokens": 28,
+      "stopped_by": "eos",
+      "prefill_seconds": 2.169,
+      "ttft_seconds": 2.169,
+      "total_seconds": 7.14,
+      "seconds_per_token": 0.1842,
+      "fingerprint_restored": true,
+      "raw_text": "No encontré esa información en los documentos oficiales disponibles. Te recomiendo consultar directamente al Registro Civil de La Rioja."
+    },
+    {
+      "id": "q13",
+      "question": "¿Qué requisitos publica el Registro Civil para el pasaporte de un menor?",
+      "answerable": true,
+      "outcome": "wrong_source",
+      "decision": "answered",
+      "coverage": 0.875,
+      "cited_sections": [
+        "nac-requisitos-dni-pasaporte#s7",
+        "nac-requisitos-dni-pasaporte#s22",
+        "nac-requisitos-dni-pasaporte#s12",
+        "nac-requisitos-dni-pasaporte#s23",
+        "nac-requisitos-dni-pasaporte#s20"
+      ],
+      "invalid_ids": [
+        "rc-pasaporte#s7",
+        "rc-pasaporte#s20",
+        "rc-pasaporte#s12",
+        "rc-pasaporte#s22"
+      ],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "output_tokens": 256,
+      "stopped_by": "max_new_tokens",
+      "prefill_seconds": 2.349,
+      "ttft_seconds": 2.349,
+      "total_seconds": 51.88,
+      "seconds_per_token": 0.1943,
+      "fingerprint_restored": true,
+      "raw_text": "**Trámite:** Pasaporte, Registro Civil de La Rioja (provincial) [rc-pasaporte#s1].\n\n**Requisitos:**\n- DNI anterior (recomendado, no excluyente) [rc-pasaporte#s7].\n- DNI del menor solicitante [rc-pasaporte#s20].\n- Partida de Nacimiento Certificada (es decir, con firma y sello en original del oficial público) [rc-pasaporte#s12].\n- DNI de padre/madre o DNI de representante legal [rc-pasaporte#s22].\n- Si es menor de 14 años, acompañamiento del padre, madre o representante legal; y su DNI [rc-pasaporte#s22].\n- Acreditación del representante legal, cuando corresponda: Oficio judicial o testimonio de tutela del menor. Es otorgada por el juzgado. Debe contar con sello y firma del juez o del Secretario o funcionario autorizado a extender oficios en cumplimiento de mandas judiciales [rc-pasaporte#s22]."
+    },
+    {
+      "id": "q14",
+      "question": "¿Qué información falta para saber el costo de una partida?",
+      "answerable": true,
+      "outcome": "missed",
+      "decision": "abstained",
+      "coverage": null,
+      "cited_sections": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "output_tokens": 28,
+      "stopped_by": "eos",
+      "prefill_seconds": 1.871,
+      "ttft_seconds": 1.871,
+      "total_seconds": 7.25,
+      "seconds_per_token": 0.1992,
+      "fingerprint_restored": true,
+      "raw_text": "No encontré esa información en los documentos oficiales disponibles. Te recomiendo consultar directamente al Registro Civil de La Rioja."
+    },
+    {
+      "id": "q02",
+      "question": "¿Qué requisitos piden para inscribir una defunción?",
+      "answerable": true,
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "coverage": 0.667,
+      "cited_sections": [
+        "rc-defunciones#s1",
+        "rc-defunciones#s2"
+      ],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "output_tokens": 256,
+      "stopped_by": "eos",
+      "prefill_seconds": 2.161,
+      "ttft_seconds": 2.161,
+      "total_seconds": 51.22,
+      "seconds_per_token": 0.1924,
+      "fingerprint_restored": true,
+      "raw_text": "**Trámite:** Inscripción de Defunciones, Registro Civil de La Rioja (provincial) [rc-defunciones#s0].\n\n**Requisitos:**\n- Certificado médico de defunción emitido por un profesional habilitado [rc-defunciones#s1].\n- DNI del fallecido (original) [rc-defunciones#s1].\n- DNI de la persona que solicita la inscripción (original y copia) [rc-defunciones#s1].\n- Inscripción dentro de las 48 horas hábiles luego del fallecimiento [rc-defunciones#s1].\n\n**Pasos:**\n1. Concurrir a la funeraria municipal o privada y solicitar el servicio funerario [rc-defunciones#s2].\n2. Presentarse con toda la documentación necesaria en el registro civil de la localidad de fallecimiento [rc-defunciones#s2].\n\n**Costo:** No informado: el documento no publica el monto [rc-defunciones#s4].\n\n**Dónde:** Registro Civil de la localidad de fallecimiento [rc-defunciones#s2]."
+    },
+    {
+      "id": "q10",
+      "question": "¿Cómo me inscribo en el monotributo?",
+      "answerable": false,
+      "outcome": "correct_abstention",
+      "decision": "abstained",
+      "coverage": null,
+      "cited_sections": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "output_tokens": 37,
+      "stopped_by": "eos",
+      "prefill_seconds": 1.854,
+      "ttft_seconds": 1.854,
+      "total_seconds": 8.88,
+      "seconds_per_token": 0.1953,
+      "fingerprint_restored": true,
+      "raw_text": "No encontré esa información en los documentos oficiales disponibles. Te recomiendo consultar directamente a la Dirección General de Ingresos Provinciales de La Rioja."
+    }
+  ],
+  "peak_working_set_mb": 6634,
+  "finished_at": "2026-10-17T20:44:16+00:00"
+}

@@ -1,0 +1,453 @@
+{
+  "phase": 5,
+  "evaluated_at": "2026-10-17T19:08:21+00:00",
+  "engine": {
+    "model_id": "Qwen/Qwen2.5-1.5B-Instruct",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "dtype": "float32",
+    "device": "cpu",
+    "model_load_seconds": 31.07,
+    "cache_id": "83ed348a1d8ba1b7",
+    "cache_source": "disk",
+    "cache_seconds": 14.81,
+    "cache_rejected": null,
+    "prefix_tokens": 15755,
+    "context_limit": 32768,
+    "max_new_tokens": 256,
+    "corpus_build_id": "10ba192df05e0285",
+    "corpus_version": "b7b3289233add501"
+  },
+  "torch_threads": 6,
+  "questions_file": "questions.json",
+  "summary": {
+    "correct_answer": 7,
+    "wrong_source": 1,
+    "correct_abstention": 1,
+    "hallucination_shown": 3
+  },
+  "rows": [
+    {
+      "id": "q01",
+      "question": "¿Cómo solicito una partida de nacimiento en La Rioja?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-solicitud-partidas"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-solicitud-partidas#s0",
+        "rc-solicitud-partidas#s2"
+      ],
+      "cited_documents": [
+        "rc-solicitud-partidas"
+      ],
+      "invalid_ids": [],
+      "weak_citations": [
+        "rc-solicitud-partidas#s2"
+      ],
+      "warnings": [
+        "Los costos de partidas que publica el Registro Civil no coinciden con las tasas del art. 39 de la Ley Impositiva 2024 (Ley 10.702). Confirmá el monto con el Registro Civil antes de pagar.",
+        "Algunas citas no coinciden bien con el texto de la respuesta: rc-solicitud-partidas#s2. Revisá la fuente."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 22,
+        "output": 190
+      },
+      "timings": {
+        "question_seconds": 4.147,
+        "first_token_seconds": 4.252,
+        "generation_seconds": 98.567,
+        "total_seconds": 99.321
+      },
+      "raw_text": "**Trámite:** Solicitud de Partidas, Registro Civil de La Rioja (provincial) [rc-solicitud-partidas#s0].\n**Requisitos:**\n- DNI de ambos convivientes, original y fotocopia.\n- Dos testigos mayores de edad con DNI, quienes no deben ser parientes en ningún grado.\n- Declaración jurada completa y suscripta.\n**Pasos:**\n1. Solicitar turno en el Registro Civil correspondiente.\n2. Presentarse con la documentación requerida.\n3. La Dirección General analizará la documentación y autorizará o no la unión.\n4. Si es aprobada, se notificará a los convivientes y se celebrará la unión convivencial.\n**Costo:** no informado: el documento no publica el monto [rc-solicitud-partidas#s2]."
+    },
+    {
+      "id": "q02",
+      "question": "¿Qué requisitos piden para inscribir una defunción?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-defunciones"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-defunciones#s0",
+        "rc-defunciones#s1",
+        "rc-defunciones#s2"
+      ],
+      "cited_documents": [
+        "rc-defunciones"
+      ],
+      "invalid_ids": [],
+      "weak_citations": [],
+      "warnings": [],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 23,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 2.545,
+        "first_token_seconds": 2.546,
+        "generation_seconds": 126.704,
+        "total_seconds": 127.595
+      },
+      "raw_text": "**Trámite:** Inscripción de Defunciones, Registro Civil de La Rioja (provincial) [rc-defunciones#s0].\n**Requisitos:**\n- Certificado médico de defunción emitido por un profesional habilitado [rc-defunciones#s1].\n- DNI del fallecido (original) [rc-defunciones#s1].\n- DNI de la persona que solicita la inscripción del fallecimiento (original y copia) [rc-defunciones#s1].\n- Que la inscripción se realice dentro de las 48hs hábiles luego de ocurrido el fallecimiento [rc-defunciones#s1].\n**Pasos:**\n1. Concurrir a la funeraria municipal o privada y solicitar el servicio funerario [rc-defunciones#s2].\n2. Reunir toda la documentación necesaria [rc-defunciones#s1].\n3. Concurrir al registro civil de la localidad de fallecimiento. Consultar previamente la modalidad de atención (con o sin turno). Si se contrató un servicio funerario privado, la empresa puede presentar"
+    },
+    {
+      "id": "q03",
+      "question": "¿Cuánto cuesta una partida de nacimiento?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-solicitud-partidas",
+        "ley-10702-impositiva-2024"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-solicitud-partidas#s4",
+        "rc-solicitud-partidas#s0",
+        "rc-solicitud-partidas#s1",
+        "rc-solicitud-partidas#s2",
+        "rc-solicitud-partidas#s3"
+      ],
+      "cited_documents": [
+        "rc-solicitud-partidas"
+      ],
+      "invalid_ids": [],
+      "weak_citations": [
+        "rc-solicitud-partidas#s4",
+        "rc-solicitud-partidas#s0",
+        "rc-solicitud-partidas#s1",
+        "rc-solicitud-partidas#s2",
+        "rc-solicitud-partidas#s3"
+      ],
+      "warnings": [
+        "Los costos salen de «Solicitud de Partidas» (2025-10-20; obtenido el 2026-10-16). No se pudo confirmar que sigan vigentes.",
+        "Los costos de partidas que publica el Registro Civil no coinciden con las tasas del art. 39 de la Ley Impositiva 2024 (Ley 10.702). Confirmá el monto con el Registro Civil antes de pagar.",
+        "Algunas citas no coinciden bien con el texto de la respuesta: rc-solicitud-partidas#s4, rc-solicitud-partidas#s0, rc-solicitud-partidas#s1, rc-solicitud-partidas#s2, rc-solicitud-partidas#s3. Revisá la fuente."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 20,
+        "output": 248
+      },
+      "timings": {
+        "question_seconds": 2.489,
+        "first_token_seconds": 2.49,
+        "generation_seconds": 121.073,
+        "total_seconds": 121.791
+      },
+      "raw_text": "**Trámite:** Solicitud de Partidas, Registro Civil de La Rioja (provincial) [rc-solicitud-partidas#s4].\n**Requisitos:**\n- DNI de ambos convivientes, original y fotocopia [rc-solicitud-partidas#s4].\n- Dos testigos mayores de edad con DNI, quienes no deben ser parientes en ningún grado [rc-solicitud-partidas#s4].\n- Declaración jurada completa y suscripta [rc-solicitud-partidas#s4].\n**Pasos:**\n1. Solicitar turno en el Registro Civil más cercano [rc-solicitud-partidas#s0].\n2. Presentarse con la documentación requerida [rc-solicitud-partidas#s1].\n3. La Dirección General analizará la documentación y autorizará o no la unión [rc-solicitud-partidas#s2].\n4. Si es aprobada, se notificará a los convivientes y se celebrará la unión convivencial [rc-solicitud-partidas#s3].\n**Costo:** $1.100 [rc-solicitud-partidas#s4]."
+    },
+    {
+      "id": "q04",
+      "question": "¿Qué necesito para tramitar el DNI de un recién nacido?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-dni-recien-nacido",
+        "sj-guia-tramites",
+        "nac-requisitos-dni-pasaporte"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-dni-recien-nacido#s0",
+        "rc-dni-recien-nacido#s1",
+        "rc-dni-recien-nacido#s2"
+      ],
+      "cited_documents": [
+        "rc-dni-recien-nacido"
+      ],
+      "invalid_ids": [],
+      "weak_citations": [],
+      "warnings": [],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 26,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 2.496,
+        "first_token_seconds": 2.497,
+        "generation_seconds": 126.587,
+        "total_seconds": 127.324
+      },
+      "raw_text": "**Trámite:** DNI – Recién nacido, Registro Civil de La Rioja (provincial) [rc-dni-recien-nacido#s0].\n**Requisitos:**\n- Partida de nacimiento original [rc-dni-recien-nacido#s1].\n- Documento de identidad de ambos progenitores [rc-dni-recien-nacido#s1].\n- Si los progenitores están casados, deben presentar la libreta de familia o los datos de inscripción del acta de matrimonio para poder localizar el acta y adjuntarla al trámite [rc-dni-recien-nacido#s1].\n- Si son extranjeros, con DNI Argentino para extranjeros, pasaporte o cédula de su país, que no haya vencido [rc-dni-recien-nacido#s1].\n**Pasos:**\n1. Sacar turno en el registro civil o delegación correspondiente [rc-dni-recien-nacido#s2].\n2. Presentarse con el bebé para DNI definitivo o sin el bebé para DNI provisorio [rc-dni-rec"
+    },
+    {
+      "id": "q05",
+      "question": "¿Qué requisitos necesito para tramitar el pasaporte de un menor de edad?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-pasaporte",
+        "sj-guia-tramites",
+        "nac-requisitos-dni-pasaporte"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-pasaporte#s1"
+      ],
+      "cited_documents": [
+        "rc-pasaporte"
+      ],
+      "invalid_ids": [],
+      "weak_citations": [],
+      "warnings": [],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 27,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 2.709,
+        "first_token_seconds": 2.71,
+        "generation_seconds": 130.93,
+        "total_seconds": 131.68
+      },
+      "raw_text": "**Trámite:** Pasaporte, Registro Civil de La Rioja (provincial) [rc-pasaporte#s1].\n**Requisitos:**\n- DNI del menor solicitante [rc-pasaporte#s1].\n- Partida de nacimiento certificada (es decir, con firma y sello en original del oficial público) [rc-pasaporte#s1].\n- En caso de no contar con la partida de nacimiento, podés presentar el certificado de nacimiento original, con o sin oblea, firmado por un oficial público [rc-pasaporte#s1].\n- Acreditación del representante legal, cuando corresponda:\n  - Oficio judicial o testimonio de tutela del menor. Es otorgado por el juzgado. Debe contar con sello y firma del juez o del Secretario o funcionario autorizado a extender oficios en cumplimiento de mandas judiciales [rc-pasaporte#s1].\n  - Si el menor se encuentra en un hogar: autorización de representación firmada y sellada por la autoridad competente que corresponda [rc-pasaporte#s"
+    },
+    {
+      "id": "q06",
+      "question": "¿Cuáles son los requisitos para registrar una unión convivencial?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-union-convivencial",
+        "sj-guia-tramites"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-union-convivencial#s1",
+        "sj-guia-tramites#s3",
+        "rc-union-convivencial#s2"
+      ],
+      "cited_documents": [
+        "rc-union-convivencial",
+        "sj-guia-tramites"
+      ],
+      "invalid_ids": [],
+      "weak_citations": [],
+      "warnings": [
+        "El modelo no indicó sus fuentes: se asignaron automáticamente comparando el texto con los documentos (100 % de las frases coinciden). Verificá en la fuente oficial."
+      ],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 25,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 2.693,
+        "first_token_seconds": 2.694,
+        "generation_seconds": 129.62,
+        "total_seconds": 130.344
+      },
+      "raw_text": "**Requisitos para registrar una unión convivencial:**\n\n- **Requisitos generales:**\n  - Los dos integrantes deben ser mayores de edad y capaces.\n  - No estén unidos por vínculos de parentesco en línea recta en todos los grados, ni colateral hasta el segundo grado.\n  - No estén unidos por vínculos de parentesco por afinidad en línea recta.\n  - No tengan impedimento de ligamen ni estén registrada otra unión convivencial vigente.\n  - Mantengan la convivencia durante un periodo no inferior a 2 años.\n\n- **Documentación requerida:**\n  - DNI de ambos convivientes, original y fotocopia.\n  - Dos testigos mayores de edad con DNI, quienes no deben ser parientes en ningún grado.\n  - Declaración jurada completa y suscripta.\n  - Si existe pacto de convivencia, deberá presentarse con firma certificada por escribano público o escritura según corresponda.\n  - En caso de inconsistencias, se podrán solicitar actas de nacimiento legalizadas o apostilladas según el lugar de nacimiento"
+    },
+    {
+      "id": "q07",
+      "question": "¿Cómo hago para rectificar un error en una partida?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-rectificacion-partidas"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-rectificacion-partidas#s0",
+        "rc-rectificacion-partidas#s1",
+        "rc-rectificacion-partidas#s2"
+      ],
+      "cited_documents": [
+        "rc-rectificacion-partidas"
+      ],
+      "invalid_ids": [],
+      "weak_citations": [],
+      "warnings": [],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 21,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 2.688,
+        "first_token_seconds": 2.689,
+        "generation_seconds": 130.179,
+        "total_seconds": 130.899
+      },
+      "raw_text": "**Trámite:** Rectificación de Partidas, Registro Civil de La Rioja (provincial) [rc-rectificacion-partidas#s0].\n**Requisitos:**\n- Nota explicativa del error a corregir y documentación que lo respalde [rc-rectificacion-partidas#s1].\n- DNI original del solicitante [rc-rectificacion-partidas#s1].\n- Datos del acta a rectificar para su localización [rc-rectificacion-partidas#s1].\n- Pruebas documentales que acrediten el dato correcto [rc-rectificacion-partidas#s1].\n**Pasos:**\n1. Sacar turno en el registro civil más cercano [rc-rectificacion-partidas#s2].\n2. Presentarse con la documentación requerida [rc-rectificacion-partidas#s2].\n3. El registro remite el trámite a la Dirección General, donde se genera un expediente y se evalúa [rc-rectificacion-partidas#s2].\n4. Si se observa el trámite, se notifica vía correo electrónico; si se aprueba, se emite la resolución [rc-rectificacion-partidas"
+    },
+    {
+      "id": "q08",
+      "question": "¿En cuánto tiempo entregan el DNI exprés?",
+      "answerable": true,
+      "expected_documents": [
+        "nac-requisitos-dni-pasaporte"
+      ],
+      "outcome": "wrong_source",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-dni-renovacion#s2",
+        "rc-dni-renovacion#s1"
+      ],
+      "cited_documents": [
+        "rc-dni-renovacion"
+      ],
+      "invalid_ids": [],
+      "weak_citations": [
+        "rc-dni-renovacion#s2"
+      ],
+      "warnings": [
+        "Algunas citas no coinciden bien con el texto de la respuesta: rc-dni-renovacion#s2. Revisá la fuente."
+      ],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 22,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 2.785,
+        "first_token_seconds": 2.786,
+        "generation_seconds": 129.031,
+        "total_seconds": 129.751
+      },
+      "raw_text": "**Trámite:** DNI Express, Registro Civil de La Rioja (provincial) [rc-dni-renovacion#s2].\n**Requisitos:**\n- DNI vigente [rc-dni-renovacion#s1].\n- Pasaporte anterior: es recomendable pero no obligatorio [rc-dni-renovacion#s1].\n- Certificado médico si corresponde acreditar algún impedimento, alteración o excepción relativa a la toma de datos biométricos (foto, huella o firma) [rc-dni-renovacion#s1].\n**Pasos:**\n1. Pedir turno en el Registro Civil correspondiente [rc-dni-renovacion#s1].\n2. Presentarse con el DNI vigente [rc-dni-renovacion#s1].\n3. Conservar el comprobante hasta recibir el DNI [rc-dni-renovacion#s1].\n**Costo:** no informado: el documento no publica el monto [rc-dni-renovacion#s2].\n**Dónde:** Inmediato: CAJ — La Rioja Capital [rc-dni-renovacion#s1].\n**Información adicional"
+    },
+    {
+      "id": "q09",
+      "question": "¿Cómo saco la licencia de conducir en La Rioja?",
+      "answerable": false,
+      "expected_documents": [],
+      "outcome": "correct_abstention",
+      "decision": "unsupported",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [
+        "rc-licencia-conducir#s0",
+        "rc-licencia-conducir#s1"
+      ],
+      "weak_citations": [],
+      "warnings": [
+        "El modelo generó una respuesta, pero sin citar ninguna sección de los documentos oficiales, así que no se muestra: no se puede comprobar de dónde salió.",
+        "Se descartaron referencias que no existen en los documentos: rc-licencia-conducir#s0, rc-licencia-conducir#s1."
+      ],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 23,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 2.64,
+        "first_token_seconds": 2.64,
+        "generation_seconds": 128.977,
+        "total_seconds": 129.705
+      },
+      "raw_text": "**Trámite:** Licencia de Conducir, Registro Civil de La Rioja (provincial) [rc-licencia-conducir#s0].\n**Requisitos:**\n- DNI original y fotocopia de ambos contrayentes [rc-licencia-conducir#s1].\n- Acta de nacimiento original [rc-licencia-conducir#s1].\n- Certificado médico de salud [rc-licencia-conducir#s1].\n- Documento de identidad de ambos contrayentes [rc-licencia-conducir#s1].\n- Documento de identidad de los testigos [rc-licencia-conducir#s1].\n**Pasos:**\n1. Solicitar turno en el Registro Civil correspondiente [rc-licencia-conducir#s1].\n2. Presentarse con la documentación requerida [rc-licencia-conducir#s1].\n3. El registro remite el trámite a la Dirección General, donde se genera un expediente y se evalúa [rc-licencia-conducir#s1].\n4. Si se observa el trámite, se notifica vía correo electrónico; si se"
+    },
+    {
+      "id": "q10",
+      "question": "¿Cómo me inscribo en el monotributo?",
+      "answerable": false,
+      "expected_documents": [],
+      "outcome": "hallucination_shown",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-nacimientos#s0"
+      ],
+      "cited_documents": [
+        "rc-nacimientos"
+      ],
+      "invalid_ids": [],
+      "weak_citations": [
+        "rc-nacimientos#s0"
+      ],
+      "warnings": [
+        "Algunas citas no coinciden bien con el texto de la respuesta: rc-nacimientos#s0. Revisá la fuente."
+      ],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 20,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 2.64,
+        "first_token_seconds": 2.641,
+        "generation_seconds": 130.427,
+        "total_seconds": 131.152
+      },
+      "raw_text": "**Trámite:** Monotributo, Registro Civil de La Rioja (provincial) [rc-nacimientos#s0].\n**Requisitos:**\n- DNI original y fotocopias de ambos contrayentes, más fotocopias de actas de nacimiento.\n- Documento de identidad de ambos progenitores.\n- Si los progenitores están casados, deben presentar la libreta de familia o los datos de inscripción del acta de matrimonio para poder localizar el acta y adjuntarla al trámite.\n- Si son extranjeros, con DNI Argentino para extranjeros, pasaporte o cédula de su país, que no haya vencido.\n- Si alguno de los progenitores no posee documento, deberá acreditar su identidad con 2 (dos) testigos mayores de 18 años con DNI vigente y en buen estado.\n**Pasos:**\n1. Sacar turno en el registro civil más cercano.\n2. Presentarse con la documentación requerida.\n3. El registro remite el trámite a la Dirección General, donde se genera un expediente y se evalúa"
+    },
+    {
+      "id": "q11",
+      "question": "¿Dónde pido el certificado de antecedentes penales?",
+      "answerable": false,
+      "expected_documents": [],
+      "outcome": "hallucination_shown",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-defunciones#s0"
+      ],
+      "cited_documents": [
+        "rc-defunciones"
+      ],
+      "invalid_ids": [],
+      "weak_citations": [],
+      "warnings": [],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 24,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 2.714,
+        "first_token_seconds": 2.715,
+        "generation_seconds": 130.537,
+        "total_seconds": 131.376
+      },
+      "raw_text": "**Trámite:** Certificado de Antecedentes Penales, Registro Civil de La Rioja (provincial) [rc-defunciones#s0].\n**Requisitos:**\n- DNI original y fotocopias de ambos contrayentes, más fotocopias de actas de nacimiento.\n- Documento de identidad de ambos progenitores.\n- Si los progenitores están casados, deben presentar la libreta de familia o los datos de inscripción del acta de matrimonio para poder localizar el acta y adjuntarla al trámite.\n- Si son extranjeros, con DNI Argentino para extranjeros, pasaporte o cédula de su país, que no haya vencido.\n- Si alguno de los progenitores no posee documento, deberá acreditar su identidad con 2 (dos) testigos mayores de 18 años con DNI vigente y en buen estado.\n**Pasos:**\n1. Sacar turno en el registro civil más cercano.\n2. Presentarse con la documentación requerida.\n3. El registro remite el trámite a la Dirección General, donde se genera un expediente"
+    },
+    {
+      "id": "q12",
+      "question": "¿Qué necesito para obtener un certificado de domicilio?",
+      "answerable": false,
+      "expected_documents": [],
+      "outcome": "hallucination_shown",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-nacimientos#s1",
+        "rc-nacimientos#s0",
+        "rc-nacimientos#s2",
+        "rc-nacimientos#s3",
+        "rc-nacimientos#s4"
+      ],
+      "cited_documents": [
+        "rc-nacimientos"
+      ],
+      "invalid_ids": [],
+      "weak_citations": [
+        "rc-nacimientos#s0",
+        "rc-nacimientos#s2",
+        "rc-nacimientos#s3",
+        "rc-nacimientos#s4"
+      ],
+      "warnings": [
+        "Algunas citas no coinciden bien con el texto de la respuesta: rc-nacimientos#s0, rc-nacimientos#s2, rc-nacimientos#s3, rc-nacimientos#s4. Revisá la fuente."
+      ],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 21,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 2.708,
+        "first_token_seconds": 2.708,
+        "generation_seconds": 132.63,
+        "total_seconds": 133.457
+      },
+      "raw_text": "**Trámite:** Domicilio, Registro Civil de La Rioja (provincial) [rc-nacimientos#s1].\n**Requisitos:**\n- DNI original del solicitante [rc-nacimientos#s1].\n- Datos del acta necesarios para que la búsqueda sea exitosa [rc-nacimientos#s1].\n**Pasos:**\n1. Sacar turno en el Registro Civil correspondiente [rc-nacimientos#s0].\n2. Presentarse con la documentación requerida [rc-nacimientos#s1].\n3. El registro remite el trámite a la Dirección General, donde se genera un expediente y se evalúa [rc-nacimientos#s2].\n4. Si se observa el trámite, se notifica vía correo electrónico; si se aprueba, se emite la resolución [rc-nacimientos#s3].\n**Costo:** no informado: el documento no publica el monto [rc-nacimientos#s4].\n**Dónde:** Hipólito Yrigoyen 100, Av. Rivadavia · Lun a Vie: 8:00 a 13:00 hs"
+    }
+  ]
+}

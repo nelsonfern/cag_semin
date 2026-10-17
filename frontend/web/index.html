@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>TramitaIA · Asistente de trámites de La Rioja</title>
+  <meta name="description" content="Asistente conversacional para entender trámites de La Rioja con documentos oficiales. Proyecto universitario, no es un sitio oficial.">
+  <link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/styles.css">
+  <script src="/static/app.js"></script>
+  <script defer src="/static/vendor/alpine.min.js"></script>
+</head>
+<body x-data="tramitaia()" x-init="init()" :class="{ 'menu-abierto': menu }">
+  <a class="skip" href="#pregunta">Ir al campo de consulta</a>
+
+  <div class="app">
+    <!-- Barra lateral -->
+    <aside class="lateral" aria-label="Información de TramitaIA">
+      <div class="lateral__cabecera">
+        <a class="marca" href="/" aria-label="TramitaIA, inicio">
+          <img src="/static/icon.svg" alt="" width="30" height="30">
+          <span>Tramita<b>IA</b></span>
+        </a>
+        <button class="icono-boton solo-movil" type="button" @click="menu = false" aria-label="Cerrar menú">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+
+      <button class="nueva" type="button" @click="nuevaConsulta()">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        Nueva consulta
+      </button>
+
+      <div class="estado" :class="'estado--' + estado.clase" role="status" aria-live="polite">
+        <span class="estado__punto" aria-hidden="true"></span>
+        <span x-text="estado.texto">Conectando…</span>
+      </div>
+
+      <section class="bloque">
+        <h2>Sobre TramitaIA</h2>
+        <ul>
+          <li>Responde <strong>solo</strong> con los documentos oficiales de abajo.</li>
+          <li><strong>No es asesoría legal</strong> ni reemplaza a los organismos.</li>
+          <li>La información puede estar desactualizada: confirmá requisitos y costos.</li>
+          <li>Si no encuentra la respuesta, lo dice en lugar de inventar.</li>
+          <li>Cada consulta se responde por separado.</li>
+        </ul>
+      </section>
+
+      <section class="bloque" x-show="fuentes">
+        <h2>Documentos consultables</h2>
+        <p class="bloque__nota">
+          Publicados hasta el <span x-text="fecha(fuentes && fuentes.latest_published_update)"></span> ·
+          obtenidos el <span x-text="fecha(fuentes && fuentes.retrieved_at)"></span>
+        </p>
+        <p class="aviso" x-show="fuentes && !fuentes.corpus_is_current">Hay documentos nuevos sin incorporar.</p>
+        <ul class="documentos">
+          <template x-for="d in (fuentes ? fuentes.documents.filter(d => d.included) : [])" :key="d.document_id">
+            <li>
+              <a :href="d.source_url" target="_blank" rel="noopener noreferrer" x-text="d.title"></a>
+              <span x-text="jurisdiccion(d.jurisdiction) + (d.is_excerpt ? ' · extracto' : '')"></span>
+            </li>
+          </template>
+        </ul>
+      </section>
+
+      <p class="lateral__pie">
+        Proyecto universitario. <strong>No es un sitio oficial</strong> del Gobierno de La Rioja ni de la Nación.
+        <span class="lateral__motor" x-show="motor" x-text="motor"></span>
+      </p>
+    </aside>
+    <div class="velo" @click="menu = false" aria-hidden="true"></div>
+
+    <!-- Chat -->
+    <main class="chat">
+      <header class="chat__barra">
+        <button class="icono-boton solo-movil" type="button" @click="menu = true" aria-label="Abrir menú">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+        <span class="chat__titulo">Asistente de trámites de La Rioja</span>
+        <span class="pastilla" :class="'pastilla--' + estado.clase" x-text="estado.corto"></span>
+      </header>
+
+      <div class="chat__scroll" x-ref="scroll">
+        <div class="chat__columna">
+          <!-- Bienvenida -->
+          <section class="bienvenida" x-show="historial.length === 0">
+            <img class="bienvenida__logo" src="/static/icon.svg" alt="" width="56" height="56">
+            <h1>Hola, soy TramitaIA</h1>
+            <p>Te ayudo a entender cómo hacer trámites en La Rioja, con información de documentos oficiales.
+               Cada respuesta muestra de dónde sale.</p>
+            <div class="sugerencias">
+              <template x-for="ej in ejemplos" :key="ej.texto">
+                <button type="button" class="sugerencia" @click="pregunta = ej.texto; preguntar()" :disabled="!puedeConsultar">
+                  <span class="sugerencia__tema" x-text="ej.tema"></span>
+                  <span x-text="ej.texto"></span>
+                </button>
+              </template>
+            </div>
+          </section>
+
+          <!-- Mensajes -->
+          <template x-for="item in historial" :key="item.id">
+            <div class="turno">
+              <div class="mensaje mensaje--usuario">
+                <p x-text="item.pregunta"></p>
+              </div>
+
+              <div class="mensaje mensaje--asistente">
+                <img class="avatar" src="/static/icon.svg" alt="" width="32" height="32">
+                <div class="mensaje__cuerpo">
+                  <!-- En curso -->
+                  <template x-if="item.estado === 'en-curso'">
+                    <div>
+                      <p class="pensando" aria-live="polite">
+                        <span class="puntos" aria-hidden="true"><i></i><i></i><i></i></span>
+                        <span x-text="item.cola > 0 ? `Hay ${item.cola} consulta(s) antes que la tuya…` : (item.borrador ? 'Escribiendo — borrador sin verificar' : 'Buscando en los documentos oficiales…')"></span>
+                      </p>
+                      <div class="texto texto--borrador" x-show="item.borrador" x-html="formatear(item.borrador)"></div>
+                    </div>
+                  </template>
+
+                  <!-- Error -->
+                  <p class="error" x-show="item.estado === 'error'" role="alert">
+                    No se pudo responder. <span x-text="item.error"></span>
+                  </p>
+
+                  <!-- Respuesta final -->
+                  <template x-if="item.final">
+                    <div>
+                      <div class="texto" :class="{ 'texto--nota': item.final.decision !== 'answered' }"
+                           x-html="formatear(item.final.text)"></div>
+                      <p class="corte" x-show="item.final.decision === 'answered' && item.final.stopped_by === 'max_new_tokens'">
+                        La respuesta se cortó por el límite de largo: puede faltar información.
+                      </p>
+
+                      <div class="pie-mensaje">
+                        <span class="insignia" :class="insignia(item.final.decision).clase" x-text="insignia(item.final.decision).texto"></span>
+                        <button type="button" class="chip" x-show="fuentesDe(item.final).length"
+                                @click="item.verFuentes = !item.verFuentes" :aria-expanded="item.verFuentes">
+                          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7z M14 3v5h5"/></svg>
+                          <span x-text="`Fuentes (${fuentesDe(item.final).length})`"></span>
+                        </button>
+                        <button type="button" class="chip chip--aviso" x-show="(item.final.warnings || []).length"
+                                @click="item.verAvisos = !item.verAvisos" :aria-expanded="item.verAvisos">
+                          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4l9 16H3z M12 10v4 M12 17v.5"/></svg>
+                          <span x-text="`Avisos (${(item.final.warnings || []).length})`"></span>
+                        </button>
+                        <span class="tiempo" x-show="item.final.tokens && item.final.tokens.output"
+                              x-text="segundos(item.final.timings.generation_seconds)"></span>
+                      </div>
+
+                      <ul class="avisos" x-show="item.verAvisos">
+                        <template x-for="w in item.final.warnings" :key="w"><li x-text="w"></li></template>
+                      </ul>
+
+                      <div class="fuentes" x-show="item.verFuentes">
+                        <template x-for="f in fuentesDe(item.final)" :key="f.document_id">
+                          <article class="fuente">
+                            <div class="fuente__titulo">
+                              <h3 x-text="f.title"></h3>
+                              <span x-text="jurisdiccion(f.jurisdiction)"></span>
+                            </div>
+                            <p class="fuente__organismo" x-text="f.organism"></p>
+                            <p class="fuente__datos"
+                               x-text="`Actualizado por el organismo: ${fecha(f.last_updated_date)} · obtenido: ${fecha(f.retrieved_at)} · versión ${f.version}${f.is_excerpt ? ' (extracto)' : ''}`"></p>
+                            <p class="fuente__secciones">
+                              <template x-for="s in f.sections" :key="s.section_id">
+                                <span class="cita" :title="s.section_id" x-text="s.heading || s.section_id"></span>
+                              </template>
+                            </p>
+                            <a :href="f.source_url" target="_blank" rel="noopener noreferrer">
+                              Ver fuente oficial<span class="sr"> (se abre en una pestaña nueva)</span> ↗
+                            </a>
+                          </article>
+                        </template>
+                      </div>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+
+      <!-- Campo de consulta -->
+      <form id="consulta" class="composer" @submit.prevent="preguntar()">
+        <div class="composer__caja">
+          <label class="sr" for="pregunta">Escribí tu consulta</label>
+          <textarea id="pregunta" x-ref="campo" x-model="pregunta" rows="1" maxlength="1000"
+                    placeholder="Preguntá sobre un trámite de La Rioja…"
+                    @input="autoajustar()"
+                    @keydown.enter="if (!$event.shiftKey) { $event.preventDefault(); preguntar() }"
+                    :disabled="!listo"></textarea>
+          <button type="submit" class="enviar" :disabled="!puedeConsultar || !pregunta.trim()" aria-label="Enviar consulta">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+          </button>
+        </div>
+        <p class="composer__nota">
+          TramitaIA puede equivocarse: confirmá en la fuente oficial. No es un sitio oficial. Cada respuesta tarda de 30 s a 3 min.
+        </p>
+      </form>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+{
+  "_comment": "Preguntas de evaluación (Fase 5; se reutilizan en el benchmark de la Fase 6). 'answerable' indica si el corpus 10ba192df05e0285 tiene la respuesta, verificado a mano. 'expected_documents' son los documentos donde está la respuesta: alcanza con citar uno. Las no respondibles se eligieron buscando sus palabras clave en el corpus (0 apariciones).",
+  "questions": [
+    {
+      "id": "q01",
+      "question": "¿Cómo solicito una partida de nacimiento en La Rioja?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-solicitud-partidas"
+      ]
+    },
+    {
+      "id": "q02",
+      "question": "¿Qué requisitos piden para inscribir una defunción?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-defunciones"
+      ]
+    },
+    {
+      "id": "q03",
+      "question": "¿Cuánto cuesta una partida de nacimiento?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-solicitud-partidas",
+        "ley-10702-impositiva-2024"
+      ],
+      "notes": "Las dos fuentes no coinciden: debería aparecer la advertencia de costos."
+    },
+    {
+      "id": "q04",
+      "question": "¿Qué necesito para tramitar el DNI de un recién nacido?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-dni-recien-nacido",
+        "sj-guia-tramites",
+        "nac-requisitos-dni-pasaporte"
+      ]
+    },
+    {
+      "id": "q05",
+      "question": "¿Qué requisitos necesito para tramitar el pasaporte de un menor de edad?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-pasaporte",
+        "sj-guia-tramites",
+        "nac-requisitos-dni-pasaporte"
+      ],
+      "notes": "Registro Civil y Secretaría de Justicia difieren en la presencia de los progenitores."
+    },
+    {
+      "id": "q06",
+      "question": "¿Cuáles son los requisitos para registrar una unión convivencial?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-union-convivencial",
+        "sj-guia-tramites"
+      ]
+    },
+    {
+      "id": "q07",
+      "question": "¿Cómo hago para rectificar un error en una partida?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-rectificacion-partidas"
+      ]
+    },
+    {
+      "id": "q08",
+      "question": "¿En cuánto tiempo entregan el DNI exprés?",
+      "answerable": true,
+      "expected_documents": [
+        "nac-requisitos-dni-pasaporte"
+      ]
+    },
+    {
+      "id": "q09",
+      "question": "¿Cómo saco la licencia de conducir en La Rioja?",
+      "answerable": false
+    },
+    {
+      "id": "q10",
+      "question": "¿Cómo me inscribo en el monotributo?",
+      "answerable": false
+    },
+    {
+      "id": "q11",
+      "question": "¿Dónde pido el certificado de antecedentes penales?",
+      "answerable": false
+    },
+    {
+      "id": "q12",
+      "question": "¿Qué necesito para obtener un certificado de domicilio?",
+      "answerable": false
+    },
+    {
+      "id": "q13",
+      "question": "¿Qué requisitos publica el Registro Civil para el pasaporte de un menor?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-pasaporte"
+      ],
+      "notes": "Ejemplo de la interfaz (§6). Falló con el 1.5B en la prueba en el navegador (sin respaldo)."
+    },
+    {
+      "id": "q14",
+      "question": "¿Qué información falta para saber el costo de una partida?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-solicitud-partidas",
+        "ley-10702-impositiva-2024"
+      ],
+      "notes": "Ejemplo de la interfaz (§6). Pregunta de razonamiento: hay costos publicados ($1.100 / $1.500), pero no coinciden con la Ley 10.702 ($100) y la Municipalidad puede cobrar aparte. El 1.5B se abstuvo en la prueba en el navegador."
+    }
+  ]
+}

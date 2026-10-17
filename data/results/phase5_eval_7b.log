@@ -1,0 +1,18 @@
+llama_context: n_ctx_seq (512) > n_ctx_train (0) -- possible training context overflow
+Motor listo: bartowski/Qwen2.5-7B-Instruct-GGUF/Qwen2.5-7B-Instruct-Q4_K_M.gguf (gguf-Q4_K_M-fa1) · caché bbcce11f9b11369f (built, 677.77 s) · KV 864.63 MB · RSS 6652 MB · 6 hilos
+q01 missed               unsupported citas=[] inválidas=[] 131 tokens en 82 s (0.5642 s/token)
+q02 correct_answer       answered    citas=['rc-defunciones#s1', 'rc-defunciones#s2'] inválidas=[] 256 tokens en 160 s (0.5924 s/token)
+q03 missed               abstained   citas=[] inválidas=[] 80 tokens en 57 s (0.6187 s/token)
+q04 correct_answer       answered    citas=['sj-guia-tramites#s2', 'rc-dni-recien-nacido#s2', 'rc-dni-recien-nacido#s3'] inválidas=[] 230 tokens en 153 s (0.6255 s/token)
+q05 correct_answer       answered    citas=['nac-requisitos-dni-pasaporte#s22', 'nac-requisitos-dni-pasaporte#s23'] inválidas=[] 168 tokens en 117 s (0.6389 s/token)
+q06 correct_answer       answered    citas=['sj-guia-tramites#s3', 'rc-union-convivencial#s1', 'rc-union-convivencial#s2'] inválidas=[] 252 tokens en 169 s (0.6366 s/token)
+q07 correct_answer       answered    citas=['rc-rectificacion-partidas#s1', 'rc-rectificacion-partidas#s2'] inválidas=['rc-rectificación-partidas#s1', 'rc-rectificación-partidas#s1', 'rc-rectificación-partidas#s1', 'rc-rectificación-partidas#s2', 'rc-rectificación-partidas#s2'] 256 tokens en 162 s (0.5987 s/token)
+q08 missed               unsupported citas=[] inválidas=[] 123 tokens en 76 s (0.545 s/token)
+q09 correct_abstention   abstained   citas=[] inválidas=[] 48 tokens en 36 s (0.5562 s/token)
+q10 correct_abstention   abstained   citas=[] inválidas=[] 44 tokens en 31 s (0.5588 s/token)
+q11 correct_abstention   abstained   citas=[] inválidas=[] 38 tokens en 31 s (0.5889 s/token)
+q12 correct_abstention   abstained   citas=[] inválidas=[] 35 tokens en 28 s (0.6059 s/token)
+q13 correct_answer       answered    citas=['rc-pasaporte#s1', 'sj-guia-tramites#s4', 'rc-pasaporte#s4', 'rc-pasaporte#s3'] inválidas=[] 164 tokens en 99 s (0.554 s/token)
+q14 missed               abstained   citas=[] inválidas=[] 49 tokens en 35 s (0.5461 s/token)
+Resumen: {'missed': 4, 'correct_answer': 6, 'correct_abstention': 4}
+Guardado en D:\cag_semin\data\results\phase5_eval_20261017_185557_qwen25-7b-q4-llamacpp.json

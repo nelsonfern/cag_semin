@@ -12,7 +12,7 @@ pruebas aprobadas y tareas pendientes. Cada fase cierra con un commit.
 | 2 | Corpus reproducible | **Aprobada** (2026-10-16) |
 | 3 | Prueba mínima de KV cache | **Aprobada** (2026-10-17) |
 | 4 | Motor CAG | **Aprobada** (2026-10-17) |
-| 5 | TramitaIA (API + interfaz + citas) | Pendiente |
+| 5 | TramitaIA (API + interfaz + citas) | **Aprobada** (2026-10-17) |
 | 6 | Benchmark | Pendiente |
 | 7 | Guía de exposición | Pendiente |
 
@@ -605,3 +605,334 @@ No cambió ningún comportamiento: 86 tests aprobados. **Fase aprobada por el us
 - El tiempo de carga desde disco varía mucho entre lectura en frío y en caliente; se mide en la Fase 6.
 - Las respuestas siguen saliendo en «tú» aunque el prompt pide voseo. El modelo de 1.5B no siempre lo respeta. Se trabaja en la Fase 5 junto con las citas y la abstención.
 - `data/caches/` no se versiona. En otra PC hay que correr `cli build` una vez, o copiar la carpeta, que solo sirve con el mismo modelo, revisión, dtype y corpus.
+
+---
+
+## Fase 5 — TramitaIA: API, interfaz y citas (2026-10-17)
+
+**Decisiones del usuario antes de empezar**
+- Interfaz en **Streamlit**, como cliente de la API FastAPI. El diseño visual se define más adelante.
+- Si una respuesta no tiene ninguna cita válida, **no se muestra**: se responde como abstención.
+- Respuestas de hasta **256 tokens**.
+- Medir 12 hilos de CPU contra 6.
+- Después de la primera evaluación: agregar un ejemplo resuelto al prompt y asignar citas por código con filtro de tema (opciones 1 y 2).
+
+### Arquitectura
+```
+Navegador ─► Streamlit (frontend/app.py, :8501) ─HTTP+SSE─► FastAPI (app/main.py, :8000)
+                                                              └─► AnswerService ─► CAGEngine (caché KV)
+                                                                               └─► CitationIndex (registro)
+```
+Streamlit nunca carga el modelo. La API lo carga en segundo plano al arrancar: `/health` informa `loading` y después `ready`.
+
+### Implementación
+
+| Archivo | Responsabilidad |
+|---|---|
+| `app/cag/prompt.py` | Prompt definitivo. Las reglas de la §5 van antes **y después** del corpus, todo dentro del prefijo cacheado, así que no suman costo por consulta. Incluye la frase fija de abstención (`ABSTENTION_PHRASE`), el formato con títulos, un tope de 150 palabras y **dos ejemplos resueltos**: una respuesta citada, sobre matrimonio (un documento que no está en la evaluación), y una abstención. |
+| `app/services/citations.py` | Extrae los `[doc#sN]` y los valida contra el reporte del corpus que generó la caché. Los metadatos (URL, organismo, jurisdicción, fechas, versión) salen del registro. Aplica el **filtro de tema** y la **verificación del contenido por bigramas** (ver abajo). Agrega advertencias por costos sin vigencia confirmada, extractos, diferencias conocidas entre fuentes y mezcla de información provincial y nacional. |
+| `data/citation_warnings.json` | Advertencias curadas para el ciudadano: costos de partidas frente a la Ley 10.702, y pasaporte de menores entre Registro Civil y Justicia. Las notas técnicas del manifiesto no se muestran. |
+| `app/services/answer_service.py` | Decide entre `answered`, `abstained` (frase fija) y `unsupported` (sin citas válidas, se muestra el mensaje de abstención). Conserva el texto generado en `raw_text` para evaluar. |
+| `app/api/runtime.py`, `routes.py`, `schemas.py`, `app/main.py` | Endpoints `/health`, `/sources`, `/chat`, `/chat/stream` (SSE: `queued`, `token`, `replace`, `final`, `error`), `/evaluation/results` y las rutas de admin. La carga del motor va en segundo plano. Cola de hasta 4 consultas; con más responde 429. Las rutas de admin exigen `ADMIN_TOKEN` (comparado con `compare_digest`), corren en segundo plano y de a una. Sin token configurado quedan deshabilitadas. |
+| `frontend/app.py`, `frontend/api_client.py` | Interfaz de chat:<br>• borrador en vivo y después la respuesta verificada;<br>• panel «Fuentes consultadas» con los datos del registro;<br>• advertencias, abstenciones y errores;<br>• barra lateral con el estado del motor, la fecha del corpus, la lista de documentos y el alcance y las limitaciones;<br>• las 4 preguntas de ejemplo de la §6. |
+| `scripts/run_app.py`, `.streamlit/config.toml` | Arranque de los dos servidores con un comando, y tema mínimo de Streamlit. |
+| `app/evaluation/questions.json`, `evaluate.py`, `thread_check.py` | 12 preguntas (8 que el corpus responde y 4 que no), la evaluación (con modo `--rescore`) y la medición de hilos. |
+| `requirements.txt` | `safetensors`, `fastapi`, `uvicorn`, `httpx` y `streamlit`, con versiones fijas. |
+
+**Seguridad del texto generado:** nunca se inserta como HTML. Los enlaces e imágenes en Markdown y las URL sueltas que escriba el modelo se desarman (`safe_markdown`). Los únicos enlaces son los del registro.
+
+### Hilos de CPU (`data/results/phase5_threads_20261017_150941.json`)
+Pregunta de 48 tokens, 3 repeticiones, después de un calentamiento.
+
+| Hilos | s/token (mediana) | Rango | Pregunta procesada | Total |
+|---|---|---|---|---|
+| **6** (por defecto de torch) | **0,565** | 0,563-0,572 | 3,45 s | 29,9 s |
+| 12 | 0,599 | 0,531-0,651 | 3,98 s | 31,6 s |
+
+**12 hilos no mejoran y varían más**: la generación está limitada por el ancho de banda de memoria, y los hilos de SMT compiten por los mismos núcleos. Queda en 6. El texto fue idéntico en las 7 corridas.
+
+### Evaluación con preguntas reales (Qwen2.5-1.5B, float32, CPU)
+
+**Primera evaluación** (`phase5_eval_20261017_152910.json`, prompt sin ejemplos, caché `92ccc319fbff1dbe`):
+- Respondibles: **1 de 8** mostrada. En 7 el modelo no citó nada, y la única que pasó solo decía «**Requisitos:** [rc-defunciones#s1] Requisitos del Trámite».
+- No respondibles: 4 de 4 sin mostrar. En 2 el modelo inventó documentos enteros, con URL incluida, y el validador los frenó.
+
+**Revisión del texto generado:**
+- A veces el contenido es correcto pero sin cita: $1.100 por la copia certificada y 96 hs para el DNI exprés.
+- A veces mezcla documentos: el horario de matrimonio aparece dentro de la respuesta sobre partidas.
+- Una respuesta se fue de tema: la pregunta sobre rectificar una partida la respondió con visitas a la cárcel.
+
+**Cambios:**
+1. **Ejemplos resueltos en el prompt.** Suman 269 tokens al prefijo (15.755 en total, caché `83ed348a1d8ba1b7` construida en 229,5 s) y no tienen costo por consulta.
+2. **Filtro de tema.** Una sección es del tema si el título de su documento o su encabezado comparten alguna palabra con la pregunta (raíces de 5 letras, sin palabras genéricas como «solicitud», «inscribo» o «requisitos»).
+3. **Verificación por bigramas en toda respuesta.** Al menos el **60 %** de las frases de 4 o más palabras tienen que compartir el 40 % de sus pares de palabras consecutivas con alguna sección del tema. Si no, se descartan todas las citas, aunque las haya puesto el modelo.
+4. **Citas del modelo fuera de tema:** se descartan.
+5. **Si el modelo no cita** pero el contenido pasa la verificación, las citas las asigna el código y quedan marcadas como automáticas, con una advertencia.
+
+**Segunda evaluación** (`phase5_eval_20261017_160821.json`, con ejemplos): el modelo pasó a citar en casi todas las respuestas, pero **también en las inventadas**. Pegaba una sección real cualquiera a trámites como monotributo, antecedentes penales o domicilio, y 3 de las 4 no respondibles se habrían mostrado con las reglas anteriores.
+
+**Re-evaluación con las reglas de verificación** (`phase5_eval_20261017_160821_rescored_v1.json`; la versión final, con las fuentes corregidas, está más abajo). Como la decodificación es greedy (determinista), con el mismo prefijo el modelo produce exactamente el mismo texto. Por eso `--rescore` aplica las reglas nuevas a los textos guardados, después de comprobar que el `cache_id` actual sea el de la corrida original.
+
+| Pregunta | Resultado | Cobertura | Revisión manual del texto |
+|---|---|---|---|
+| q02 defunción | mostrada, citas del modelo | 0,90 | Fiel |
+| q04 DNI recién nacido | mostrada | 0,71 | Fiel |
+| q05 pasaporte de un menor | mostrada | 0,88 | **Parcialmente fiel** (detectado en la revisión de fuentes, ver abajo): copia los requisitos del documento nacional y mezcla la acreditación del representante legal de las secciones del DNI |
+| q06 unión convivencial | mostrada | 0,90 | Fiel |
+| q07 rectificación | mostrada | 0,80 | Fiel |
+| q01 partida de nacimiento | **oculta** | 0,13 | Correcto ocultarla: requisitos de unión convivencial bajo el título «Solicitud de Partidas» |
+| q03 costo de partida | **oculta** | 0,14 | Correcto ocultarla: mismo error que q01 |
+| q08 DNI exprés | **oculta** | 0,50 | Correcto ocultarla: requisitos de renovación presentados como «DNI Express» |
+| q09-q12 no respondibles | **ocultas (4 de 4)** | 0,00 | Licencia, monotributo, antecedentes y domicilio: trámites inventados con citas falsas o fuera de tema |
+
+**Resumen:** se muestran 5 de 8 respondibles: 4 fieles y 1 parcialmente fiel (q05). Las 3 ocultas tenían errores. De las 4 no respondibles, **ninguna** alucinación quedó visible.
+
+### Revisión: las fuentes que se muestran son las que respaldan el texto
+**Problema encontrado por el usuario en la interfaz.** En una consulta sobre unión convivencial, los requisitos estaban copiados casi textuales de la guía de la Secretaría de Justicia (`sj-guia-tramites#s3`), pero el panel mostraba como única fuente la ficha del Registro Civil, que era lo que había citado el modelo. Además, el modelo citó `rc-union-convivencial#s2` («Documentación requerida») junto al costo, que está en `#s4`.
+
+**Causa:** la verificación comprobaba que las frases aparecieran en *alguna* sección del tema, pero después se mostraban las citas que había elegido el modelo, sin comprobar que fueran las secciones que respaldan cada frase.
+
+**Corrección** (`citations.py`, `answer_service.py`, `frontend/app.py`):
+- **Las fuentes que se muestran son las secciones que respaldan las frases** (la mejor sección del tema para cada frase, por bigramas).
+- Las citas del modelo que no respaldan ninguna frase se informan en `unverified_ids`, con una advertencia, y **se quitan del texto que se muestra** (`keep_only_citations`). Así las citas en línea coinciden con el panel.
+- **Desempate:** si el mismo texto aparece en varias secciones (el documento nacional repite párrafos entre el DNI y el pasaporte), gana la sección cuyo encabezado comparte más palabras con la pregunta y, después, la que citó el modelo.
+- El rótulo «Respuesta verificada» pasó a ser **«Respuesta con respaldo en los documentos»**: el control es automático y por coincidencia de texto, y el rótulo anterior prometía más de lo que se comprueba. La advertencia general también lo aclara.
+
+**Re-evaluación final** (`phase5_eval_20261017_160821_rescored_163102.json`): **las mismas decisiones** (5 mostradas, 3 ocultas y 4 abstenciones), pero con otras fuentes:
+
+| Pregunta | Fuentes que citó el modelo | Fuentes que se muestran ahora |
+|---|---|---|
+| q02 | `rc-defunciones#s0, s1, s2` | `rc-defunciones#s1, s2` |
+| q04 | `rc-dni-recien-nacido#s0, s1, s2` | `sj-guia-tramites#s2`, `rc-dni-recien-nacido#s0, s2` |
+| q05 | `rc-pasaporte#s1` | `nac-requisitos-dni-pasaporte#s22` (Primer pasaporte menor), `#s12` (DNI nuevo ejemplar menor), `#s20` (DNI 24 hs) |
+| q06 | `rc-union-convivencial#s1, s2`, `sj-guia-tramites#s3` | `rc-union-convivencial#s1, s2` |
+| q07 | `rc-rectificacion-partidas#s0, s1, s2` | `rc-rectificacion-partidas#s1, s2` |
+
+**Hallazgo en la q05.** El modelo tituló la respuesta «Pasaporte, Registro Civil de La Rioja (provincial)» y citó la ficha provincial, pero copió los requisitos del documento **nacional**. Además, los párrafos sobre el oficio judicial y la acreditación del representante legal **no están en las secciones del pasaporte**: salen de las del DNI. La corrección no oculta esta respuesta (su texto sí está en el corpus), pero ahora **el panel lo deja a la vista**: una pregunta sobre pasaporte muestra fuentes de DNI. Antes la cita del modelo lo escondía.
+
+**Limitación que queda:** el filtro de tema usa el título del documento más el encabezado de la sección. El documento nacional se llama «Requisitos para trámites de DNI o Pasaporte», así que todas sus secciones de DNI pasan el filtro en una pregunta sobre pasaporte. Para detectar esta mezcla habría que filtrar por encabezado en los documentos que reúnen varios trámites (el nacional y la guía de Justicia).
+
+**Tiempos:** primer token a los 2,5-2,8 s. La mayoría de las respuestas llega a 256 tokens en unos 130 s (alrededor de 0,5 s por token).
+
+**Calibración:** los umbrales (40 % de bigramas y 60 % de cobertura) se ajustaron con estas mismas 20 respuestas. **Son provisorios**: hay que validarlos con preguntas nuevas en la Fase 6. Una frase parafraseada (no textual) cuenta como no respaldada, así que el sistema prefiere abstenerse.
+
+### Prueba de punta a punta en el navegador
+- La API y Streamlit se lanzaron con `.claude/launch.json`. El modelo cargó en 33,3 s y la caché desde disco en 15,1 s.
+- Pregunta «¿Qué requisitos piden para inscribir una defunción?»:
+  - el borrador se vio en vivo y después «Respuesta verificada» (rótulo anterior a la revisión de fuentes), con citas;
+  - el panel de fuentes mostró organismo, jurisdicción, fechas, versión y el enlace oficial;
+  - primer token a los 9,3 s y 256 tokens en 159 s. Es más lento que en la evaluación (2,5 s y 127 s); falta medir si se debe al servidor web y al navegador, que comparten la CPU, o al calentamiento de la primera consulta.
+- La pregunta de antecedentes penales mostró el borrador inventado mientras se generaba (rotulado como borrador). Una consulta simultánea del usuario mostró «Hay 1 consulta antes que la tuya».
+- **Errores encontrados y corregidos:**
+  - el recuadro de estado se colapsaba y ocultaba el borrador;
+  - los títulos («**Pasos:**») quedaban pegados al último ítem de la lista;
+  - no había aviso cuando la respuesta se cortaba por el límite de 256 tokens.
+
+### Pruebas — 158 aprobadas, 0 fallidas (72 nuevas)
+- `tests/test_citations.py` (26 tests):
+  - división en secciones, extracción de IDs y metadatos del registro;
+  - IDs inventados, documentos excluidos y respaldo débil;
+  - advertencias (costos, extractos, contradicciones, jurisdicciones);
+  - asignación automática;
+  - filtro de tema y verificación por bigramas, incluidos los casos reales q01 y q10;
+  - fuentes = secciones que respaldan el texto (caso real de unión convivencial), desempate por encabezado y limpieza de citas en el texto;
+  - las 82 secciones del corpus real indexadas.
+- `tests/test_answer_service.py` (11 tests): las tres decisiones, el texto oculto pero conservado, el streaming y que la asignación automática no anule una abstención.
+- `tests/test_api.py` (21 tests):
+  - estados del motor (`loading`, `ready`, `error`) y validación de entrada;
+  - cola llena (429) y liberación del lugar después de un error;
+  - SSE (tokens, `final` y errores), y consultas concurrentes que se atienden de a una;
+  - `/sources` y `/evaluation/results` (con protección contra rutas);
+  - admin: deshabilitado sin token, token inválido, tarea en segundo plano y de a una.
+- `tests/test_frontend.py` (14 tests):
+  - parser de SSE y `safe_markdown`;
+  - errores de la API y API caída;
+  - la página con AppTest: lista, cargando, respuesta con fuentes, abstención, error y respuesta cortada.
+- `tests/fakes.py`: motor y servicio falsos (sin modelo).
+
+### Criterio de aprobación de la Fase 5
+> Aplicación ejecutable que responda sobre los documentos disponibles, muestre sus fuentes y se abstenga cuando no tenga respaldo suficiente.
+
+**Se cumple con limitaciones:**
+- es ejecutable y se probó en el navegador;
+- responde con fuentes del registro en 5 de 8 preguntas respondibles (4 fieles y 1 parcialmente fiel, con fuentes que dejan ver la mezcla);
+- se abstiene en 4 de 4 no respondibles y oculta las 3 respuestas erróneas.
+
+El costo es que se pierden respuestas: 3 de 8 preguntas legítimas terminan en abstención. **El estado final está en la revisión 5.1 (más abajo)**: se cambió de modelo y de motor.
+
+### Limitaciones y pendientes
+- **El modelo es el límite principal.** El 1.5B mezcla documentos y fabrica trámites con un contexto de 15.700 tokens. La seguridad depende de los controles del código, que son léxicos: una respuesta inventada que copie frases textuales de una sección del tema pasaría. Es un hallazgo para la exposición: CAG pone todo el corpus en el contexto, y un modelo chico se pierde en un contexto largo.
+- **Umbrales calibrados con pocos datos** (20 respuestas). Hay que validarlos en la Fase 6.
+- **El borrador en vivo muestra texto sin verificar** mientras se genera, aunque esté rotulado. Alternativa posible: no mostrar el texto hasta verificarlo, a costa de esperar unos 2 minutos sin ver nada.
+- **Respuestas largas:** la mayoría llega al tope de 256 tokens (unos 2 minutos), a pesar de la regla de 150 palabras.
+- **Una consulta por vez:** con varias personas, la cola crece unos 2 minutos por consulta.
+- El voseo se respeta parcialmente.
+- `.claude/launch.json` (configuración local de la vista previa) no se versiona.
+- En `data/caches/` quedaron las cachés de los prompts anteriores (`2c872ad2…`, `92ccc319…`, unos 850 MB cada una), que se pueden borrar.
+
+---
+
+### Revisión 5.1 — Motor llama.cpp con Qwen2.5-7B-Instruct Q4_K_M (2026-10-17)
+
+**Por qué.** Al probar la interfaz, el usuario vio que el 1.5B fallaba en casi todas las preguntas reales: los ejemplos de la §6 sobre el pasaporte de un menor y el costo de una partida. Pidió comparar modelos y después probar uno cuantizado con llama.cpp.
+
+#### Comparación de modelos (6 preguntas: q01, q02, q10, q11, q13 y q14)
+- La comparación con **Transformers** (Qwen3-1.7B y Qwen2.5-3B en bf16) **se cortó a pedido del usuario** por la duración. Solo quedó medido el 1.5B (`phase5_eval_20261017_165416_qwen25-1.5b-fp32.json`).
+- Qwen3-1.7B no entraba en fp32: su caché KV ocupa **3,37 GB** porque tiene 8 cabezas K/V contra 2 del Qwen2.5-1.5B.
+- **Gemma no sirve para este esquema de CAG**: usa atención de ventana deslizante, y esas capas no conservan la caché del corpus completo.
+- **Ollama y LM Studio tampoco**, porque no exponen la caché KV (Fase 3). **llama.cpp sí lo permite** a través de `llama-cpp-python`.
+
+**Factibilidad de CAG con llama.cpp** (`app/evaluation/llamacpp_probe.py`). Verificado en el código de llama-cpp-python 0.3.36:
+- `eval()` borra de la caché todo lo posterior a `n_tokens`, así que **restaurar el prefijo es volver `n_tokens` a su largo**;
+- `llama_state_seq_get_data` permite tomar una huella solo de las K/V;
+- `save_state` y `load_state` permiten guardarla en disco.
+
+Con Llama 3.2 3B, Qwen2.5-3B y Qwen2.5-7B (todos en Q4_K_M) se cumplió lo mismo:
+- la huella de la caché se restaura después de cada consulta;
+- el control negativo sin restaurar detecta la contaminación;
+- la caché cargada desde disco tiene la misma huella y reproduce la misma respuesta.
+
+El baseline completo (recalcular el prefijo) se salteó a pedido del usuario: tarda unos 8 minutos por modelo. **CAG = baseline token por token** con llama.cpp quedó verificado en los tests del motor (con un corpus chico; ver abajo).
+
+**Resultados** (`phase5_llamacpp_20261017_{173400,174416,180442}.json`; re-evaluados con las reglas de citas finales):
+
+| Modelo | Respondibles mostradas y fieles | Alucinaciones visibles | Por token | Primer token | RAM en uso (pico) | Construir la caché | Cargarla desde disco |
+|---|---|---|---|---|---|---|---|
+| Qwen2.5-1.5B fp32 (PyTorch) | 1 de 4 (q02) | 0 | 0,56 s | ~2,5 s | 7,2 GB | ~3,5-4 min | 15 s |
+| Llama 3.2 3B Q4 | 1 de 4, más q13 con requisitos nacionales atribuidos al Registro Civil | 0 | 0,21 s | 13-15 s (sin `flash_attn`) | 4,8 GB (9,4) | 8,3 min | 18 s |
+| Qwen2.5-3B Q4 | 1 de 4 (q02 con «costo no informado», copiado del ejemplo del prompt), más q13 parcial | 0 | 0,19 s | ~2 s | 5,2 GB (6,6) | 6,1 min | 0,7 s |
+| **Qwen2.5-7B Q4** | **2 de 4** (q02 y q13, la única que respondió bien la ficha del Registro Civil) | 0 | 0,64 s | 8-10 s | 8,3 GB (10) | 11 min | 9 s |
+
+En las 2 preguntas no respondibles, **los tres modelos de llama.cpp se abstuvieron solos**; el 1.5B inventaba trámites y lo frenaba el código. La pregunta de razonamiento (q14) no la resolvió ninguno.
+
+**Decisión del usuario: Qwen2.5-7B-Instruct Q4_K_M con llama.cpp.** Es el modelo que se había pedido al principio de la Fase 3 y que en PyTorch no entraba en memoria.
+
+#### Cambios de código
+
+| Archivo | Cambio |
+|---|---|
+| `app/cag/llamacpp_engine.py` (nuevo) | `LlamaCppEngine`, con la misma interfaz que `CAGEngine`. `prepare` carga la caché desde disco o la construye; `answer` valida, toma el lock, restaura el prefijo, verifica la huella (y si falla, recupera desde disco), genera en greedy con streaming y restaura en un `finally`. La caché va a `data/caches/<cache_id>/state.bin` + `meta.json`, y al cargarla se validan modelo, revisión, cuantización, `flash_attn`, `n_ctx`, tamaño del archivo, prefijo, versión del corpus y la huella recalculada. `warmup()` hace una consulta de un token al arrancar. |
+| `app/cag/factory.py` (nuevo) | `create_engine()` según `ENGINE` (`llamacpp` o `transformers`). Lo usan la API, la CLI y la evaluación. |
+| `app/cag/prompt.py` | Plantillas de chat para GGUF (`chatml`, `llama3`). El ejemplo de costo ahora cita lo que dice el documento: con «no informado» los modelos copiaban esa frase aunque el documento informara el costo. Además, `enable_thinking=False` para Qwen3 (no cambia el prefijo de Qwen2.5). |
+| `app/api/runtime.py`, `app/cag/cli.py`, `app/evaluation/evaluate.py` | Usan la fábrica. La reconstrucción de la caché libera el motor anterior antes de cargar el nuevo, para no tener dos 7B en memoria. La evaluación mide memoria y tiempo por token, y acepta `--engine`, `--model`, `--dtype` y `--tag`. |
+| `app/services/citations.py` | (1) **Filtro por trámite**: con palabras clave por trámite, si la pregunta nombra uno y la sección trata de otro, la sección no es del tema. En los documentos que reúnen varios trámites (detectados solos: el nacional, la guía de Justicia), el trámite sale del encabezado. Antes, una pregunta sobre pasaporte aceptaba secciones del DNI. (2) La línea «Trámite:» del formato no cuenta en la cobertura. (3) Se quitan las negritas antes que las viñetas: antes, «**Título:**» perdía un asterisco y no se reconocía. (4) Los IDs con tilde (`rc-rectificación-partidas#s1`) se normalizan. |
+| `app/services/answer_service.py` | Siempre se verifica, también cuando el texto trae la frase de abstención. El 7B se abstuvo y además pegó una cita; antes eso se mostraba sin verificar. Las notas de «sin respaldo» ya no se contradicen con las citas descartadas. |
+| `.env.example`, `requirements.txt`, `README.md` | Variables `ENGINE` y `LLAMACPP_*`; `llama-cpp-python==0.3.36` (en Windows se instala el binario para CPU); sección del motor en el README. |
+
+#### Evaluación con las 14 preguntas (`phase5_eval_20261017_185557_qwen25-7b-q4-llamacpp.json`)
+- **Caché:** construida en 678 s, 865 MB (15.807 tokens de prefijo con el prompt corregido).
+- **Memoria:** RSS de 6,7 GB y pico de 9,7 GB. Después de cargar quedaban 3,2 GB libres.
+- **Tiempos:** primer token a los 7,3-10,1 s (mediana 9,0); 0,55-0,64 s por token (mediana 0,59); respuestas de 28 a 169 s (mediana 79 s).
+
+Revisión manual de cada respuesta contra el corpus:
+
+| | Preguntas | Revisión |
+|---|---|---|
+| **Mostradas y fieles** | q02 defunción, q04 DNI de recién nacido, q06 unión convivencial, q07 rectificación, q13 pasaporte (Registro Civil) | Datos copiados de la ficha, con el costo correcto («gratuito» en q02 y q04). La q13 incluye además una frase de la guía de Justicia: el panel muestra las dos fuentes y **la advertencia de contradicción** entre ellas |
+| **Mostrada con un dato inventado** | q05 pasaporte de un menor | Los requisitos salen de las secciones nacionales del pasaporte, pero dice «**Costo: Gratuito**», que la sección no dice. Pasó con 60 % de cobertura, justo en el umbral |
+| **Ocultas** | q01 y q03 partida, q08 DNI exprés, q14 costo | q01 y q03: correcto ocultarlas, porque dicen «sin cargo» para la partida y la copia certificada cuesta $1.100. **q08: la respuesta era correcta** (96 hs hábiles) pero parafraseada, y la verificación por bigramas la ocultó. q14: falla de razonamiento |
+| **No respondibles** | q09-q12 | **4 de 4 abstenciones del propio modelo**, sin inventar |
+
+**Resumen:**
+- Se muestran 6 de 10 respondibles: 5 fieles y 1 con un dato de costo inventado.
+- Ninguna de las 4 no respondibles muestra información inventada.
+- Frente al 1.5B: más respuestas mostradas, mejor calidad, y el modelo ya no inventa trámites.
+
+#### Prueba en el navegador y arranque
+- La API arrancó con `ENGINE=llamacpp`: modelo en 29-36 s, caché desde disco en 10 s.
+- La pregunta de ejemplo del pasaporte mostró «Respuesta con respaldo en los documentos», con las citas de `rc-pasaporte`, la advertencia de costos y la de contradicción con la guía de Justicia, y las dos fuentes en el panel.
+- **La primera consulta después de arrancar tardó 33 s hasta el primer token** (las siguientes, unos 8 s). Por eso se agregó `warmup()` al arranque: el arranque pasa a unos 67 s (29 s el modelo, 10 s la caché y 28 s el calentamiento) y **la primera consulta real tiene el primer token a los 7,9 s**.
+
+#### Pruebas — 173 aprobadas, 0 fallidas
+`tests/test_llamacpp_engine.py` (10 tests, con el GGUF real de Qwen2.5-3B y un corpus chico; se saltean si el archivo no está descargado):
+- metadatos de la caché guardada;
+- **CAG = baseline token por token** y aislamiento (q2 después de q1 da lo mismo que q2 sola);
+- la carga desde disco reproduce la respuesta;
+- una falla a mitad de la generación restaura el prefijo;
+- una huella alterada se recupera desde disco;
+- los tokens del streaming coinciden con el resultado;
+- se rechazan un archivo de estado alterado y metadatos que no coinciden (`n_ctx`);
+- límites de pregunta y de contexto;
+- el calentamiento no toca el prefijo.
+
+También hay tests nuevos de citas: filtro por trámite, línea «Trámite:», IDs con tilde y abstención con una cita no verificada.
+
+#### Criterio de aprobación de la Fase 5 (estado final)
+> Aplicación ejecutable que responda sobre los documentos disponibles, muestre sus fuentes y se abstenga cuando no tenga respaldo suficiente.
+
+**Se cumple con limitaciones:**
+- la aplicación es ejecutable con el motor llama.cpp y se probó en el navegador;
+- responde con fuentes del registro en 6 de 10 preguntas respondibles;
+- se abstiene en 4 de 4 no respondibles.
+
+**Fase aprobada por el usuario el 2026-10-17**, con las revisiones 5.1 (motor llama.cpp y Qwen2.5-7B) y 5.2 (control de alcance e interfaz de chat).
+
+#### Limitaciones y pendientes
+- **Un dato inventado puede pasar dentro de una respuesta respaldada** (el costo de la q05). El control es por frases y alcanza con que el 60 % coincida.
+- **El control por bigramas oculta respuestas correctas parafraseadas** (q08) y nunca deja pasar las de razonamiento. El usuario lo cuestionó: si el modelo razona, el control léxico estorba. Alternativas para la Fase 6: comparar por significado (embeddings), o advertir en lugar de ocultar.
+- **Velocidad:** el primer token sale a ~8-10 s y las respuestas tardan de 0,5 a 3 minutos. El arranque tarda unos 67 s.
+- **Memoria:** con el 7B quedan unos 3 GB libres en una PC de 16 GB. Con el navegador y Streamlit abiertos el margen es chico.
+- **Umbrales y filtros calibrados con pocas preguntas** (14). La lista de palabras clave por trámite está escrita a mano para este corpus.
+- La construcción de la caché del 7B tarda 11 minutos. Cualquier cambio de prompt o de corpus la invalida (el `cache_id` cambia solo).
+- En `data/caches/` quedaron cachés de pruebas y de prompts anteriores (varios GB), que se pueden borrar.
+
+---
+
+### Revisión 5.2 — Control de alcance e interfaz de chat (2026-10-17)
+
+**Pedidos del usuario al probar la interfaz con el 7B:**
+1. «No tiene control para preguntas que no tengan que ver con el tema»: preguntó sobre un ciclo `for` de Python y la interfaz «se puso a contestar».
+2. La interfaz de Streamlit no le gustó, «tiene bug» y pidió algo más producido. Primero eligió HTML + Alpine.js con estilo gubernamental moderno y borrador visible pero atenuado. Después de verla, pidió **un chatbot moderno**.
+
+**Diagnóstico del punto 1.** Reproducido: con «¿Cómo hago un ciclo for en Python?» el modelo se abstuvo, pero cualquier pregunta llegaba al modelo. **Faltaba el control de alcance que pide la §4 (paso C.2).** Además, el borrador en vivo muestra el texto sin verificar: aunque al final se reemplaza por la abstención, durante la generación se ve la respuesta sobre Python.
+
+#### Control de alcance (`app/services/scope.py`)
+- **Se hace antes de llamar al modelo.** Una pregunta fuera de alcance se responde al instante con la decisión `out_of_scope` y un mensaje fijo; no se genera nada (antes eran de 30 s a 3 min de cómputo).
+- **Criterio:** alguna palabra de contenido (4 letras o más, raíz de 5 letras sin tildes) tiene que aparecer en los **títulos y encabezados del corpus** o en un conjunto de **palabras de trámites y administrativas** («partida», «certificado», «licencia», «monotributo», «turno»...).
+- **No se usa el texto completo del corpus**: con él pasaban «¿Cuál es la capital de Francia?» o «Escribime un poema» (por «capital» y «escribano»).
+- Las preguntas sobre trámites que el corpus no tiene (licencia, monotributo, antecedentes) **siguen pasando**: el modelo se abstiene, como en la evaluación.
+- Verificado:
+  - las 14 preguntas de evaluación y 9 formulaciones coloquiales («Se murió mi abuelo», «¿Qué necesito para casarme?») quedan **dentro**;
+  - 10 preguntas ajenas (Python, recetas, fútbol, poemas, Windows, traducción, IA) quedan **fuera**.
+
+#### Corrección de citas encontrada en la prueba en el navegador
+El modelo escribió «**Costo:** El trámite es gratuito [rc-defunciones#s4]». La cita es correcta, pero la frase es tan corta que no entraba en la verificación, así que se descartaba con el aviso «no respalda el texto». Ahora, una cita del modelo en una frase corta se acepta si al menos el 60 % de las palabras de esa frase están en la sección citada. «Cuesta 5000 pesos [s4]» sigue marcándose como no respaldada.
+
+#### Interfaz de chat (`frontend/web/`: `index.html`, `styles.css`, `app.js`, `vendor/alpine.min.js`)
+- **Reemplaza a Streamlit.** Se borraron `frontend/app.py`, `frontend/api_client.py`, `tests/test_frontend.py`, `.streamlit/` y la dependencia `streamlit`.
+- **Un solo servidor:** FastAPI sirve la página en `/` y los archivos en `/static`. `scripts/run_app.py` lanza solo uvicorn y, con `--abrir`, abre el navegador cuando el motor está listo.
+- **Diseño de chat moderno:**
+  - barra lateral con la marca, «Nueva consulta», el estado del motor, el alcance y los documentos; en el celular se pliega;
+  - conversación centrada: las preguntas en burbujas a la derecha y las respuestas a la izquierda;
+  - campo de escritura fijo abajo, que crece con el texto (Enter envía y Shift+Enter agrega una línea);
+  - bienvenida con sugerencias por tema;
+  - modo claro y oscuro automático;
+  - paleta propia, **sin colores, logos ni marcas oficiales**, y con el aviso «No es un sitio oficial» en la barra lateral y debajo del campo.
+- **Mientras genera:** indicador de escritura y **borrador atenuado** con la etiqueta «borrador sin verificar».
+- **Al terminar**, debajo de cada respuesta:
+  - una insignia («Con respaldo en documentos oficiales», «Sin información en los documentos», «Sin respaldo verificable» o «Fuera del alcance de TramitaIA»);
+  - los chips plegables **Fuentes (n)** y **Avisos (n)**; las tarjetas de fuente muestran el organismo, la jurisdicción, las fechas, la versión, las secciones por nombre y el enlace oficial;
+  - el tiempo que tardó.
+- **Funciona sin internet:** Alpine.js 3.14.1 está copiado en el proyecto (SHA-256 `358d9afb…`) y no se usan CDN ni fuentes externas. Hay un test que lo controla.
+- **Seguridad del texto del modelo:** se escapa todo el HTML y solo se agregan negritas, listas y marcas de cita. Nunca se crean enlaces desde el texto generado: los únicos enlaces son los del registro.
+- **Error encontrado y corregido:** el atajo de Enter usaba el modificador `.exact`, que existe en Vue pero no en Alpine, y nunca se disparaba.
+
+**Prueba en el navegador** (motor 7B, escritorio y ancho de celular, modo claro y oscuro):
+- la pregunta de Python dio «Fuera del alcance» al instante;
+- la de defunción dio una respuesta con respaldo, con el borrador visible mientras se generaba, el aviso de corte por largo y las fuentes;
+- la de unión convivencial mostró burbujas, el borrador, las fuentes de Registro Civil y Justicia en tarjetas, y Avisos (1). Tardó 3 min 32 s con el navegador abierto en la misma PC;
+- no hubo errores en la consola.
+- **No se llegó a probar en el navegador el menú plegable del celular**: el usuario cerró el servidor durante la prueba.
+
+**Pruebas: 190 aprobadas, 0 fallidas.**
+- Se fueron los 14 tests de Streamlit.
+- Nuevos:
+  - `tests/test_scope.py` (22): preguntas dentro y fuera de alcance, y que una fuera de alcance no llega al modelo;
+  - `tests/test_web.py` (8): la página y sus archivos, que no carga nada de internet y el formateo seguro en JavaScript (ejecutado con Node): HTML escapado, sin enlaces, listas, citas y citas maliciosas;
+  - un test de citas en frases cortas.
+
+**Pendientes y limitaciones**
+- **El borrador sigue mostrando texto sin verificar** durante la generación (decisión del usuario: visible pero atenuado). Las preguntas fuera de alcance ya no generan borrador.
+- **El control de alcance es léxico**: una pregunta ajena que use una palabra de trámites («¿Qué licencia tiene Python?») pasa al modelo, aunque el modelo y la verificación de citas siguen actuando después.
+- **Respuestas largas** (hasta 3 min 30 s con el navegador abierto). Conviene medir si bajar `max_new_tokens` o el largo pedido en el prompt mejora la experiencia.
+- El usuario mencionó un «bug» de la interfaz de Streamlit sin describirlo. La interfaz se reemplazó por completo, pero no se pudo confirmar cuál era.

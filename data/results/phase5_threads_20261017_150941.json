@@ -1,0 +1,65 @@
+{
+  "phase": 5,
+  "measured_at": "2026-10-17T18:09:41+00:00",
+  "model_id": "Qwen/Qwen2.5-1.5B-Instruct",
+  "dtype": "float32",
+  "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "cache_id": "92ccc319fbff1dbe",
+  "question": "¿Cómo solicito una partida de nacimiento en La Rioja?",
+  "max_new_tokens": 48,
+  "repeats": 3,
+  "torch_default_threads": 6,
+  "same_text_in_all_runs": true,
+  "by_threads": {
+    "6": {
+      "runs": [
+        {
+          "prefill_seconds": 3.451,
+          "total_seconds": 29.917,
+          "seconds_per_token": 0.5631,
+          "output_tokens": 48
+        },
+        {
+          "prefill_seconds": 3.577,
+          "total_seconds": 30.125,
+          "seconds_per_token": 0.5648,
+          "output_tokens": 48
+        },
+        {
+          "prefill_seconds": 2.939,
+          "total_seconds": 29.817,
+          "seconds_per_token": 0.5718,
+          "output_tokens": 48
+        }
+      ],
+      "median_prefill_seconds": 3.451,
+      "median_seconds_per_token": 0.5648,
+      "median_total_seconds": 29.917
+    },
+    "12": {
+      "runs": [
+        {
+          "prefill_seconds": 3.981,
+          "total_seconds": 28.935,
+          "seconds_per_token": 0.5309,
+          "output_tokens": 48
+        },
+        {
+          "prefill_seconds": 3.47,
+          "total_seconds": 31.623,
+          "seconds_per_token": 0.599,
+          "output_tokens": 48
+        },
+        {
+          "prefill_seconds": 4.254,
+          "total_seconds": 34.852,
+          "seconds_per_token": 0.651,
+          "output_tokens": 48
+        }
+      ],
+      "median_prefill_seconds": 3.981,
+      "median_seconds_per_token": 0.599,
+      "median_total_seconds": 31.623
+    }
+  }
+}

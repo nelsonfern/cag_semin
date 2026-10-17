@@ -1,0 +1,19 @@
+[17:44:21] Cargando el modelo...
+llama_context: n_ctx_seq (512) > n_ctx_train (0) -- possible training context overflow
+[17:45:07] Modelo cargado en 45.1 s · n_ctx 17408 · RSS 7167 MB
+[17:45:07] Prefijo: 15755 tokens (tokenizer de Llama) · unión de tokenización correcta: {'q01': True, 'q11': True, 'q13': True, 'q14': True, 'q02': True, 'q10': True}
+[17:45:07] Construyendo la caché KV del prefijo...
+[17:56:21] Caché construida en 661.7 s · KV 862 MB · estado guardado en disco en 9.45 s (llamacpp_e70a2168e08fc22c.state)
+[17:56:21] CAG q01...
+[17:57:55]   134 tokens · primer token a los 8.88 s · total 94.3 s
+[17:57:56] CAG q11 (después de q01)...
+[17:58:36] Control negativo: segunda pregunta sin restaurar...
+[17:58:58] Cargar el estado guardado en disco y repetir la segunda pregunta...
+[17:59:45] Verificaciones: {"fingerprint_restored_after_query": true, "negative_control": {"cache_len_before_second_without_reset": 15785, "first_logits_max_abs_diff_vs_clean": 6.9728240966796875}, "load_state_seconds": 9.187, "fingerprint_after_load_state": true, "load_state_reproduces_answer": true}
+[17:59:47] q01 missed               unsupported cobertura=0.25 citas=[] 134 tokens en 94.3 s (0.6425 s/token)
+[17:59:48] q11 correct_abstention   abstained   cobertura=None citas=[] 49 tokens en 39.8 s (0.6563 s/token)
+[18:02:02] q13 correct_answer       answered    cobertura=0.714 citas=['rc-pasaporte#s1', 'nac-requisitos-dni-pasaporte#s20', 'rc-pasaporte#s4', 'rc-pasaporte#s3'] 195 tokens en 133.7 s (0.6369 s/token)
+[18:02:38] q14 correct_answer       answered    cobertura=None citas=['rc-solicitud-partidas#s3'] 42 tokens en 34.5 s (0.6181 s/token)
+[18:04:10] q02 missed               unsupported cobertura=0.5 citas=[] 126 tokens en 91.3 s (0.6551 s/token)
+[18:04:42] q10 correct_abstention   abstained   cobertura=None citas=[] 34 tokens en 31.0 s (0.6795 s/token)
+[18:04:42] Guardado en D:\cag_semin\data\results\phase5_llamacpp_20261017_180442.json

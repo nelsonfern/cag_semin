@@ -117,6 +117,74 @@ muestran la respuesta a medida que se genera. Para guardar los modelos en otro d
 Código: [`app/cag/cache_store.py`](app/cag/cache_store.py) (guardar y cargar) y
 [`app/cag/cli.py`](app/cag/cli.py).
 
+## Motor de inferencia: llama.cpp con Qwen2.5-7B (Fase 5)
+
+TramitaIA usa por defecto **Qwen2.5-7B-Instruct cuantizado a 4 bits (Q4_K_M)** con
+**llama.cpp** ([`app/cag/llamacpp_engine.py`](app/cag/llamacpp_engine.py)). En esta PC (CPU,
+16 GB de RAM) es el que mejor respondió en la comparación de modelos, y en PyTorch un 7B no entra
+en memoria. El motor de Transformers (Fases 3 y 4) sigue disponible con `ENGINE=transformers`.
+
+| Variable del `.env` | Para qué |
+|---|---|
+| `ENGINE` | `llamacpp` (por defecto en `.env.example`) o `transformers` |
+| `LLAMACPP_REPO`, `LLAMACPP_FILE`, `LLAMACPP_REVISION` | Modelo GGUF del Hub (se descarga la primera vez, con el commit fijo); o `LLAMACPP_MODEL_PATH` para un archivo local |
+| `LLAMACPP_TEMPLATE` | Plantilla de chat: `chatml` (Qwen) o `llama3` |
+| `LLAMACPP_THREADS`, `LLAMACPP_FLASH_ATTN` | Hilos de CPU (6 en esta PC) y atención optimizada |
+
+El motor de llama.cpp tiene las mismas garantías que el de PyTorch: restaura el prefijo antes
+y después de cada consulta, verifica la huella SHA-256 de la caché KV, guarda la caché en
+`data/caches/<cache_id>/` con sus metadatos y la valida al cargarla. Los comandos de la CLI
+(`build`, `ask`, `chat`) y la evaluación usan el motor configurado.
+
+En Windows, `llama-cpp-python` se instala desde el binario para CPU (sin compilador):
+
+```bash
+.venv\Scripts\python -m pip install llama-cpp-python==0.3.36 --only-binary=:all: --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu
+```
+
+## Aplicación: API e interfaz (Fase 5)
+
+La API FastAPI ([`app/main.py`](app/main.py)) carga el modelo y la caché en segundo plano al
+arrancar (alrededor de un minuto, con una consulta de calentamiento) y sirve también la
+interfaz web en `/`: un chat hecho con HTML, CSS y Alpine.js ([`frontend/web`](frontend/web)),
+sin compilación ni dependencias externas, así que funciona sin internet. Recargar la página no
+vuelve a cargar el modelo.
+
+```bash
+.venv\Scripts\python scripts\run_app.py --abrir     # http://127.0.0.1:8000 (abre el navegador cuando está listo)
+```
+
+Equivale a `.venv\Scripts\python -m uvicorn app.main:app --port 8000`.
+
+Antes de llegar al modelo, las preguntas pasan por un **control de alcance**
+([`app/services/scope.py`](app/services/scope.py)): una consulta ajena a los trámites (por
+ejemplo, de programación) se responde al instante sin generar nada.
+
+| Ruta | Para qué |
+|---|---|
+| `GET /health` | Estado del motor (`loading`, `ready`, `error`), modelo, caché y cola |
+| `GET /sources` | Documentos del corpus con sus metadatos y fecha de actualización |
+| `POST /chat` | Respuesta completa en JSON |
+| `POST /chat/stream` | Respuesta por SSE: `queued`, `token`, `final`, `error` |
+| `GET /evaluation/results` | Resultados guardados en `data/results/` |
+| `POST /admin/ingest`, `POST /admin/rebuild-cache`, `GET /admin/jobs` | Requieren `Authorization: Bearer <ADMIN_TOKEN>`; sin `ADMIN_TOKEN` quedan deshabilitadas |
+
+Cómo se decide qué mostrar ([`app/services/answer_service.py`](app/services/answer_service.py)):
+
+- El modelo cita secciones como `[rc-pasaporte#s1]`. Las citas se validan contra el corpus y los
+  enlaces, organismos y fechas salen del registro, no del texto generado
+  ([`app/services/citations.py`](app/services/citations.py)).
+- Sin ninguna cita válida, la respuesta **no se muestra** y se informa que no hay respaldo.
+- Si los documentos no responden, el modelo usa una frase fija de abstención.
+- Se advierten costos sin vigencia confirmada, documentos incluidos como extracto y diferencias
+  conocidas entre fuentes ([`data/citation_warnings.json`](data/citation_warnings.json)).
+
+Evaluación con preguntas reales ([`app/evaluation/questions.json`](app/evaluation/questions.json)):
+
+```bash
+.venv\Scripts\python -X utf8 -m app.evaluation.evaluate
+```
+
 ## Pruebas
 
 ```bash

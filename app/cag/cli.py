@@ -26,14 +26,19 @@ def _log(msg: str) -> None:
 
 
 def _engine(args):
-    """Carga el modelo y arma el motor para el último corpus (todavía sin caché)."""
-    from app.cag.engine import CAGEngine
-    from app.cag.model_loader import load_model
+    """Crea el motor configurado en el .env (``ENGINE``) para el último corpus (todavía sin caché)."""
+    import os
 
+    from app.cag.factory import create_engine
+
+    # --model/--dtype/--device solo aplican al motor transformers (el de llama.cpp usa LLAMACPP_*).
+    for flag, env in ((args.model, "MODEL_ID"), (args.dtype, "DTYPE"), (args.device, "DEVICE")):
+        if flag:
+            os.environ[env] = flag
     _log("Cargando modelo...")
-    lm = load_model(args.model, device=args.device, dtype=args.dtype)
-    _log(f"Modelo {lm.model_id} ({lm.dtype}, revisión {(lm.revision or '?')[:12]}) cargado en {lm.load_seconds:.1f} s")
-    engine = CAGEngine.from_latest_corpus(lm, max_new_tokens=args.max_new_tokens)
+    engine, info, _ = create_engine(args.engine, max_new_tokens=args.max_new_tokens)
+    _log(f"Motor {info['engine']} · modelo {info['model_id']} ({info['dtype']}, revisión "
+         f"{(info['revision'] or '?')[:12]}) cargado en {info['model_load_seconds']} s")
     _log(f"Prefijo: {engine.prefix_len} tokens · cache_id {engine.identity.cache_id} · "
          f"contexto permitido {engine.context_limit}")
     return engine
@@ -138,7 +143,9 @@ def main(argv: list[str] | None = None) -> None:
     sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(prog="python -m app.cag.cli")
     common = argparse.ArgumentParser(add_help=False)
-    common.add_argument("--model", default=None, help="por defecto, MODEL_ID del .env")
+    common.add_argument("--engine", default=None, choices=["llamacpp", "transformers"],
+                        help="por defecto, ENGINE del .env")
+    common.add_argument("--model", default=None, help="motor transformers: por defecto, MODEL_ID del .env")
     common.add_argument("--device", default=None)
     common.add_argument("--dtype", default=None)
     common.add_argument("--max-new-tokens", type=int, default=256)

@@ -1,0 +1,377 @@
+{
+  "phase": 5,
+  "evaluated_at": "2026-10-17T18:29:08+00:00",
+  "engine": {
+    "model_id": "Qwen/Qwen2.5-1.5B-Instruct",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "dtype": "float32",
+    "device": "cpu",
+    "model_load_seconds": 32.47,
+    "cache_id": "92ccc319fbff1dbe",
+    "cache_source": "disk",
+    "cache_seconds": 14.5,
+    "cache_rejected": null,
+    "prefix_tokens": 15486,
+    "context_limit": 32768,
+    "max_new_tokens": 256,
+    "corpus_build_id": "10ba192df05e0285",
+    "corpus_version": "b7b3289233add501"
+  },
+  "torch_threads": 6,
+  "questions_file": "questions.json",
+  "summary": {
+    "missed": 7,
+    "correct_answer": 1,
+    "correct_abstention": 4
+  },
+  "rows": [
+    {
+      "id": "q01",
+      "question": "¿Cómo solicito una partida de nacimiento en La Rioja?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-solicitud-partidas"
+      ],
+      "outcome": "missed",
+      "decision": "unsupported",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "weak_citations": [],
+      "warnings": [
+        "El modelo generó una respuesta, pero sin citar ninguna sección de los documentos oficiales, así que no se muestra: no se puede comprobar de dónde salió."
+      ],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 22,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 8.269,
+        "first_token_seconds": 8.341,
+        "generation_seconds": 155.923,
+        "total_seconds": 156.685
+      },
+      "raw_text": "Para solicitar una partida de nacimiento en La Rioja, puedes seguir estos pasos:\n\n1. **Llegar a la oficina de Registro Civil más cercana a tu domicilio.** Puedes encontrar la ubicación de las oficinas en el sitio web oficial de Registro Civil de La Rioja (https://registrocivil.larioja.gob.ar/).\n\n2. **Reservar turno** en la oficina más cercana. Puedes hacerlo con dos meses de anticipación en la Oficina de Matrimonio Casa Central. El horario de atención es de 8:00 a 13:00 hs y de 16:00 a 21:00 hs de lunes a viernes, y de 16:00 a 21:00 hs los fines de semana y feriados.\n\n3. **Presentarte con la documentación requerida** en la oficina del día del turno. La documentación necesaria incluye:\n   - DNI original y fotocopias de ambos progenitores.\n   - Si los progenitores están casados, deben presentar la libreta de familia o los datos de inscripción del act"
+    },
+    {
+      "id": "q02",
+      "question": "¿Qué requisitos piden para inscribir una defunción?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-defunciones"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-defunciones#s1"
+      ],
+      "cited_documents": [
+        "rc-defunciones"
+      ],
+      "invalid_ids": [],
+      "weak_citations": [],
+      "warnings": [],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 23,
+        "output": 22
+      },
+      "timings": {
+        "question_seconds": 4.429,
+        "first_token_seconds": 4.564,
+        "generation_seconds": 17.727,
+        "total_seconds": 18.716
+      },
+      "raw_text": "**Requisitos:** [rc-defunciones#s1] Requisitos del Trámite"
+    },
+    {
+      "id": "q03",
+      "question": "¿Cuánto cuesta una partida de nacimiento?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-solicitud-partidas",
+        "ley-10702-impositiva-2024"
+      ],
+      "outcome": "missed",
+      "decision": "unsupported",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "weak_citations": [],
+      "warnings": [
+        "El modelo generó una respuesta, pero sin citar ninguna sección de los documentos oficiales, así que no se muestra: no se puede comprobar de dónde salió."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 20,
+        "output": 15
+      },
+      "timings": {
+        "question_seconds": 2.935,
+        "first_token_seconds": 2.937,
+        "generation_seconds": 10.584,
+        "total_seconds": 11.521
+      },
+      "raw_text": "La partida de nacimiento cuesta $1.100."
+    },
+    {
+      "id": "q04",
+      "question": "¿Qué necesito para tramitar el DNI de un recién nacido?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-dni-recien-nacido",
+        "sj-guia-tramites",
+        "nac-requisitos-dni-pasaporte"
+      ],
+      "outcome": "missed",
+      "decision": "unsupported",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "weak_citations": [],
+      "warnings": [
+        "El modelo generó una respuesta, pero sin citar ninguna sección de los documentos oficiales, así que no se muestra: no se puede comprobar de dónde salió."
+      ],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 26,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 2.513,
+        "first_token_seconds": 2.514,
+        "generation_seconds": 143.734,
+        "total_seconds": 144.492
+      },
+      "raw_text": "Para tramitar el DNI de un recién nacido, necesitas:\n\n1. Partida de nacimiento original con sello del oficial público.\n2. Documento de identidad de ambos progenitores.\n3. Si los progenitores están casados, deben presentar la libreta de familia o los datos de inscripción del acta de matrimonio para poder localizar el acta y adjuntarla al trámite.\n4. Si son extranjeros, con DNI Argentino para extranjeros, pasaporte o cédula de su país, que no haya vencido.\n5. Si alguno de los progenitores no posee documento, deberá acreditar su identidad con 2 (dos) testigos mayores de 18 años con DNI vigente y en buen estado.\n\nSi es menor de 18 años, también necesitas:\n\n- Acreditación del representante legal, como oficio judicial o testimonio de tutela del menor, que debe contar con sello y firma del juez.\n\nSi es menor de 14 años, también necesitas:\n\n- Acreditación del representante legal, como oficio judicial o testimonio de tutela"
+    },
+    {
+      "id": "q05",
+      "question": "¿Qué requisitos necesito para tramitar el pasaporte de un menor de edad?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-pasaporte",
+        "sj-guia-tramites",
+        "nac-requisitos-dni-pasaporte"
+      ],
+      "outcome": "missed",
+      "decision": "unsupported",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "weak_citations": [],
+      "warnings": [
+        "El modelo generó una respuesta, pero sin citar ninguna sección de los documentos oficiales, así que no se muestra: no se puede comprobar de dónde salió."
+      ],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 27,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 3.318,
+        "first_token_seconds": 3.319,
+        "generation_seconds": 136.594,
+        "total_seconds": 137.391
+      },
+      "raw_text": "Para tramitar un pasaporte para un menor de edad, necesitas cumplir con los siguientes requisitos:\n\n1. **DNI del menor**: El menor debe tener un DNI vigente.\n\n2. **Partida de nacimiento certificada**: Si no tienes la partida de nacimiento original, puedes presentar el certificado de nacimiento original o número manuscrito firmado por un oficial público.\n\n3. **DNI de los padres o tutor legal**: Si no tienes el DNI del menor, necesitas presentar el DNI de los padres o el DNI de un tutor legal que lo represente.\n\n4. **Testimonio judicial**: Si el menor no puede firmar o aportar huellas por impedimentos físicos, necesitas un testimonio judicial que acredite esta situación.\n\n5. **Acreditación del representante legal**: Si el menor se encuentra en un hogar, necesitas una autorización de representación firmada y sellada por el director del establecimiento.\n\n6. **Documentación legal acreditante**: Si el menor se encuentra en un hogar, necesitas una autorización de representación firmada y sellada por el director del establecimiento.\n\n7. **Cert"
+    },
+    {
+      "id": "q06",
+      "question": "¿Cuáles son los requisitos para registrar una unión convivencial?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-union-convivencial",
+        "sj-guia-tramites"
+      ],
+      "outcome": "missed",
+      "decision": "unsupported",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "weak_citations": [],
+      "warnings": [
+        "El modelo generó una respuesta, pero sin citar ninguna sección de los documentos oficiales, así que no se muestra: no se puede comprobar de dónde salió."
+      ],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 25,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 2.806,
+        "first_token_seconds": 2.807,
+        "generation_seconds": 130.312,
+        "total_seconds": 131.031
+      },
+      "raw_text": "Para registrar una unión convivencial, los requisitos son los siguientes:\n\n1. **Convivencia**: La relación debe ser pública, notoria, estable, permanente y singular, durante un mínimo de 2 años.\n\n2. **Edad**: Los integrantes deben ser mayores de edad (18 años o más).\n\n3. **Estado civil**: No estar casados ni registrar otra unión convivencial vigente.\n\n4. **Parentesco**: No ser parientes en línea recta en todos los grados, ni colaterales hasta el segundo grado (ej. hermanos), ni por afinidad en línea recta.\n\n5. **Documentación**: \n   - DNI de ambos integrantes.\n   - Domicilio legal denunciado en común.\n\n6. **Testigos**: 2 testigos mayores de edad con DNI, que no sean familiares en ningún grado.\n\n7. **Acreditación de vínculo**: Si es familiar directo, representante legal o apoderado, deberás presentar documentación que acredite el vínculo o autorización.\n\n8. **Testimonio judicial**: Si es menor de 18 años, deberás presentar un testimonio judicial que"
+    },
+    {
+      "id": "q07",
+      "question": "¿Cómo hago para rectificar un error en una partida?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-rectificacion-partidas"
+      ],
+      "outcome": "missed",
+      "decision": "unsupported",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "weak_citations": [],
+      "warnings": [
+        "El modelo generó una respuesta, pero sin citar ninguna sección de los documentos oficiales, así que no se muestra: no se puede comprobar de dónde salió."
+      ],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 21,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 2.548,
+        "first_token_seconds": 2.548,
+        "generation_seconds": 129.679,
+        "total_seconds": 130.395
+      },
+      "raw_text": "Para rectificar un error en una partida, sigue estos pasos:\n\n1. **Descarga el instructivo con los requisitos para acreditar visitas.** (s12)\n2. **Descarga el listado completo de elementos no permitidos.** (s10)\n3. **Descarga la grilla de días y horarios de recepción.** (s11)\n4. **Descarga el cronograma de visitas de las Unidades.** (s12)\n\nLuego, sigue estos pasos:\n\n1. **Acredita tu visita** con los requisitos del instructivo. Necesitarás:\n   - Nombre completo\n   - DNI\n   - Motivo de consulta\n   - Nombre completo\n\n2. **Reserva tu turno** en el Cronograma de Visitas de las Unidades. Puedes hacerlo online o en persona.\n\n3. **Realiza tu visita** en la Unidad correspondiente, siguiendo los horarios y requisitos del Cronograma.\n\n4. **Asegúrate de acreditar tu visita** con los documentos necesarios, como el instructivo, el listado de elementos no permitidos y el cronograma"
+    },
+    {
+      "id": "q08",
+      "question": "¿En cuánto tiempo entregan el DNI exprés?",
+      "answerable": true,
+      "expected_documents": [
+        "nac-requisitos-dni-pasaporte"
+      ],
+      "outcome": "missed",
+      "decision": "unsupported",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "weak_citations": [],
+      "warnings": [
+        "El modelo generó una respuesta, pero sin citar ninguna sección de los documentos oficiales, así que no se muestra: no se puede comprobar de dónde salió."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 22,
+        "output": 33
+      },
+      "timings": {
+        "question_seconds": 2.479,
+        "first_token_seconds": 2.48,
+        "generation_seconds": 18.59,
+        "total_seconds": 19.304
+      },
+      "raw_text": "Según el documento oficial, el DNI exprés se entrega por correo dentro de las 96 horas hábiles posteriores a su realización."
+    },
+    {
+      "id": "q09",
+      "question": "¿Cómo saco la licencia de conducir en La Rioja?",
+      "answerable": false,
+      "expected_documents": [],
+      "outcome": "correct_abstention",
+      "decision": "abstained",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "weak_citations": [],
+      "warnings": [],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 23,
+        "output": 45
+      },
+      "timings": {
+        "question_seconds": 2.406,
+        "first_token_seconds": 2.407,
+        "generation_seconds": 24.164,
+        "total_seconds": 24.876
+      },
+      "raw_text": "No encontré esa información en los documentos oficiales disponibles. Te recomiendo consultar al organismo oficial que corresponda para obtener más detalles sobre cómo solicitar la licencia de conducir en La Rioja."
+    },
+    {
+      "id": "q10",
+      "question": "¿Cómo me inscribo en el monotributo?",
+      "answerable": false,
+      "expected_documents": [],
+      "outcome": "correct_abstention",
+      "decision": "abstained",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "weak_citations": [],
+      "warnings": [],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 20,
+        "output": 42
+      },
+      "timings": {
+        "question_seconds": 2.424,
+        "first_token_seconds": 2.425,
+        "generation_seconds": 22.926,
+        "total_seconds": 23.643
+      },
+      "raw_text": "No encontré esa información en los documentos oficiales disponibles. Te recomiendo consultar al organismo oficial que corresponda para obtener más detalles sobre cómo inscribirte en el monotributo."
+    },
+    {
+      "id": "q11",
+      "question": "¿Dónde pido el certificado de antecedentes penales?",
+      "answerable": false,
+      "expected_documents": [],
+      "outcome": "correct_abstention",
+      "decision": "unsupported",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [
+        "rc-certificado-antecedentes-penales#s0",
+        "rc-certificado-antecedentes-penales#s1"
+      ],
+      "weak_citations": [],
+      "warnings": [
+        "El modelo generó una respuesta, pero sin citar ninguna sección de los documentos oficiales, así que no se muestra: no se puede comprobar de dónde salió.",
+        "Se descartaron referencias que no existen en los documentos: rc-certificado-antecedentes-penales#s0, rc-certificado-antecedentes-penales#s1."
+      ],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 24,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 2.441,
+        "first_token_seconds": 2.442,
+        "generation_seconds": 128.802,
+        "total_seconds": 129.556
+      },
+      "raw_text": "**Trámite:** Certificado de Antecedentes Penales\n**Organismo:** Registro Civil de La Rioja\n**Jurisdicción:** provincial\n**Fuente oficial:** https://registrocivil.larioja.gob.ar/tramite-certificado-antecedentes-penales.html\n**Última actualización publicada por el organismo:** 2025-10-20\n**Fecha de obtención:** 2026-10-16\n**Versión del documento:** v2\n\n[rc-certificado-antecedentes-penales#s0]\n# Certificado de Antecedentes Penales\nÚltima actualización: 20/10/2025\nEste trámite te permite solicitar un certificado de antecedentes penales, que es una documentación que muestra la historia criminal de una persona.\n\n[rc-certificado-antecedentes-penales#s1] Requisitos del Trámite\nPara solicitar un certificado de antecedentes penales, necesitas:\n\n- DNI del solicitante.\n- Documento de identidad del solicitante (original y fotocopia).\n- Documento de ident"
+    },
+    {
+      "id": "q12",
+      "question": "¿Qué necesito para obtener un certificado de domicilio?",
+      "answerable": false,
+      "expected_documents": [],
+      "outcome": "correct_abstention",
+      "decision": "unsupported",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "weak_citations": [],
+      "warnings": [
+        "El modelo generó una respuesta, pero sin citar ninguna sección de los documentos oficiales, así que no se muestra: no se puede comprobar de dónde salió."
+      ],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 21,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 2.292,
+        "first_token_seconds": 2.293,
+        "generation_seconds": 129.25,
+        "total_seconds": 129.98
+      },
+      "raw_text": "Para obtener un certificado de domicilio, necesitas:\n\n1. **DNI original y fotocopia**: Debes presentar tu DNI original y una copia de él.\n\n2. **Documentación de identidad de la persona que solicita el certificado**: Si no eres el titular del DNI, también necesitas presentar la documentación de identidad de la persona que solicita el certificado.\n\n3. **Testimonio judicial**: Si eres menor de 18 años, necesitas un testimonio judicial que acredite tu identidad.\n\n4. **Documentación de la persona que solicita el certificado**: Si eres menor de 18 años, también necesitas presentar la documentación de la persona que solicita el certificado.\n\n5. **Testimonio de la persona que solicita el certificado**: Si eres menor de 18 años, necesitas un testimonio de la persona que solicita el certificado.\n\n6. **Documentación de la persona que tiene el DNI**: Si eres mayor de 18 años, necesitas presentar la documentación de la persona que tiene el DNI.\n\n7. **Testimonio de la persona que tiene el D"
+    }
+  ]
+}

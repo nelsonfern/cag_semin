@@ -1,0 +1,562 @@
+{
+  "phase": 5,
+  "evaluated_at": "2026-10-17T21:55:57+00:00",
+  "engine": {
+    "engine": "llama.cpp",
+    "model_id": "bartowski/Qwen2.5-7B-Instruct-GGUF/Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+    "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+    "dtype": "gguf-Q4_K_M-fa1",
+    "device": "cpu",
+    "model_load_seconds": 37.24,
+    "threads": 6,
+    "n_ctx": 16384,
+    "flash_attn": true,
+    "cache_id": "bbcce11f9b11369f",
+    "cache_source": "built",
+    "cache_seconds": 677.77,
+    "cache_rejected": "No existe D:\\cag_semin\\data\\caches\\bbcce11f9b11369f\\meta.json",
+    "prefix_tokens": 15807,
+    "context_limit": 16384,
+    "max_new_tokens": 256,
+    "corpus_build_id": "10ba192df05e0285",
+    "corpus_version": "b7b3289233add501"
+  },
+  "memory": {
+    "rss_after_model_and_cache_mb": 6652,
+    "kv_cache_mb": 864.63,
+    "kv_bytes_per_token": 57356,
+    "kv_shape_per_layer": null,
+    "num_layers": 28,
+    "ram_total_gb": 15.87,
+    "ram_available_gb_before": 8.14,
+    "ram_available_gb_after_load": 3.22
+  },
+  "peak_working_set_mb": 9711,
+  "torch_threads": 6,
+  "questions_file": "questions.json",
+  "summary": {
+    "missed": 4,
+    "correct_answer": 6,
+    "correct_abstention": 4
+  },
+  "rows": [
+    {
+      "id": "q01",
+      "question": "¿Cómo solicito una partida de nacimiento en La Rioja?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-solicitud-partidas"
+      ],
+      "outcome": "missed",
+      "decision": "unsupported",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [
+        "rc-solicitud-partidas#s0",
+        "rc-solicitud-partidas#s1",
+        "rc-solicitud-partidas#s2",
+        "rc-solicitud-partidas#s3"
+      ],
+      "coverage": 0.333,
+      "weak_citations": [],
+      "warnings": [
+        "El modelo generó una respuesta, pero no se pudo comprobar en los documentos oficiales, así que no se muestra.",
+        "El texto generado no coincide con los documentos citados (rc-solicitud-partidas#s0, rc-solicitud-partidas#s1, rc-solicitud-partidas#s2, rc-solicitud-partidas#s3), así que no se muestra."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 22,
+        "output": 131
+      },
+      "timings": {
+        "question_seconds": 8.377,
+        "first_token_seconds": 8.604,
+        "generation_seconds": 81.952,
+        "total_seconds": 82.761
+      },
+      "raw_text": "**Trámite:** Solicitud de Partidas, Registro Civil de La Rioja (provincial) [rc-solicitud-partidas#s0].\n**Requisitos:**\n- Tener una cuenta de Ciudadano Digital [rc-solicitud-partidas#s1].\n**Pasos:**\n1. Iniciar la solicitud de actas de nacimiento digitalmente en el servicio del Registro Civil de La Rioja [rc-solicitud-partidas#s2].\n**Costo:** Sin cargo [rc-solicitud-partidas#s3].\n**Dónde:** Online a través del sitio oficial del Registro Civil de La Rioja.",
+      "seconds_per_token": 0.5642
+    },
+    {
+      "id": "q02",
+      "question": "¿Qué requisitos piden para inscribir una defunción?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-defunciones"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-defunciones#s1",
+        "rc-defunciones#s2"
+      ],
+      "cited_documents": [
+        "rc-defunciones"
+      ],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "coverage": 0.857,
+      "weak_citations": [],
+      "warnings": [
+        "Las fuentes se identificaron comparando cada frase de la respuesta con los documentos oficiales (86 % de las frases coinciden). Es un control automático: confirmá los datos en la fuente oficial.",
+        "El modelo citó secciones que no respaldan el texto (rc-defunciones#s4): se muestran las que sí lo respaldan."
+      ],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 23,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 8.541,
+        "first_token_seconds": 8.542,
+        "generation_seconds": 159.601,
+        "total_seconds": 160.244
+      },
+      "raw_text": "**Trámite:** Inscripción de Defunciones, Registro Civil de La Rioja (provincial) [rc-defunciones#s1].\n**Requisitos:**\n- Certificado médico de defunción emitido por un profesional habilitado [rc-defunciones#s1].\n- DNI del fallecido (original) [rc-defunciones#s1].\n- DNI de la persona que solicita la inscripción del fallecimiento (original y copia) [rc-defunciones#s1].\n- Inscripción dentro de las 48 horas hábiles posteriores al fallecimiento [rc-defunciones#s1].\n**Pasos:**\n1. Concurrir a la funeraria municipal o privada y solicitar el servicio funerario [rc-defunciones#s2].\n2. Reunir toda la documentación necesaria [rc-defunciones#s2].\n3. Concurrir al registro civil de la localidad de fallecimiento [rc-defunciones#s2].\n**Costo:** El trámite es gratuito [rc-defunciones#s4].\n**Dónde:** Registro Civil de la localidad de f",
+      "seconds_per_token": 0.5924
+    },
+    {
+      "id": "q03",
+      "question": "¿Cuánto cuesta una partida de nacimiento?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-solicitud-partidas",
+        "ley-10702-impositiva-2024"
+      ],
+      "outcome": "missed",
+      "decision": "abstained",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [
+        "rc-solicitud-partidas#s0",
+        "rc-solicitud-partidas#s3"
+      ],
+      "coverage": 0.0,
+      "weak_citations": [],
+      "warnings": [
+        "El texto generado no coincide con los documentos citados (rc-solicitud-partidas#s0, rc-solicitud-partidas#s3), así que no se muestra."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 20,
+        "output": 80
+      },
+      "timings": {
+        "question_seconds": 7.721,
+        "first_token_seconds": 7.721,
+        "generation_seconds": 56.598,
+        "total_seconds": 57.274
+      },
+      "raw_text": "**Trámite:** Solicitud de Partidas, Registro Civil de La Rioja (provincial) [rc-solicitud-partidas#s0].\n**Costo:** Sin cargo [rc-solicitud-partidas#s3].\n\nNo encontré esa información en los documentos oficiales disponibles. Te recomiendo consultar directamente al Registro Civil de La Rioja para obtener el costo actual.",
+      "seconds_per_token": 0.6187
+    },
+    {
+      "id": "q04",
+      "question": "¿Qué necesito para tramitar el DNI de un recién nacido?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-dni-recien-nacido",
+        "sj-guia-tramites",
+        "nac-requisitos-dni-pasaporte"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "sj-guia-tramites#s2",
+        "rc-dni-recien-nacido#s2",
+        "rc-dni-recien-nacido#s3"
+      ],
+      "cited_documents": [
+        "sj-guia-tramites",
+        "rc-dni-recien-nacido"
+      ],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "coverage": 1.0,
+      "weak_citations": [],
+      "warnings": [
+        "Las fuentes se identificaron comparando cada frase de la respuesta con los documentos oficiales (100 % de las frases coinciden). Es un control automático: confirmá los datos en la fuente oficial.",
+        "Los costos salen de «DNI – Recién nacido» (2025-10-20; obtenido el 2026-10-16). No se pudo confirmar que sigan vigentes.",
+        "El modelo citó secciones que no respaldan el texto (rc-dni-recien-nacido#s1): se muestran las que sí lo respaldan."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 26,
+        "output": 230
+      },
+      "timings": {
+        "question_seconds": 9.707,
+        "first_token_seconds": 9.707,
+        "generation_seconds": 152.944,
+        "total_seconds": 153.648
+      },
+      "raw_text": "**Trámite:** DNI – Recién nacido, Registro Civil de La Rioja (provincial) [rc-dni-recien-nacido#s1].\n**Requisitos:**\n- DNI actualizado de la madre, padre o tutor legal [rc-dni-recien-nacido#s1].\n- Partida de nacimiento original con firma y sello del oficial público [rc-dni-recien-nacido#s1].\n- En caso de tutela, presentar el testimonio judicial original [rc-dni-recien-nacido#s1].\n**Pasos:**\n1. Sacar turno en el registro civil o delegación correspondiente [rc-dni-recien-nacido#s2].\n2. Presentarse con el bebé para DNI definitivo o sin el bebé para DNI provisorio [rc-dni-recien-nacido#s2].\n**Costo:** El trámite es gratuito [rc-dni-recien-nacido#s3].\n**Dónde:** Registro Civil o delegación correspondiente.",
+      "seconds_per_token": 0.6255
+    },
+    {
+      "id": "q05",
+      "question": "¿Qué requisitos necesito para tramitar el pasaporte de un menor de edad?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-pasaporte",
+        "sj-guia-tramites",
+        "nac-requisitos-dni-pasaporte"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "nac-requisitos-dni-pasaporte#s22",
+        "nac-requisitos-dni-pasaporte#s23"
+      ],
+      "cited_documents": [
+        "nac-requisitos-dni-pasaporte"
+      ],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "coverage": 0.6,
+      "weak_citations": [],
+      "warnings": [
+        "Las fuentes se identificaron comparando cada frase de la respuesta con los documentos oficiales (60 % de las frases coinciden). Es un control automático: confirmá los datos en la fuente oficial.",
+        "«Requisitos para trámites de DNI o Pasaporte» está incluido solo en parte (extracto): puede haber información que TramitaIA no tiene."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 27,
+        "output": 168
+      },
+      "timings": {
+        "question_seconds": 10.095,
+        "first_token_seconds": 10.095,
+        "generation_seconds": 116.788,
+        "total_seconds": 117.502
+      },
+      "raw_text": "**Trámite:** Pasaporte, RENAPER - Ministerio del Interior (Nación) [nac-requisitos-dni-pasaporte#s22].\n**Requisitos:**\n- DNI del menor solicitante.\n- Partida de nacimiento certificada o certificado de nacimiento original.\n- DNI de padre o madre o representante legal.\n- Permiso para tramitar Pasaporte sin presencia de padres/madres, con certificación de la autoridad pertinente (escribano o juez).\n**Pasos:**\n1. Concurrir a la oficina de RENAPER con la documentación requerida.\n**Costo:** Gratuito [nac-requisitos-dni-pasaporte#s22].",
+      "seconds_per_token": 0.6389
+    },
+    {
+      "id": "q06",
+      "question": "¿Cuáles son los requisitos para registrar una unión convivencial?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-union-convivencial",
+        "sj-guia-tramites"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "sj-guia-tramites#s3",
+        "rc-union-convivencial#s1",
+        "rc-union-convivencial#s2"
+      ],
+      "cited_documents": [
+        "sj-guia-tramites",
+        "rc-union-convivencial"
+      ],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "coverage": 0.75,
+      "weak_citations": [],
+      "warnings": [
+        "Las fuentes se identificaron comparando cada frase de la respuesta con los documentos oficiales (75 % de las frases coinciden). Es un control automático: confirmá los datos en la fuente oficial."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 25,
+        "output": 252
+      },
+      "timings": {
+        "question_seconds": 9.709,
+        "first_token_seconds": 9.709,
+        "generation_seconds": 169.492,
+        "total_seconds": 170.218
+      },
+      "raw_text": "**Trámite:** Unión Convivencial, Registro Civil de La Rioja (provincial) [rc-union-convivencial#s1].\n**Requisitos:**\n- Ambos convivientes mayores de 18 años [rc-union-convivencial#s1].\n- No estar unidos por vínculos de parentesco en línea recta o colateral hasta el segundo grado [rc-union-convivencial#s1].\n- No estar unidos por afinidad en línea recta [rc-union-convivencial#s1].\n- Mantener la convivencia durante al menos 2 años [rc-union-convivencial#s1].\n- DNI original y fotocopia de ambos convivientes [rc-union-convivencial#s1].\n- Dos testigos mayores de edad con DNI [rc-union-convivencial#s1].\n- Declaración jurada completa y suscripta [rc-union-convivencial#s1].\n- Si existe pacto de convivencia, firma certificada por escribano público o escritura [rc-union-convivencial#s1].",
+      "seconds_per_token": 0.6366
+    },
+    {
+      "id": "q07",
+      "question": "¿Cómo hago para rectificar un error en una partida?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-rectificacion-partidas"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-rectificacion-partidas#s1",
+        "rc-rectificacion-partidas#s2"
+      ],
+      "cited_documents": [
+        "rc-rectificacion-partidas"
+      ],
+      "invalid_ids": [
+        "rc-rectificación-partidas#s1",
+        "rc-rectificación-partidas#s1",
+        "rc-rectificación-partidas#s1",
+        "rc-rectificación-partidas#s2",
+        "rc-rectificación-partidas#s2"
+      ],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "coverage": 0.875,
+      "weak_citations": [],
+      "warnings": [
+        "Las fuentes se identificaron comparando cada frase de la respuesta con los documentos oficiales (88 % de las frases coinciden). Es un control automático: confirmá los datos en la fuente oficial.",
+        "El modelo citó secciones que no respaldan el texto (rc-rectificacion-partidas#s0): se muestran las que sí lo respaldan.",
+        "Se descartaron referencias que no existen en los documentos: rc-rectificación-partidas#s1, rc-rectificación-partidas#s1, rc-rectificación-partidas#s1, rc-rectificación-partidas#s2, rc-rectificación-partidas#s2."
+      ],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 21,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 9.707,
+        "first_token_seconds": 9.708,
+        "generation_seconds": 162.382,
+        "total_seconds": 163.086
+      },
+      "raw_text": "**Trámite:** Rectificación de Partidas, Registro Civil de La Rioja (provincial) [rc-rectificacion-partidas#s0].\n**Requisitos:**\n- Nota explicativa del error a corregir y documentación que lo respalde [rc-rectificacion-partidas#s1].\n- DNI original del solicitante [rc-rectificacion-partidas#s1].\n- Datos del acta a rectificar para su localización [rc-rectificación-partidas#s1].\n- Pruebas documentales que acrediten el dato correcto [rc-rectificación-partidas#s1].\n- Si sos familiar directo, representante legal o apoderado, deberás presentar documentación que acredite el vínculo o autorización [rc-rectificación-partidas#s1].\n**Pasos:**\n1. Sacar turno en el registro civil más cercano [rc-rectificación-partidas#s2].\n2. Presentarse con la documentación requerida [rc-rectificación-partidas#s2].\n3. El registro remite el trámite a la Dirección General, donde se genera un expediente y se evalúa [rc-rectificación",
+      "seconds_per_token": 0.5987
+    },
+    {
+      "id": "q08",
+      "question": "¿En cuánto tiempo entregan el DNI exprés?",
+      "answerable": true,
+      "expected_documents": [
+        "nac-requisitos-dni-pasaporte"
+      ],
+      "outcome": "missed",
+      "decision": "unsupported",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [
+        "nac-requisitos-dni-pasaporte#s21"
+      ],
+      "coverage": 0.0,
+      "weak_citations": [],
+      "warnings": [
+        "El modelo generó una respuesta, pero no se pudo comprobar en los documentos oficiales, así que no se muestra.",
+        "El texto generado no coincide con los documentos citados (nac-requisitos-dni-pasaporte#s21), así que no se muestra."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 22,
+        "output": 123
+      },
+      "timings": {
+        "question_seconds": 9.989,
+        "first_token_seconds": 9.989,
+        "generation_seconds": 76.481,
+        "total_seconds": 77.174
+      },
+      "raw_text": "**Trámite:** DNI exprés, RENAPER (nacional) [nac-requisitos-dni-pasaporte#s21].\n**Costo:** No se especifica en el documento [nac-requisitos-dni-pasaporte#s21].\n**Dónde:** Centro de Documentación de RENAPER.\n\n**Respuesta:** El DNI exprés se entrega por correo dentro de las 96 horas hábiles posteriores a su realización [nac-requisitos-dni-pasaporte#s21].",
+      "seconds_per_token": 0.545
+    },
+    {
+      "id": "q09",
+      "question": "¿Cómo saco la licencia de conducir en La Rioja?",
+      "answerable": false,
+      "expected_documents": [],
+      "outcome": "correct_abstention",
+      "decision": "abstained",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "coverage": 0.0,
+      "weak_citations": [],
+      "warnings": [],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 23,
+        "output": 48
+      },
+      "timings": {
+        "question_seconds": 9.818,
+        "first_token_seconds": 9.818,
+        "generation_seconds": 35.958,
+        "total_seconds": 36.655
+      },
+      "raw_text": "No encontré esa información en los documentos oficiales disponibles. Te recomiendo consultar directamente con la Subsecretaría de Tránsito y Transporte de La Rioja o la Dirección Provincial de Tránsito.",
+      "seconds_per_token": 0.5562
+    },
+    {
+      "id": "q10",
+      "question": "¿Cómo me inscribo en el monotributo?",
+      "answerable": false,
+      "expected_documents": [],
+      "outcome": "correct_abstention",
+      "decision": "abstained",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "coverage": 0.0,
+      "weak_citations": [],
+      "warnings": [],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 20,
+        "output": 44
+      },
+      "timings": {
+        "question_seconds": 7.253,
+        "first_token_seconds": 7.253,
+        "generation_seconds": 31.28,
+        "total_seconds": 31.997
+      },
+      "raw_text": "No encontré esa información en los documentos oficiales disponibles. Te recomiendo consultar directamente a la AFIP o el sitio web oficial del monotributo para obtener los requisitos y pasos actualizados.",
+      "seconds_per_token": 0.5588
+    },
+    {
+      "id": "q11",
+      "question": "¿Dónde pido el certificado de antecedentes penales?",
+      "answerable": false,
+      "expected_documents": [],
+      "outcome": "correct_abstention",
+      "decision": "abstained",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "coverage": 0.0,
+      "weak_citations": [],
+      "warnings": [],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 24,
+        "output": 38
+      },
+      "timings": {
+        "question_seconds": 9.073,
+        "first_token_seconds": 9.073,
+        "generation_seconds": 30.862,
+        "total_seconds": 31.586
+      },
+      "raw_text": "No encontré esa información en los documentos oficiales disponibles. Te recomiendo consultar directamente a la dependencia correspondiente o al Ministerio de Seguridad de La Rioja.",
+      "seconds_per_token": 0.5889
+    },
+    {
+      "id": "q12",
+      "question": "¿Qué necesito para obtener un certificado de domicilio?",
+      "answerable": false,
+      "expected_documents": [],
+      "outcome": "correct_abstention",
+      "decision": "abstained",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "coverage": 0.0,
+      "weak_citations": [],
+      "warnings": [],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 21,
+        "output": 35
+      },
+      "timings": {
+        "question_seconds": 7.27,
+        "first_token_seconds": 7.27,
+        "generation_seconds": 27.872,
+        "total_seconds": 28.584
+      },
+      "raw_text": "No encontré esa información en los documentos oficiales disponibles. Te recomiendo consultar directamente al Registro Civil de La Rioja para obtener los requisitos específicos.",
+      "seconds_per_token": 0.6059
+    },
+    {
+      "id": "q13",
+      "question": "¿Qué requisitos publica el Registro Civil para el pasaporte de un menor?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-pasaporte"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-pasaporte#s1",
+        "sj-guia-tramites#s4",
+        "rc-pasaporte#s4",
+        "rc-pasaporte#s3"
+      ],
+      "cited_documents": [
+        "rc-pasaporte",
+        "sj-guia-tramites"
+      ],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "coverage": 0.8,
+      "weak_citations": [],
+      "warnings": [
+        "Las fuentes se identificaron comparando cada frase de la respuesta con los documentos oficiales (80 % de las frases coinciden). Es un control automático: confirmá los datos en la fuente oficial.",
+        "Los costos salen de «Pasaporte» (2025-10-20; obtenido el 2026-10-16). No se pudo confirmar que sigan vigentes.",
+        "Para el pasaporte de menores, la ficha del Registro Civil pide la presencia de ambos progenitores o del tutor legal, mientras que la guía de la Secretaría de Justicia menciona el DNI de los padres o tutores que acompañen. Consultá al Registro Civil cuál aplica a tu caso."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 26,
+        "output": 164
+      },
+      "timings": {
+        "question_seconds": 8.915,
+        "first_token_seconds": 8.915,
+        "generation_seconds": 99.216,
+        "total_seconds": 99.922
+      },
+      "raw_text": "**Trámite:** Pasaporte, Registro Civil de La Rioja (provincial) [rc-pasaporte#s1].\n**Requisitos:**\n- Partida de nacimiento actualizada [rc-pasaporte#s1].\n- DNI vigente del menor [rc-pasaporte#s1].\n- DNI de los padres o tutores legales que lo acompañen [rc-pasaporte#s1].\n**Costo:** Pasaporte regular: Costo determinado por Re.Na.Per [rc-pasaporte#s4].\n**Dónde:** Se inicia de forma presencial y personal en la oficina de Registro Civil más cercana a tu domicilio [rc-pasaporte#s3].",
+      "seconds_per_token": 0.554
+    },
+    {
+      "id": "q14",
+      "question": "¿Qué información falta para saber el costo de una partida?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-solicitud-partidas",
+        "ley-10702-impositiva-2024"
+      ],
+      "outcome": "missed",
+      "decision": "abstained",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [
+        "rc-solicitud-partidas#s3"
+      ],
+      "coverage": 0.0,
+      "weak_citations": [],
+      "warnings": [
+        "El texto generado no coincide con los documentos citados (rc-solicitud-partidas#s3), así que no se muestra."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 20,
+        "output": 49
+      },
+      "timings": {
+        "question_seconds": 8.504,
+        "first_token_seconds": 8.505,
+        "generation_seconds": 34.72,
+        "total_seconds": 35.451
+      },
+      "raw_text": "No encontré esa información en los documentos oficiales disponibles. Te recomiendo consultar directamente al Registro Civil de La Rioja para obtener el costo actual de la partida que necesitas. [rc-solicitud-partidas#s3]",
+      "seconds_per_token": 0.5461
+    }
+  ]
+}

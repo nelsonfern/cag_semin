@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-17T05:10:00+00:00",
+  "generated_at": "2026-10-17T21:35:09+00:00",
   "corpus_version": "b7b3289233add501",
   "documents": {
     "ley-10702-impositiva-2024": {
@@ -502,6 +502,43 @@
       "corpus_build_id": "10ba192df05e0285",
       "prefix_len": 15208,
       "fingerprint": "1f8da2a58d4c5dd3a107fb47a5342f66"
+    },
+    {
+      "cache_id": "92ccc319fbff1dbe",
+      "corpus_version": "b7b3289233add501",
+      "created_at": "2026-10-17T18:04:29+00:00",
+      "stale": false,
+      "model_id": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "dtype": "float32",
+      "corpus_build_id": "10ba192df05e0285",
+      "prefix_len": 15486,
+      "fingerprint": "dd9d2963ad26cb6f1794aaf7232e973e"
+    },
+    {
+      "cache_id": "83ed348a1d8ba1b7",
+      "corpus_version": "b7b3289233add501",
+      "created_at": "2026-10-17T18:41:34+00:00",
+      "stale": false,
+      "model_id": "Qwen/Qwen2.5-1.5B-Instruct",
+      "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "dtype": "float32",
+      "corpus_build_id": "10ba192df05e0285",
+      "prefix_len": 15755,
+      "fingerprint": "e7f94de339dcd18f2fa238aba24c8b78"
+    },
+    {
+      "cache_id": "bbcce11f9b11369f",
+      "corpus_version": "b7b3289233add501",
+      "created_at": "2026-10-17T21:35:09+00:00",
+      "stale": false,
+      "engine": "llama.cpp",
+      "model_id": "bartowski/Qwen2.5-7B-Instruct-GGUF/Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+      "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+      "dtype": "gguf-Q4_K_M-fa1",
+      "corpus_build_id": "10ba192df05e0285",
+      "prefix_len": 15807,
+      "fingerprint": "b148678c11d5b500659d8c92d858218b"
     }
   ]
 }

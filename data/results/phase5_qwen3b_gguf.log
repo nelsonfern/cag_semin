@@ -1,0 +1,19 @@
+[17:34:31] Cargando el modelo...
+llama_context: n_ctx_seq (512) > n_ctx_train (0) -- possible training context overflow
+[17:34:50] Modelo cargado en 19.0 s · n_ctx 17408 · RSS 3406 MB
+[17:34:50] Prefijo: 15755 tokens (tokenizer de Llama) · unión de tokenización correcta: {'q01': True, 'q11': True, 'q13': True, 'q14': True, 'q02': True, 'q10': True}
+[17:34:50] Construyendo la caché KV del prefijo...
+[17:41:07] Caché construida en 368.3 s · KV 554 MB · estado guardado en disco en 7.55 s (llamacpp_fe2eb70444b1c7c8.state)
+[17:41:07] CAG q01...
+[17:41:51]   220 tokens · primer token a los 2.09 s · total 44.4 s
+[17:41:52] CAG q11 (después de q01)...
+[17:41:59] Control negativo: segunda pregunta sin restaurar...
+[17:42:05] Cargar el estado guardado en disco y repetir la segunda pregunta...
+[17:42:13] Verificaciones: {"fingerprint_restored_after_query": true, "negative_control": {"cache_len_before_second_without_reset": 15785, "first_logits_max_abs_diff_vs_clean": 7.174796104431152}, "load_state_seconds": 0.704, "fingerprint_after_load_state": true, "load_state_reproduces_answer": true}
+[17:42:14] q01 missed               unsupported cobertura=0.333 citas=[] 220 tokens en 44.4 s (0.1933 s/token)
+[17:42:14] q11 correct_abstention   abstained   cobertura=None citas=[] 28 tokens en 7.1 s (0.1842 s/token)
+[17:43:07] q13 wrong_source         answered    cobertura=0.875 citas=['nac-requisitos-dni-pasaporte#s7', 'nac-requisitos-dni-pasaporte#s22', 'nac-requisitos-dni-pasaporte#s12', 'nac-requisitos-dni-pasaporte#s23', 'nac-requisitos-dni-pasaporte#s20'] 256 tokens en 51.9 s (0.1943 s/token)
+[17:43:14] q14 missed               abstained   cobertura=None citas=[] 28 tokens en 7.3 s (0.1992 s/token)
+[17:44:06] q02 correct_answer       answered    cobertura=0.667 citas=['rc-defunciones#s1', 'rc-defunciones#s2'] 256 tokens en 51.2 s (0.1924 s/token)
+[17:44:16] q10 correct_abstention   abstained   cobertura=None citas=[] 37 tokens en 8.9 s (0.1953 s/token)
+[17:44:16] Guardado en D:\cag_semin\data\results\phase5_llamacpp_20261017_174416.json

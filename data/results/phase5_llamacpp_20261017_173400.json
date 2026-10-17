@@ -1,0 +1,198 @@
+{
+  "phase": 5,
+  "experiment": "llama.cpp feasibility",
+  "started_at": "2026-10-17T20:28:52+00:00",
+  "environment": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.12.0",
+    "llama_cpp_python": "0.3.36",
+    "threads": 6,
+    "n_batch": 512,
+    "ram_available_gb_at_start": 8.68
+  },
+  "model_path": "D:\\hf_cache\\hub\\models--bartowski--Llama-3.2-3B-Instruct-GGUF\\snapshots\\5ab33fa94d1d04e903623ae72c95d1696f09f9e8\\Llama-3.2-3B-Instruct-Q4_K_M.gguf",
+  "model_file_gb": 1.881,
+  "corpus_build_id": "10ba192df05e0285",
+  "model": {
+    "load_seconds": 14.64,
+    "rss_before_mb": 206,
+    "rss_after_mb": 4663,
+    "n_ctx": 16384,
+    "n_vocab": 128256,
+    "stop_tokens": [
+      128009
+    ]
+  },
+  "prompt": {
+    "prefix_tokens": 15355,
+    "question_tokens": {
+      "q01": 23,
+      "q11": 25,
+      "q13": 27,
+      "q14": 21,
+      "q02": 24,
+      "q10": 21
+    },
+    "boundary_ok": {
+      "q01": true,
+      "q11": true,
+      "q13": true,
+      "q14": true,
+      "q02": true,
+      "q10": true
+    },
+    "max_new_tokens": 256
+  },
+  "cache": {
+    "loaded_from": "llamacpp_17d2f5277f666958.state",
+    "load_seconds": 18.5,
+    "kv_seq_bytes": 1761219196,
+    "kv_seq_mb": 1679.6,
+    "kv_bytes_per_token": 114700,
+    "fingerprint": "17d2f5277f6669589d670e411ab9321b",
+    "rss_before_mb": 4666,
+    "rss_after_mb": 4822
+  },
+  "checks": {
+    "fingerprint_restored_after_query": true,
+    "negative_control": {
+      "cache_len_before_second_without_reset": 15386,
+      "first_logits_max_abs_diff_vs_clean": 4.515913963317871
+    },
+    "load_state_seconds": 18.048,
+    "fingerprint_after_load_state": true,
+    "load_state_reproduces_answer": true
+  },
+  "rows": [
+    {
+      "id": "q01",
+      "question": "¿Cómo solicito una partida de nacimiento en La Rioja?",
+      "answerable": true,
+      "outcome": "missed",
+      "decision": "unsupported",
+      "coverage": 0.0,
+      "cited_sections": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "output_tokens": 256,
+      "stopped_by": "max_new_tokens",
+      "prefill_seconds": 15.533,
+      "ttft_seconds": 15.626,
+      "total_seconds": 67.98,
+      "seconds_per_token": 0.2053,
+      "fingerprint_restored": true,
+      "raw_text": "Para solicitar una partida de nacimiento en La Rioja, debes concurrir a la oficina del Registro Civil correspondiente al lugar de nacimiento del bebé y presentar los siguientes requisitos:\n\n**Requisitos:**\n\n*   DNI original del solicitante (madre, padre o tutor legal)\n*   DNI de la persona que solicita la partida de nacimiento (si es menor de edad)\n*   Partida de nacimiento original con firma y sello del oficial público (si se tiene)\n*   Certificado de nacimiento original con o sin oblea (si no se tiene la partida original)\n*   Si el menor se encuentra en un hogar, se debe presentar la autorización de representación firmada y sellada por el director del establecimiento\n*   Si el menor es menor de 14 años, se debe presentar el permiso para tramitar pasaporte sin presencia de los padres, con certificación de la autoridad pertinente (escribano o juez)\n*   Si el menor es menor de 18 años, se debe presentar el permiso para tramitar pasaporte sin presencia de los padres, con certificación de la"
+    },
+    {
+      "id": "q11",
+      "question": "¿Dónde pido el certificado de antecedentes penales?",
+      "answerable": false,
+      "outcome": "correct_abstention",
+      "decision": "abstained",
+      "coverage": null,
+      "cited_sections": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "output_tokens": 55,
+      "stopped_by": "eos",
+      "prefill_seconds": 1.668,
+      "ttft_seconds": 1.668,
+      "total_seconds": 13.43,
+      "seconds_per_token": 0.2179,
+      "fingerprint_restored": true,
+      "raw_text": "No encontré esa información en los documentos oficiales disponibles. Te recomiendo consultar directamente con la Inspección General de Justicia de La Rioja o con el organismo competente para obtener más información sobre el certificado de antecedentes penales."
+    },
+    {
+      "id": "q13",
+      "question": "¿Qué requisitos publica el Registro Civil para el pasaporte de un menor?",
+      "answerable": true,
+      "outcome": "wrong_source",
+      "decision": "answered",
+      "coverage": 0.889,
+      "cited_sections": [
+        "nac-requisitos-dni-pasaporte#s7",
+        "nac-requisitos-dni-pasaporte#s12",
+        "nac-requisitos-dni-pasaporte#s20"
+      ],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "output_tokens": 256,
+      "stopped_by": "max_new_tokens",
+      "prefill_seconds": 1.803,
+      "ttft_seconds": 1.803,
+      "total_seconds": 55.99,
+      "seconds_per_token": 0.2125,
+      "fingerprint_restored": true,
+      "raw_text": "Según el documento oficial del Registro Civil de La Rioja, para el pasaporte de un menor, los requisitos son los siguientes:\n\n**Si el menor es menor de 14 años:**\n\n* DNI anterior (recomendado, no excluyente)\n* Partida de nacimiento original con firma y sello del oficial público (o certificado de nacimiento con o sin oblea, firmado por un Oficial Público)\n* Acompañamiento del padre, madre o representante legal; y su DNI\n* Acreditación del representante legal, cuando corresponda:\n  + Oficio judicial o testimonio de tutela del menor (otorgada por el juzgado). Debe contar con sello y firma del juez o del Secretario o funcionario autorizado a extender oficios en cumplimiento de mandas judiciales.\n  + Si el menor se encuentra en un hogar: autorización de representación firmada y sellada por la autoridad competente que corresponda.\n  + Oficio judicial o testimonio de guarda provisoria con fines de adopción (debe contar con sello y firma del juez, o del Secretario o"
+    },
+    {
+      "id": "q14",
+      "question": "¿Qué información falta para saber el costo de una partida?",
+      "answerable": true,
+      "outcome": "missed",
+      "decision": "unsupported",
+      "coverage": 0.0,
+      "cited_sections": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [
+        "rc-solicitud-partidas#s3"
+      ],
+      "output_tokens": 59,
+      "stopped_by": "eos",
+      "prefill_seconds": 1.532,
+      "ttft_seconds": 1.532,
+      "total_seconds": 13.8,
+      "seconds_per_token": 0.2114,
+      "fingerprint_restored": true,
+      "raw_text": "Para saber el costo de una partida, necesitarías la información sobre la sección [rc-solicitud-partidas#s3] del documento, que menciona el costo de la solicitud de partidas. Sin embargo, en el documento proporcionado, no se incluye esa información."
+    },
+    {
+      "id": "q02",
+      "question": "¿Qué requisitos piden para inscribir una defunción?",
+      "answerable": true,
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "coverage": 0.875,
+      "cited_sections": [
+        "rc-defunciones#s1"
+      ],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "output_tokens": 256,
+      "stopped_by": "max_new_tokens",
+      "prefill_seconds": 1.605,
+      "ttft_seconds": 1.605,
+      "total_seconds": 54.56,
+      "seconds_per_token": 0.2077,
+      "fingerprint_restored": true,
+      "raw_text": "Según el documento oficial, para inscribir una defunción, se requieren los siguientes requisitos:\n\nCertificado médico de defunción emitido por un profesional habilitado.\nDNI del fallecido (original).\nDNI de la persona que solicita la inscripción del fallecimiento (original y copia).\n\nAdemás, si el fallecido no tiene DNI, se deben presentar documentos adicionales según el caso:\n\n*   Muerte fetal: DNI de los progenitores y Certificado de Defunción fetal (original y copia).\n*   Persona nacida con vida: Se debe realizar la inscripción del nacimiento, la inscripción de la defunción y presentar el DNI de los progenitores.\n*   Extravío, robo o hurto: Exposición o denuncia policial y Declaración Jurada de identidad con dos testigos ante autoridad competente.\n\n[rc-defunciones#s1] Requisitos del Trámite\nCertificado médico de defunción emitido por un profesional habilitado.\nDNI del fallecido (original).\nDNI de la persona que solicita la inscri"
+    },
+    {
+      "id": "q10",
+      "question": "¿Cómo me inscribo en el monotributo?",
+      "answerable": false,
+      "outcome": "correct_abstention",
+      "decision": "abstained",
+      "coverage": null,
+      "cited_sections": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "output_tokens": 59,
+      "stopped_by": "eos",
+      "prefill_seconds": 1.352,
+      "ttft_seconds": 1.352,
+      "total_seconds": 13.1,
+      "seconds_per_token": 0.2025,
+      "fingerprint_restored": true,
+      "raw_text": "No encontré esa información en los documentos oficiales disponibles. Te recomiendo consultar directamente con la Administración Federal de Ingresos Públicos (AFIP) o visitar su sitio web oficial para obtener más información sobre cómo inscribirse en el monotributo."
+    }
+  ],
+  "peak_working_set_mb": 9376,
+  "finished_at": "2026-10-17T20:34:00+00:00"
+}

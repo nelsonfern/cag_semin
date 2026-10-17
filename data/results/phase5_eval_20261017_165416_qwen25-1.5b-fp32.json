@@ -1,0 +1,183 @@
+{
+  "phase": 5,
+  "evaluated_at": "2026-10-17T19:54:16+00:00",
+  "engine": {
+    "model_id": "Qwen/Qwen2.5-1.5B-Instruct",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "dtype": "float32",
+    "device": "cpu",
+    "model_load_seconds": 33.36,
+    "cache_id": "83ed348a1d8ba1b7",
+    "cache_source": "disk",
+    "cache_seconds": 15.13,
+    "cache_rejected": null,
+    "prefix_tokens": 15755,
+    "context_limit": 32768,
+    "max_new_tokens": 256,
+    "corpus_build_id": "10ba192df05e0285",
+    "corpus_version": "b7b3289233add501"
+  },
+  "memory": {
+    "rss_after_model_and_cache_mb": 7162,
+    "kv_cache_mb": 861.6,
+    "kv_bytes_per_token": 57344,
+    "kv_shape_per_layer": [
+      1,
+      2,
+      15755,
+      128
+    ],
+    "num_layers": 28,
+    "ram_total_gb": 15.87,
+    "ram_available_gb_before": 8.0,
+    "ram_available_gb_after_load": 1.42
+  },
+  "peak_working_set_mb": 8038,
+  "torch_threads": 6,
+  "questions_file": "questions.json",
+  "summary": {
+    "missed": 3,
+    "correct_abstention": 1
+  },
+  "rows": [
+    {
+      "id": "q01",
+      "question": "¿Cómo solicito una partida de nacimiento en La Rioja?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-solicitud-partidas"
+      ],
+      "outcome": "missed",
+      "decision": "unsupported",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [
+        "rc-solicitud-partidas#s0",
+        "rc-solicitud-partidas#s2"
+      ],
+      "coverage": 0.125,
+      "weak_citations": [],
+      "warnings": [
+        "El modelo generó una respuesta, pero sin citar ninguna sección de los documentos oficiales, así que no se muestra: no se puede comprobar de dónde salió.",
+        "El texto generado no coincide con los documentos citados (rc-solicitud-partidas#s0, rc-solicitud-partidas#s2), así que no se muestra."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 22,
+        "output": 190
+      },
+      "timings": {
+        "question_seconds": 4.5,
+        "first_token_seconds": 4.617,
+        "generation_seconds": 107.099,
+        "total_seconds": 107.861
+      },
+      "raw_text": "**Trámite:** Solicitud de Partidas, Registro Civil de La Rioja (provincial) [rc-solicitud-partidas#s0].\n**Requisitos:**\n- DNI de ambos convivientes, original y fotocopia.\n- Dos testigos mayores de edad con DNI, quienes no deben ser parientes en ningún grado.\n- Declaración jurada completa y suscripta.\n**Pasos:**\n1. Solicitar turno en el Registro Civil correspondiente.\n2. Presentarse con la documentación requerida.\n3. La Dirección General analizará la documentación y autorizará o no la unión.\n4. Si es aprobada, se notificará a los convivientes y se celebrará la unión convivencial.\n**Costo:** no informado: el documento no publica el monto [rc-solicitud-partidas#s2].",
+      "seconds_per_token": 0.5422
+    },
+    {
+      "id": "q11",
+      "question": "¿Dónde pido el certificado de antecedentes penales?",
+      "answerable": false,
+      "expected_documents": [],
+      "outcome": "correct_abstention",
+      "decision": "unsupported",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [
+        "rc-defunciones#s0"
+      ],
+      "rejected_citations": [],
+      "coverage": 0.0,
+      "weak_citations": [],
+      "warnings": [
+        "El modelo generó una respuesta, pero sin citar ninguna sección de los documentos oficiales, así que no se muestra: no se puede comprobar de dónde salió.",
+        "Se descartaron citas a documentos que no tratan el tema de la pregunta: rc-defunciones#s0."
+      ],
+      "stopped_by": "max_new_tokens",
+      "tokens": {
+        "question": 24,
+        "output": 256
+      },
+      "timings": {
+        "question_seconds": 2.927,
+        "first_token_seconds": 2.928,
+        "generation_seconds": 148.552,
+        "total_seconds": 149.314
+      },
+      "raw_text": "**Trámite:** Certificado de Antecedentes Penales, Registro Civil de La Rioja (provincial) [rc-defunciones#s0].\n**Requisitos:**\n- DNI original y fotocopias de ambos contrayentes, más fotocopias de actas de nacimiento.\n- Documento de identidad de ambos progenitores.\n- Si los progenitores están casados, deben presentar la libreta de familia o los datos de inscripción del acta de matrimonio para poder localizar el acta y adjuntarla al trámite.\n- Si son extranjeros, con DNI Argentino para extranjeros, pasaporte o cédula de su país, que no haya vencido.\n- Si alguno de los progenitores no posee documento, deberá acreditar su identidad con 2 (dos) testigos mayores de 18 años con DNI vigente y en buen estado.\n**Pasos:**\n1. Sacar turno en el registro civil más cercano.\n2. Presentarse con la documentación requerida.\n3. El registro remite el trámite a la Dirección General, donde se genera un expediente",
+      "seconds_per_token": 0.5711
+    },
+    {
+      "id": "q13",
+      "question": "¿Qué requisitos publica el Registro Civil para el pasaporte de un menor?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-pasaporte"
+      ],
+      "outcome": "missed",
+      "decision": "unsupported",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [
+        "rc-pasaporte#s1"
+      ],
+      "coverage": 0.0,
+      "weak_citations": [],
+      "warnings": [
+        "El modelo generó una respuesta, pero sin citar ninguna sección de los documentos oficiales, así que no se muestra: no se puede comprobar de dónde salió.",
+        "El texto generado no coincide con los documentos citados (rc-pasaporte#s1), así que no se muestra."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 26,
+        "output": 218
+      },
+      "timings": {
+        "question_seconds": 2.825,
+        "first_token_seconds": 2.825,
+        "generation_seconds": 123.276,
+        "total_seconds": 124.019
+      },
+      "raw_text": "**Requisitos:** [rc-pasaporte#s1]\n\n- Mayores de 14 años: DNI original y fotocopias de ambos contrayentes, más fotocopias de actas de nacimiento.\n- Menores de 14 años: concurrir acompañados por padre, madre o tutor legal, quienes deben presentar su propio DNI y la partida de nacimiento original del menor.\n- Si los progenitores están casados, deben presentar la libreta de familia o los datos de inscripción del acta de matrimonio para poder localizar el acta y adjuntarla al trámite.\n- Si son extranjeros, con DNI Argentino para extranjeros, pasaporte o cédula de su país, que no haya vencido.\n- Si alguno de los progenitores no posee documento, deberá acreditar su identidad con 2 (dos) testigos mayores de 18 años con DNI vigente y en buen estado.",
+      "seconds_per_token": 0.5551
+    },
+    {
+      "id": "q14",
+      "question": "¿Qué información falta para saber el costo de una partida?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-solicitud-partidas",
+        "ley-10702-impositiva-2024"
+      ],
+      "outcome": "missed",
+      "decision": "abstained",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "coverage": null,
+      "weak_citations": [],
+      "warnings": [],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 20,
+        "output": 35
+      },
+      "timings": {
+        "question_seconds": 3.032,
+        "first_token_seconds": 3.033,
+        "generation_seconds": 22.544,
+        "total_seconds": 23.332
+      },
+      "raw_text": "No encontré esa información en los documentos oficiales disponibles. Te recomiendo consultar directamente a tu Registro Civil correspondiente para obtener el costo de las partidas.",
+      "seconds_per_token": 0.5739
+    }
+  ]
+}
