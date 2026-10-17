@@ -84,7 +84,7 @@ sección. La misma entrada produce siempre los mismos bytes y el mismo `build_id
 ## Demostración de la caché KV (Fase 3)
 
 ```bash
-.venv\Scripts\python -X utf8 -m app.cag.demo_kv --dtype bfloat16
+.venv\Scripts\python -X utf8 -m app.cag.demo_kv --device cpu --dtype float32
 ```
 
 Construye una vez la caché KV del prefijo (instrucciones + corpus) y responde dos preguntas

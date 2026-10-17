@@ -1,0 +1,25 @@
+[01:32:36] Cargando modelo...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s]Loading weights:   0%|          | 1/338 [00:00<02:10,  2.59it/s]Loading weights:   5%|▌         | 18/338 [00:00<00:06, 46.76it/s]Loading weights:  10%|█         | 35/338 [00:00<00:03, 76.73it/s]Loading weights:  14%|█▍        | 47/338 [00:00<00:03, 85.00it/s]Loading weights:  18%|█▊        | 60/338 [00:00<00:03, 88.09it/s]Loading weights:  21%|██        | 71/338 [00:00<00:02, 92.46it/s]Loading weights:  25%|██▌       | 85/338 [00:01<00:02, 102.18it/s]Loading weights:  29%|██▊       | 97/338 [00:01<00:02, 99.24it/s] Loading weights:  32%|███▏      | 108/338 [00:01<00:02, 97.27it/s]Loading weights:  35%|███▌      | 119/338 [00:01<00:02, 94.62it/s]Loading weights:  39%|███▉      | 133/338 [00:01<00:01, 103.91it/s]Loading weights:  43%|████▎     | 144/338 [00:01<00:01, 98.42it/s] Loading weights:  46%|████▌     | 155/338 [00:01<00:01, 97.15it/s]Loading weights:  50%|█████     | 169/338 [00:01<00:01, 102.28it/s]Loading weights:  54%|█████▎    | 181/338 [00:02<00:01, 100.78it/s]Loading weights:  57%|█████▋    | 193/338 [00:02<00:01, 98.55it/s] Loading weights:  61%|██████    | 206/338 [00:02<00:01, 104.11it/s]Loading weights:  64%|██████▍   | 217/338 [00:02<00:01, 102.68it/s]Loading weights:  68%|██████▊   | 229/338 [00:02<00:01, 101.53it/s]Loading weights:  71%|███████▏  | 241/338 [00:02<00:00, 102.09it/s]Loading weights:  75%|███████▍  | 252/338 [00:02<00:00, 101.59it/s]Loading weights:  78%|███████▊  | 263/338 [00:02<00:00, 99.06it/s] Loading weights:  82%|████████▏ | 277/338 [00:02<00:00, 104.96it/s]Loading weights:  85%|████████▌ | 288/338 [00:03<00:01, 42.87it/s] Loading weights:  88%|████████▊ | 296/338 [00:03<00:00, 47.26it/s]Loading weights:  90%|████████▉ | 304/338 [00:04<00:01, 23.71it/s]Loading weights:  92%|█████████▏| 311/338 [00:05<00:01, 19.43it/s]Loading weights:  94%|█████████▍| 318/338 [00:05<00:00, 22.39it/s]Loading weights:  96%|█████████▌| 323/338 [00:06<00:01, 13.43it/s]Loading weights:  99%|█████████▉| 334/338 [00:06<00:00, 19.49it/s]Loading weights: 100%|██████████| 338/338 [00:06<00:00, 52.20it/s]
+[01:37:01] Modelo Qwen/Qwen2.5-1.5B-Instruct (float32) cargado en 262.9 s
+[01:37:01] Prefijo: 15208 tokens; preguntas: [22, 27]; unión de tokenización correcta: [True, True]
+[01:37:01] Construyendo la caché KV del prefijo...
+[01:40:26] Caché construida en 204.1 s: 831.69 MB, capas=28, forma K por capa=[1, 2, 15208, 128]
+[01:40:26] CAG pregunta 1...
+[01:41:22]   54.6 s (pregunta procesada en 2.32 s): 'Para solicitar una partida de nacimiento en La Rioja, puedes seguir estos pasos:\n\n1. **Accede al sitio web oficial del R'
+[01:41:22] CAG pregunta 2...
+[01:42:17]   53.3 s (pregunta procesada en 2.35 s): 'Para tramitar un pasaporte para un menor de edad, necesitas cumplir con los siguientes requisitos:\n\n1. El menor debe est'
+[01:42:17] Baseline pregunta 1 (procesa prefijo + pregunta desde cero)...
+[01:46:33]   256.5 s (prefill 206.6 s)
+[01:46:33] Baseline pregunta 2 (procesa prefijo + pregunta desde cero)...
+[01:50:46]   252.1 s (prefill 201.8 s)
+[01:50:46] Control negativo: pregunta 1 y 2 sin restaurar la caché...
+[01:52:31] RESULTADO
+[01:52:31]   q1_cag_equals_baseline_tokens: True
+[01:52:31]   q2_cag_equals_baseline_tokens: True
+[01:52:31]   q2_first_logits_max_abs_diff_vs_baseline: 0.0
+[01:52:31]   control negativo: {"cache_len_before_q2_without_reset": 15325, "extra_positions_from_previous_query": 117, "q2_tokens_differ_from_clean_answer": true, "first_logits_max_abs_diff_vs_clean": 6.462984085083008, "text": "Para tramitar el pasaporte de un menor de edad, necesitarás cumplir con los siguientes requisitos:\n\
+[01:52:31]   P1 CAG 54.585 s vs baseline 256.467 s
+[01:52:31]   P2 CAG 53.324 s vs baseline 252.055 s
+[01:52:31] Guardado en D:\cag_semin\data\results\phase3_kv_demo_20261017_015231.json
+exit=0  

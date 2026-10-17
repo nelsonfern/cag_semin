@@ -9,7 +9,7 @@ Con el corpus real y un modelo real:
 5. Control negativo: repite sin restaurar la caché para mostrar la contaminación.
 
 Uso:
-    python -X utf8 -m app.cag.demo_kv [--model Qwen/Qwen2.5-0.5B-Instruct] [--dtype bfloat16]
+    python -X utf8 -m app.cag.demo_kv [--model Qwen/Qwen2.5-1.5B-Instruct] [--dtype float32]
 Resultados: data/results/phase3_kv_demo_<fecha>.json
 """
 

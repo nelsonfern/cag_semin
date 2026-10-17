@@ -10,7 +10,7 @@ pruebas aprobadas y tareas pendientes. Cada fase cierra con un commit.
 | 0 | Inicialización del repositorio | Completada |
 | 1 | Fuentes e ingesta | **Aprobada** (2026-10-16) |
 | 2 | Corpus reproducible | **Aprobada** (2026-10-16) |
-| 3 | Prueba mínima de KV cache | Abierta — falta la demo real (se correrá en la PC potente) |
+| 3 | Prueba mínima de KV cache | **Aprobada** (2026-10-17) |
 | 4 | Motor CAG | Pendiente |
 | 5 | TramitaIA (API + interfaz + citas) | Pendiente |
 | 6 | Benchmark | Pendiente |
@@ -421,3 +421,66 @@ py -3.12 -m venv .venv
 El corpus (`data/processed/corpus/`) y el manifiesto vienen en el repo, así que no hace falta volver a descargar las fuentes. Hay que commitear el JSON de `data/results/` y traerlo para documentarlo.
 
 Se agregó `--device` a la demo y el registro de GPU, VRAM total y VRAM máxima usada.
+
+### Demo real en la PC potente (2026-10-17)
+
+**Elección del modelo (decisiones del usuario)**
+- Primero se pidió **Qwen2.5-7B-Instruct**. Se descartó para esta PC: los pesos ocupan 15,2 GB en bf16 y ~30 GB en float32, y no entran en 15,9 GB de RAM (había 4,2 GB libres). Habría que paginar a disco en cada pasada.
+- Después se eligió **Qwen2.5-3B-Instruct en bfloat16**. La corrida se **cortó a pedido del usuario** durante la descarga, por la duración estimada (1 a 2,5 h, porque esta CPU emula bf16). No dio ninguna medición.
+- Se eligió **Qwen2.5-1.5B-Instruct en float32**, pensando también en una demo en vivo. Usa el mismo tokenizer que el corpus, así que no hubo que reconstruir nada.
+- Una primera corrida del 1.5B se interrumpió durante la descarga porque se reinició la sesión de Claude Code. Se relanzó como proceso independiente. No dio ninguna medición.
+
+**Cambios de código:** `DEFAULT_MODEL_ID = Qwen/Qwen2.5-1.5B-Instruct` y dtype por defecto `float32` en `app/cag/model_loader.py`. También se actualizaron `.env.example`, la ayuda de `demo_kv.py` y el comando del README.
+
+**Entorno**
+- AMD Ryzen 5 5500, 12 hilos (torch usó 6).
+- 15,87 GB de RAM, 7,77 GB disponibles al empezar.
+- Windows 11.
+- Python 3.12.0, torch 2.14.1+cpu, transformers 5.20.1.
+- Sin GPU usable (Radeon RX 6400, sin CUDA).
+- Modelo descargado en `D:\hf_cache` (`HF_HOME`).
+
+**Comandos**
+```bash
+py -3.12 -m venv .venv
+.venv\Scripts\python -m pip install -r requirements.txt
+.venv\Scripts\python -m pytest            # 54 aprobadas, 0 fallidas
+set HF_HOME=D:\hf_cache
+.venv\Scripts\python -X utf8 -m app.cag.demo_kv --model Qwen/Qwen2.5-1.5B-Instruct --device cpu --dtype float32
+```
+Resultado: `data/results/phase3_kv_demo_20261017_015231.json`. Log: `data/results/phase3_demo_1.5b_fp32.log`.
+
+**Mediciones (una sola corrida, sin repeticiones; las repeticiones y percentiles van en la Fase 6)**
+
+| Etapa | Valor |
+|---|---|
+| Carga del modelo | 262,9 s, **incluye terminar la descarga**; no es el tiempo de carga desde disco. RSS de 295 a 6.305 MB |
+| Prefijo | 15.208 tokens (corpus `10ba192df05e0285`). Preguntas de 22 y 27 tokens; la unión de tokenización es correcta en ambas |
+| Construcción de la caché KV | **204,1 s**. `DynamicCache` de 28 capas, K y V `[1, 2, 15208, 128]` en float32. **831,69 MB** (56 KB por token, igual al cálculo teórico). RSS de 6.316 a 7.317 MB |
+
+| Consulta | CAG: pregunta procesada | CAG: TTFT | CAG: total | Baseline: prefill | Baseline: total |
+|---|---|---|---|---|---|
+| P1 (partida de nacimiento) | 2,32 s | 2,44 s | **54,6 s** | 206,6 s | **256,5 s** |
+| P2 (pasaporte de un menor) | 2,35 s | 2,35 s | **53,3 s** | 201,8 s | **252,1 s** |
+
+En las dos consultas se generaron 96 tokens, el límite (`max_new_tokens`). Con CAG, casi todo el tiempo se va en la generación: ~51 s para 96 tokens, unos 0,53 s por token, cada uno atendiendo sobre ~15.300 posiciones.
+
+**Verificaciones de corrección**
+- **CAG = baseline token por token** en P1 y en P2. La diferencia máxima de los primeros logits de P2 frente al baseline es **0,0**.
+- La caché tenía **15.208 posiciones antes de cada consulta CAG** y se restauró al prefijo después de cada una, con la misma huella (`1f8da2a58d4c5dd3a107fb47a5342f66`).
+- **Control negativo** (sin restaurar):
+  - P2 arrancó con **15.325 posiciones**, es decir, 117 de más que sobraron de P1: 22 de la pregunta y 95 generados.
+  - Su respuesta difiere de la limpia. La diferencia máxima de los primeros logits es 6,46.
+  - Al restaurar se quitaron 239 posiciones y se recuperó exactamente el estado base.
+
+### Criterio de aprobación de la Fase 3
+> El estado KV del prefijo documental se reutiliza correctamente para dos preguntas independientes, sin que se incorporen tokens de la primera respuesta a la segunda.
+
+**Se cumple con el corpus real y un modelo real. Fase aprobada por el usuario el 2026-10-17.**
+
+### Limitaciones y pendientes
+- `revision` del modelo quedó en `null`: el loader no la obtuvo de la caché local. Para reproducir con precisión, hay que registrarla (se corrige en la Fase 4).
+- torch usó 6 de los 12 hilos (su valor por defecto en esta CPU). Se puede medir con 12 en el benchmark.
+- Las respuestas están en «tú» porque las instrucciones son todavía provisionales. El voseo y las citas van en la Fase 5.
+- Para la demo en vivo, se propone para la Fase 4 **guardar la caché KV en disco** con metadatos (modelo, revisión, dtype, `build_id`, huella), y verificarlos al cargarla, para no reconstruirla durante la exposición.
+- En `D:\hf_cache` quedó la descarga parcial del 3B (~4,2 GB), que se puede borrar.

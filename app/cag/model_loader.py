@@ -13,7 +13,7 @@ from dataclasses import dataclass
 import psutil
 import torch
 
-DEFAULT_MODEL_ID = "Qwen/Qwen2.5-0.5B-Instruct"
+DEFAULT_MODEL_ID = "Qwen/Qwen2.5-1.5B-Instruct"
 
 _DTYPES = {"float32": torch.float32, "bfloat16": torch.bfloat16, "float16": torch.float16}
 
@@ -42,7 +42,7 @@ def load_model(model_id: str | None = None, device: str | None = None, dtype: st
 
     model_id = model_id or os.environ.get("MODEL_ID") or DEFAULT_MODEL_ID
     device = device or os.environ.get("DEVICE") or "cpu"
-    dtype = dtype or os.environ.get("DTYPE") or "bfloat16"
+    dtype = dtype or os.environ.get("DTYPE") or "float32"
     if dtype not in _DTYPES:
         raise ValueError(f"DTYPE no soportado: {dtype!r}. Opciones: {sorted(_DTYPES)}")
 
