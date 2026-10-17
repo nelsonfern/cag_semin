@@ -96,6 +96,27 @@ Código: [`app/cag/cache_builder.py`](app/cag/cache_builder.py) (construcción),
 [`app/cag/engine.py`](app/cag/engine.py) (consulta, restauración y baseline) y
 [`app/cag/prompt.py`](app/cag/prompt.py) (prefijo y pregunta).
 
+## Motor CAG y caché en disco (Fase 4)
+
+Construir la caché KV lleva minutos en CPU; cargarla desde disco, segundos. El motor
+(`CAGEngine` en [`app/cag/engine.py`](app/cag/engine.py)) la guarda en `data/caches/<cache_id>/`
+(fuera de git) y la valida al cargarla: modelo, revisión, dtype, prefijo, versión del corpus
+y huella SHA-256 de las K/V. Si algo no coincide, la descarta y la reconstruye.
+
+```bash
+.venv\Scripts\python -X utf8 -m app.cag.cli build                 # antes de la demo: construye y guarda
+.venv\Scripts\python -X utf8 -m app.cag.cli info                  # cachés guardadas y si están vigentes
+.venv\Scripts\python -X utf8 -m app.cag.cli ask "¿Cómo solicito una partida de nacimiento?"
+.venv\Scripts\python -X utf8 -m app.cag.cli chat                  # varias preguntas con una sola carga
+```
+
+`ask` y `chat` solo cargan la caché (no la reconstruyen salvo con `--build-if-missing`) y
+muestran la respuesta a medida que se genera. Para guardar los modelos en otro disco, definí
+`HF_HOME` en el `.env`.
+
+Código: [`app/cag/cache_store.py`](app/cag/cache_store.py) (guardar y cargar) y
+[`app/cag/cli.py`](app/cag/cli.py).
+
 ## Pruebas
 
 ```bash

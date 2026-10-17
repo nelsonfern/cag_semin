@@ -405,6 +405,15 @@ def write_build(build: CorpusBuild, out_dir: Path = CORPUS_DIR) -> tuple[Path, P
     return txt, rep
 
 
+def load_latest(out_dir: Path = CORPUS_DIR) -> tuple[str, dict]:
+    """Texto y reporte del último build (``latest.json``). Lee los bytes tal cual se escribieron."""
+    latest = json.loads((out_dir / "latest.json").read_text(encoding="utf-8"))
+    with open(out_dir / latest["text"], encoding="utf-8", newline="") as fh:
+        text = fh.read()
+    report = json.loads((out_dir / latest["report"]).read_text(encoding="utf-8"))
+    return text, report
+
+
 def main(argv: list[str] | None = None) -> None:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")

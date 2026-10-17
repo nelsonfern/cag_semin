@@ -31,11 +31,14 @@ DOCUMENTOS OFICIALES:
 
 @dataclass
 class EncodedPrompt:
+    """Un tramo del prompt: el texto y sus IDs de tokens."""
+
     text: str
     ids: list[int]
 
 
 def _messages(corpus_text: str, question: str | None = None) -> list[dict]:
+    """Mensajes de chat: sistema (instrucciones + corpus) y, si hay, la pregunta del usuario."""
     messages = [{"role": "system", "content": SYSTEM_INSTRUCTIONS + corpus_text}]
     if question is not None:
         messages.append({"role": "user", "content": question})
@@ -43,6 +46,7 @@ def _messages(corpus_text: str, question: str | None = None) -> list[dict]:
 
 
 def build_prefix(tokenizer, corpus_text: str) -> EncodedPrompt:
+    """Prefijo que se cachea: plantilla de chat con el mensaje de sistema y el corpus."""
     text = tokenizer.apply_chat_template(_messages(corpus_text), tokenize=False, add_generation_prompt=False)
     return EncodedPrompt(text=text, ids=tokenizer.encode(text, add_special_tokens=False))
 

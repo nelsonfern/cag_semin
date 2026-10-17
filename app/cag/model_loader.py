@@ -9,6 +9,7 @@ from __future__ import annotations
 import os
 import time
 from dataclasses import dataclass
+from pathlib import Path
 
 import psutil
 import torch
@@ -20,6 +21,8 @@ _DTYPES = {"float32": torch.float32, "bfloat16": torch.bfloat16, "float16": torc
 
 @dataclass
 class LoadedModel:
+    """Modelo y tokenizer cargados, con los datos que identifican los pesos y el costo de carga."""
+
     model: object
     tokenizer: object
     model_id: str
@@ -37,7 +40,35 @@ def rss_mb() -> float:
     return psutil.Process().memory_info().rss / 2**20
 
 
+def resolve_revision(model_id: str, config=None) -> str | None:
+    """Commit del modelo en el Hub, para saber exactamente qué pesos generaron una caché.
+
+    ``config._commit_hash`` puede venir vacío al cargar desde la caché local; en ese caso se
+    toma del nombre de la carpeta ``snapshots/<commit>`` de Hugging Face. Para un modelo en una
+    carpeta propia (sin Hub) devuelve ``None``.
+    """
+    revision = getattr(config, "_commit_hash", None) if config is not None else None
+    if revision:
+        return revision
+    if Path(model_id).exists():
+        return None
+    from huggingface_hub import try_to_load_from_cache
+
+    cached = try_to_load_from_cache(model_id, "config.json")
+    if isinstance(cached, str):
+        parent = Path(cached).parent
+        if parent.parent.name == "snapshots":
+            return parent.name
+    return None
+
+
 def load_model(model_id: str | None = None, device: str | None = None, dtype: str | None = None) -> LoadedModel:
+    """Carga modelo y tokenizer. Sin argumentos, usa ``MODEL_ID``, ``DEVICE`` y ``DTYPE`` del .env.
+
+    Mide el tiempo y la RAM de la carga por separado: es un costo fijo por proceso, distinto
+    del de construir la caché y del de responder. Registra la revisión de los pesos para
+    poder validar después las cachés guardadas.
+    """
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     model_id = model_id or os.environ.get("MODEL_ID") or DEFAULT_MODEL_ID
@@ -62,7 +93,7 @@ def load_model(model_id: str | None = None, device: str | None = None, dtype: st
         model=model,
         tokenizer=tokenizer,
         model_id=model_id,
-        revision=getattr(model.config, "_commit_hash", None),
+        revision=resolve_revision(model_id, model.config),
         device=device,
         dtype=dtype,
         num_parameters=sum(p.numel() for p in model.parameters()),

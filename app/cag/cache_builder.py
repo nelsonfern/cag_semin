@@ -31,6 +31,12 @@ DEFAULT_CHUNK_SIZE = 2048
 
 @dataclass
 class KVCacheState:
+    """La caché KV del prefijo y lo necesario para verificarla y restaurarla.
+
+    ``prefix_len`` y ``fingerprint`` definen el «estado base»: toda consulta debe empezar con
+    la caché exactamente así. ``structure`` describe capas, formas, dtype y tamaño.
+    """
+
     cache: object                  # transformers.DynamicCache con las K/V del prefijo
     prefix_ids: list[int]
     prefix_len: int
@@ -40,9 +46,12 @@ class KVCacheState:
     rss_before_mb: float
     rss_after_mb: float
     structure: dict = field(default_factory=dict)
+    source: str = "built"          # "built" (calculada ahora) o "disk" (cargada de data/caches)
+    load_seconds: float | None = None
 
 
 def cache_structure(cache, prefix_len: int) -> dict:
+    """Describe la caché (capas, formas, dtype, bytes totales y por token) para registrarla."""
     layers = cache.layers
     k0 = layers[0].keys
     total_bytes = sum(l.keys.numel() * l.keys.element_size() + l.values.numel() * l.values.element_size() for l in layers)
@@ -99,6 +108,12 @@ def prefill(model, ids: list[int], cache, start: int = 0, chunk_size: int = DEFA
 
 
 def build_kv_cache(model, prefix_ids: list[int], chunk_size: int = DEFAULT_CHUNK_SIZE) -> KVCacheState:
+    """Fase B del CAG: procesa el prefijo una sola vez y devuelve su caché KV.
+
+    Crea una ``DynamicCache`` vacía, la llena con ``prefill`` (por bloques) y registra el
+    tiempo, la RAM, la estructura y la huella de las K/V. Rechaza un prefijo vacío o uno que
+    no entra en el contexto del modelo. Es el paso caro (minutos en CPU) que CAG paga una vez.
+    """
     from transformers import DynamicCache
 
     if not prefix_ids:

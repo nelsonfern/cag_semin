@@ -1,0 +1,66 @@
+{
+  "phase": 4,
+  "started_at": "2026-10-17T05:05:52+00:00",
+  "environment": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "cpu_threads_torch": 6,
+    "ram_total_gb": 15.87,
+    "ram_available_gb_at_start": 8.75,
+    "python": "3.12.0",
+    "torch": "2.14.1+cpu",
+    "transformers": "5.20.1"
+  },
+  "compared_with": "phase3_kv_demo_20261017_015231.json",
+  "model": {
+    "model_id": "Qwen/Qwen2.5-1.5B-Instruct",
+    "revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "dtype": "float32",
+    "load_seconds": 31.27,
+    "rss_after_mb": 6290
+  },
+  "build": {
+    "cache_id": "2c872ad2e0d03e03",
+    "build_seconds": 207.39,
+    "save_seconds": 6.185,
+    "file_bytes": 872092856,
+    "file_mb": 831.69,
+    "fingerprint": "1f8da2a58d4c5dd3a107fb47a5342f66",
+    "fingerprint_equals_phase3": true,
+    "path": "data\\caches\\2c872ad2e0d03e03"
+  },
+  "load": {
+    "source": "disk",
+    "load_seconds": 1.229,
+    "rss_before_mb": 6767,
+    "rss_after_mb": 7261,
+    "fingerprint_equals_built": true
+  },
+  "queries": [
+    {
+      "question": "¿Cómo solicito una partida de nacimiento en La Rioja?",
+      "question_tokens": 22,
+      "output_tokens": 96,
+      "prefill_seconds": 2.489,
+      "ttft_seconds": 2.587,
+      "total_seconds": 54.045,
+      "text_equals_phase3": true,
+      "text": "Para solicitar una partida de nacimiento en La Rioja, puedes seguir estos pasos:\n\n1. **Accede al sitio web oficial del Registro Civil de La Rioja**:\n   - Visita la página web oficial del Registro Civil de La Rioja: [https://registrocivil.larioja.gob.ar/](https://registrocivil.larioja.gob.ar/)\n\n2. **Elegir la opción de solicitud de actas**:\n   - En"
+    },
+    {
+      "question": "¿Qué requisitos necesito para tramitar el pasaporte de un menor de edad?",
+      "question_tokens": 27,
+      "output_tokens": 96,
+      "prefill_seconds": 2.416,
+      "ttft_seconds": 2.417,
+      "total_seconds": 51.636,
+      "text_equals_phase3": true,
+      "text": "Para tramitar un pasaporte para un menor de edad, necesitas cumplir con los siguientes requisitos:\n\n1. El menor debe estar acompañado por un mayor (padre, madre o tutor legal) con DNI.\n\n2. El menor debe estar acompañado por un mayor (padre, madre o tutor legal) con DNI.\n\n3. La acreditación del representante legal puede estar dada por los siguientes documentos:\n\n   - Oficio judicial de"
+    }
+  ],
+  "checks": {
+    "all_answers_equal_phase3": true,
+    "cache_restored": true,
+    "recoveries": []
+  },
+  "finished_at": "2026-10-17T05:11:49+00:00"
+}

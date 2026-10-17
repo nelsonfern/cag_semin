@@ -19,3 +19,6 @@ cache/
 .idea/
 Thumbs.db
 .DS_Store
+
+# Cachés KV serializadas (cientos de MB cada una)
+data/caches/

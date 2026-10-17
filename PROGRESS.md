@@ -11,7 +11,7 @@ pruebas aprobadas y tareas pendientes. Cada fase cierra con un commit.
 | 1 | Fuentes e ingesta | **Aprobada** (2026-10-16) |
 | 2 | Corpus reproducible | **Aprobada** (2026-10-16) |
 | 3 | Prueba mínima de KV cache | **Aprobada** (2026-10-17) |
-| 4 | Motor CAG | Pendiente |
+| 4 | Motor CAG | **Aprobada** (2026-10-17) |
 | 5 | TramitaIA (API + interfaz + citas) | Pendiente |
 | 6 | Benchmark | Pendiente |
 | 7 | Guía de exposición | Pendiente |
@@ -484,3 +484,124 @@ En las dos consultas se generaron 96 tokens, el límite (`max_new_tokens`). Con 
 - Las respuestas están en «tú» porque las instrucciones son todavía provisionales. El voseo y las citas van en la Fase 5.
 - Para la demo en vivo, se propone para la Fase 4 **guardar la caché KV en disco** con metadatos (modelo, revisión, dtype, `build_id`, huella), y verificarlos al cargarla, para no reconstruirla durante la exposición.
 - En `D:\hf_cache` quedó la descarga parcial del 3B (~4,2 GB), que se puede borrar.
+
+---
+
+## Fase 4 — Motor CAG (2026-10-17)
+
+**Plan aprobado por el usuario:**
+- guardar y cargar la caché KV en disco, con validación;
+- `CAGEngine` con lock, restauración garantizada y límites de contexto;
+- CLI para la demo en vivo;
+- tests y medición real.
+
+Quedan fuera de esta fase la API, las citas y el prompt definitivo (Fase 5), y las repeticiones y percentiles (Fase 6).
+
+### Implementación
+
+| Archivo | Responsabilidad |
+|---|---|
+| `app/cag/cache_store.py` (nuevo) | Guarda las K/V del prefijo en `data/caches/<cache_id>/kv.safetensors`, en su dtype exacto, junto con `meta.json`: modelo, revisión, dtype, hash de los IDs del prefijo, `build_id` y versión del corpus, huella, formas y versiones de torch y transformers. Escribe en una carpeta temporal y la renombra al final. Al cargar, valida todo y **recalcula la huella**. |
+| `app/cag/engine.py` | `CAGEngine` (detallado abajo). Además, `answer_with_cache` ahora restaura la caché en un `finally` y acepta `on_token` para mostrar la respuesta mientras se genera. |
+| `app/cag/model_loader.py` | `resolve_revision`: toma el commit de `snapshots/<commit>` de la caché de Hugging Face. En la Fase 3 había quedado en `null`. El dtype por defecto pasa a `float32`. |
+| `app/cag/cache_builder.py` | `KVCacheState` registra su origen (`built` o `disk`) y el tiempo de carga. |
+| `app/ingestion/corpus_builder.py` | `load_latest()`: texto y reporte del último build. |
+| `app/cag/cli.py` (nuevo) | Comandos `build`, `info`, `ask` y `chat`. `ask` y `chat` solo cargan la caché, salvo que se pase `--build-if-missing`. |
+| `app/cag/demo_store.py` (nuevo) | Medición real de guardado y carga, comparada contra la Fase 3. |
+| `.gitignore`, `.env.example`, `README.md` | `data/caches/` queda fuera de git. Se agrega `HF_HOME` opcional y la sección «Motor CAG y caché en disco». |
+
+**Decisiones**
+- **safetensors** en lugar de `torch.save`: cargar el archivo no ejecuta código (pickle).
+- **Se guarda en el dtype exacto.** Pasar a bf16 reduciría el archivo a la mitad, pero cambiaría las K/V, y CAG dejaría de coincidir con el baseline.
+- **`cache_id` = hash de (modelo, revisión, dtype, IDs del prefijo).** Si cambian el corpus o las instrucciones del sistema (en la Fase 5), cambia el `cache_id`. La versión del corpus se valida aparte, para poder avisar «desactualizada».
+- **Ante cualquier duda, se reconstruye.** Una caché que no pasa la validación nunca se usa.
+- **Lock por motor.** La caché es una sola y cada consulta la extiende temporalmente, así que las consultas se atienden de a una. Es la base para FastAPI (Fase 5) y limita el throughput a una consulta por vez.
+- **`CAGEngine.from_latest_corpus` rechaza un corpus desactualizado**, es decir, uno construido con otra versión del manifiesto.
+- **Cada caché construida se registra en `data/manifest.json`** con `register_cache` y `mark_stale_caches`, que ya existían desde la Fase 1. Por eso este commit modifica el manifiesto.
+
+**`CAGEngine`**
+- `prepare(allow_build, force_rebuild)` carga la caché desde disco si es válida. Si no, la construye, la guarda y la registra. Informa de dónde salió la caché, cuánto tardó y por qué se descartó la anterior.
+- `answer(pregunta)` hace, en orden:
+  1. Valida la pregunta: que no esté vacía y que no supere 1.000 caracteres ni 256 tokens.
+  2. Valida el contexto: prefijo + pregunta + `max_new_tokens` ≤ min(contexto del modelo, `MAX_CONTEXT_TOKENS`).
+  3. Toma el lock.
+  4. Restaura la caché y verifica la huella. Si la caché está contaminada o alterada, la **recupera desde disco** y lo registra en `recoveries`.
+  5. Responde.
+- Errores: `QuestionError`, `ContextLimitError`, `CacheNotReadyError`, `CacheValidationError`.
+
+### Pruebas — 86 aprobadas, 0 fallidas (32 nuevas)
+
+`tests/tiny_model.py` reúne el modelo minúsculo de los tests (sin red).
+
+**`tests/test_cache_store.py` (13 tests)**
+- Ida y vuelta exacta: los tensores son idénticos, la huella y la estructura también, y las respuestas y logits coinciden con los de la caché recién construida.
+- `meta.json` completo, y el `cache_id` cambia si cambia el modelo, la revisión, el dtype o el prefijo.
+- Se rechaza la caché si cambia el modelo, la revisión, el dtype o el prefijo, o si el corpus está desactualizado.
+- Se rechaza si se altera **un solo byte** del archivo (falla la huella), si el archivo está truncado, o si `meta.json` falta, no es JSON válido o tiene otro formato.
+- Solo se puede guardar la caché en su estado base.
+
+**`tests/test_engine.py` (19 tests)**
+- **Reutilización:**
+  - el primer `prepare` construye y guarda, y el segundo carga desde disco y responde igual que el baseline;
+  - `force_rebuild` reconstruye aunque haya una caché válida;
+  - `allow_build=False` sin caché falla;
+  - consultar antes de `prepare` falla;
+  - la caché queda registrada en el manifiesto sin duplicarse.
+- **Aislamiento:**
+  - 5 preguntas en 3 órdenes distintos dan respuestas iguales al baseline;
+  - una excepción a mitad de la generación deja la caché en el prefijo;
+  - una caché alterada en memoria se recupera desde disco;
+  - 10 consultas concurrentes desde varios hilos dan lo mismo que en serie;
+  - los tokens transmitidos coinciden con el resultado.
+- **Errores y límites:**
+  - pregunta vacía, demasiado larga en caracteres o en tokens;
+  - prefijo + pregunta + respuesta justo en el límite (se acepta) y un token por encima (se rechaza);
+  - el límite es el menor entre el del modelo y `MAX_CONTEXT_TOKENS`;
+  - un prefijo que no entra se rechaza al crear el motor.
+
+### Medición real (Qwen2.5-1.5B-Instruct, float32, CPU; una sola corrida)
+Comando: `python -X utf8 -m app.cag.demo_store --phase3 data/results/phase3_kv_demo_20261017_015231.json`.
+Resultado: `data/results/phase4_cache_store_20261017_021149.json`. Log: `data/results/phase4_demo.log`.
+
+| Etapa | Valor |
+|---|---|
+| Carga del modelo desde disco, sin descarga | **31,3 s** (28,7 s en la corrida de la CLI). Revisión `989aa7980e4cf806f80c7fef2b1adb7bc71aa306` |
+| Construcción de la caché | 207,4 s (204,1 s en la Fase 3) |
+| Guardado | **6,18 s**, 831,69 MB en disco |
+| Huella de la caché construida | **Idéntica a la de la Fase 3** (`1f8da2a5…`): las K/V son reproducibles bit a bit |
+| Carga desde disco con validación completa | **1,23 s** justo después de guardarla (el archivo seguía en la caché de disco del sistema operativo); **13,6 s** en la CLI unos minutos después |
+| P1 con la caché cargada | 54,0 s (pregunta procesada en 2,49 s). **Texto idéntico al de la Fase 3** |
+| P2 con la caché cargada | 51,6 s (pregunta procesada en 2,42 s). **Texto idéntico al de la Fase 3** |
+
+`cache_restored = true` y `recoveries = []`.
+
+**Prueba de la CLI:** `cli ask "¿Dónde saco una partida de matrimonio?" --max-new-tokens 24`:
+- modelo cargado en 28,7 s;
+- caché cargada en 13,6 s;
+- pregunta de 20 tokens procesada en 3,15 s;
+- primer token a los 3,24 s;
+- 24 tokens en 16,4 s.
+
+La respuesta se muestra mientras se genera.
+
+**Qué implica para la demo en vivo:** se arranca en unos 45 s (modelo y caché) en lugar de unos 4 minutos. Cada respuesta empieza a los ~3 s y genera unos 2 tokens por segundo. La diferencia entre 1,2 y 13,6 s al cargar depende de si el archivo ya estaba en la caché de disco del sistema operativo. Hay que medirla con repeticiones en la Fase 6. Esa carga incluye recalcular la huella SHA-256 de los 832 MB.
+
+### Criterio de aprobación de la Fase 4
+> Pruebas automatizadas de reutilización, manejo de errores, límites de contexto y aislamiento entre consultas.
+
+**Se cumple:** 32 tests nuevos cubren las cuatro áreas, y la medición real confirma que la caché cargada desde disco responde exactamente igual que en la Fase 3.
+
+**Revisión del usuario:** pidió que el código se pudiera leer y entender función por función. Se agregaron docstrings a las piezas centrales que no las tenían:
+- `_decode`, el bucle de generación, que explica por qué cada paso procesa un solo token y no recalcula el prefijo;
+- `CAGEngine.answer`, `validate_question`, `__init__` y `_prepare_locked`;
+- `build_kv_cache`, `cache_structure` y `load_model`;
+- las clases `GenerationResult`, `KVCacheState`, `LoadedModel` y `EncodedPrompt`;
+- los comandos de la CLI.
+
+No cambió ningún comportamiento: 86 tests aprobados. **Fase aprobada por el usuario el 2026-10-17.**
+
+### Limitaciones y pendientes
+- Un solo motor atiende una consulta por vez. Si se necesitan consultas en paralelo, hay que copiar la caché, lo que implica unos 830 MB por consulta (Fase 5 o 6).
+- El tiempo de carga desde disco varía mucho entre lectura en frío y en caliente; se mide en la Fase 6.
+- Las respuestas siguen saliendo en «tú» aunque el prompt pide voseo. El modelo de 1.5B no siempre lo respeta. Se trabaja en la Fase 5 junto con las citas y la abstención.
+- `data/caches/` no se versiona. En otra PC hay que correr `cli build` una vez, o copiar la carpeta, que solo sirve con el mismo modelo, revisión, dtype y corpus.
