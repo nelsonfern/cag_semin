@@ -185,6 +185,20 @@ Evaluación con preguntas reales ([`app/evaluation/questions.json`](app/evaluati
 .venv\Scripts\python -X utf8 -m app.evaluation.evaluate
 ```
 
+## Benchmark (Fase 6)
+
+```bash
+.venv\Scripts\python -X utf8 -m app.evaluation.benchmark --reps 5 --baseline-reps 3 --tokens 128
+.venv\Scripts\python -X utf8 -m app.evaluation.report data\results\phase6_benchmark_<fecha>.json
+.venv\Scripts\python -X utf8 -m app.evaluation.evaluate --questions app\evaluation\questions_heldout.json --phase 6
+```
+
+Mide por separado la descarga y preparación del corpus, la carga del modelo, la carga y
+construcción de la caché KV, las consultas CAG y el baseline sin caché (con respuestas de largo
+fijo), y calcula el punto de equilibrio y los costos. Con Qwen2.5-7B Q4 en CPU: primer token a los
+~9 s con CAG contra ~630 s sin caché; CAG conviene desde la segunda consulta (desde la primera si
+la caché ya está en disco). Detalle en [`PROGRESS.md`](PROGRESS.md), Fase 6.
+
 ## Pruebas
 
 ```bash

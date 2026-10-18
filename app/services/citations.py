@@ -116,6 +116,8 @@ def _answer_sentences(text: str) -> list[str]:
         # Primero las negritas («**Requisitos:**») y después las viñetas: al revés, la viñeta
         # «*» se comía un asterisco de la negrita.
         line = re.sub(r"^\s*(?:[-*•]|\d+[.)])\s*", "", line.replace("**", "")).strip()
+        # Las marcas de cita no son contenido: «[rc-dni-renovacion#s4]» sumaba «renov» y «dni».
+        line = re.sub(r"\[[^\[\]\n]*#[^\[\]\n]*\]", "", line).strip()
         if re.match(r"(?i)tr[áa]mite\s*:", line):
             continue
         parts.extend(p.strip() for p in re.split(r"(?<=[.;])\s+", line) if p.strip())
@@ -157,6 +159,7 @@ class CitationReport:
     invalid_ids: list[str] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
     off_topic_ids: list[str] = field(default_factory=list)       # existen, pero no son del tema de la pregunta
+    removed_cost_lines: list[dict] = field(default_factory=list)  # líneas de costo sin respaldo: {"line", "reason"}
     rejected_citations: list[str] = field(default_factory=list)  # citas descartadas porque el texto no coincide
     unverified_ids: list[str] = field(default_factory=list)      # citas del modelo que no respaldan ninguna frase
     coverage: float | None = None   # fracción de frases respaldadas por secciones del tema (si se verificó)
@@ -180,6 +183,7 @@ class CitationReport:
             "off_topic_ids": self.off_topic_ids,
             "rejected_citations": self.rejected_citations,
             "unverified_ids": self.unverified_ids,
+            "removed_cost_lines": self.removed_cost_lines,
             "coverage": self.coverage,
         }
 
@@ -228,6 +232,34 @@ def _raw_stems(text: str) -> set[str]:
     text = unicodedata.normalize("NFKD", text.lower())
     text = "".join(ch for ch in text if not unicodedata.combining(ch))
     return {w[:5] for w in re.findall(r"[a-z0-9]{4,}", text)}
+
+
+# --- Verificación de costos ----------------------------------------------------------------
+# En la Fase 6 (preguntas nuevas) el 7B completaba la línea «Costo:» con «gratuito» aunque el
+# documento no publicara el costo: una frase corta que no entraba en la verificación por bigramas.
+COST_LINE_RE = re.compile(r"\b(costo|costos|cuesta|cuestan|precio|arancel|tasa|tasas|gratuit\w*|gratis|sin cargo|sin costo)\b|\$")
+FREE_RE = re.compile(r"gratuit|gratis|sin cargo|sin costo|no tiene costo")
+NOT_PUBLISHED_RE = re.compile(r"no (se )?(informa|publica|especifica|indica|detalla)|no (esta )?disponible|no informado|\$\s*\?")
+AMOUNT_RE = re.compile(r"\$\s*(\d[\d.,]*)|(\d[\d.,]*)\s*pesos")
+
+
+def _plain(text: str) -> str:
+    """Minúsculas, sin tildes, sin negritas, viñetas ni marcas de cita (para comparar costos)."""
+    text = BRACKET_RE.sub(" ", text.replace("**", ""))
+    text = re.sub(r"^\s*(?:[-*•]|\d+[.)])\s*", "", text)
+    text = unicodedata.normalize("NFKD", text.lower())
+    return "".join(ch for ch in text if not unicodedata.combining(ch)).strip()
+
+
+def _amounts(text: str) -> set[str]:
+    """Montos en pesos de un texto, normalizados («$1.500», «1500 pesos» -> «1500»)."""
+    found = set()
+    for m in AMOUNT_RE.finditer(text):
+        digits = re.sub(r"[.,]", "", m.group(1) or m.group(2))
+        digits = re.sub(r"00$", "", digits) if re.search(r"[.,]\d{2}$", m.group(1) or m.group(2) or "") else digits
+        if digits:
+            found.add(digits.lstrip("0") or "0")
+    return found
 
 
 def keep_only_citations(text: str, keep: set[str]) -> str:
@@ -316,6 +348,55 @@ class CitationIndex:
             return None  # muy poco texto para juzgar (por ejemplo, la cita sola en una línea)
         section_words = _normalize_words(self.sections[section_id][2])
         return round(len(words & section_words) / len(words), 3)
+
+    def cost_evidence(self, doc_ids: set[str]) -> str:
+        """Texto de las secciones de esos documentos que hablan de costos (normalizado)."""
+        parts = []
+        for sid, (doc_id, heading, text) in self.sections.items():
+            if doc_id in doc_ids:
+                plain = _plain(f"{heading or ''} {text}")
+                if COST_LINE_RE.search(plain):
+                    parts.append(plain)
+        return "\n".join(parts)
+
+    def check_costs(self, answer_text: str, doc_ids: set[str]) -> list[dict]:
+        """Líneas de la respuesta que afirman algo sobre el costo sin respaldo en esos documentos.
+
+        - «gratuito»: el documento tiene que decirlo, y no publicar además montos (por ejemplo,
+          las partidas son sin cargo solo para identificación: la copia certificada cuesta $1.100).
+        - Un monto: tiene que figurar en el documento.
+        - «No publicado»: el documento no tiene que informar el costo.
+        - Otra afirmación («determinado por Re.Na.Per»): la mitad de sus palabras tiene que estar
+          en la sección de costo.
+        """
+        evidence = self.cost_evidence(doc_ids)
+        ev_free = bool(FREE_RE.search(evidence))
+        ev_amounts = _amounts(evidence)
+        ev_unpublished = bool(re.search(r"\$\s*\?|determinad", evidence))
+        issues = []
+        for line in answer_text.splitlines():
+            plain = _plain(line)
+            if not plain or not COST_LINE_RE.search(plain):
+                continue
+            amounts, free, unpublished = _amounts(plain), bool(FREE_RE.search(plain)), bool(NOT_PUBLISHED_RE.search(plain))
+            reason = None
+            if not evidence:
+                reason = "los documentos de la respuesta no publican costos"
+            elif amounts and not amounts <= ev_amounts:
+                reason = "el monto no figura en el documento"
+            elif free and not ev_free:
+                reason = "el documento no dice que sea gratuito"
+            elif free and ev_amounts:
+                reason = "el documento publica montos distintos según el caso"
+            elif unpublished and (ev_free or ev_amounts) and not ev_unpublished:
+                reason = "el documento sí informa el costo"
+            elif not (amounts or free or unpublished):
+                words = _stems(plain) - {"costo", "costos"}
+                if words and len(words & _stems(evidence)) / len(words) < 0.5:
+                    reason = "no coincide con la sección de costo del documento"
+            if reason:
+                issues.append({"line": line.strip(), "reason": reason})
+        return issues
 
     def topic_sections(self, question: str) -> list[str]:
         """Secciones del tema de la pregunta.
@@ -407,15 +488,28 @@ class CitationIndex:
             if words:
                 short_scores[section_id] = max(short_scores.get(section_id, 0.0),
                                                len(words & _raw_stems(section_text)) / len(words))
+            elif _amounts(_plain(sentence)):
+                # Frase que es solo un monto («Costo: $1.500»): vale si el monto figura en la sección.
+                ok = _amounts(_plain(sentence)) <= _amounts(_plain(section_text))
+                short_scores[section_id] = max(short_scores.get(section_id, 0.0), 1.0 if ok else 0.0)
             report.citations.append(Citation(
                 section_id=section_id, heading=heading, document=self.documents[doc_id],
                 support=score, weak_support=score is not None and score < WEAK_SUPPORT,
             ))
         if question:
             model_ids = [c.section_id for c in report.citations]
-            supporting, coverage, _ = self.attribute(answer_text, question, preferred=set(model_ids))
-            report.coverage = coverage
-            if coverage < AUTO_COVERAGE:
+            supporting, coverage, evaluated = self.attribute(answer_text, question, preferred=set(model_ids))
+            report.coverage = coverage if evaluated else None
+            if not evaluated:
+                # Respuesta hecha solo de frases cortas («Trámite: …», «Costo: gratuito»): no hay nada
+                # que medir por bigramas (antes daba cobertura 0 y se ocultaba aunque fuera correcta).
+                # Se aceptan las citas del modelo cuya frase coincide con la sección citada.
+                short_ok = [c for c in report.citations if short_scores.get(c.section_id, 0.0) >= SHORT_SUPPORT]
+                report.unverified_ids = [c.section_id for c in report.citations if c not in short_ok]
+                report.citations = short_ok
+                if not short_ok:
+                    report.rejected_citations = model_ids
+            elif coverage < AUTO_COVERAGE:
                 report.rejected_citations = model_ids
                 report.citations = []
             else:
@@ -430,6 +524,8 @@ class CitationIndex:
                 report.unverified_ids = [sid for sid in model_ids
                                          if sid not in supporting_ids and sid not in {c.section_id for c in short_ok}]
                 report.citations = supporting + short_ok
+        if question and report.citations:
+            report.removed_cost_lines = self.check_costs(answer_text, {c.document.document_id for c in report.citations})
         report.warnings = self._warnings(report)
         if report.citations and report.coverage is not None:
             pct = round(100 * report.coverage)
@@ -468,6 +564,9 @@ class CitationIndex:
         if report.off_topic_ids:
             warnings.append("Se descartaron citas a documentos que no tratan el tema de la pregunta: "
                             f"{', '.join(report.off_topic_ids)}.")
+        for item in report.removed_cost_lines:
+            warnings.append(f"Se quitó una afirmación sobre el costo porque {item['reason']}: "
+                            "confirmá el costo en la fuente oficial.")
         if report.unverified_ids:
             warnings.append("El modelo citó secciones que no respaldan el texto "
                             f"({', '.join(report.unverified_ids)}): se muestran las que sí lo respaldan.")

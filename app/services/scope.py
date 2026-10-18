@@ -53,6 +53,15 @@ rectificacion rectificar error correccion copia legalizada certificada registro 
 """.split())
 
 
+# Raíces de títulos y encabezados demasiado generales para indicar que una pregunta es sobre
+# trámites (Fase 6: «¿Cómo preparo un asado para diez personas?» pasaba por «Dirección de Personas
+# Jurídicas»; «ejemp» de «Nuevo ejemplar» es también la raíz de «ejemplo»).
+_GENERIC_HEADING_STEMS = set("""
+perso infor pregu frecu nuevo ejemp publi direc inici reali prese prima prime acces actua adici anos
+anual cambi crono deter digit eleme extra ingre instr integ perio recep unida valid reque contr mayor
+""".split())
+
+
 def _stems(text: str) -> set[str]:
     """Raíces de 5 letras, sin tildes, de las palabras de 3+ letras que no son vacías."""
     text = unicodedata.normalize("NFKD", text.lower())
@@ -73,7 +82,10 @@ class ScopeChecker:
         """Vocabulario de los títulos y encabezados del ``CitationIndex`` (el corpus en la caché)."""
         texts = [h for _, h, _ in index.sections.values() if h]
         texts += [d.title for d in index.documents.values()]
-        return cls(texts)
+        checker = cls(texts)
+        # Se sacan las raíces generales de los encabezados; las del vocabulario administrativo quedan.
+        checker.vocabulary -= _GENERIC_HEADING_STEMS - _stems(" ".join(_ADMIN))
+        return checker
 
     def matching_words(self, question: str) -> set[str]:
         """Raíces de la pregunta que están en el vocabulario (vacío = fuera de alcance)."""

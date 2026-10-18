@@ -315,3 +315,61 @@ def test_short_cited_sentence_is_kept_only_if_the_section_says_it(index):
                        question="¿Qué necesito para pedir una partida?")
     assert "rc-partidas#s2" not in [c.section_id for c in bad.citations]
     assert bad.unverified_ids == ["rc-partidas#s2"]
+
+
+# --- Verificación de costos (Fase 6) ------------------------------------------------------
+
+COST_Q = "¿Qué necesito para pedir una partida?"
+REQ = "- Presentar el DNI del titular de la partida o de un familiar directo [rc-partidas#s1].\n"
+
+
+@pytest.mark.parametrize("cost_line, removed", [
+    ("**Costo:** La partida digital cuesta 1500 pesos [rc-partidas#s2].", False),   # monto que figura
+    ("**Costo:** $1.500 [rc-partidas#s2].", False),
+    ("**Costo:** $2.000 [rc-partidas#s2].", True),                                  # monto inventado
+    ("**Costo:** Gratuito.", True),                                                 # el documento no lo dice
+    ("**Costo:** no informado.", True),                                             # el documento sí lo informa
+])
+def test_cost_lines_are_checked_against_the_document(index, cost_line, removed):
+    report = index.review(REQ + cost_line, question=COST_Q)
+    assert bool(report.removed_cost_lines) is removed
+    if removed:
+        assert any("Se quitó una afirmación sobre el costo" in w for w in report.warnings)
+
+
+def test_cost_line_without_any_cost_section_is_removed(index):
+    # Caso real (h09): «Costo: Gratuito» con un documento que no publica costos.
+    report = index.review("- El DNI exprés se entrega en 24 horas en las oficinas del RENAPER [nac-dni#s2].\n"
+                          "**Costo:** Gratuito.", question="¿Cuándo entregan el DNI exprés?")
+    assert [x["reason"] for x in report.removed_cost_lines] == ["los documentos de la respuesta no publican costos"]
+
+
+def test_free_claim_is_removed_when_the_document_also_lists_amounts(tmp_path):
+    from app.services.citations import CitationIndex
+
+    corpus = ("<<<DOCUMENTO id=rc-p>>>\n[rc-p#s1] Requisitos\nPresentar el DNI del titular de la partida.\n\n"
+              "[rc-p#s2] Costo\nCopia certificada: $1.100\nCopia para identificación: Sin cargo\n<<<FIN DOCUMENTO id=rc-p>>>\n")
+    rep = {"documents": [{**REPORT["documents"][0], "document_id": "rc-p", "title": "Partidas",
+                          "sections": [{"section_id": "rc-p#s1", "heading": "Requisitos", "status": "included"},
+                                       {"section_id": "rc-p#s2", "heading": "Costo", "status": "included"}]}]}
+    idx = CitationIndex.from_corpus(corpus, rep, warnings_file=None)
+    # Caso real (h07): «Sin cargo» es verdad solo para identificación.
+    r = idx.review("- Presentar el DNI del titular de la partida [rc-p#s1].\n**Costo:** Sin cargo [rc-p#s2].",
+                   question="¿Qué necesito para pedir una partida?")
+    assert r.removed_cost_lines and "montos distintos" in r.removed_cost_lines[0]["reason"]
+
+
+def test_short_only_answer_is_accepted_when_its_lines_match(index):
+    # Caso real (v3, c01/c02/c04): solo «Trámite:» y «Costo:», correctas; antes daban cobertura 0.
+    ok = index.review("**Trámite:** Solicitud de Partidas [rc-partidas#s0].\n**Costo:** $1.500 [rc-partidas#s2].",
+                      question="¿Cuánto cuesta una partida?")
+    assert "rc-partidas#s2" in [c.section_id for c in ok.citations] and ok.removed_cost_lines == []
+    bad = index.review("**Trámite:** Solicitud de Partidas [rc-partidas#s0].\n**Costo:** $9.999 [rc-partidas#s2].",
+                       question="¿Cuánto cuesta una partida?")
+    assert "rc-partidas#s2" not in [c.section_id for c in bad.citations]
+
+
+def test_citation_markers_are_not_counted_as_words():
+    from app.services.citations import _answer_sentences
+
+    assert _answer_sentences("Es gratuito [rc-dni-renovacion#s4].") == ["Es gratuito ."]

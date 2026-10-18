@@ -37,6 +37,8 @@ def test_procedure_questions_are_in_scope(scope, question):
     "¿Cómo hago un ciclo for en Python?", "Explicame qué es un bucle while", "Dame una receta de empanadas",
     "¿Quién ganó el mundial 2022?", "Escribime un poema sobre el mar", "hola", "¿Cuál es la capital de Francia?",
     "¿Cómo instalo Windows?", "Traducí esto al inglés", "¿Qué es la inteligencia artificial?",
+    # Fase 6: pasaban por raíces generales de los encabezados («Personas Jurídicas», «Nuevo ejemplar»).
+    "¿Cómo preparo un asado para diez personas?", "Dame un ejemplo de código en Java",
 ])
 def test_unrelated_questions_are_out_of_scope(scope, question):
     assert not scope.in_scope(question)

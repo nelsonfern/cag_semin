@@ -394,12 +394,16 @@ class LlamaCppEngine:
         """Mismas reglas que ``CAGEngine.validate_question`` (pregunta vacía o larga, contexto)."""
         return CAGEngine.validate_question(self, question, max_new_tokens)
 
-    def answer(self, question: str, max_new_tokens: int | None = None, on_token=None) -> GenerationResult:
+    def answer(self, question: str, max_new_tokens: int | None = None, on_token=None,
+               ignore_eos: bool = False) -> GenerationResult:
         """Responde reutilizando la caché del prefijo (mismos pasos que ``CAGEngine.answer``).
 
         Valida la pregunta, toma el lock, restaura el prefijo y verifica la huella (si no
         coincide, recupera la caché desde disco), procesa solo la pregunta, genera token por
         token (greedy) y vuelve a restaurar el prefijo aunque la generación falle.
+
+        ``ignore_eos`` genera exactamente ``max_new_tokens`` (no corta en el fin de turno): lo usa
+        el benchmark para comparar tiempos sin que influya el largo de cada respuesta.
         """
         ids = self.validate_question(question, max_new_tokens)
         new_tokens = max_new_tokens or self.max_new_tokens
@@ -425,7 +429,7 @@ class LlamaCppEngine:
                     if i == 0:
                         result.ttft_seconds = time.perf_counter() - start
                     output.append(token)
-                    if token in self.stop:
+                    if token in self.stop and not ignore_eos:
                         result.stopped_by = "eos"
                         break
                     if on_token:

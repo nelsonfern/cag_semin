@@ -13,7 +13,7 @@ pruebas aprobadas y tareas pendientes. Cada fase cierra con un commit.
 | 3 | Prueba mínima de KV cache | **Aprobada** (2026-10-17) |
 | 4 | Motor CAG | **Aprobada** (2026-10-17) |
 | 5 | TramitaIA (API + interfaz + citas) | **Aprobada** (2026-10-17) |
-| 6 | Benchmark | Pendiente |
+| 6 | Benchmark | **Aprobada** (2026-10-18) |
 | 7 | Guía de exposición | Pendiente |
 
 ### Criterios de aprobación (resumen de `docs/PROMPT para cag.md`, §12)
@@ -936,3 +936,191 @@ El modelo escribió «**Costo:** El trámite es gratuito [rc-defunciones#s4]». 
 - **El control de alcance es léxico**: una pregunta ajena que use una palabra de trámites («¿Qué licencia tiene Python?») pasa al modelo, aunque el modelo y la verificación de citas siguen actuando después.
 - **Respuestas largas** (hasta 3 min 30 s con el navegador abierto). Conviene medir si bajar `max_new_tokens` o el largo pedido en el prompt mejora la experiencia.
 - El usuario mencionó un «bug» de la interfaz de Streamlit sin describirlo. La interfaz se reemplazó por completo, pero no se pudo confirmar cuál era.
+
+---
+
+## Fase 6 — Benchmark (2026-10-17)
+
+**Decisiones del usuario:**
+- solo CAG contra el baseline, sin RAG;
+- baseline con 2 preguntas × 3 repeticiones;
+- el apartado económico no incluye el costo del hardware.
+
+### Configuración
+
+| | |
+|---|---|
+| Equipo | AMD Ryzen 5 5500 (6 núcleos / 12 hilos), 15,87 GB de RAM, Windows 11. **No se usó GPU**: la Radeon RX 6400 no tiene CUDA y no está soportada por ROCm en Windows; llama-cpp-python está instalado para CPU, así que **no hay VRAM que medir** |
+| Software | Python 3.12.0, llama-cpp-python 0.3.36, 6 hilos, `flash_attn` activado |
+| Modelo | Qwen2.5-7B-Instruct Q4_K_M (`bartowski/Qwen2.5-7B-Instruct-GGUF`, revisión `8911e8a4…`, 4,36 GB) |
+| Corpus y caché | Corpus `10ba192df05e0285`; prefijo de 15.807 tokens; caché `bbcce11f9b11369f` (865 MB de K/V; estado guardado de 907 MB) |
+| Medición | Cada respuesta de las mediciones de tiempo genera **exactamente 128 tokens** (`ignore_eos`), para que el largo no influya. La calidad se evalúa aparte, con respuestas normales |
+| Archivos | `app/evaluation/benchmark.py` → `data/results/phase6_benchmark_20261017_211141.json` (todas las mediciones individuales); análisis con `app/evaluation/report.py` → `phase6_summary_20261017_233736.json` |
+
+### Resultados por etapa (los costos se miden por separado, §7)
+
+| Etapa | Resultado |
+|---|---|
+| Descarga de las 11 fuentes automáticas (robots.txt y pausas de cortesía incluidos; sin tocar el manifiesto) | 20,2 s |
+| Construcción del corpus | 0,2 s, más 11,4 s para cargar el tokenizer. Mismo `build_id` (reproducible) |
+| Carga del modelo | 6,7 s en el proceso principal; 5,1, 24,8 y 11,5 s en procesos separados (cargaban con 7 GB ya ocupados por el proceso principal). **Depende mucho de cuánta RAM libre queda para la caché de disco del sistema** |
+| Carga de la caché KV desde disco | **9,6 s la primera vez (en frío)** y **1,27 a 1,34 s las siguientes** (el archivo ya está en la caché de disco del sistema operativo). Esto **explica la diferencia de 1,2 contra 13,6 s** que había quedado pendiente en la Fase 4 |
+| Construcción de la caché KV | **651 s**, más 9,1 s para guardarla. Pico de memoria del proceso: 10,0 GB |
+| Primera consulta sin calentamiento | Primer token a los **22,2 s** (después, ~8,8 s). Por eso la API hace una consulta de calentamiento al arrancar |
+
+### CAG frente al baseline (mediana, con p10–p90 entre paréntesis)
+
+| | CAG (6 preguntas × 5 repeticiones; n = 29 sin contar la primera) | Baseline (2 preguntas × 3 repeticiones; n = 6) | Relación |
+|---|---|---|---|
+| Procesar el contexto | Solo la pregunta: **8,8 s** (7,5–9,3) | Prefijo + pregunta: **621,5 s** (619,1–622,4) | |
+| Hasta el primer token | **8,8 s** (7,5–9,3) | **630,1 s** (628,3–630,5) | **72 veces** |
+| Respuesta completa de 128 tokens | **87,7 s** (86,4–89,8) | **708,0 s** (706,9–708,4) | **8,1 veces** |
+| Segundos por token generado | 0,624 (0,612–0,641) | 0,614 (0,611–0,622) | Igual: generar cuesta lo mismo |
+| Tokens iguales a los de CAG | | **6 de 6** | CAG = baseline token por token con el corpus real |
+
+**Lectura:**
+- CAG elimina el costo de procesar el corpus en cada consulta: 621 s menos por consulta.
+- **No acelera la generación**: cada token sigue leyendo los pesos y atendiendo sobre las 15.807 posiciones de la caché. Por eso la respuesta completa mejora 8 veces y el primer token, 72.
+
+### Punto de equilibrio (§7)
+Costo acumulado de CAG = preparación + 87,7 s × N; baseline = 708,0 s × N. La carga del modelo es común a los dos modos y no entra.
+
+| Preparación de CAG | Segundos | CAG gana desde | Acumulado con N consultas: CAG / baseline |
+|---|---|---|---|
+| Construir la caché | 651,2 | **N = 2** (826,7 s contra 1.416 s) | N = 10: 1.528 s / 7.080 s · N = 100: 2,6 h / 19,7 h |
+| Cargarla desde disco en frío | 9,6 | **N = 1** (97,3 s contra 708 s) | N = 10: 887 s / 7.080 s |
+| Cargarla desde disco en caliente | 1,3 | **N = 1** | |
+
+Construir la caché cuesta casi lo mismo que un solo prefill del baseline (651 contra 622 s). Por eso **en este equipo CAG conviene desde la segunda consulta** si hay que construir la caché, **y desde la primera si ya está guardada**. Con la caché persistida en disco (Fase 4), el costo de preparación prácticamente desaparece.
+
+### Memoria
+- Durante las consultas, el proceso usa ~6,7-7,2 GB (modelo y caché), con un **pico de 10,0 GB** al construir o cargar la caché (se copia el estado).
+- Con el modelo cargado quedan **2,9 a 3,6 GB libres** de 15,9 GB.
+- La caché KV del corpus ocupa 865 MB en f16: 56 KB por token, porque Qwen2.5-7B usa GQA con 4 cabezas K/V.
+
+### Calidad con preguntas nuevas (`questions_heldout.json`; `phase6_eval_20261017_234209_heldout-qwen25-7b.json`)
+Son 16 preguntas escritas antes de correrlas, con la respuesta esperada tomada del corpus: 10 respondibles, 4 de trámites que el corpus no tiene y 2 fuera de tema. Se evitó el trámite de matrimonio porque es el ejemplo del prompt.
+- **El clasificador automático da 10 de 10 respondibles correctas y 6 de 6 abstenciones.**
+- **La revisión manual contra el corpus encuentra menos aciertos:**
+
+| | Preguntas | Revisión manual |
+|---|---|---|
+| Fieles | h01, h05, h06, h08, h10 | Datos correctos con las secciones correctas. La h08 es incompleta y la h10 dice que el costo no se publica, pero omite la Ley 10.702 |
+| Fieles con errores menores | h02, h03 | Lo preguntado es correcto (40 días y luego inscripción de oficio; quién puede iniciar), pero agregan líneas falsas («no se especifican requisitos», «pasos no especificados») |
+| **Con un dato incorrecto a la vista** | h04, h07, h09 | **Siempre la línea «Costo:»**: h04 y h09 dicen «gratuito», pero el documento nacional no publica costos; h07 dice «sin cargo», pero la copia certificada cuesta $1.100. La h09 además atribuye el DNI 24 hs al Registro Civil provincial (es del RENAPER) y la h04 usa la sección de cambio de domicilio en lugar de la de extravío |
+| No respondibles | h11-h14 | **4 de 4 abstenciones** del propio modelo |
+| Fuera de tema | h15, h16 | h16 («serie»): fuera de alcance, al instante. **h15 («asado») pasó el control de alcance** por la palabra «personas» (del encabezado «Dirección de Personas Jurídicas»); el modelo se abstuvo, pero gastó 34 s |
+
+**Conclusiones de calidad:**
+- **Los umbrales de citas no se sostienen fuera de la muestra en un punto concreto: el costo.** El formato del prompt pide siempre una línea «**Costo:**». Cuando el documento no publica el monto, el 7B la completa con «gratuito» o «sin cargo». Es una frase corta, a veces sin cita, que no entra en ninguna verificación.
+- En el resto, las respuestas mostradas reproducen bien las secciones citadas, y **ninguna pregunta sin respuesta en el corpus mostró información inventada** (4 de 4 en esta muestra; 4 de 4 en la Fase 5).
+
+**Correcciones propuestas** (se dejan para después de aprobar la fase, para no ajustar las reglas sobre el mismo conjunto con el que se mide):
+1. Que el formato del prompt no pida «Costo:» cuando el documento no lo informa.
+2. Que el código verifique toda frase que mencione un costo contra una sección de costo del documento citado, y la quite si no coincide.
+3. Ajustar el vocabulario del control de alcance («personas» es demasiado general).
+
+### Apartado económico (§7)
+Cifras por consulta, con lo medido.
+
+| Concepto | CAG | Baseline |
+|---|---|---|
+| Tiempo | 87,7 s | 708,0 s |
+| Energía estimada (65 W de TDP de la CPU, o ~100 W para toda la PC) | 1,6 a 2,4 Wh | 12,8 a 19,7 Wh |
+| Costo de esa energía con la tarifa EDELAR (escalón > 430 kWh: $197,8549/kWh) | **$0,31 a $0,48** | **$2,5 a $3,9** |
+
+- **Fuente de la tarifa:** cuadro tarifario de EDELAR, Resolución EUCOP N.º 001 Acta 028 del 14-04-2026, cargo variable residencial antes del subsidio nacional. El cuadro no indica si incluye impuestos.
+- **La energía es una estimación**: no se midió el consumo real, porque no había medidor.
+- **Hardware:** fuera del alcance, por decisión del usuario.
+- **Mantenimiento:** reconstruir la caché ante un cambio de corpus o de prompt lleva 651 s (~12-18 Wh, ~$2,3-3,6). La ingesta de fuentes lleva unos 20 s. La revisión manual de los documentos y de las advertencias curadas es tiempo humano, no medido.
+
+**Referencia: la misma consulta en APIs con prompt caching.** Son 15.807 tokens de prefijo, ~23 de pregunta y 128 de salida, contados con el tokenizer de Qwen (cada proveedor tokeniza distinto: es una aproximación). Precios oficiales consultados el 2026-10-17 en [Anthropic](https://platform.claude.com/docs/en/about-claude/pricing) y [OpenAI](https://developers.openai.com/api/docs/pricing):
+
+| Modelo | Sin caché (USD por consulta) | Con caché: primera / siguientes | 100 consultas con caché |
+|---|---|---|---|
+| Claude Haiku 5.5 | 0,00165 | 0,00204 / 0,00022 | USD 0,024 |
+| OpenAI gpt-5.4-mini | 0,01245 | 0,01245 / 0,00178 | USD 0,19 |
+| Claude Sonnet 5.5 | 0,03294 | 0,04085 / 0,00291 | USD 0,33 |
+
+Es la misma idea de CAG del lado del proveedor: pagar una vez por procesar el prefijo y reutilizarlo con un descuento de ~90 %. Pero **la caché vence** a los 5 minutos (o 1 hora, más cara), así que con consultas espaciadas se vuelve a pagar la escritura. Además, los modelos no son comparables en calidad y los datos salen del equipo. En local, la caché persiste en disco sin vencimiento y el costo marginal es la energía.
+
+### Métricas que no se obtuvieron, y por qué
+- **VRAM:** no se usa GPU (ver la configuración).
+- **Consumo eléctrico real:** no había medidor; se informa una estimación con supuestos declarados.
+- **Carga en frío controlada del modelo:** Windows no permite vaciar la caché de disco sin permisos de administrador. Se informa la variación observada (5 a 25 s).
+- **RAG:** fuera del alcance, por decisión del usuario.
+
+### Pruebas
+- 190 aprobadas: no cambiaron en esta fase.
+- Se agregaron `benchmark.py` y `report.py`, y la opción `ignore_eos` del motor, que solo usa el benchmark.
+
+### Criterio de aprobación de la Fase 6
+> Mediciones realmente ejecutadas y reproducibles, con configuración del equipo, modelo, versiones, corpus, repeticiones y resultados. Si alguna métrica no puede obtenerse, explicá por qué.
+
+**Se cumple:**
+- las mediciones son reales y repetidas (30 de CAG y 6 del baseline), con mediana y percentiles;
+- se informan la configuración completa, el punto de equilibrio con lo medido y el apartado económico con fuentes oficiales;
+- se explican las métricas que no se pudieron obtener.
+
+La evaluación con preguntas nuevas encontró una debilidad concreta (el costo inventado), documentada con las correcciones propuestas. Queda a la espera de la aprobación del usuario.
+
+### Revisión 6.1 — Corrección del costo inventado y del control de alcance (2026-10-18)
+
+**Pedido del usuario:** corregir los dos problemas que encontró la evaluación con preguntas nuevas y volver a evaluar. Después pidió no repetir todas las evaluaciones y validar **solo con un conjunto nuevo**.
+
+**Cómo se evitó ajustar sobre lo mismo que se mide:**
+- Antes de cambiar el código se escribió `app/evaluation/questions_v3.json`: 11 preguntas nunca usadas, con la respuesta y el costo esperados tomados del corpus.
+  - 7 respondibles: costo gratuito, costo con monto, costo «determinado por RENAPER», costo no publicado, y preguntas que no piden costo pero tientan a inventarlo;
+  - 1 de un trámite que el corpus no tiene;
+  - 3 fuera de tema, una con la trampa «gastos *personales*».
+- Las correcciones se validaron con ese conjunto. Los dos anteriores solo se usaron para comprobar que no hubiera regresiones, re-evaluando sus textos guardados.
+
+#### Correcciones
+1. **Prompt** (`app/cag/prompt.py`): la línea «Costo» se escribe **solo si el documento del trámite tiene sección de costo**, copiando lo que dice y con su cita; nunca un «gratuito» puesto por el modelo. Cambia el prefijo: la caché nueva es `bda0d01871987281` (construida en 624 s, 868 MB).
+2. **Verificación de costos en el código** (`CitationIndex.check_costs`): cada línea que afirma algo sobre el costo se compara con las secciones de costo de los documentos que respaldan la respuesta.
+   - «gratuito» pasa solo si el documento lo dice y no publica además montos (las partidas son sin cargo solo para identificación);
+   - un monto pasa solo si figura;
+   - «no publicado» pasa solo si el documento no informa el costo;
+   - cualquier otra afirmación tiene que coincidir con la sección de costo.
+
+   Si no pasa, **se quita la línea del texto mostrado** y se avisa con el motivo.
+3. **Control de alcance** (`app/services/scope.py`): se sacaron del vocabulario las raíces generales de los encabezados («perso», «infor», «pregu», «nuevo», «ejemp», «publi», «direc»…). «¿Cómo preparo un asado para diez personas?» entraba por «Dirección de **Personas** Jurídicas», y «ejemp» (de «Nuevo ejemplar») es también la raíz de «ejemplo».
+
+**Dos errores que destapó el conjunto nuevo (y se corrigieron):**
+4. **Respuestas hechas solo de frases cortas.** «**Trámite:** …» y «**Costo:** El trámite es gratuito [s5]» no tienen ninguna frase medible por bigramas: la cobertura daba 0 % y se ocultaban, **aunque fueran correctas** (c01, c02, c04). Ahora, si no hay nada que medir, se aceptan las citas del modelo cuya frase coincide con la sección citada (por palabras, o por monto si la frase es solo un monto). Igual pasan por el control de costos.
+5. **Las marcas de cita se contaban como palabras.** `[rc-dni-renovacion#s4]` sumaba «renov» y «dni» a la frase, y eso afectaba la medición por bigramas de todas las respuestas. Ahora se quitan antes de medir.
+
+#### Validación con el conjunto nuevo (`phase6_eval_20261018_001532_v3.json`; re-evaluado con las reglas finales en `…_v3_rescored.json`, mismo prompt y caché)
+
+| Pregunta | Resultado | Revisión manual |
+|---|---|---|
+| c01 ¿Cuánto cuesta renovar el DNI? | mostrada | ✅ «determinado por Re.Na.Per» [rc-dni-renovacion#s4] |
+| c02 ¿Tiene costo inscribir un nacimiento? | mostrada | ✅ «gratuito» [rc-nacimientos#s5] |
+| c03 ¿Cuánto sale el pasaporte? | mostrada | ✅ «determinado por Re.Na.Per» y dónde se inicia |
+| c04 ¿Cuánto cuesta una copia legalizada? | mostrada | ✅ «$1.500» [rc-solicitud-partidas#s3], con las advertencias de vigencia y de diferencia con la Ley 10.702 |
+| c05 Requisitos del DNI exprés | **oculta** | Correcto ocultarla: usa secciones del pasaporte exprés y un monto de la ley («$1.700») |
+| c06 Unión convivencial y costo | mostrada | ✅ requisitos, pasos y «$?» (no publicado) |
+| c07 Personas extranjeras: inscripción de nacimiento | mostrada | ✅ documentación de rc-nacimientos#s2, **sin línea de costo** |
+| c08 Costo de la licencia de conducir | abstención | ✅ |
+| c09 pizza, c10 presidente de Francia, c11 planilla de «gastos personales» | **fuera de alcance, al instante** | ✅ 3 de 3 |
+
+**Resultado:**
+- **6 de 7 respondibles mostradas, las 6 correctas**, incluidos sus costos;
+- 1 oculta con razón;
+- 4 de 4 sin respuesta en el corpus sin información inventada.
+- **Con el prompt nuevo, el modelo no inventó ningún «gratuito».** El control de costos no tuvo que quitar ninguna línea en este conjunto.
+
+**Sin regresiones** en los conjuntos anteriores (textos guardados del prompt anterior, re-evaluados con las reglas nuevas):
+- 16 preguntas de `questions_heldout`: siguen las 10 mostradas, y **se quitan las 3 líneas de costo inventadas** (h04, h07, h09).
+- 14 originales: siguen las 6 mostradas, y **se quita el costo inventado de la q05**.
+- Ningún costo correcto («gratuito» de q02, q04, h02 y h03; «determinado por Re.Na.Per» de q13 y h05; «$?» de h06 y h10) se quitó.
+
+**Pruebas: 202 aprobadas, 0 fallidas.** Hay tests nuevos de costos (montos, «gratuito» con y sin montos, «no publicado», documento sin costos), de respuestas cortas, de marcas de cita y de alcance (asado y «ejemplo de código»).
+
+**Limitaciones que siguen:**
+- Las correcciones 4 y 5 salieron del conjunto nuevo: **solo están validadas sobre los textos ya guardados**, no con un cuarto conjunto.
+- La verificación sigue siendo léxica: una respuesta correcta parafraseada puede ocultarse (la q08 de la Fase 5) y un dato inventado que copie palabras del documento podría pasar.
+- El benchmark de tiempos se midió con el prompt anterior (prefijo de 15.807 tokens). El nuevo es apenas más largo (868 MB de K/V contra 865), así que las conclusiones de tiempo no cambian.
+- En `data/caches/` quedan las cachés de prompts anteriores, varios GB que se pueden borrar.
+
+**Criterio de aprobación de la Fase 6:** se cumple (ver arriba). **Fase aprobada por el usuario el 2026-10-18.**

@@ -75,7 +75,10 @@ def decide(question: str, raw_text: str, citations: CitationReport) -> tuple[str
     if not citations.citations:
         return UNSUPPORTED, ABSTENTION_MESSAGE
     keep = {c.section_id for c in citations.citations}
-    return ANSWERED, keep_only_citations(raw_text, keep).strip()
+    # Se quitan las líneas de costo sin respaldo (el motivo queda en las advertencias).
+    removed = {item["line"] for item in citations.removed_cost_lines}
+    text = "\n".join(line for line in raw_text.splitlines() if line.strip() not in removed)
+    return ANSWERED, keep_only_citations(text, keep).strip()
 
 
 class AnswerService:

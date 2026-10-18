@@ -95,3 +95,11 @@ def test_abstention_with_an_unverified_citation_is_still_an_abstention():
     replies = {"partida": phrase + " Consultá en el sitio oficial del Registro Civil [rc-partidas#s2]."}
     a = make_service(replies=replies).answer("partida")
     assert a.decision == ABSTAINED and a.text == ABSTENTION_MESSAGE
+
+
+def test_unsupported_cost_line_is_removed_from_the_displayed_text():
+    q = "¿Qué necesito para pedir una partida?"
+    replies = {q: "- Presentar el DNI del titular de la partida o de un familiar directo [rc-partidas#s1].\n"
+                  "**Costo:** Gratuito."}
+    a = make_service(replies=replies).answer(q)
+    assert a.decision == ANSWERED and "Gratuito" not in a.text and "Gratuito" in a.raw_text

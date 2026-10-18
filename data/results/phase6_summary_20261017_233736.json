@@ -1,0 +1,170 @@
+{
+  "phase": 6,
+  "generated_at": "2026-10-17T23:37:36",
+  "benchmark_file": "phase6_benchmark_20261017_211141.json",
+  "medianas_s": {
+    "cag_por_consulta": 87.722,
+    "cag_ttft": 8.763,
+    "baseline_por_consulta": 708.01,
+    "baseline_ttft": 630.055,
+    "baseline_prefijo": 621.54,
+    "aceleracion_ttft": 71.9,
+    "aceleracion_total": 8.1
+  },
+  "punto_de_equilibrio": {
+    "construir_cache": {
+      "preparacion_s": 651.23,
+      "n": 2,
+      "ahorro_por_consulta_s": 620.3,
+      "cag_acumulado_n_s": 826.7,
+      "baseline_acumulado_n_s": 1416.0
+    },
+    "cargar_cache_en_frio": {
+      "preparacion_s": 9.582,
+      "n": 1,
+      "ahorro_por_consulta_s": 620.3,
+      "cag_acumulado_n_s": 97.3,
+      "baseline_acumulado_n_s": 708.0
+    },
+    "cargar_cache_en_caliente": {
+      "preparacion_s": 1.323,
+      "n": 1,
+      "ahorro_por_consulta_s": 620.3,
+      "cag_acumulado_n_s": 89.0,
+      "baseline_acumulado_n_s": 708.0
+    }
+  },
+  "curvas_acumuladas": {
+    "1": {
+      "cag_construyendo_s": 739.0,
+      "cag_desde_disco_s": 97.3,
+      "baseline_s": 708.0
+    },
+    "2": {
+      "cag_construyendo_s": 826.7,
+      "cag_desde_disco_s": 185.0,
+      "baseline_s": 1416.0
+    },
+    "5": {
+      "cag_construyendo_s": 1089.8,
+      "cag_desde_disco_s": 448.2,
+      "baseline_s": 3540.1
+    },
+    "10": {
+      "cag_construyendo_s": 1528.4,
+      "cag_desde_disco_s": 886.8,
+      "baseline_s": 7080.1
+    },
+    "50": {
+      "cag_construyendo_s": 5037.3,
+      "cag_desde_disco_s": 4395.7,
+      "baseline_s": 35400.5
+    },
+    "100": {
+      "cag_construyendo_s": 9423.4,
+      "cag_desde_disco_s": 8781.8,
+      "baseline_s": 70801.0
+    }
+  },
+  "energia_estimada": {
+    "tarifa_ars_kwh": 197.8549,
+    "potencias_w": {
+      "cpu_tdp": 65,
+      "pc_estimada": 100
+    },
+    "por_etapa": {
+      "cag_por_consulta": {
+        "cpu_tdp": {
+          "wh": 1.58,
+          "ars": 0.313
+        },
+        "pc_estimada": {
+          "wh": 2.44,
+          "ars": 0.482
+        }
+      },
+      "baseline_por_consulta": {
+        "cpu_tdp": {
+          "wh": 12.78,
+          "ars": 2.529
+        },
+        "pc_estimada": {
+          "wh": 19.67,
+          "ars": 3.891
+        }
+      },
+      "construir_cache": {
+        "cpu_tdp": {
+          "wh": 11.76,
+          "ars": 2.326
+        },
+        "pc_estimada": {
+          "wh": 18.09,
+          "ars": 3.579
+        }
+      }
+    },
+    "fuente_tarifa": {
+      "fuente": "EDELAR S.A., cuadro tarifario, Resolución EUCOP N.º 001 Acta 028 (14-04-2026), https://www.edelar.com.ar/files.php?f=cuadro-tarifario.pdf",
+      "nota": "Cargo variable residencial antes del subsidio nacional; el cuadro no indica si incluye impuestos.",
+      "primeros_200_kwh": 176.9956,
+      "200_a_430_kwh": 125.467,
+      "mas_de_430_kwh": 197.8549
+    }
+  },
+  "apis_referencia": {
+    "tokens": {
+      "prefijo": 15807,
+      "pregunta": 24,
+      "salida": 128
+    },
+    "por_modelo": {
+      "Claude Haiku 5.5": {
+        "sin_cache_usd": 0.001647,
+        "primera_con_cache_usd": 0.002042,
+        "siguientes_con_cache_usd": 0.000224,
+        "100_consultas_sin_cache_usd": 0.1647,
+        "100_consultas_con_cache_usd": 0.0243
+      },
+      "Claude Sonnet 5.5": {
+        "sin_cache_usd": 0.032942,
+        "primera_con_cache_usd": 0.040845,
+        "siguientes_con_cache_usd": 0.002909,
+        "100_consultas_sin_cache_usd": 3.2942,
+        "100_consultas_con_cache_usd": 0.3288
+      },
+      "OpenAI gpt-5.4-mini": {
+        "sin_cache_usd": 0.012449,
+        "primera_con_cache_usd": 0.012449,
+        "siguientes_con_cache_usd": 0.00178,
+        "100_consultas_sin_cache_usd": 1.2449,
+        "100_consultas_con_cache_usd": 0.1886
+      }
+    },
+    "precios": {
+      "fuente_anthropic": "https://platform.claude.com/docs/en/about-claude/pricing (consultado 2026-10-17)",
+      "fuente_openai": "https://developers.openai.com/api/docs/pricing (consultado 2026-10-17)",
+      "modelos": {
+        "Claude Haiku 5.5": {
+          "input": 0.1,
+          "cache_write": 0.125,
+          "cache_read": 0.01,
+          "output": 0.5
+        },
+        "Claude Sonnet 5.5": {
+          "input": 2.0,
+          "cache_write": 2.5,
+          "cache_read": 0.1,
+          "output": 10.0
+        },
+        "OpenAI gpt-5.4-mini": {
+          "input": 0.75,
+          "cache_write": 0.75,
+          "cache_read": 0.075,
+          "output": 4.5
+        }
+      },
+      "nota": "OpenAI cobra la escritura de caché como entrada normal (no tiene recargo de escritura). Los conteos de tokens son los del tokenizer de Qwen: cada proveedor tokeniza distinto (aproximación)."
+    }
+  }
+}

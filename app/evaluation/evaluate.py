@@ -115,6 +115,8 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--model", default=None, help="motor transformers: por defecto, MODEL_ID del .env")
     parser.add_argument("--dtype", default=None, help="por defecto, DTYPE del .env")
     parser.add_argument("--tag", default="", help="sufijo para el nombre del archivo de resultados")
+    parser.add_argument("--questions", type=Path, default=QUESTIONS_FILE, help="archivo de preguntas")
+    parser.add_argument("--phase", type=int, default=5, help="fase a la que pertenece la corrida")
     args = parser.parse_args(argv)
     if args.rescore:
         rescore(args.rescore)
@@ -122,7 +124,7 @@ def main(argv: list[str] | None = None) -> None:
     if args.threads:
         torch.set_num_threads(args.threads)
 
-    questions = json.loads(QUESTIONS_FILE.read_text(encoding="utf-8"))["questions"]
+    questions = json.loads(args.questions.read_text(encoding="utf-8"))["questions"]
     if args.only:
         questions = [q for q in questions if q["id"] in args.only]
 
@@ -172,13 +174,13 @@ def main(argv: list[str] | None = None) -> None:
 
     counts = summarize(rows)
     result = {
-        "phase": 5,
+        "phase": args.phase,
         "evaluated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "engine": info, "memory": memory, "peak_working_set_mb": round(getattr(psutil.Process().memory_info(), "peak_wset", 0) / 2**20) or None, "torch_threads": torch.get_num_threads(),
-        "questions_file": QUESTIONS_FILE.name, "summary": counts, "rows": rows,
+        "questions_file": args.questions.name, "summary": counts, "rows": rows,
     }
     tag = f"_{args.tag}" if args.tag else ""
-    out = DATA_DIR / "results" / f"phase5_eval_{datetime.now().strftime('%Y%m%d_%H%M%S')}{tag}.json"
+    out = DATA_DIR / "results" / f"phase{args.phase}_eval_{datetime.now().strftime('%Y%m%d_%H%M%S')}{tag}.json"
     out.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Resumen: {counts}\nGuardado en {out}", flush=True)
 

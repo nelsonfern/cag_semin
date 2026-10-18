@@ -1,0 +1,15 @@
+llama_context: n_ctx_seq (512) > n_ctx_train (0) -- possible training context overflow
+Motor listo: bartowski/Qwen2.5-7B-Instruct-GGUF/Qwen2.5-7B-Instruct-Q4_K_M.gguf (gguf-Q4_K_M-fa1) · caché bda0d01871987281 (built, 623.98 s) · KV 867.91 MB · RSS 7399 MB · 6 hilos
+c01 missed               unsupported citas=[] inválidas=[] 61 tokens en 44 s (0.6138 s/token)
+c02 missed               unsupported citas=[] inválidas=[] 52 tokens en 39 s (0.6208 s/token)
+c03 correct_answer       answered    citas=['rc-pasaporte#s4', 'rc-pasaporte#s3'] inválidas=[] 96 tokens en 67 s (0.6116 s/token)
+c04 missed               unsupported citas=[] inválidas=[] 52 tokens en 40 s (0.6192 s/token)
+c05 missed               unsupported citas=[] inválidas=[] 244 tokens en 157 s (0.6163 s/token)
+c06 correct_answer       answered    citas=['rc-union-convivencial#s2', 'rc-union-convivencial#s3', 'rc-union-convivencial#s1'] inválidas=[] 225 tokens en 148 s (0.619 s/token)
+c07 correct_answer       answered    citas=['rc-nacimientos#s2'] inválidas=[] 225 tokens en 148 s (0.6142 s/token)
+c08 correct_abstention   abstained   citas=[] inválidas=[] 45 tokens en 37 s (0.6265 s/token)
+c09 correct_abstention   out_of_scope citas=[] inválidas=[] 0 tokens en 0 s (0.0 s/token)
+c10 correct_abstention   out_of_scope citas=[] inválidas=[] 0 tokens en 0 s (0.0 s/token)
+c11 correct_abstention   out_of_scope citas=[] inválidas=[] 0 tokens en 0 s (0.0 s/token)
+Resumen: {'missed': 4, 'correct_answer': 3, 'correct_abstention': 4}
+Guardado en D:\cag_semin\data\results\phase6_eval_20261018_001532_v3.json

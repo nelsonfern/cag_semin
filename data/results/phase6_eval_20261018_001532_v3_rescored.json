@@ -1,0 +1,454 @@
+{
+  "phase": 6,
+  "evaluated_at": "2026-10-18T03:15:32+00:00",
+  "engine": {
+    "engine": "llama.cpp",
+    "model_id": "bartowski/Qwen2.5-7B-Instruct-GGUF/Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+    "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+    "dtype": "gguf-Q4_K_M-fa1",
+    "device": "cpu",
+    "model_load_seconds": 13.31,
+    "threads": 6,
+    "n_ctx": 16384,
+    "flash_attn": true,
+    "warmup_seconds": 5.47,
+    "cache_id": "bda0d01871987281",
+    "cache_source": "built",
+    "cache_seconds": 623.98,
+    "cache_rejected": "No existe D:\\cag_semin\\data\\caches\\bda0d01871987281\\meta.json",
+    "prefix_tokens": 15867,
+    "context_limit": 16384,
+    "max_new_tokens": 256,
+    "corpus_build_id": "10ba192df05e0285",
+    "corpus_version": "b7b3289233add501"
+  },
+  "memory": {
+    "rss_after_model_and_cache_mb": 7399,
+    "kv_cache_mb": 867.91,
+    "kv_bytes_per_token": 57356,
+    "kv_shape_per_layer": null,
+    "num_layers": 28,
+    "ram_total_gb": 15.87,
+    "ram_available_gb_before": 9.93,
+    "ram_available_gb_after_load": 3.27
+  },
+  "peak_working_set_mb": 10481,
+  "torch_threads": 6,
+  "questions_file": "questions_v3.json",
+  "summary": {
+    "correct_answer": 6,
+    "missed": 1,
+    "correct_abstention": 4
+  },
+  "rows": [
+    {
+      "id": "c01",
+      "question": "¿Cuánto cuesta renovar el DNI?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-dni-renovacion",
+        "nac-requisitos-dni-pasaporte"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-dni-renovacion#s4"
+      ],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [
+        "rc-dni-renovacion#s0",
+        "rc-dni-renovacion#s4"
+      ],
+      "coverage": null,
+      "weak_citations": [],
+      "warnings": [
+        "Los costos salen de «DNI – Nuevo ejemplar por robo, deterioro, extravío o caducidad» (2025-10-20; obtenido el 2026-10-16). No se pudo confirmar que sigan vigentes.",
+        "El modelo citó secciones que no respaldan el texto (rc-dni-renovacion#s0): se muestran las que sí lo respaldan."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 20,
+        "output": 61
+      },
+      "timings": {
+        "question_seconds": 7.279,
+        "first_token_seconds": 7.279,
+        "generation_seconds": 44.105,
+        "total_seconds": 44.742
+      },
+      "raw_text": "**Trámite:** Nuevo ejemplar de DNI, Registro Civil de La Rioja (provincial) [rc-dni-renovacion#s0].\n**Costo:** El costo es el determinado por Re.Na.Per [rc-dni-renovacion#s4].",
+      "seconds_per_token": 0.6138,
+      "shown_text": "**Trámite:** Nuevo ejemplar de DNI, Registro Civil de La Rioja (provincial).\n**Costo:** El costo es el determinado por Re.Na.Per [rc-dni-renovacion#s4].",
+      "removed_cost_lines": []
+    },
+    {
+      "id": "c02",
+      "question": "¿Tiene costo inscribir un nacimiento?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-nacimientos"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-nacimientos#s5"
+      ],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [
+        "rc-nacimientos#s0",
+        "rc-nacimientos#s5"
+      ],
+      "coverage": null,
+      "weak_citations": [],
+      "warnings": [
+        "Los costos salen de «Inscripción de Nacimientos» (2025-10-20; obtenido el 2026-10-16). No se pudo confirmar que sigan vigentes.",
+        "El modelo citó secciones que no respaldan el texto (rc-nacimientos#s0): se muestran las que sí lo respaldan."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 19,
+        "output": 52
+      },
+      "timings": {
+        "question_seconds": 6.931,
+        "first_token_seconds": 6.932,
+        "generation_seconds": 38.593,
+        "total_seconds": 39.233
+      },
+      "raw_text": "**Trámite:** Inscripción de Nacimientos, Registro Civil de La Rioja (provincial) [rc-nacimientos#s0].\n**Costo:** El trámite es gratuito [rc-nacimientos#s5].",
+      "seconds_per_token": 0.6208,
+      "shown_text": "**Trámite:** Inscripción de Nacimientos, Registro Civil de La Rioja (provincial).\n**Costo:** El trámite es gratuito [rc-nacimientos#s5].",
+      "removed_cost_lines": []
+    },
+    {
+      "id": "c03",
+      "question": "¿Cuánto sale sacar el pasaporte?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-pasaporte"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-pasaporte#s4",
+        "rc-pasaporte#s3"
+      ],
+      "cited_documents": [
+        "rc-pasaporte"
+      ],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "coverage": 1.0,
+      "weak_citations": [],
+      "warnings": [
+        "Las fuentes se identificaron comparando cada frase de la respuesta con los documentos oficiales (100 % de las frases coinciden). Es un control automático: confirmá los datos en la fuente oficial.",
+        "Los costos salen de «Pasaporte» (2025-10-20; obtenido el 2026-10-16). No se pudo confirmar que sigan vigentes.",
+        "El modelo citó secciones que no respaldan el texto (rc-pasaporte#s0): se muestran las que sí lo respaldan."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 20,
+        "output": 96
+      },
+      "timings": {
+        "question_seconds": 8.757,
+        "first_token_seconds": 8.757,
+        "generation_seconds": 66.855,
+        "total_seconds": 67.493
+      },
+      "raw_text": "**Trámite:** Pasaporte, Registro Civil de La Rioja (provincial) [rc-pasaporte#s0].\n**Costo:** Pasaporte regular: Costo determinado por Re.Na.Per [rc-pasaporte#s4].\n**Dónde:** Se inicia de forma presencial y personal en la oficina de Registro Civil más cercana a tu domicilio [rc-pasaporte#s3].",
+      "seconds_per_token": 0.6116,
+      "shown_text": "**Trámite:** Pasaporte, Registro Civil de La Rioja (provincial).\n**Costo:** Pasaporte regular: Costo determinado por Re.Na.Per [rc-pasaporte#s4].\n**Dónde:** Se inicia de forma presencial y personal en la oficina de Registro Civil más cercana a tu domicilio [rc-pasaporte#s3].",
+      "removed_cost_lines": []
+    },
+    {
+      "id": "c04",
+      "question": "¿Cuánto cuesta una copia legalizada de una partida?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-solicitud-partidas",
+        "ley-10702-impositiva-2024"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-solicitud-partidas#s0",
+        "rc-solicitud-partidas#s3"
+      ],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [
+        "rc-solicitud-partidas#s0",
+        "rc-solicitud-partidas#s3"
+      ],
+      "coverage": null,
+      "weak_citations": [],
+      "warnings": [
+        "Los costos salen de «Solicitud de Partidas» (2025-10-20; obtenido el 2026-10-16). No se pudo confirmar que sigan vigentes.",
+        "Los costos de partidas que publica el Registro Civil no coinciden con las tasas del art. 39 de la Ley Impositiva 2024 (Ley 10.702). Confirmá el monto con el Registro Civil antes de pagar."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 23,
+        "output": 52
+      },
+      "timings": {
+        "question_seconds": 7.997,
+        "first_token_seconds": 7.997,
+        "generation_seconds": 39.576,
+        "total_seconds": 40.212
+      },
+      "raw_text": "**Trámite:** Solicitud de Partidas, Registro Civil de La Rioja (provincial) [rc-solicitud-partidas#s0].\n**Costo:** $1.500 [rc-solicitud-partidas#s3].",
+      "seconds_per_token": 0.6192,
+      "shown_text": "**Trámite:** Solicitud de Partidas, Registro Civil de La Rioja (provincial) [rc-solicitud-partidas#s0].\n**Costo:** $1.500 [rc-solicitud-partidas#s3].",
+      "removed_cost_lines": []
+    },
+    {
+      "id": "c05",
+      "question": "¿Qué requisitos piden para el DNI exprés?",
+      "answerable": true,
+      "expected_documents": [
+        "nac-requisitos-dni-pasaporte"
+      ],
+      "outcome": "missed",
+      "decision": "unsupported",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [
+        "nac-requisitos-dni-pasaporte#s26",
+        "ley-10702-impositiva-2024#art-39"
+      ],
+      "rejected_citations": [],
+      "coverage": 0.25,
+      "weak_citations": [],
+      "warnings": [
+        "Se descartaron citas a documentos que no tratan el tema de la pregunta: nac-requisitos-dni-pasaporte#s26, ley-10702-impositiva-2024#art-39."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 21,
+        "output": 244
+      },
+      "timings": {
+        "question_seconds": 7.731,
+        "first_token_seconds": 7.731,
+        "generation_seconds": 157.486,
+        "total_seconds": 158.128
+      },
+      "raw_text": "**Trámite:** Nuevo ejemplar de DNI, RENAPER (nacional) [nac-requisitos-dni-pasaporte#s26].\n**Requisitos:**\n- DNI vigente.\n- Argentinos con capacidad restringida o incapaces: testimonio judicial y DNI del representante legal [nac-requisitos-dni-pasaporte#s26].\n- Para menores de 14 años: acompañamiento de padre, madre o representante legal; DNI del menor y del acompañante; permiso para tramitar Pasaporte [nac-requisitos-dni-pasaporte#s26].\n**Pasos:**\n1. Presentar los documentos requeridos en el Centro de Documentación de RENAPER [nac-requisitos-dni-pasaporte#s26].\n**Costo:** PESOS UN MIL SETECIENTOS ($1.700,00) [ley-10702-impositiva-2024#art-39].\n**Dónde:** Centro de Documentación de RENAPER.",
+      "seconds_per_token": 0.6163,
+      "shown_text": "No encontré esa información en los documentos oficiales disponibles. Te recomiendo consultar directamente al organismo correspondiente: el Registro Civil de La Rioja (registrocivil.larioja.gob.ar) para partidas, DNI y pasaporte, o la Secretaría de Justicia (secretariadejusticia.larioja.gob.ar).",
+      "removed_cost_lines": []
+    },
+    {
+      "id": "c06",
+      "question": "¿Qué necesito para registrar mi unión convivencial y cuánto cuesta?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-union-convivencial",
+        "sj-guia-tramites"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-union-convivencial#s1",
+        "rc-union-convivencial#s2",
+        "rc-union-convivencial#s3"
+      ],
+      "cited_documents": [
+        "rc-union-convivencial"
+      ],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "coverage": 1.0,
+      "weak_citations": [],
+      "warnings": [
+        "Las fuentes se identificaron comparando cada frase de la respuesta con los documentos oficiales (100 % de las frases coinciden). Es un control automático: confirmá los datos en la fuente oficial.",
+        "El modelo citó secciones que no respaldan el texto (rc-union-convivencial#s0, rc-union-convivencial#s4): se muestran las que sí lo respaldan."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 27,
+        "output": 225
+      },
+      "timings": {
+        "question_seconds": 9.737,
+        "first_token_seconds": 9.737,
+        "generation_seconds": 148.384,
+        "total_seconds": 149.026
+      },
+      "raw_text": "**Trámite:** Unión Convivencial, Registro Civil de La Rioja (provincial) [rc-union-convivencial#s0].\n**Requisitos:**\n- DNI original y fotocopia de ambos convivientes [rc-union-convivencial#s1].\n- Dos testigos mayores de edad con DNI [rc-union-convivencial#s1].\n- Declaración jurada completa y suscripta [rc-union-convivencial#s1].\n- Si existe pacto de convivencia, firma certificada por escribano público [rc-union-convivencial#s1].\n**Pasos:**\n1. Solicitar turno en el Registro Civil correspondiente [rc-union-convivencial#s3].\n2. Presentarse el día del turno con documentación y datos de testigos [rc-union-convivencial#s3].\n**Costo:** $? [rc-union-convivencial#s4].\n**Dónde:** Registro Civil correspondiente.",
+      "seconds_per_token": 0.619,
+      "shown_text": "**Trámite:** Unión Convivencial, Registro Civil de La Rioja (provincial).\n**Requisitos:**\n- DNI original y fotocopia de ambos convivientes [rc-union-convivencial#s1].\n- Dos testigos mayores de edad con DNI [rc-union-convivencial#s1].\n- Declaración jurada completa y suscripta [rc-union-convivencial#s1].\n- Si existe pacto de convivencia, firma certificada por escribano público [rc-union-convivencial#s1].\n**Pasos:**\n1. Solicitar turno en el Registro Civil correspondiente [rc-union-convivencial#s3].\n2. Presentarse el día del turno con documentación y datos de testigos [rc-union-convivencial#s3].\n**Costo:** $?.\n**Dónde:** Registro Civil correspondiente.",
+      "removed_cost_lines": []
+    },
+    {
+      "id": "c07",
+      "question": "¿Qué documentos necesitan las personas extranjeras para inscribir un nacimiento?",
+      "answerable": true,
+      "expected_documents": [
+        "rc-nacimientos"
+      ],
+      "outcome": "correct_answer",
+      "decision": "answered",
+      "cited_sections": [
+        "rc-nacimientos#s2"
+      ],
+      "cited_documents": [
+        "rc-nacimientos"
+      ],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "coverage": 1.0,
+      "weak_citations": [],
+      "warnings": [
+        "Las fuentes se identificaron comparando cada frase de la respuesta con los documentos oficiales (100 % de las frases coinciden). Es un control automático: confirmá los datos en la fuente oficial."
+      ],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 26,
+        "output": 225
+      },
+      "timings": {
+        "question_seconds": 10.847,
+        "first_token_seconds": 10.847,
+        "generation_seconds": 148.421,
+        "total_seconds": 149.066
+      },
+      "raw_text": "**Trámite:** Inscripción de Nacimientos, Registro Civil de La Rioja (provincial) [rc-nacimientos#s2].\n**Requisitos:**\n- Certificado médico de nacimiento original con sello del profesional firmante o certificado de nacido vivo expedido por el hospital o la clínica [rc-nacimientos#s2].\n- DNI de ambos progenitores [rc-nacimientos#s2].\n- Si los progenitores están casados, deben presentar la libreta de familia o los datos de inscripción del acta de matrimonio [rc-nacimientos#s2].\n- Si son extranjeros, con pasaporte o cédula de su país, que no haya vencido [rc-nacimientos#s2].\n- Si alguno de los progenitores no posee documento, deberá acreditar su identidad con 2 (dos) testigos mayores de 18 años con DNI vigente y en buen estado [rc-nacimientos#s2].",
+      "seconds_per_token": 0.6142,
+      "shown_text": "**Trámite:** Inscripción de Nacimientos, Registro Civil de La Rioja (provincial) [rc-nacimientos#s2].\n**Requisitos:**\n- Certificado médico de nacimiento original con sello del profesional firmante o certificado de nacido vivo expedido por el hospital o la clínica [rc-nacimientos#s2].\n- DNI de ambos progenitores [rc-nacimientos#s2].\n- Si los progenitores están casados, deben presentar la libreta de familia o los datos de inscripción del acta de matrimonio [rc-nacimientos#s2].\n- Si son extranjeros, con pasaporte o cédula de su país, que no haya vencido [rc-nacimientos#s2].\n- Si alguno de los progenitores no posee documento, deberá acreditar su identidad con 2 (dos) testigos mayores de 18 años con DNI vigente y en buen estado [rc-nacimientos#s2].",
+      "removed_cost_lines": []
+    },
+    {
+      "id": "c08",
+      "question": "¿Cuánto cuesta la licencia de conducir?",
+      "answerable": false,
+      "expected_documents": [],
+      "outcome": "correct_abstention",
+      "decision": "abstained",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "coverage": 0.0,
+      "weak_citations": [],
+      "warnings": [],
+      "stopped_by": "eos",
+      "tokens": {
+        "question": 21,
+        "output": 45
+      },
+      "timings": {
+        "question_seconds": 9.045,
+        "first_token_seconds": 9.045,
+        "generation_seconds": 36.613,
+        "total_seconds": 37.25
+      },
+      "raw_text": "No encontré esa información en los documentos oficiales disponibles. Te recomiendo consultar directamente a la Dirección Provincial de Tránsito de La Rioja o al sitio web oficial del organismo correspondiente.",
+      "seconds_per_token": 0.6265,
+      "shown_text": "No encontré esa información en los documentos oficiales disponibles. Te recomiendo consultar directamente al organismo correspondiente: el Registro Civil de La Rioja (registrocivil.larioja.gob.ar) para partidas, DNI y pasaporte, o la Secretaría de Justicia (secretariadejusticia.larioja.gob.ar).",
+      "removed_cost_lines": []
+    },
+    {
+      "id": "c09",
+      "question": "¿Cuál es la mejor receta de pizza casera?",
+      "answerable": false,
+      "expected_documents": [],
+      "outcome": "correct_abstention",
+      "decision": "out_of_scope",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "coverage": null,
+      "weak_citations": [],
+      "warnings": [],
+      "stopped_by": "out_of_scope",
+      "tokens": {
+        "question": 0,
+        "output": 0
+      },
+      "timings": {
+        "question_seconds": 0.0,
+        "first_token_seconds": 0.0,
+        "generation_seconds": 0.0,
+        "total_seconds": 0.001
+      },
+      "raw_text": "",
+      "seconds_per_token": 0.0
+    },
+    {
+      "id": "c10",
+      "question": "¿Quién es el presidente de Francia?",
+      "answerable": false,
+      "expected_documents": [],
+      "outcome": "correct_abstention",
+      "decision": "out_of_scope",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "coverage": null,
+      "weak_citations": [],
+      "warnings": [],
+      "stopped_by": "out_of_scope",
+      "tokens": {
+        "question": 0,
+        "output": 0
+      },
+      "timings": {
+        "question_seconds": 0.0,
+        "first_token_seconds": 0.0,
+        "generation_seconds": 0.0,
+        "total_seconds": 0.001
+      },
+      "raw_text": "",
+      "seconds_per_token": 0.0
+    },
+    {
+      "id": "c11",
+      "question": "¿Cómo armo una planilla de Excel para mis gastos personales?",
+      "answerable": false,
+      "expected_documents": [],
+      "outcome": "correct_abstention",
+      "decision": "out_of_scope",
+      "cited_sections": [],
+      "cited_documents": [],
+      "invalid_ids": [],
+      "off_topic_ids": [],
+      "rejected_citations": [],
+      "coverage": null,
+      "weak_citations": [],
+      "warnings": [],
+      "stopped_by": "out_of_scope",
+      "tokens": {
+        "question": 0,
+        "output": 0
+      },
+      "timings": {
+        "question_seconds": 0.0,
+        "first_token_seconds": 0.0,
+        "generation_seconds": 0.0,
+        "total_seconds": 0.001
+      },
+      "raw_text": "",
+      "seconds_per_token": 0.0
+    }
+  ],
+  "rescored_at": "2026-10-18T00:19:06",
+  "rescored_from": "phase6_eval_20261018_001532_v3.json",
+  "rescore_note": "Mismo prompt y caché (bda0d01871987281) que la corrida original. Reglas finales: respuestas de frases cortas y marcas de cita fuera de la verificación por bigramas."
+}

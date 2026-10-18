@@ -1,0 +1,20 @@
+llama_context: n_ctx_seq (512) > n_ctx_train (0) -- possible training context overflow
+Motor listo: bartowski/Qwen2.5-7B-Instruct-GGUF/Qwen2.5-7B-Instruct-Q4_K_M.gguf (gguf-Q4_K_M-fa1) · caché bbcce11f9b11369f (disk, 10.45 s) · KV 864.63 MB · RSS 8613 MB · 6 hilos
+h01 correct_answer       answered    citas=['rc-nacimientos#s2', 'rc-nacimientos#s3'] inválidas=[] 256 tokens en 171 s (0.633 s/token)
+h02 correct_answer       answered    citas=['rc-nacimientos#s1', 'rc-nacimientos#s4', 'rc-nacimientos#s5'] inválidas=[] 190 tokens en 127 s (0.6208 s/token)
+h03 correct_answer       answered    citas=['rc-defunciones#s3', 'rc-defunciones#s2'] inválidas=[] 115 tokens en 80 s (0.6281 s/token)
+h04 correct_answer       answered    citas=['nac-requisitos-dni-pasaporte#s7', 'nac-requisitos-dni-pasaporte#s20'] inválidas=[] 242 tokens en 160 s (0.6226 s/token)
+h05 correct_answer       answered    citas=['rc-pasaporte#s4', 'rc-pasaporte#s5'] inválidas=[] 104 tokens en 74 s (0.6232 s/token)
+h06 correct_answer       answered    citas=['rc-union-convivencial#s3'] inválidas=[] 190 tokens en 127 s (0.6254 s/token)
+h07 correct_answer       answered    citas=['rc-solicitud-partidas#s1', 'rc-solicitud-partidas#s2', 'rc-solicitud-partidas#s0', 'rc-solicitud-partidas#s3'] inválidas=[] 129 tokens en 88 s (0.6249 s/token)
+h08 correct_answer       answered    citas=['sj-guia-tramites#s12'] inválidas=[] 97 tokens en 66 s (0.6162 s/token)
+h09 correct_answer       answered    citas=['nac-requisitos-dni-pasaporte#s20'] inválidas=[] 163 tokens en 114 s (0.6387 s/token)
+h10 correct_answer       answered    citas=['rc-rectificacion-partidas#s3', 'rc-rectificacion-partidas#s0'] inválidas=[] 94 tokens en 64 s (0.6124 s/token)
+h11 correct_abstention   abstained   citas=[] inválidas=[] 50 tokens en 39 s (0.6226 s/token)
+h12 correct_abstention   abstained   citas=[] inválidas=[] 42 tokens en 33 s (0.6197 s/token)
+h13 correct_abstention   abstained   citas=[] inválidas=[] 55 tokens en 39 s (0.6115 s/token)
+h14 correct_abstention   abstained   citas=[] inválidas=[] 43 tokens en 34 s (0.6166 s/token)
+h15 correct_abstention   abstained   citas=[] inválidas=[] 45 tokens en 34 s (0.6109 s/token)
+h16 correct_abstention   out_of_scope citas=[] inválidas=[] 0 tokens en 0 s (0.0 s/token)
+Resumen: {'correct_answer': 10, 'correct_abstention': 6}
+Guardado en D:\cag_semin\data\results\phase6_eval_20261017_234209_heldout-qwen25-7b.json
