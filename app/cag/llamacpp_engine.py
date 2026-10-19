@@ -18,6 +18,12 @@ Cómo se maneja la caché KV (verificado en el código de llama-cpp-python 0.3.x
 La caché guardada (``data/caches/<cache_id>/state.bin`` + ``meta.json``) solo sirve con el mismo
 archivo de modelo, el mismo prefijo y los mismos parámetros del contexto (``n_ctx``,
 ``flash_attn``: cambia cómo se guardan las V). Todo eso se valida al cargarla.
+
+GPU (opcional): ``n_gpu_layers`` (o ``LLAMACPP_GPU_LAYERS`` en el .env) manda esa cantidad de
+capas a la GPU; ``-1`` las manda todas y ``0`` (por defecto) corre todo en CPU, como en las
+Fases 5 y 6. Necesita llama-cpp-python compilado con CUDA. Las capas en GPU cambian los números
+de la caché, así que forman parte de su identidad: una caché hecha con otra cantidad de capas no
+se reutiliza, se construye una nueva.
 """
 
 from __future__ import annotations
@@ -84,6 +90,18 @@ def resolve_gguf(repo: str | None = None, filename: str | None = None, revision:
     return GGUFModel(path=p, model_id=f"{repo}/{filename}", revision=snapshot, quant=_quant(filename))
 
 
+def gpu_layers_from_env() -> int:
+    """Capas a la GPU según ``LLAMACPP_GPU_LAYERS``: vacío o 0 = solo CPU, -1 = todas."""
+    raw = (os.environ.get("LLAMACPP_GPU_LAYERS") or "0").strip()
+    try:
+        value = int(raw)
+    except ValueError:
+        raise ValueError(f"LLAMACPP_GPU_LAYERS tiene que ser un entero (0 = solo CPU, -1 = todas): {raw!r}")
+    if value < -1:
+        raise ValueError(f"LLAMACPP_GPU_LAYERS no puede ser menor que -1: {value}")
+    return value
+
+
 def _quant(filename: str) -> str:
     stem = Path(filename).stem
     return stem.rsplit("-", 1)[-1] if "-" in stem else "gguf"
@@ -116,7 +134,7 @@ class LlamaCppEngine:
     def __init__(self, model: GGUFModel, corpus_text: str, *, template: str = "chatml",
                  corpus_build_id: str | None = None, corpus_version: str | None = None,
                  caches_root: Path | None = None, threads: int | None = None, flash_attn: bool = True,
-                 n_batch: int = 512, max_new_tokens: int = DEFAULT_MAX_NEW_TOKENS,
+                 n_batch: int = 512, n_gpu_layers: int = 0, max_new_tokens: int = DEFAULT_MAX_NEW_TOKENS,
                  max_question_tokens: int = MAX_QUESTION_TOKENS, max_context_tokens: int | None = None,
                  verify_each_query: bool = True, manifest=None):
         """Carga el modelo (sin construir la caché: eso lo hace ``prepare``).
@@ -140,6 +158,12 @@ class LlamaCppEngine:
         self.manifest = manifest
         self.flash_attn = flash_attn
         self.n_batch = n_batch
+        if n_gpu_layers and not llama_cpp.llama_supports_gpu_offload():
+            raise RuntimeError(
+                f"LLAMACPP_GPU_LAYERS={n_gpu_layers}, pero llama-cpp-python está instalado sin soporte de GPU. "
+                "Reinstalalo compilado con CUDA (ver el README) o poné LLAMACPP_GPU_LAYERS=0"
+            )
+        self.n_gpu_layers = n_gpu_layers
         self.llama_cpp_version = llama_cpp.__version__
 
         prefix_text = template_prefix(template, corpus_text)
@@ -164,7 +188,7 @@ class LlamaCppEngine:
         rss_before, start = rss_mb(), time.perf_counter()
         self.llm = Llama(model_path=str(model.path), n_ctx=self.n_ctx, n_batch=n_batch, n_ubatch=n_batch,
                          n_threads=threads, n_threads_batch=threads, flash_attn=flash_attn,
-                         logits_all=False, verbose=False)
+                         n_gpu_layers=n_gpu_layers, logits_all=False, verbose=False)
         self.load_seconds = time.perf_counter() - start
         self.rss_before_mb, self.rss_after_mb = rss_before, rss_mb()
 
@@ -173,8 +197,9 @@ class LlamaCppEngine:
         self.tokenizer = _Detokenizer(self.llm, self.stop)
         self.identity = CacheIdentity(
             model_id=model.model_id, revision=model.revision,
-            # Lo que cambia la forma de la caché además del modelo: cuantización y flash_attn.
-            dtype=f"gguf-{model.quant}-fa{int(flash_attn)}",
+            # Lo que cambia la caché además del modelo: cuantización, flash_attn y capas en GPU
+            # (sin GPU queda igual que antes, así las cachés ya construidas siguen sirviendo).
+            dtype=f"gguf-{model.quant}-fa{int(flash_attn)}" + (f"-gpu{n_gpu_layers}" if n_gpu_layers else ""),
             prefix_ids=tuple(prefix_ids), corpus_build_id=corpus_build_id, corpus_version=corpus_version,
         )
         self.state: KVCacheState | None = None
@@ -200,6 +225,7 @@ class LlamaCppEngine:
             kwargs.setdefault("max_context_tokens", int(env_limit))
         kwargs.setdefault("template", os.environ.get("LLAMACPP_TEMPLATE") or "chatml")
         kwargs.setdefault("flash_attn", (os.environ.get("LLAMACPP_FLASH_ATTN") or "1") not in ("0", "false", "no"))
+        kwargs.setdefault("n_gpu_layers", gpu_layers_from_env())
         return cls(model or resolve_gguf(), corpus_text, corpus_build_id=report["build_id"],
                    corpus_version=manifest.corpus_version, manifest=manifest, **kwargs)
 
@@ -248,7 +274,8 @@ class LlamaCppEngine:
         n_layer = int(llama_cpp.llama_model_n_layer(self.llm.model))
         return {
             "cache_class": "llama.cpp", "num_layers": n_layer, "key_shape_per_layer": None,
-            "dtype": "f16", "device": "cpu", "seq_length": self.prefix_len, "prefix_len": self.prefix_len,
+            "dtype": "f16", "device": f"cpu+gpu({self.n_gpu_layers} capas)" if self.n_gpu_layers else "cpu",
+            "seq_length": self.prefix_len, "prefix_len": self.prefix_len,
             "total_bytes": kv_bytes, "total_mb": round(kv_bytes / 2**20, 2),
             "bytes_per_token": kv_bytes // max(self.prefix_len, 1), "n_ctx": self.n_ctx, "flash_attn": self.flash_attn,
         }
@@ -262,7 +289,7 @@ class LlamaCppEngine:
             "model_id": self.identity.model_id, "revision": self.identity.revision, "dtype": self.identity.dtype,
             "model_file": self.gguf.path.name, "model_bytes": self.gguf.path.stat().st_size,
             "template": self.template, "n_ctx": self.n_ctx, "n_batch": self.n_batch, "flash_attn": self.flash_attn,
-            "prefix_len": self.prefix_len, "prefix_hash": self.identity.prefix_hash,
+            "n_gpu_layers": self.n_gpu_layers, "prefix_len": self.prefix_len, "prefix_hash": self.identity.prefix_hash,
             "corpus_build_id": self.identity.corpus_build_id, "corpus_version": self.identity.corpus_version,
             "fingerprint": fp, "kv_seq_bytes": kv_bytes, "state_bytes": state_bytes,
             "build_seconds": round(build_seconds, 2), "save_seconds": round(save_seconds, 2),

@@ -130,6 +130,7 @@ en memoria. El motor de Transformers (Fases 3 y 4) sigue disponible con `ENGINE=
 | `LLAMACPP_REPO`, `LLAMACPP_FILE`, `LLAMACPP_REVISION` | Modelo GGUF del Hub (se descarga la primera vez, con el commit fijo); o `LLAMACPP_MODEL_PATH` para un archivo local |
 | `LLAMACPP_TEMPLATE` | Plantilla de chat: `chatml` (Qwen) o `llama3` |
 | `LLAMACPP_THREADS`, `LLAMACPP_FLASH_ATTN` | Hilos de CPU (6 en esta PC) y atención optimizada |
+| `LLAMACPP_GPU_LAYERS` | Capas en la GPU: `0` solo CPU (por defecto), `-1` todas, `N` las primeras N. Ver «Usar una GPU NVIDIA» |
 
 El motor de llama.cpp tiene las mismas garantías que el de PyTorch: restaura el prefijo antes
 y después de cada consulta, verifica la huella SHA-256 de la caché KV, guarda la caché en
@@ -141,6 +142,45 @@ En Windows, `llama-cpp-python` se instala desde el binario para CPU (sin compila
 ```bash
 .venv\Scripts\python -m pip install llama-cpp-python==0.3.36 --only-binary=:all: --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu
 ```
+
+### Usar una GPU NVIDIA (opcional)
+
+Con una GPU NVIDIA el modelo puede mandar parte de sus capas a la placa. Construir la caché y
+generar debería ser bastante más rápido. **No está medido en este proyecto:** las cifras de la
+Fase 6 son solo en CPU.
+
+1. **Instalar llama-cpp-python con CUDA.** Para la versión 0.3.36 no hay binario con CUDA para
+   Windows, así que hay que compilarlo. Hace falta el
+   [CUDA Toolkit](https://developer.nvidia.com/cuda-downloads) y Visual Studio Build Tools con
+   «Desarrollo para el escritorio con C++». En una consola **x64 Native Tools Command Prompt**:
+
+   ```bat
+   set CMAKE_ARGS=-DGGML_CUDA=on
+   .venv\Scripts\python -m pip install llama-cpp-python==0.3.36 --force-reinstall --no-cache-dir --no-binary llama-cpp-python
+   ```
+
+   La compilación tarda un rato (10 a 30 minutos). Para comprobarla:
+
+   ```bat
+   .venv\Scripts\python -c "import llama_cpp; print(llama_cpp.llama_supports_gpu_offload())"
+   ```
+
+   Tiene que imprimir `True`.
+
+2. **Elegir cuántas capas van a la GPU**, con `LLAMACPP_GPU_LAYERS` en el `.env`. Qwen2.5-7B
+   tiene 28 capas. Con 6 GB de VRAM no entra entero junto con la caché de ~16.000 tokens:
+   - empezar con `20`;
+   - si al arrancar falla por falta de memoria, bajar de a 2;
+   - si sobra memoria, subir.
+
+   Con 8 GB o más, probar `-1` (todas).
+
+3. **Arrancar la app.** La primera vez con un valor nuevo construye una caché nueva, porque las
+   capas en GPU forman parte de la identidad de la caché. La caché de solo CPU no se borra y se
+   sigue usando con `LLAMACPP_GPU_LAYERS=0`.
+
+Si `LLAMACPP_GPU_LAYERS` es distinto de 0 y llama-cpp-python no tiene soporte de GPU, la app no
+arranca y avisa con un mensaje claro: no corre en CPU sin decirlo.
 
 ## Aplicación: API e interfaz (Fase 5)
 

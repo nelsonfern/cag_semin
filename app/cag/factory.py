@@ -34,8 +34,9 @@ def create_engine(kind: str | None = None, transformers_model=None, **kwargs):
         engine = LlamaCppEngine.from_latest_corpus(**kwargs)
         info = {
             "engine": "llama.cpp", "model_id": engine.identity.model_id, "revision": engine.identity.revision,
-            "dtype": engine.identity.dtype, "device": "cpu", "model_load_seconds": round(engine.load_seconds, 2),
-            "threads": engine.threads, "n_ctx": engine.n_ctx, "flash_attn": engine.flash_attn,
+            "dtype": engine.identity.dtype, "device": "cpu+gpu" if engine.n_gpu_layers else "cpu",
+            "model_load_seconds": round(engine.load_seconds, 2), "threads": engine.threads,
+            "n_gpu_layers": engine.n_gpu_layers, "n_ctx": engine.n_ctx, "flash_attn": engine.flash_attn,
         }
         return engine, info, None
 
