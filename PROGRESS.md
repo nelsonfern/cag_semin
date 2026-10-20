@@ -14,7 +14,7 @@ pruebas aprobadas y tareas pendientes. Cada fase cierra con un commit.
 | 4 | Motor CAG | **Aprobada** (2026-10-17) |
 | 5 | TramitaIA (API + interfaz + citas) | **Aprobada** (2026-10-17) |
 | 6 | Benchmark | **Aprobada** (2026-10-18) |
-| 7 | Guía de exposición | Pendiente |
+| 7 | Guía de exposición | En revisión (2026-10-18) |
 
 ### Criterios de aprobación (resumen de `docs/PROMPT para cag.md`, §12)
 
@@ -1124,3 +1124,89 @@ La evaluación con preguntas nuevas encontró una debilidad concreta (el costo i
 - En `data/caches/` quedan las cachés de prompts anteriores, varios GB que se pueden borrar.
 
 **Criterio de aprobación de la Fase 6:** se cumple (ver arriba). **Fase aprobada por el usuario el 2026-10-18.**
+
+## Fase 7 — Guía de exposición (2026-10-18)
+
+**Pedido del usuario:**
+- exposición de 30 a 40 minutos;
+- cinco integrantes (Nelson, Martin, Jero, Ramiro y Carlos) con tiempos parejos;
+- formato de clase dinámica, no lineal;
+- Nelson explica el código, Jero presenta CAG y Martin tiene una parte más fuerte;
+- **sin el apartado de costos económicos**, porque no es relevante para la materia;
+- la **demo al final y por separado**;
+- **dos versiones**: una dinámica y otra por bloques.
+
+Formato elegido: guías en el repositorio y diapositivas como presentación web.
+
+### Archivos
+
+| Archivo | Contenido |
+|---|---|
+| `docs/exposicion/README.md` | Comparación de las dos versiones; reparto de tiempo por integrante; lista de control de la demo (arranque ~70 s antes, «En línea», zoom); guion de la demo con una pregunta por integrante; plan B con capturas; 15 preguntas probables del público, con quién responde cada una |
+| `docs/exposicion/version_A_dinamica.md` | Versión A: 11 segmentos con relevos, tres preguntas al público, una votación que se resuelve más tarde y un diálogo Carlos ↔ Jero («¿Y esto no es RAG?»). Usa como hilo la pregunta del nacimiento. Parte 1 ~30 min + demo ~8 min |
+| `docs/exposicion/version_B_bloques.md` | Versión B: apertura de Nelson y cinco bloques seguidos (Jero, Nelson, Ramiro, Martin, Carlos), cada uno con un momento de interacción y una frase de pase. Parte 1 ~31 min + demo ~8 min |
+| `docs/exposicion/contenido_tecnico.md` | Material común: cifras con su fuente, CAG según el paper y el repositorio de referencia, atención y caché KV, tabla de la §8, `answer()` comentado, arquitectura y flujo en Mermaid, capas contra la invención y el camino de los modelos |
+| `app/evaluation/charts.py` | Genera `docs/img/respuesta_cag_vs_baseline.svg` y `docs/img/punto_de_equilibrio.svg` desde el JSON del benchmark (paleta categórica validada con el validador de la guía de visualización) |
+| `docs/img/demo/01…06_*.jpg` | Capturas reales de la app con el 7B (2026-10-18): inicio, borrador en vivo, respuesta con fuentes, fuera de alcance, abstención y costo |
+
+**Presentaciones web** (privadas hasta que se compartan desde el menú Compartir):
+- Versión A: https://claude.ai/artifact/FB4xod6t5HCJYtivaTECXY
+- Versión B: https://claude.ai/artifact/GQMYoSsVy6yVU7wVcvAach
+
+La A tiene 25 diapositivas y la B 31, con el orador marcado en cada una, notas para quien habla, los dos gráficos, las capturas y una diapositiva de plan B.
+
+**Versión elegida: B (por bloques).** A pedido del usuario, el código se amplió a ~9 min. Recorre el sistema de punta a punta con el código real:
+- ingesta (`ingest.py`, descarga, parser, hashes y versiones);
+- corpus (`split_markdown`, `_render_block`);
+- prefijo (`prompt.py`);
+- construcción y guardado de la caché (`_prepare_locked`, `_save`, `cache_id`);
+- carga desde disco (`_load`, validación y huella);
+- respuesta (`answer`).
+
+Para emparejar tiempos, se reparte en dos bloques seguidos:
+- Ramiro (bloque 2, 7 min): arquitectura, borrador en vivo, ingesta y corpus;
+- Nelson (bloque 3, 5,5 min + 1,5 de apertura): prefijo, caché y respuesta.
+
+Jero, Martin y Carlos quedan con 6 min cada uno y la demo con ~7.
+
+**Guardado y versión C (2026-10-19):**
+- La presentación B quedó copiada en `docs/exposicion/presentacion_B/` (31 diapositivas con notas) y su guion completo, con lo que dice cada integrante, en `docs/exposicion/guion_B.md`.
+- Se agregó la **versión C, por temas**: qué es CAG → ventajas, desventajas y limitaciones → stack de los datos → stack del modelo y la app → código → demostración.
+  - 6,5 min por integrante: Jero, Carlos, Martin, Ramiro y Nelson.
+  - Diapositivas: https://claude.ai/artifact/WRjZe6Ykmg9npV7FYXza4w (copia en `presentacion_C/`).
+  - Guía en `version_C_temas.md` y guion en `guion_C.md`.
+  - Las diapositivas nuevas (ventajas, desventajas, limitaciones, los dos stacks y «por qué estas piezas») usan solo cifras de esta bitácora, del paper y de `requirements.txt`.
+
+**Diseños (2026-10-19):**
+- **Diseño 1 (oscuro):** B y C pasaron a un estilo oscuro en sus mismos links.
+- **Diseño 2 (glassmorphism):** a pedido del usuario se crearon versiones nuevas sin borrar las anteriores, para elegir después.
+  - Fondo `#0B0F19` con brillos sutiles, tarjetas de vidrio translúcidas con desenfoque, íconos geométricos y tipografía Sora + Manrope.
+  - B: https://claude.ai/artifact/JV9mDvsr8NXSAuDbrPqDdW (copia en `presentacion_B2/`).
+  - C: https://claude.ai/artifact/RTqiumNMqwUj8oZyQRoLXB (copia en `presentacion_C2/`).
+- `charts.py` admite `--oscuro` y genera `docs/img/*_oscuro.svg` con los pasos oscuros de la paleta, el naranja primero y validados sobre `#141414`: todas las comprobaciones aprobadas, peor par CVD ΔE 9,4.
+- **Arreglo:** 7 diapositivas de B y 5 de C (las que tienen bloques de código) quedaban bloqueadas en el editor. La causa eran comillas mal escapadas por el script del diseño 1. Se corrigieron en los dos diseños.
+- **Diseño 2 rediseñado a pedido del usuario:** más futurista y sin violeta, siguiendo una imagen de referencia.
+  - Negro con líneas finas y círculos de fondo, y tarjetas con esquinas marcadas.
+  - Íconos en cuadrados rojos, acento rojo anaranjado `#FF4D2E` y ámbar para las advertencias.
+  - Tipografía Chakra Petch + Space Grotesk.
+
+### Datos que se verificaron para la exposición
+- **Paper** (arXiv 2412.15605): precarga, inferencia sin recuperación y reinicio truncando los tokens nuevos. La ventaja de CAG frente a RAG se achica al crecer el corpus (en HotPotQA grande, RAG supera a CAG en BERTScore). No se le atribuye al paper nada que no diga.
+- **Repositorio `hhhuang/CAG`**: `DynamicCache` con una pasada y `clean_up()` que recorta las K/V al largo original antes de cada pregunta.
+- **Cifras**: todas salen de esta bitácora y de `data/results/`. Se cambiaron dos ejemplos que no estaban registrados por otros que sí lo están: la contradicción del pasaporte de menores (Fase 2) y los «trámites inventados con citas falsas» (Fase 5).
+
+### Lo que mostraron las capturas
+- Respuesta del nacimiento: **3 min 1 s**. Llegó al límite de largo y la última línea quedó cortada; la app lo avisa.
+- Abstención (licencia): **36 s**. El borrador mencionó «la Subsecretaría de Tránsito y Transporte», que no está en el corpus, y al terminar se reemplazó por el mensaje fijo. Es un buen ejemplo de por qué el borrador dice «sin verificar».
+- Costo del nacimiento: **41 s**, «gratuito» con la cita `rc-nacimientos#s5`.
+- Asado: fuera de alcance, al instante.
+
+### Limitaciones
+- Los tiempos por integrante son estimados: hay que ensayar con reloj.
+- La demo depende de la PC: si hay otros programas abiertos, la respuesta del nacimiento puede pasar de 3 minutos. El plan B cubre ese caso.
+- Las presentaciones web no están en el repositorio. El contenido de las diapositivas está en las guías.
+
+### Pruebas
+202 aprobadas, 0 fallidas. En esta fase solo se agregó `charts.py`, que no cambia la aplicación.
+
+**Criterio de aprobación de la Fase 7:** guía con duración, reparto parejo, diapositivas, demo con plan B y preguntas probables. Queda a la espera de la aprobación del usuario.
