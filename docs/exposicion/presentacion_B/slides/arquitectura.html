@@ -1,0 +1,22 @@
+<section id="arquitectura" data-transition="fade" style="background:#0A0F1E;color:#B6C0D8;font-family:'Inter', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="position:absolute;left:1232px;top:56px;width:560px;text-align:right;font-size:26px;color:#B6C0D8">Habla <b><span style="color:#8AB8FF">Ramiro</span></b> · Bloque 2 · 7 min</p>
+<p style="font-size:26px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8AB8FF">Bloque 2 · La aplicación</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;letter-spacing:-1px;color:#F2F5FF">De la pregunta a la respuesta citada</h2>
+<div style="display:flex;gap:20px;align-items:center">
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:28px"><p style="font-size:24px;font-weight:700;color:#8AB8FF">1</p><p style="font-size:30px;line-height:1.35"><b>Navegador</b><br>chat en HTML + Alpine.js</p></div>
+<x-shape kind="arrow-right" style="background:#5B9BFF;width:64px;height:32px"></x-shape>
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:28px"><p style="font-size:24px;font-weight:700;color:#8AB8FF">2</p><p style="font-size:30px;line-height:1.35"><b>FastAPI</b><br>streaming por SSE</p></div>
+<x-shape kind="arrow-right" style="background:#5B9BFF;width:64px;height:32px"></x-shape>
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:28px"><p style="font-size:24px;font-weight:700;color:#8AB8FF">3</p><p style="font-size:30px;line-height:1.35"><b>¿Es un trámite?</b><br>si no, responde al instante</p></div>
+</div>
+<div style="display:flex;gap:20px;align-items:center">
+<div style="flex:1;background:#18244A;border:1px solid #5B9BFF;border-radius:16px;padding:28px"><p style="font-size:24px;font-weight:700;color:#8AB8FF">4</p><p style="font-size:30px;line-height:1.35"><b>Motor CAG</b><br>llama.cpp + Qwen2.5-7B Q4</p></div>
+<x-shape kind="arrow-right" style="background:#5B9BFF;width:64px;height:32px"></x-shape>
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:28px"><p style="font-size:24px;font-weight:700;color:#8AB8FF">5</p><p style="font-size:30px;line-height:1.35"><b>Verificación</b><br>citas, tema, frases, costos</p></div>
+<x-shape kind="arrow-right" style="background:#5B9BFF;width:64px;height:32px"></x-shape>
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:28px"><p style="font-size:24px;font-weight:700;color:#8AB8FF">6</p><p style="font-size:30px;line-height:1.35"><b>Registro documental</b><br>URL, organismo, fechas</p></div>
+</div>
+<p style="font-size:30px;line-height:1.4">Una sola caché → <b>una consulta por vez</b>, con cola de 4. Al arrancar, una consulta de calentamiento (sin ella, la primera tardaba 22 s).</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1100px;font-size:24px;color:#7F8AA8">TramitaIA · Versión B</p>
+<aside>Ramiro: recorrer los seis pasos. El paso 3 se hace antes del modelo: una pregunta sobre un asado no gasta ni un segundo de cómputo. El paso 6: el enlace a la fuente oficial lo pone el código, no el modelo. Mencionar la cola y el calentamiento como decisiones de diseño.</aside>
+</section>

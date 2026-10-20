@@ -1,0 +1,15 @@
+<section id="stackapp" data-transition="fade" style="background:#0A0F1E;color:#B6C0D8;font-family:'Inter', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="position:absolute;left:1232px;top:56px;width:560px;text-align:right;font-size:26px;color:#B6C0D8">Habla <b><span style="color:#8AB8FF">Ramiro</span></b> · Bloque 4 · 6,5 min</p>
+<p style="font-size:26px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8AB8FF">Bloque 4 · Stack: el modelo y la app</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;letter-spacing:-1px;color:#F2F5FF">Con qué está hecho</h2>
+<table style="font-size:30px;color:#B6C0D8;background:#131B33">
+<tr><th style="width:22%">Capa</th><th style="width:42%">Tecnología</th><th style="width:36%">Detalle</th></tr>
+<tr><td><b>Modelo</b></td><td>Qwen2.5-7B-Instruct, Q4_K_M</td><td>4 bits, ~4,7 GB</td></tr>
+<tr><td><b>Inferencia</b></td><td>llama.cpp (llama-cpp-python 0.3.36)</td><td>Guarda, carga y recorta la caché</td></tr>
+<tr><td><b>API</b></td><td>FastAPI + uvicorn</td><td>Respuesta en streaming (SSE)</td></tr>
+<tr><td><b>Interfaz</b></td><td>HTML + CSS + Alpine.js</td><td>Sin dependencias externas</td></tr>
+<tr><td><b>Base</b></td><td>Python 3.12 · pytest</td><td>202 pruebas automáticas</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#7F8AA8">requirements.txt · app/cag/llamacpp_engine.py · app/main.py · frontend/web/</p>
+<aside>Ramiro: recorrer la tabla de arriba abajo. El modelo es Qwen 2.5 de 7.000 millones de parámetros, en su versión Instruct, comprimido a 4 bits. llama.cpp es el motor que lo corre en CPU y el que nos da las tres operaciones que CAG necesita sobre la caché. FastAPI manda la respuesta palabra por palabra. La interfaz no carga nada de internet.</aside>
+</section>

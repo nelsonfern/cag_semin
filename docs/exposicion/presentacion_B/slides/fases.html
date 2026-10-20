@@ -1,0 +1,13 @@
+<section id="fases" data-transition="fade" style="background:#0A0F1E;color:#B6C0D8;font-family:'Inter', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="position:absolute;left:1232px;top:56px;width:560px;text-align:right;font-size:26px;color:#B6C0D8">Habla <b><span style="color:#8AB8FF">Jero</span></b></p>
+<p style="font-size:26px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8AB8FF">Bloque 1 · Qué es CAG</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;letter-spacing:-1px;color:#F2F5FF">Leer el libro una vez y quedarse con los apuntes</h2>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:12px"><p style="font-size:26px;font-weight:700;color:#8AB8FF">Fase 1 · una sola vez</p><h3 style="font-size:44px;font-weight:700;color:#F2F5FF">Precargar</h3><p style="font-size:30px;line-height:1.4">El corpus entero pasa por el modelo y sus K/V quedan en la caché.</p></div>
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:12px"><p style="font-size:26px;font-weight:700;color:#8AB8FF">Fase 2 · cada pregunta</p><h3 style="font-size:44px;font-weight:700;color:#F2F5FF">Responder</h3><p style="font-size:30px;line-height:1.4">Solo se procesa la pregunta. No hay búsqueda de fragmentos.</p></div>
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:40px;display:flex;flex-direction:column;gap:12px"><p style="font-size:26px;font-weight:700;color:#8AB8FF">Fase 3 · después</p><h3 style="font-size:44px;font-weight:700;color:#F2F5FF">Reiniciar</h3><p style="font-size:30px;line-height:1.4">Se truncan los tokens nuevos y la caché vuelve a tener solo el corpus.</p></div>
+</div>
+<p style="font-size:30px;line-height:1.4">Lo que <b>no</b> se ahorra: escribir la respuesta, palabra por palabra.</p>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#7F8AA8">Chan, Chen, Cheng y Huang, «Don’t Do RAG: When Cache-Augmented Generation is All You Need for Knowledge Tasks», arXiv 2412.15605 (2024)</p>
+<aside>Jero: la analogía primero (el título). Después las tres fases del paper. Remarcar la frase de abajo, porque Carlos la va a mostrar con números: CAG ahorra leer, no escribir.</aside>
+</section>

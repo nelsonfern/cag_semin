@@ -1,0 +1,13 @@
+<section id="limpiar" data-transition="fade" style="background:#0A0F1E;color:#B6C0D8;font-family:'Inter', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="position:absolute;left:1232px;top:56px;width:560px;text-align:right;font-size:26px;color:#B6C0D8">Habla <b><span style="color:#8AB8FF">Nelson</span></b></p>
+<p style="font-size:26px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8AB8FF">Bloque 3 · 7 · ¿Está bien? · Pregunta al público</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;letter-spacing:-1px;color:#F2F5FF">¿Qué pasa si no limpio la caché?</h2>
+<div style="background:#050914;border:1px solid #26304D;border-radius:16px;padding:32px 48px"><p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:28px;line-height:1.5;color:#E6EBF3;white-space:nowrap">self.llm.n_tokens = self.prefix_len<br>self.llm.eval([])&#160;&#160;<span style="color:#A9C8FF"># borra de la caché todo lo posterior al corpus</span></p></div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:36px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:64px;font-weight:700;color:#FF8A5B">+117</p><p style="font-size:28px;line-height:1.4"><b>Sin limpiar:</b> la 2.ª pregunta arranca con 117 posiciones de la anterior y su resultado cambia</p></div>
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:36px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:64px;font-weight:700;color:#F2F5FF">6 de 6</p><p style="font-size:28px;line-height:1.4"><b>Con caché = sin caché:</b> respuestas idénticas token por token</p></div>
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:36px;display:flex;flex-direction:column;gap:8px"><p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:64px;font-weight:700;color:#F2F5FF">SHA-256</p><p style="font-size:28px;line-height:1.4"><b>Huella de las K/V:</b> un byte alterado y la caché se rechaza</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1100px;font-size:24px;color:#7F8AA8">TramitaIA · Versión B</p>
+<aside>Nelson: hacer la pregunta antes de mostrar las tarjetas y dejar que respondan. Respuesta: la segunda pregunta “ve” la anterior. El reinicio del paper son estas dos líneas. Las tarjetas son las pruebas: control negativo, comparación con el baseline (6 de 6 con el 7B) y la huella. Pase: “¿Y qué sabe el asistente, y cómo evitamos que invente? Martin.”</aside>
+</section>

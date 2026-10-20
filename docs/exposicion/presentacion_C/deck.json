@@ -1,0 +1,91 @@
+{
+  "v": 4,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-19T04:10:00Z"
+  },
+  "lists": "css",
+  "title": "TramitaIA · Exposición C (por temas)",
+  "order": [
+    "cover",
+    "pregunta",
+    "agenda",
+    "votacion",
+    "atencion",
+    "fases",
+    "flujo",
+    "rag",
+    "revelacion",
+    "ventajas",
+    "barras",
+    "desventajas",
+    "limitaciones",
+    "datos",
+    "stackdatos",
+    "contradiccion",
+    "capas",
+    "nose",
+    "stackapp",
+    "porque",
+    "arquitectura",
+    "borrador",
+    "prefijo",
+    "construir",
+    "cargar",
+    "codigo",
+    "limpiar",
+    "conclusiones",
+    "demo",
+    "planb",
+    "preguntas"
+  ],
+  "sections": {
+    "s0": {
+      "description": "Apertura con el caso del nacimiento (Nelson).",
+      "start": "cover"
+    },
+    "s1": {
+      "description": "Bloque 1: qué es CAG y cómo funciona (Jero).",
+      "start": "votacion"
+    },
+    "s2": {
+      "description": "Bloque 2: ventajas, desventajas y limitaciones, con lo medido (Carlos).",
+      "start": "revelacion"
+    },
+    "s3": {
+      "description": "Bloque 3: stack tecnológico de los datos y cómo se evita que el modelo invente (Martin).",
+      "start": "datos"
+    },
+    "s4": {
+      "description": "Bloque 4: stack tecnológico del modelo y la aplicación (Ramiro).",
+      "start": "stackapp"
+    },
+    "s5": {
+      "description": "Bloque 5: el código de CAG (Nelson).",
+      "start": "prefijo"
+    },
+    "s5b": {
+      "description": "Cierre: conclusiones (Jero).",
+      "start": "conclusiones"
+    },
+    "s6": {
+      "description": "Parte 2: la demostración en vivo, con plan B (todos).",
+      "start": "demo"
+    }
+  },
+  "faces": {
+    "space-grotesk": {
+      "family": "Space Grotesk",
+      "href": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&display=swap"
+    },
+    "inter": {
+      "family": "Inter",
+      "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    },
+    "jetbrains-mono": {
+      "family": "JetBrains Mono",
+      "href": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap"
+    }
+  },
+  "designSystems": []
+}

@@ -1,0 +1,23 @@
+<section id="flujo" data-transition="fade" style="background:#0A0F1E;color:#B6C0D8;font-family:'Inter', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="position:absolute;left:1232px;top:56px;width:560px;text-align:right;font-size:26px;color:#B6C0D8">Habla <b><span style="color:#8AB8FF">Jero</span></b></p>
+<p style="font-size:26px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8AB8FF">Bloque 1 · Qué es CAG</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;letter-spacing:-1px;color:#F2F5FF">El flujo en TramitaIA</h2>
+<p style="font-size:28px;font-weight:700;color:#F2F5FF">UNA VEZ · ~11 minutos</p>
+<div style="display:flex;gap:20px;align-items:center">
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:28px"><p style="font-size:30px;line-height:1.35"><b>Instrucciones + corpus</b><br>~15.800 tokens</p></div>
+<x-shape kind="arrow-right" style="background:#5B9BFF;width:64px;height:32px"></x-shape>
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:28px"><p style="font-size:30px;line-height:1.35"><b>Una pasada del modelo</b><br>Qwen2.5-7B en 4 bits</p></div>
+<x-shape kind="arrow-right" style="background:#5B9BFF;width:64px;height:32px"></x-shape>
+<div style="flex:1;background:#18244A;border:1px solid #5B9BFF;border-radius:16px;padding:28px"><p style="font-size:30px;line-height:1.35"><b>Caché KV</b><br>865 MB, guardada en disco</p></div>
+</div>
+<p style="font-size:28px;font-weight:700;color:#F2F5FF">CADA PREGUNTA · la primera palabra a los ~9 s</p>
+<div style="display:flex;gap:20px;align-items:center">
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:28px"><p style="font-size:30px;line-height:1.35"><b>Pregunta</b><br>~20 tokens</p></div>
+<x-shape kind="arrow-right" style="background:#5B9BFF;width:64px;height:32px"></x-shape>
+<div style="flex:1;background:#18244A;border:1px solid #5B9BFF;border-radius:16px;padding:28px"><p style="font-size:30px;line-height:1.35"><b>Modelo + caché</b><br>atiende sobre todo el corpus</p></div>
+<x-shape kind="arrow-right" style="background:#5B9BFF;width:64px;height:32px"></x-shape>
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:28px"><p style="font-size:30px;line-height:1.35"><b>Respuesta</b><br>y recorte al prefijo</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1100px;font-size:24px;color:#7F8AA8">TramitaIA · Versión C</p>
+<aside>Jero: recorrer la fila de arriba (se hace una vez) y la de abajo (cada pregunta). La caché queda en disco: al arrancar la app se carga en 1 a 10 segundos, no se reconstruye. Siguiente: la diferencia con RAG.</aside>
+</section>

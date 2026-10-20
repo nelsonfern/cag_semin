@@ -1,0 +1,16 @@
+<section id="equilibrio" data-transition="fade" style="background:#0A0A0A;color:#A3A3A3;font-family:'Space Grotesk', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<x-shape kind="ellipse" style="position:absolute;left:1040px;top:176px;width:720px;height:720px;background:transparent;border:1px solid #1C1C1C"></x-shape><div style="position:absolute;left:128px;top:104px;width:1664px;height:1px;background:#1F1F1F"></div><div style="position:absolute;left:128px;top:952px;width:1664px;height:1px;background:#1F1F1F"></div><x-shape kind="rect" style="position:absolute;left:128px;top:62px;width:14px;height:14px;background:#FF4D2E"></x-shape><p style="position:absolute;left:156px;top:54px;width:640px;font-size:24px;color:#8A8A8A">TramitaIA · Cache-Augmented Generation</p>
+<p style="position:absolute;left:1232px;top:56px;width:560px;text-align:right;font-size:26px;color:#A3A3A3">Habla <b><span style="color:#FF4D2E">Carlos</span></b></p>
+<div style="display:flex;gap:20px;align-items:center"><div style="width:56px;height:56px;border-radius:4px;background:#2A0F0A;border:1px solid #5A1E14;display:flex;align-items:center;justify-content:center"><x-icon name="Chart" style="color:#FF4D2E;width:30px;height:30px"></x-icon></div><p style="font-size:26px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:#FF4D2E">Bloque 5 · Resultados</p></div>
+<h2 style="font-family:'Chakra Petch', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;letter-spacing:0px;color:#F5F5F5">Desde la segunda consulta ya conviene</h2>
+<div style="display:flex;gap:40px;align-items:center">
+<img src="/_blob/ebf4be3d04a16272272886992d6048ba" alt="Tiempo acumulado según la cantidad de consultas: el baseline sube 11,8 minutos por consulta; CAG empieza en 11 minutos por construir la caché y después sube 1,5 por consulta; con la caché en disco empieza casi en cero." style="width:1048px;height:500px;object-fit:contain;border-radius:4px">
+<div style="flex:1;display:flex;flex-direction:column;gap:24px">
+<div style="border-top:2px solid #262626;padding:16px 0 0 0"><p style="font-family:'Chakra Petch', Arial, sans-serif;font-size:48px;font-weight:700;color:#F5F5F5">11 min</p><p style="font-size:26px">construir la caché, una vez</p></div>
+<div style="border-top:2px solid #262626;padding:16px 0 0 0"><p style="font-family:'Chakra Petch', Arial, sans-serif;font-size:48px;font-weight:700;color:#F5F5F5">1–10 s</p><p style="font-size:26px">cargarla desde disco</p></div>
+<div style="border-top:2px solid #262626;padding:16px 0 0 0"><p style="font-family:'Chakra Petch', Arial, sans-serif;font-size:48px;font-weight:700;color:#F5F5F5">865 MB</p><p style="font-size:26px">ocupa la caché (~56 KB por token)</p></div>
+</div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#8A8A8A">Medianas · benchmark de la Fase 6 · la app completa usa ~7 GB de RAM</p>
+<aside>Carlos: construir la caché cuesta casi lo mismo que una sola consulta sin caché. Por eso desde la segunda consulta CAG gana, y si la caché ya está en disco, gana desde la primera. Memoria: 865 MB de caché; el modelo más la caché, unos 7 GB. Versión corta: saltar esta diapositiva. Siguiente: lo que salió mal.</aside>
+</section>

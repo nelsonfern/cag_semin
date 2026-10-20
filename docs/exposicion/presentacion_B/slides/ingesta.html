@@ -1,0 +1,14 @@
+<section id="ingesta" data-transition="fade" style="background:#0A0F1E;color:#B6C0D8;font-family:'Inter', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:32px">
+<p style="position:absolute;left:1232px;top:56px;width:560px;text-align:right;font-size:26px;color:#B6C0D8">Habla <b><span style="color:#8AB8FF">Ramiro</span></b> · 1,5 min</p>
+<p style="font-size:26px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8AB8FF">Bloque 2 · 1 · Ingesta</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;letter-spacing:-1px;color:#F2F5FF">Bajar la página y guardarla con versión</h2>
+<div style="background:#050914;border:1px solid #26304D;border-radius:16px;padding:36px 48px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#E6EBF3;white-space:nowrap">result = downloader.fetch(spec.source_url)&#160;&#160;<span style="color:#A9C8FF"># respeta robots.txt, 2 s entre pedidos</span><br>parser = get_parser(spec.parser)&#160;&#160;<span style="color:#A9C8FF"># uno por sitio: HTML, JavaScript, PDF</span><br>parsed = parser(result.content, result.encoding, url)&#160;&#160;<span style="color:#A9C8FF"># los &lt;h2&gt; pasan a "## "</span><br>record.raw_hash = sha256_bytes(result.content)&#160;&#160;<span style="color:#A9C8FF"># ¿cambió el original?</span><br>record.content_hash = sha256_text(parsed.text)&#160;&#160;<span style="color:#A9C8FF"># ¿cambió el texto?</span><br>change = manifest.upsert(record)&#160;&#160;<span style="color:#A9C8FF"># new | updated | reparsed | unchanged</span></p>
+</div>
+<div style="display:flex;gap:24px">
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:28px"><p style="font-size:28px;line-height:1.4"><b>Versión nueva:</b> se guardan <span style="color:#8AB8FF"><b>raw/&lt;doc&gt;/vN.html</b></span> y <span style="color:#8AB8FF"><b>processed/&lt;doc&gt;/vN.txt</b></span></p></div>
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:28px"><p style="font-size:28px;line-height:1.4"><b>Si la descarga falla:</b> se conserva la versión anterior y se anota el error</p></div>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#7F8AA8">app/ingestion/ingest.py · downloader.py · parser.py · source_registry.py (simplificado)</p>
+<aside>Ramiro: cada fuente está en data/sources.json con su URL y su parser. El descargador es “educado”: consulta robots.txt y espera entre pedidos. Hay un parser por tipo de sitio: el Registro Civil es HTML, la Secretaría de Justicia es una página en JavaScript y la ley es un PDF. Los dos hashes permiten distinguir si cambió el organismo (updated) o si cambió nuestra extracción (reparsed). Todo queda en el manifiesto con fecha de obtención.</aside>
+</section>

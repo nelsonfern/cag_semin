@@ -1,0 +1,15 @@
+<section id="stackdatos" data-transition="fade" style="background:#0A0F1E;color:#B6C0D8;font-family:'Inter', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="position:absolute;left:1232px;top:56px;width:560px;text-align:right;font-size:26px;color:#B6C0D8">Habla <b><span style="color:#8AB8FF">Martin</span></b> · 1,5 min</p>
+<p style="font-size:26px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8AB8FF">Bloque 3 · Stack: los datos</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;letter-spacing:-1px;color:#F2F5FF">De la página oficial al corpus</h2>
+<table style="font-size:30px;color:#B6C0D8;background:#131B33">
+<tr><th style="width:18%">Paso</th><th style="width:38%">Herramienta</th><th style="width:44%">Para qué</th></tr>
+<tr><td><b>Descarga</b></td><td>requests</td><td>Respeta robots.txt; 2 s entre pedidos</td></tr>
+<tr><td><b>Extracción</b></td><td>BeautifulSoup · json5 · pypdf</td><td>HTML, páginas en JavaScript, PDF</td></tr>
+<tr><td><b>Registro</b></td><td>manifest.json + SHA-256</td><td>Versión y fecha de cada documento</td></tr>
+<tr><td><b>Corpus</b></td><td>Secciones con id</td><td>rc-nacimientos#s2: lo que se cita</td></tr>
+<tr><td><b>Conteo</b></td><td>Tokenizer de Qwen (transformers)</td><td>Saber si todo entra en el contexto</td></tr>
+</table>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#7F8AA8">app/ingestion/ · downloader.py · parser.py · source_registry.py · corpus_builder.py</p>
+<aside>Martin: recorrer las filas en orden, como el viaje de un documento. Lo importante de la descarga: es “educada” con los sitios oficiales. Hay tres tipos de fuente: HTML (Registro Civil), una página armada en JavaScript (Secretaría de Justicia) y un PDF (la ley impositiva). Las dos huellas SHA-256 (del original y del texto) dicen si cambió el organismo o nuestra extracción. El tokenizer es el del mismo modelo, para contar exactamente lo que va a ocupar.</aside>
+</section>

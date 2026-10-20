@@ -1,0 +1,14 @@
+<section id="salio" data-transition="fade" style="background:#0A0F1E;color:#B6C0D8;font-family:'Inter', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<p style="position:absolute;left:1232px;top:56px;width:560px;text-align:right;font-size:26px;color:#B6C0D8">Habla <b><span style="color:#8AB8FF">Carlos</span></b></p>
+<p style="font-size:26px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8AB8FF">Bloque 5 · Lo que salió mal</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;letter-spacing:-1px;color:#F2F5FF">Cuatro modelos hasta el que funcionó</h2>
+<div style="display:flex;gap:20px">
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:36px;font-weight:700;color:#F2F5FF">7B en PyTorch</h3><p style="font-size:28px;line-height:1.4">No entra: 15,2 GB solo de pesos en 16 GB de RAM</p></div>
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:36px;font-weight:700;color:#F2F5FF">3B en bf16</h3><p style="font-size:28px;line-height:1.4">Sin bf16 nativo en la CPU: hasta 2,5 h de demo</p></div>
+<div style="flex:1;background:#131B33;border:1px solid #26304D;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:36px;font-weight:700;color:#F2F5FF">1,5B en fp32</h3><p style="font-size:28px;line-height:1.4">CAG funciona, pero cita 1 de 8 e inventa trámites</p></div>
+<div style="flex:1;background:#18244A;border:1px solid #5B9BFF;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:36px;font-weight:700;color:#F2F5FF">7B en 4 bits</h3><p style="font-size:28px;line-height:1.4">Con llama.cpp: se abstiene y cita bien. <b>El de la app.</b></p></div>
+</div>
+<div style="background:linear-gradient(120deg, #2563EB 0%, #7C3AED 100%);border-radius:16px;padding:40px"><p style="font-size:36px;line-height:1.4;color:#F2F5FF">CAG resuelve <b>tener todo el corpus disponible</b>, no que el modelo <span style="color:#FDE68A"><b>sepa usarlo</b></span>.</p></div>
+<p style="position:absolute;left:128px;bottom:64px;width:1100px;font-size:24px;color:#7F8AA8">TramitaIA · Versión B</p>
+<aside>Carlos: contarlo como historia, rápido. El 1,5B demostró que CAG funcionaba (mismas respuestas con y sin caché), pero un modelo chico se pierde en 15.800 tokens. Cuantizar a 4 bits permitió usar un 7B en la misma PC. Seguir con las conclusiones.</aside>
+</section>

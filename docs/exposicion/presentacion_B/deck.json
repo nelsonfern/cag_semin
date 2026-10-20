@@ -1,0 +1,87 @@
+{
+  "v": 4,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-18T03:50:00Z"
+  },
+  "lists": "css",
+  "title": "TramitaIA · Exposición B (por bloques)",
+  "order": [
+    "cover",
+    "pregunta",
+    "agenda",
+    "votacion",
+    "atencion",
+    "fases",
+    "flujo",
+    "rag",
+    "caches",
+    "arquitectura",
+    "borrador",
+    "recorrido",
+    "ingesta",
+    "corpus",
+    "prefijo",
+    "construir",
+    "cargar",
+    "codigo",
+    "limpiar",
+    "datos",
+    "contradiccion",
+    "capas",
+    "nose",
+    "revelacion",
+    "barras",
+    "equilibrio",
+    "salio",
+    "conclusiones",
+    "demo",
+    "planb",
+    "preguntas"
+  ],
+  "sections": {
+    "s0": {
+      "description": "Apertura con el caso del nacimiento (Nelson).",
+      "start": "cover"
+    },
+    "s1": {
+      "description": "Bloque 1: qué es CAG y en qué se diferencia de RAG (Jero).",
+      "start": "votacion"
+    },
+    "s2": {
+      "description": "Bloque 2: la aplicación y los datos de entrada, de la arquitectura a la ingesta y el corpus (Ramiro).",
+      "start": "arquitectura"
+    },
+    "s3": {
+      "description": "Bloque 3: el código de CAG, del prefijo a la respuesta (Nelson).",
+      "start": "prefijo"
+    },
+    "s4": {
+      "description": "Bloque 4: qué hay en el corpus y cómo se evita que el modelo invente (Martin).",
+      "start": "datos"
+    },
+    "s5": {
+      "description": "Bloque 5: resultados, lo que salió mal y conclusiones (Carlos).",
+      "start": "revelacion"
+    },
+    "s6": {
+      "description": "Parte 2: la demo en vivo, con plan B (todos).",
+      "start": "demo"
+    }
+  },
+  "faces": {
+    "space-grotesk": {
+      "family": "Space Grotesk",
+      "href": "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&display=swap"
+    },
+    "inter": {
+      "family": "Inter",
+      "href": "https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+    },
+    "jetbrains-mono": {
+      "family": "JetBrains Mono",
+      "href": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap"
+    }
+  },
+  "designSystems": []
+}

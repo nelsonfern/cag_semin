@@ -1,0 +1,14 @@
+<section id="prefijo" data-transition="fade" style="background:#0A0F1E;color:#B6C0D8;font-family:'Inter', Arial, sans-serif;padding:128px 128px 160px;display:flex;flex-direction:column;gap:36px">
+<p style="position:absolute;left:1232px;top:56px;width:560px;text-align:right;font-size:26px;color:#B6C0D8">Habla <b><span style="color:#8AB8FF">Nelson</span></b> · Bloque 5 · 5,5 min</p>
+<p style="font-size:26px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8AB8FF">Bloque 5 · El código · 1 · Prefijo</p>
+<h2 style="font-family:'Space Grotesk', Arial, sans-serif;font-size:72px;font-weight:700;line-height:1.1;letter-spacing:-1px;color:#F2F5FF">Qué entra en la caché y qué no</h2>
+<div style="display:flex;gap:16px;align-items:stretch">
+<div style="flex:5;background:#18244A;border:2px solid #5B9BFF;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><p style="font-size:26px;font-weight:700;color:#8AB8FF">PREFIJO · se cachea una vez</p><p style="font-size:30px;line-height:1.4;color:#F2F5FF">Instrucciones + <b>corpus</b> + reglas y ejemplos</p><p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:56px;font-weight:700;color:#F2F5FF">~15.800 tokens</p></div>
+<div style="flex:2;background:#131B33;border:2px dashed #FF8A5B;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:12px"><p style="font-size:26px;font-weight:700;color:#FF8A5B">POR CONSULTA</p><p style="font-size:30px;line-height:1.4;color:#F2F5FF">La pregunta</p><p style="font-family:'Space Grotesk', Arial, sans-serif;font-size:56px;font-weight:700;color:#F2F5FF">~20</p></div>
+</div>
+<div style="background:#050914;border:1px solid #26304D;border-radius:16px;padding:28px 48px">
+<p style="font-family:'JetBrains Mono', 'Courier New', monospace;font-size:26px;line-height:1.5;color:#E6EBF3;white-space:nowrap">system = SYSTEM_INSTRUCTIONS + corpus_text + SYSTEM_CLOSING<br>prefijo = "&lt;|im_start|&gt;system\n" + system + "&lt;|im_end|&gt;\n"<br>pregunta = "&lt;|im_start|&gt;user\n" + q + "&lt;|im_end|&gt;\n&lt;|im_start|&gt;assistant\n"</p>
+</div>
+<p style="position:absolute;left:128px;bottom:64px;width:1664px;font-size:24px;color:#7F8AA8">app/cag/prompt.py · plantilla ChatML de Qwen2.5</p>
+<aside>Nelson: la clave de CAG está en este corte. Todo lo que es igual para cualquier pregunta va en el prefijo y se procesa una sola vez: las instrucciones, los documentos y las reglas (que se repiten al final para que el modelo las tenga cerca). Lo único que cambia, la pregunta, va aparte. Prefijo y pregunta se tokenizan por separado y se concatenan los ids, así el modelo ve exactamente los mismos tokens que generaron la caché.</aside>
+</section>
