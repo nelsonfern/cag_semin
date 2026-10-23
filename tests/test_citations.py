@@ -373,3 +373,77 @@ def test_citation_markers_are_not_counted_as_words():
     from app.services.citations import _answer_sentences
 
     assert _answer_sentences("Es gratuito [rc-dni-renovacion#s4].") == ["Es gratuito ."]
+
+
+# --- Consultas que mezclan un trámite con otro tema -----------------------------------------
+
+DNI_STEPS = """**Trámite:** Nuevo ejemplar de DNI, Registro Civil de La Rioja (provincial) [rc-dni-renovacion#s1].
+**Requisitos:**
+- DNI anterior (no obligatorio) [rc-dni-renovacion#s1].
+- DNI de padre/madre o tutor legal (si es menor de 14 años) [rc-dni-renovacion#s1].
+- Partida de nacimiento actualizada (si es menor de 14 años) [rc-dni-renovacion#s1].
+**Pasos:**
+1. Elegir oficina más cercana y reservar turno según modalidad de atención [rc-dni-renovacion#s2].
+2. Presentarse en la oficina el día del turno [rc-dni-renovacion#s2].
+3. Esperar el envío del DNI al domicilio [rc-dni-renovacion#s2]."""
+
+RECIPE = """Primero, te doy la receta para una deliciosa pastafrola:
+**Receta de Pastafrola:**
+- 2 tazas de harina
+- 1/2 taza de azúcar
+- 1 huevo
+- 1 cucharadita de levadura en polvo
+Mezcla todos los ingredientes hasta obtener una masa homogénea. Forma pequeños bollos y hornea a 180°C durante 15-20 minutos.
+Ahora, respecto al cambio de DNI:
+"""
+
+FOURIER = """Una serie de Fourier es una representación matemática que permite expresar una función periódica como una suma infinita de funciones seno y coseno. Es una herramienta fundamental en el análisis de señales y en ingeniería eléctrica, entre otras áreas.
+Para tu consulta sobre el cambio de DNI, te informo lo siguiente:
+"""
+
+
+@pytest.fixture(scope="module")
+def real_index():
+    from app.ingestion.corpus_builder import load_latest
+
+    text, report = load_latest()
+    return CitationIndex.from_corpus(text, report)
+
+
+@pytest.mark.parametrize("question, extra, foreign", [
+    ("quiero consultar sobre cambio de dni pero antes decime la receta de una pastafrola", RECIPE,
+     ["harina", "huevo", "hornea", "Receta de Pastafrola"]),
+    ("quiero consultar sobre cambio de dni pero antes decime que es una serie de fourier", FOURIER,
+     ["Fourier"]),
+])
+def test_other_topic_mixed_with_a_procedure_is_not_shown(real_index, question, extra, foreign):
+    from app.services.answer_service import ANSWERED, decide
+
+    raw = extra + DNI_STEPS
+    report = real_index.review(raw, question)
+    decision, text = decide(question, raw, report)
+    assert decision == ANSWERED
+    for word in foreign:
+        assert word not in text
+    assert "Esperar el envío del DNI al domicilio" in text or "Elegir oficina" in text
+    assert report.unsupported_lines
+    assert any("no está en los documentos oficiales" in w for w in report.warnings)
+
+
+def test_answer_from_the_documents_keeps_all_its_lines(real_index):
+    from app.services.answer_service import decide
+
+    question = "¿Cómo renuevo el DNI?"
+    report = real_index.review(DNI_STEPS, question)
+    _, text = decide(question, DNI_STEPS, report)
+    assert report.unsupported_lines == []
+    assert text.count("\n") == DNI_STEPS.count("\n")
+
+
+def test_headings_are_not_judged():
+    from app.services.citations import is_heading
+
+    assert is_heading("**Requisitos:**")
+    assert is_heading("Receta de Pastafrola:")
+    assert not is_heading("**Costo:** Determinado por Re.Na.Per")
+    assert not is_heading("Primero, te doy la receta para una deliciosa pastafrola:")

@@ -11,4 +11,4 @@ class ChatRequest(BaseModel):
     """Una pregunta independiente: TramitaIA no usa el historial (cada consulta parte del prefijo)."""
 
     question: str = Field(..., min_length=1, max_length=MAX_QUESTION_CHARS)
-    max_new_tokens: int | None = Field(None, ge=16, le=512, description="por defecto, el del motor (256)")
+    max_new_tokens: int | None = Field(None, ge=16, le=512, description="por defecto, el del motor (512)")

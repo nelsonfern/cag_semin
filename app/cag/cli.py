@@ -17,7 +17,7 @@ import argparse
 import sys
 import time
 
-from app.cag.engine import ContextLimitError, QuestionError
+from app.cag.engine import DEFAULT_MAX_NEW_TOKENS, ContextLimitError, QuestionError
 
 
 def _log(msg: str) -> None:
@@ -148,7 +148,7 @@ def main(argv: list[str] | None = None) -> None:
     common.add_argument("--model", default=None, help="motor transformers: por defecto, MODEL_ID del .env")
     common.add_argument("--device", default=None)
     common.add_argument("--dtype", default=None)
-    common.add_argument("--max-new-tokens", type=int, default=256)
+    common.add_argument("--max-new-tokens", type=int, default=DEFAULT_MAX_NEW_TOKENS)
     sub = parser.add_subparsers(dest="command", required=True)
 
     p = sub.add_parser("build", parents=[common], help="construye y guarda la caché KV")

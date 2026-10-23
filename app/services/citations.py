@@ -20,6 +20,9 @@ Este módulo:
    textuales (pares de palabras) en secciones del tema; si no, se descartan todas las citas.
    Si el modelo no citó pero el contenido está respaldado, las citas las asigna el código y
    quedan marcadas como automáticas.
+7. Marca las líneas sin respaldo de una respuesta aceptada, para que no se muestren: si la
+   consulta mezcla un trámite con otro tema («decime una receta y después lo del DNI»), el
+   modelo puede contestar las dos cosas y la parte del trámite alcanza para aceptar la respuesta.
 """
 
 from __future__ import annotations
@@ -162,6 +165,7 @@ class CitationReport:
     removed_cost_lines: list[dict] = field(default_factory=list)  # líneas de costo sin respaldo: {"line", "reason"}
     rejected_citations: list[str] = field(default_factory=list)  # citas descartadas porque el texto no coincide
     unverified_ids: list[str] = field(default_factory=list)      # citas del modelo que no respaldan ninguna frase
+    unsupported_lines: list[str] = field(default_factory=list)   # líneas sin respaldo en los documentos: no se muestran
     coverage: float | None = None   # fracción de frases respaldadas por secciones del tema (si se verificó)
 
     @property
@@ -184,6 +188,7 @@ class CitationReport:
             "rejected_citations": self.rejected_citations,
             "unverified_ids": self.unverified_ids,
             "removed_cost_lines": self.removed_cost_lines,
+            "unsupported_lines": self.unsupported_lines,
             "coverage": self.coverage,
         }
 
@@ -262,6 +267,11 @@ def _amounts(text: str) -> set[str]:
     return found
 
 
+def _is_abstention_line(plain: str) -> bool:
+    """Línea con la frase de abstención: la maneja el servicio, no se recorta."""
+    return "no encontre esa informacion" in plain
+
+
 def keep_only_citations(text: str, keep: set[str]) -> str:
     """Quita del texto las citas que no están en ``keep`` (y los corchetes que quedan vacíos).
 
@@ -277,6 +287,12 @@ def keep_only_citations(text: str, keep: set[str]) -> str:
 
     text = BRACKET_RE.sub(fix, text)
     return re.sub(r"[ \t]+([.,;:])", r"\1", text)  # espacio que quedó antes de la puntuación
+
+
+def is_heading(line: str) -> bool:
+    """Título de una parte de la respuesta («**Requisitos:**», «Pasos:»): no afirma ningún dato."""
+    plain = re.sub(r"^\s*(?:[-*•#]+|\d+[.)])\s*", "", line.replace("**", "")).strip()
+    return plain.endswith(":") and len(plain.split()) <= 4
 
 
 def _sentence_with(text: str, start: int) -> str:
@@ -298,6 +314,7 @@ class CitationIndex:
         # documento + encabezado de la sección, para el filtro de tema).
         self._content_stems = {sid: _stems(text) for sid, (_, _, text) in sections.items()}
         self._content_bigrams = {sid: _bigrams(text) for sid, (_, _, text) in sections.items()}
+        self._raw_section_stems = {sid: _raw_stems(f"{heading or ''} {text}") for sid, (_, heading, text) in sections.items()}
         self._topic_stems = {
             sid: _stems(f"{documents[doc_id].title} {heading or ''}") for sid, (doc_id, heading, _) in sections.items()
         }
@@ -452,6 +469,39 @@ class CitationIndex:
         ]
         return citations, round(supported / len(sentences), 3), len(sentences)
 
+    def line_supported(self, line: str, section_ids: list[str]) -> bool:
+        """¿La línea sale de alguna de esas secciones?
+
+        Vale si alguna de sus oraciones está casi textual (``AUTO_SUPPORT`` de sus bigramas) o si
+        ``SHORT_SUPPORT`` de sus palabras aparecen en una misma sección: así pasan las viñetas
+        cortas de un documento («DNI anterior») y no las de otro tema («2 tazas de harina»).
+        """
+        plain = BRACKET_RE.sub(" ", line.replace("**", ""))
+        plain = re.sub(r"^\s*(?:[-*•]|\d+[.)])\s*", "", plain).strip()
+        for sentence in re.split(r"(?<=[.;])\s+", plain):
+            pairs = _bigrams(sentence)
+            if pairs and any(len(pairs & self._content_bigrams[sid]) / len(pairs) >= AUTO_SUPPORT for sid in section_ids):
+                return True
+        words = _raw_stems(re.sub(r"^\W*[\w ]{1,20}:\s*", "", plain))
+        if not words:
+            return True  # nada que comparar (un número suelto, un signo)
+        return any(len(words & self._raw_section_stems[sid]) / len(words) >= SHORT_SUPPORT for sid in section_ids)
+
+    def find_unsupported_lines(self, answer_text: str, section_ids: list[str]) -> list[str]:
+        """Líneas que no salen de esas secciones (sin contar títulos, la línea «Trámite» ni las de costo).
+
+        Las de costo tienen su propia verificación (``check_costs``), más estricta.
+        """
+        found = []
+        for line in answer_text.splitlines():
+            plain = _plain(line)
+            if (not plain or is_heading(line) or re.match(r"tramite\s*:", plain)
+                    or COST_LINE_RE.search(plain) or _is_abstention_line(plain)):
+                continue
+            if not self.line_supported(line, section_ids):
+                found.append(line.strip())
+        return found
+
     def review(self, answer_text: str, question: str | None = None) -> CitationReport:
         """Valida las citas de una respuesta y arma la lista de fuentes y advertencias.
 
@@ -498,7 +548,16 @@ class CitationIndex:
             ))
         if question:
             model_ids = [c.section_id for c in report.citations]
-            supporting, coverage, evaluated = self.attribute(answer_text, question, preferred=set(model_ids))
+            # Las líneas sin cita que no salen de ningún documento (la receta o la serie de Fourier
+            # que se pidió junto con el trámite) no cuentan para la cobertura: igual no se muestran.
+            # Sin esto, una consulta mezclada se ocultaba entera aunque la parte del trámite estuviera bien.
+            on_corpus = "\n".join(line for line in answer_text.splitlines()
+                                  if extract_ids(line)[0] or self.line_supported(line, list(self.sections)))
+            supporting, coverage, evaluated = self.attribute(on_corpus, question, preferred=set(model_ids))
+            if not evaluated:
+                # Si no queda ninguna frase para medir, se mide como antes, con el texto completo
+                # (no se pasa a la verificación de frases cortas por haber sacado líneas).
+                supporting, coverage, evaluated = self.attribute(answer_text, question, preferred=set(model_ids))
             report.coverage = coverage if evaluated else None
             if not evaluated:
                 # Respuesta hecha solo de frases cortas («Trámite: …», «Costo: gratuito»): no hay nada
@@ -526,6 +585,8 @@ class CitationIndex:
                 report.citations = supporting + short_ok
         if question and report.citations:
             report.removed_cost_lines = self.check_costs(answer_text, {c.document.document_id for c in report.citations})
+            sections = list(dict.fromkeys(self.topic_sections(question) + [c.section_id for c in report.citations]))
+            report.unsupported_lines = self.find_unsupported_lines(answer_text, sections)
         report.warnings = self._warnings(report)
         if report.citations and report.coverage is not None:
             pct = round(100 * report.coverage)
@@ -564,6 +625,9 @@ class CitationIndex:
         if report.off_topic_ids:
             warnings.append("Se descartaron citas a documentos que no tratan el tema de la pregunta: "
                             f"{', '.join(report.off_topic_ids)}.")
+        if report.unsupported_lines:
+            warnings.append("Se omitió parte de la respuesta porque no está en los documentos oficiales: "
+                            "TramitaIA solo responde sobre trámites.")
         for item in report.removed_cost_lines:
             warnings.append(f"Se quitó una afirmación sobre el costo porque {item['reason']}: "
                             "confirmá el costo en la fuente oficial.")

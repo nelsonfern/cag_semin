@@ -187,7 +187,7 @@ def answer_without_cache(
 
 # --- Motor con estado -----------------------------------------------------------------------
 
-DEFAULT_MAX_NEW_TOKENS = 256
+DEFAULT_MAX_NEW_TOKENS = 512
 MAX_QUESTION_CHARS = 1000
 MAX_QUESTION_TOKENS = 256
 

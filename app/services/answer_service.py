@@ -14,11 +14,12 @@ El texto generado se conserva siempre en ``raw_text`` para la evaluación, aunqu
 
 from __future__ import annotations
 
+import re
 import time
 from dataclasses import dataclass, field
 
 from app.cag.prompt import ABSTENTION_PHRASE
-from app.services.citations import CitationIndex, CitationReport, keep_only_citations
+from app.services.citations import CitationIndex, CitationReport, is_heading, keep_only_citations
 from app.services.scope import OUT_OF_SCOPE_MESSAGE, ScopeChecker
 
 ANSWERED, ABSTAINED, UNSUPPORTED, OUT_OF_SCOPE = "answered", "abstained", "unsupported", "out_of_scope"
@@ -75,10 +76,35 @@ def decide(question: str, raw_text: str, citations: CitationReport) -> tuple[str
     if not citations.citations:
         return UNSUPPORTED, ABSTENTION_MESSAGE
     keep = {c.section_id for c in citations.citations}
-    # Se quitan las líneas de costo sin respaldo (el motivo queda en las advertencias).
-    removed = {item["line"] for item in citations.removed_cost_lines}
-    text = "\n".join(line for line in raw_text.splitlines() if line.strip() not in removed)
+    # Se quitan las líneas de costo sin respaldo y las que no salen de los documentos (por ejemplo,
+    # la receta que se pidió junto con el trámite); el motivo queda en las advertencias.
+    removed = {item["line"] for item in citations.removed_cost_lines} | set(citations.unsupported_lines)
+    lines = raw_text.splitlines()
+    if citations.unsupported_lines:
+        removed |= _emptied_headings(lines, removed)
+    text = "\n".join(line for line in lines if line.strip() not in removed)
     return ANSWERED, keep_only_citations(text, keep).strip()
+
+
+def _emptied_headings(lines: list[str], removed: set[str]) -> set[str]:
+    """Títulos cuyo contenido se quitó entero («Receta de pastafrola:» sin sus viñetas).
+
+    El contenido de un título llega hasta el próximo título o la próxima línea con etiqueta en
+    negrita («**Trámite:** …»).
+    """
+    emptied = set()
+    for i, line in enumerate(lines):
+        if not is_heading(line):
+            continue
+        block = []
+        for nxt in lines[i + 1:]:
+            if is_heading(nxt) or re.match(r"\s*\*\*[^*]+:\*\*", nxt):
+                break
+            if nxt.strip():
+                block.append(nxt.strip())
+        if block and all(b in removed for b in block):
+            emptied.add(line.strip())
+    return emptied
 
 
 class AnswerService:
