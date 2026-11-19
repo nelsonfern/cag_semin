@@ -204,3 +204,9 @@ la caché ya está en disco). Detalle en [`PROGRESS.md`](PROGRESS.md), Fase 6.
 ```bash
 .venv\Scripts\python -m pytest
 ```
+## Licencia de uso
+
+El código original de TramitaIA se distribuye bajo la [Licencia MIT](./LICENSE).
+
+Los documentos oficiales utilizados en el corpus, los modelos de lenguaje
+y las dependencias de terceros conservan sus respectivas condiciones de uso.
